@@ -1,0 +1,23 @@
+{
+  "vendor": "vtex",
+  "name": "login",
+  "version": "0.0.0",
+  "title": "VTEX Login",
+  "defaultLocale": "pt-BR",
+  "description": "The VTEX Login app",
+  "builders": {
+    "react": "2.x"
+  },
+  "mustUpdateAt": "2019-04-02",
+  "categories": [],
+  "registries": [
+    "smartcheckout"
+  ],
+  "settingsSchema": {},
+  "scripts": {
+    "postreleasy": "vtex publish -r vtex --public"
+  },
+  "dependencies": {
+    "vtex.store-graphql": "2.x"
+  }
+}

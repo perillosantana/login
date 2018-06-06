@@ -1,0 +1,12 @@
+{
+    "pages": {
+        "login": {
+            "path": "/_v/login"
+        }
+    },
+    "extensions": {
+        "carousel": {
+            "component": "Login"
+        }
+    }
+}

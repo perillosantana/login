@@ -1,2 +1,1 @@
-# login
-VTEX Login app 
+# VTEX Login app 
