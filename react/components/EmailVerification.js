@@ -10,6 +10,11 @@ import { translate } from '../utils'
 
 /** EmailVerification tab component. Receive a email from an input and call the sendEmailVerification mutation */
 class EmailVerification extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { isLoading: false }
+  }
+
   handleInputChange = event => {
     this.props.onStateChange({ email: event.target.value })
   }
@@ -18,6 +23,7 @@ class EmailVerification extends Component {
     const { sendEmailVerification, email, onStateChange, next } = this.props
 
     if (email !== '') {
+      this.setState({ isLoading: true })
       sendEmailVerification({ variables: { email } }).then(
         ({ data }) => {
           if (
@@ -33,11 +39,13 @@ class EmailVerification extends Component {
           console.log(err)
         }
       )
+      this.setState({ isLoading: false })
     }
   }
 
   render() {
     const { goBack, send, intl, onStateChange, previous, email } = this.props
+    const { isLoading } = this.state
 
     return (
       <div className="vtex.login__email-verification">
@@ -54,9 +62,15 @@ class EmailVerification extends Component {
             </Button>
           </div>
           <div className="fr mt4">
-            <Button size="small" onClick={() => this.handleOnSubmit()}>
-              {translate(send, intl)}
-            </Button>
+            {isLoading ? (
+              <Button size="small" disabled isLoading={isLoading}>
+                {translate(send, intl)}
+              </Button>
+            ) : (
+                <Button size="small" onClick={() => this.handleOnSubmit()}>
+                  {translate(send, intl)}
+                </Button>
+              )}
           </div>
         </div>
       </div>

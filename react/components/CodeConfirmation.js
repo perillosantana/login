@@ -11,17 +11,22 @@ import { translate } from '../utils'
 
 /** CodeConfirmation tab component. Receive the code from an input and call the signIn mutation */
 class CodeConfirmation extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { isLoading: false }
+  }
+
   handleInputChange = event => {
     this.props.onStateChange({ code: event.target.value })
   }
+
   handleOnSubmit = () => {
-    const temporarySession = Cookie.get('temporarySession')
-    console.log(temporarySession)
     const { accessKeySignIn, email, code } = this.props
     if (code !== '') {
+      this.setState({ isLoading: true })
       accessKeySignIn({
         variables: {
-          authInput: { email, code, temporarySession }
+          authInput: { email, code }
         }
       }).then(
         res => {
@@ -31,6 +36,7 @@ class CodeConfirmation extends Component {
           console.log(err)
         }
       )
+      this.setState({ isLoading: false })
     }
   }
 
@@ -44,6 +50,7 @@ class CodeConfirmation extends Component {
       previous,
       code,
     } = this.props
+    const { isLoading } = this.state
 
     return (
       <div className="vtex-login__code-confirmation">
@@ -59,9 +66,15 @@ class CodeConfirmation extends Component {
             </Button>
           </div>
           <div className="fr mt4">
-            <Button size="small" onClick={() => this.handleOnSubmit()}>
-              {translate(confirm, intl)}
-            </Button>
+            {isLoading ? (
+              <Button size="small" disabled isLoading={isLoading}>
+                {translate(confirm, intl)}
+              </Button>
+            ) : (
+                <Button size="small" onClick={() => this.handleOnSubmit()}>
+                  {translate(confirm, intl)}
+                </Button>
+              )}
           </div>
         </div>
       </div>
