@@ -15,9 +15,10 @@
   ],
   "settingsSchema": {},
   "scripts": {
-    "postreleasy": "vtex publish -r vtex --public"
+    "postreleasy": "vtex publish -r vtex --verbose"
   },
   "dependencies": {
+    "vtex.styleguide": "4.x",
     "vtex.store-graphql": "2.x"
   }
 }

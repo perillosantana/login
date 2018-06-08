@@ -1,0 +1,4 @@
+mutation accessKeySignIn($authInput: AuthInput) 
+  @context(scope: "private") {
+  accessKeySignIn(fields: $authInput) 
+}
