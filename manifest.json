@@ -15,7 +15,7 @@
   ],
   "settingsSchema": {},
   "scripts": {
-    "postreleasy": "vtex publish -r vtex --verbose"
+    "postreleasy": "vtex publish --verbose"
   },
   "dependencies": {
     "vtex.styleguide": "4.x",

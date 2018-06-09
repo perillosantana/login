@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Input, Button } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
-import Cookie from 'js-cookie'
 
 import accessKeySignIn from '../mutations/accessKeySignIn.gql'
 
@@ -21,7 +20,7 @@ class CodeConfirmation extends Component {
   }
 
   handleOnSubmit = () => {
-    const { accessKeySignIn, email, code } = this.props
+    const { accessKeySignIn, email, code, onStateChange, next } = this.props
     if (code !== '') {
       this.setState({ isLoading: true })
       accessKeySignIn({
@@ -29,14 +28,14 @@ class CodeConfirmation extends Component {
           authInput: { email, code }
         }
       }).then(
-        res => {
-          console.log(res)
-        },
-        err => {
+        ({ data }) => {
+          if (data.accessKeySignIn) {
+            this.setState({ isLoading: false })
+            onStateChange({ step: next })
+          }
+        }, err => {
           console.log(err)
-        }
-      )
-      this.setState({ isLoading: false })
+        })
     }
   }
 
@@ -87,6 +86,8 @@ CodeConfirmation.propTypes = {
   email: PropTypes.string.isRequired,
   /** Code set on state */
   code: PropTypes.string.isRequired,
+  /** Next step */
+  next: PropTypes.number.isRequired,
   /** Previous step */
   previous: PropTypes.number.isRequired,
   /** Title that will be shown on top */

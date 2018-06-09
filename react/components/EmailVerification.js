@@ -19,6 +19,10 @@ class EmailVerification extends Component {
     this.props.onStateChange({ email: event.target.value })
   }
 
+  componentWillUnmount() {
+    this.setState({ isLoading: false })
+  }
+
   handleOnSubmit = () => {
     const { sendEmailVerification, email, onStateChange, next } = this.props
 
@@ -26,20 +30,13 @@ class EmailVerification extends Component {
       this.setState({ isLoading: true })
       sendEmailVerification({ variables: { email } }).then(
         ({ data }) => {
-          if (
-            data &&
-            data.sendEmailVerification
-          ) {
-            onStateChange({
-              step: next,
-            })
+          if (data.sendEmailVerification) {
+            onStateChange({ step: next })
           }
         },
         err => {
           console.log(err)
-        }
-      )
-      this.setState({ isLoading: false })
+        })
     }
   }
 

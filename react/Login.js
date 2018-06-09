@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import { Button } from 'vtex.styleguide'
+import { graphql, Query } from 'react-apollo'
 
+import { Button } from 'vtex.styleguide'
 import LoginOptions from './components/LoginOptions'
 import EmailVerification from './components/EmailVerification'
 import CodeConfirmation from './components/CodeConfirmation'
+import AccountOptions from './components/AccountOptions'
 import ProfileIcon from './images/ProfileIcon'
+import GET_USER_PROFILE from './queries/profile.gql'
 
 import './global.css'
 
@@ -41,6 +44,7 @@ const STEPS = [
         goBack={GO_BACK}
         confirm="login.confirm"
         titleLabel="login-email-code.title"
+        next={3}
         previous={1}
         email={state.email}
         code={state.code}
@@ -48,10 +52,15 @@ const STEPS = [
       />
     )
   },
+  (state, func) => {
+    return (
+      <AccountOptions />
+    )
+  },
 ]
 
 /** Canonical login that calls a mutation to retrieve the authentication token */
-export default class Login extends Component {
+class Login extends Component {
   state = {
     isMouseOnButton: false,
     isMouseOnContent: false,
@@ -64,34 +73,36 @@ export default class Login extends Component {
     this.setState(state)
   }
 
+  handleAccountContent = () => {
+    this.setState({ step: 3 })
+  }
+
   render() {
     const { isMouseOnButton, isMouseOnContent, step } = this.state
-
     const render = STEPS[step](this.state, this.handleUpdateState)
-
+    const { data: { profile } } = this.props
     return (
-      <div className="relative fr">
+      <div className="relative w-100 fr">
         <Button
           variation="tertiary"
           size="small"
           icon
-          onClick={this.handleClickButton}
           onMouseEnter={() => this.handleUpdateState({ isMouseOnButton: true })}
-          onMouseLeave={() =>
-            this.handleUpdateState({ isMouseOnButton: false })
-          }
+          onMouseLeave={() => this.handleUpdateState({ isMouseOnButton: false })}
         >
+          {profile &&
+            (<div className="f7"
+              onMouseEnter={() => this.handleAccountContent()}>
+              Olá, {profile.firstName}
+            </div>)
+          }
           <ProfileIcon />
         </Button>
         {(isMouseOnContent || isMouseOnButton) && (
           <div
             className="vtex-login__box absolute right-0 z-max flex flex-colunm"
-            onMouseLeave={() =>
-              this.handleUpdateState({ isMouseOnContent: false })
-            }
-            onMouseEnter={() =>
-              this.handleUpdateState({ isMouseOnContent: true })
-            }
+            onMouseLeave={() => this.handleUpdateState({ isMouseOnContent: false })}
+            onMouseEnter={() => this.handleUpdateState({ isMouseOnContent: true })}
           >
             <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3" />
 
@@ -106,3 +117,9 @@ export default class Login extends Component {
     )
   }
 }
+const options = {
+  options: () => ({
+    ssr: false,
+  }),
+}
+export default graphql(GET_USER_PROFILE, options)(Login)

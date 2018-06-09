@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Add Account content when user is logged.
+
 ## [0.0.2] - 2018-6-8
 ### Changed
 - Rename `index` to `Login`
