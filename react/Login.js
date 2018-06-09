@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { graphql, Query } from 'react-apollo'
+import { graphql } from 'react-apollo'
 
 import { Button } from 'vtex.styleguide'
 import LoginOptions from './components/LoginOptions'
@@ -7,7 +7,7 @@ import EmailVerification from './components/EmailVerification'
 import CodeConfirmation from './components/CodeConfirmation'
 import AccountOptions from './components/AccountOptions'
 import ProfileIcon from './images/ProfileIcon'
-import GET_USER_PROFILE from './queries/profile.gql'
+import GET_USER_PROFILE from './queries/getProfile.gql'
 
 import './global.css'
 
@@ -101,11 +101,10 @@ class Login extends Component {
         {(isMouseOnContent || isMouseOnButton) && (
           <div
             className="vtex-login__box absolute right-0 z-max flex flex-colunm"
-            onMouseLeave={() => this.handleUpdateState({ isMouseOnContent: false })}
             onMouseEnter={() => this.handleUpdateState({ isMouseOnContent: true })}
+            onMouseLeave={() => this.handleUpdateState({ isMouseOnContent: false })}
           >
             <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3" />
-
             <div className="shadow-3 mt3">
               <div className="vtex-login__content pa4 flex items-center justify-center relative bg-white">
                 {render}
@@ -117,6 +116,7 @@ class Login extends Component {
     )
   }
 }
+
 const options = {
   options: () => ({
     ssr: false,
