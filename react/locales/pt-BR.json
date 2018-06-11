@@ -4,5 +4,7 @@
     "login.go-back": "Voltar",
     "login.send": "Enviar",
     "login.confirm": "Confirmar",
-    "login-email-code.title": "Informar o código recebido por email"
+    "login-email-code.title": "Informar o código recebido por email",
+    "login.welcome": "Bem vindo!",
+    "login.hello": "Olá,"
 }

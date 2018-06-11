@@ -29,7 +29,7 @@ class CodeConfirmation extends Component {
         }
       }).then(
         ({ data }) => {
-          if (data.accessKeySignIn) {
+          if (data && data.accessKeySignIn) {
             this.setState({ isLoading: false })
             onStateChange({ step: next })
           }

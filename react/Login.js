@@ -8,6 +8,7 @@ import CodeConfirmation from './components/CodeConfirmation'
 import AccountOptions from './components/AccountOptions'
 import ProfileIcon from './images/ProfileIcon'
 import GET_USER_PROFILE from './queries/getProfile.gql'
+import { injectIntl, intlShape } from 'react-intl'
 
 import './global.css'
 
@@ -54,13 +55,18 @@ const STEPS = [
   },
   (state, func) => {
     return (
-      <AccountOptions />
+      <AccountOptions welcome="login.welcome" />
     )
   },
 ]
 
 /** Canonical login that calls a mutation to retrieve the authentication token */
 class Login extends Component {
+  static propTypes = {
+    /** Intl object*/
+    intl: intlShape
+  }
+
   state = {
     isMouseOnButton: false,
     isMouseOnContent: false,
@@ -80,7 +86,10 @@ class Login extends Component {
   render() {
     const { isMouseOnButton, isMouseOnContent, step } = this.state
     const render = STEPS[step](this.state, this.handleUpdateState)
-    const { data: { profile } } = this.props
+    const {
+      data: { profile },
+      intl: { formatMessage }
+    } = this.props
     return (
       <div className="relative w-100 fr">
         <Button
@@ -93,7 +102,7 @@ class Login extends Component {
           {profile &&
             (<div className="f7"
               onMouseEnter={() => this.handleAccountContent()}>
-              Olá, {profile.firstName}
+              {formatMessage({ id: 'login.hello' })} {profile.firstName}
             </div>)
           }
           <ProfileIcon />
@@ -122,4 +131,6 @@ const options = {
     ssr: false,
   }),
 }
-export default graphql(GET_USER_PROFILE, options)(Login)
+export default injectIntl(
+  graphql(GET_USER_PROFILE, options)(Login)
+)
