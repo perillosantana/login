@@ -18,8 +18,8 @@
 }
 
 .vtex-login__content {
-  max-height: 410px;
-  min-width: 410px;
+  max-height: 310px;
+  min-width: 310px;
 }
 
 @media only screen and (max-width: 600px) {

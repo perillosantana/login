@@ -1,10 +1,11 @@
 {
-    "login-options.title": "Use one of these options to login",
+    "login-options.title": "Choose an option to sign in",
     "login-options.email-verification": "Receive access key by email",
     "login.go-back": "Go back",
     "login.send": "Send",
     "login.confirm": "Confirm",
-    "login-email-code.title": "Inform the code received on your email",
-    "login.welcome": "Welcome!",
+    "login.email": "Inform your email",
+    "login.email-code.title": "Inform the code received on your email",
+    "login.my-account": "My account",
     "login.hello": "Hello,"
 }

@@ -52,26 +52,26 @@ class CodeConfirmation extends Component {
     const { isLoading } = this.state
 
     return (
-      <div className="vtex-login__code-confirmation">
-        <h3 className="fw5 ttu br2 fw4 v-mid relative tc pv3 ph5 f6 rebel-pink">
+      <div className="vtex-login__code-confirmation w-100">
+        <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
           {translate(titleLabel, intl)}
         </h3>
         <Input value={code} onChange={this.handleInputChange} />
-        <div className="bt mt5 min-h-2 b--light-gray">
+        <div className="mt5 min-h-2 b--light-gray">
           <div className="fl mt4">
             <Button variation="secondary" size="small"
               onClick={() => onStateChange({ step: previous })}>
-              {translate(goBack, intl)}
+              <div className="f7">{translate(goBack, intl)}</div>
             </Button>
           </div>
           <div className="fr mt4">
             {isLoading ? (
               <Button size="small" disabled isLoading={isLoading}>
-                {translate(confirm, intl)}
+                <div className="f7">{translate(confirm, intl)}</div>
               </Button>
             ) : (
                 <Button size="small" onClick={() => this.handleOnSubmit()}>
-                  {translate(confirm, intl)}
+                  <div className="f7">{translate(confirm, intl)}</div>
                 </Button>
               )}
           </div>

@@ -1,10 +1,11 @@
 {
-    "login-options.title": "Use una de estas opciones para iniciar sesión",
+    "login-options.title": "Elige una opción para iniciar sesión",
     "login-options.email-verification": "Recibir clave de acceso por correo electrónico",
     "login.go-back": "Volver",
     "login.send": "Enviar",
     "login.confirm": "Confirmar",
-    "login-email-code.title": "Informar el código recibido en su correo electrónico",
-    "login.welcome": "Bienvenido!",
+    "login.email": "Informar su correo electrónico",
+    "login.email-code.title": "Informar el código recibido en su correo electrónico",
+    "login.my-account": "Minha conta",
     "login.hello": "Hola,"
 }

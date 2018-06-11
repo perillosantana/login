@@ -30,7 +30,7 @@ class EmailVerification extends Component {
       this.setState({ isLoading: true })
       sendEmailVerification({ variables: { email } }).then(
         ({ data }) => {
-          if (data.sendEmailVerification) {
+          if (data && data.sendEmailVerification) {
             onStateChange({ step: next })
           }
         },
@@ -41,11 +41,14 @@ class EmailVerification extends Component {
   }
 
   render() {
-    const { goBack, send, intl, onStateChange, previous, email } = this.props
+    const { goBack, send, intl, onStateChange, previous, email, titleLabel } = this.props
     const { isLoading } = this.state
 
     return (
-      <div className="vtex.login__email-verification">
+      <div className="vtex-login__email-verification w-100">
+        <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
+          {translate(titleLabel, intl)}
+        </h3>
         <Input
           value={email}
           onChange={this.handleInputChange}
@@ -55,17 +58,17 @@ class EmailVerification extends Component {
           <div className="fl mt4">
             <Button variation="secondary" size="small"
               onClick={() => onStateChange({ step: previous })}>
-              {translate(goBack, intl)}
+              <div className="f7">{translate(goBack, intl)}</div>
             </Button>
           </div>
           <div className="fr mt4">
             {isLoading ? (
               <Button size="small" disabled isLoading={isLoading}>
-                {translate(send, intl)}
+                <div className="f7">{translate(send, intl)}</div>
               </Button>
             ) : (
                 <Button size="small" onClick={() => this.handleOnSubmit()}>
-                  {translate(send, intl)}
+                  <div className="f7">{translate(send, intl)}</div>
                 </Button>
               )}
           </div>
@@ -82,6 +85,8 @@ EmailVerification.propTypes = {
   previous: PropTypes.number.isRequired,
   /** Email set on state */
   email: PropTypes.string.isRequired,
+  /** Title that will be shown on top */
+  titleLabel: PropTypes.string.isRequired,
   /** Locales go back string id */
   goBack: PropTypes.string.isRequired,
   /** Locales send string id */

@@ -30,6 +30,7 @@ const STEPS = [
     return (
       <EmailVerification
         goBack={GO_BACK}
+        titleLabel="login.email"
         send="login.send"
         next={2}
         previous={0}
@@ -44,7 +45,7 @@ const STEPS = [
       <CodeConfirmation
         goBack={GO_BACK}
         confirm="login.confirm"
-        titleLabel="login-email-code.title"
+        titleLabel="login.email-code.title"
         next={3}
         previous={1}
         email={state.email}
@@ -55,7 +56,7 @@ const STEPS = [
   },
   (state, func) => {
     return (
-      <AccountOptions welcome="login.welcome" />
+      <AccountOptions />
     )
   },
 ]

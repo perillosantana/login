@@ -12,7 +12,7 @@ class LoginOptions extends Component {
 
     return (
       <div>
-        <h3 className="fw5 ttu br2 tc fw4 v-mid relative pv3 ph5 f6 rebel-pink">
+        <h3 className="fw5 ttu br2 tc fw4 v-mid relative pv3 ph5 f6 light-marine">
           {translate(titleLabel, intl)}
         </h3>
         <ul className="vtex-login-options__list">
@@ -26,7 +26,7 @@ class LoginOptions extends Component {
                   onClick={() => onStateChange({ step: step + 1 })}
                   block
                 >
-                  {translate(el, intl)}
+                  <div className="f7">{translate(el, intl)}</div>
                 </Button>
               </li>
             )
