@@ -6,6 +6,7 @@
     "login.confirm": "Confirmar",
     "login.email": "Informar su correo electrónico",
     "login.email-code.title": "Informar el código recibido en su correo electrónico",
-    "login.my-account": "Minha conta",
+    "login.my-account": "Mi perfil",
+    "login.my-orders": "Mis Pedidos",
     "login.hello": "Hola,"
 }

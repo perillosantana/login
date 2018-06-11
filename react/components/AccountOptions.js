@@ -10,17 +10,24 @@ class AccountOptions extends Component {
         intl: intlShape
     }
 
-    handleClickButton = () => location.assign('/account')
+    handleClickButton = path => location.assign(path)
 
     render() {
         const { intl: { formatMessage } } = this.props
         return (
-            <div className="vtex-login__account-options w-100">
+            <div className="vtex-login__account-options items-center w-100">
                 <div className="ma4 min-h-2 b--light-gray">
                     <Button variation="tertiary" size="small"
-                        onClick={() => this.handleClickButton}
+                        onClick={() => this.handleClickButton('account')}
                     >
                         <div className="f7">{formatMessage({ id: 'login.my-account' })}</div>
+                    </Button>
+                </div>
+                <div className="ma4 min-h-2 b--light-gray">
+                    <Button variation="tertiary" size="small"
+                        onClick={() => this.handleClickButton('account/orders')}
+                    >
+                        <div className="f7">{formatMessage({ id: 'login.my-orders' })}</div>
                     </Button>
                 </div>
             </div>

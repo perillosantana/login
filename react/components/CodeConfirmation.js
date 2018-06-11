@@ -19,7 +19,7 @@ class CodeConfirmation extends Component {
     this.props.onStateChange({ code: event.target.value })
   }
 
-  handleOnSubmit = () => {
+  handleOnSubmit = event => {
     const { accessKeySignIn, email, code, onStateChange, next } = this.props
     if (code !== '') {
       this.setState({ isLoading: true })
@@ -37,6 +37,7 @@ class CodeConfirmation extends Component {
           console.log(err)
         })
     }
+    event.preventDefault();
   }
 
   render() {
@@ -56,26 +57,31 @@ class CodeConfirmation extends Component {
         <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
           {translate(titleLabel, intl)}
         </h3>
-        <Input value={code} onChange={this.handleInputChange} />
-        <div className="mt5 min-h-2 b--light-gray">
-          <div className="fl mt4">
-            <Button variation="secondary" size="small"
-              onClick={() => onStateChange({ step: previous })}>
-              <div className="f7">{translate(goBack, intl)}</div>
-            </Button>
-          </div>
-          <div className="fr mt4">
-            {isLoading ? (
-              <Button size="small" disabled isLoading={isLoading}>
-                <div className="f7">{translate(confirm, intl)}</div>
+        <form onSubmit={e => this.handleOnSubmit(e)}>
+          <Input value={code} onChange={this.handleInputChange} />
+          <div className="mt5 min-h-2 b--light-gray">
+            <div className="fl mt4">
+              <Button variation="secondary" size="small"
+                onClick={() => onStateChange({ step: previous })}>
+                <div className="f7">{translate(goBack, intl)}</div>
               </Button>
-            ) : (
-                <Button size="small" onClick={() => this.handleOnSubmit()}>
+            </div>
+            <div className="fr mt4">
+              {isLoading ? (
+                <Button size="small" disabled isLoading={isLoading}>
                   <div className="f7">{translate(confirm, intl)}</div>
                 </Button>
-              )}
+              ) : (
+                  <Button size="small"
+                    type="submit"
+                    onClick={e => this.handleOnSubmit(e)}
+                  >
+                    <div className="f7">{translate(confirm, intl)}</div>
+                  </Button>
+                )}
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     )
   }

@@ -23,7 +23,7 @@ class EmailVerification extends Component {
     this.setState({ isLoading: false })
   }
 
-  handleOnSubmit = () => {
+  handleOnSubmit = event => {
     const { sendEmailVerification, email, onStateChange, next } = this.props
 
     if (email !== '') {
@@ -38,6 +38,7 @@ class EmailVerification extends Component {
           console.log(err)
         })
     }
+    event.preventDefault();
   }
 
   render() {
@@ -49,30 +50,35 @@ class EmailVerification extends Component {
         <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
           {translate(titleLabel, intl)}
         </h3>
-        <Input
-          value={email}
-          onChange={this.handleInputChange}
-          placeholder={'Ex: example@mail.com'}
-        />
-        <div className="bt mt5 min-h-2 b--light-gray">
-          <div className="fl mt4">
-            <Button variation="secondary" size="small"
-              onClick={() => onStateChange({ step: previous })}>
-              <div className="f7">{translate(goBack, intl)}</div>
-            </Button>
-          </div>
-          <div className="fr mt4">
-            {isLoading ? (
-              <Button size="small" disabled isLoading={isLoading}>
-                <div className="f7">{translate(send, intl)}</div>
+        <form onSubmit={e => this.handleOnSubmit(e)}>
+          <Input
+            value={email}
+            onChange={this.handleInputChange}
+            placeholder={'Ex: example@mail.com'}
+          />
+          <div className="bt mt5 min-h-2 b--light-gray">
+            <div className="fl mt4">
+              <Button variation="secondary" size="small"
+                onClick={() => onStateChange({ step: previous })}>
+                <div className="f7">{translate(goBack, intl)}</div>
               </Button>
-            ) : (
-                <Button size="small" onClick={() => this.handleOnSubmit()}>
+            </div>
+            <div className="fr mt4">
+              {isLoading ? (
+                <Button size="small" disabled isLoading={isLoading}>
                   <div className="f7">{translate(send, intl)}</div>
                 </Button>
-              )}
+              ) : (
+                  <Button size="small"
+                    type="submit"
+                    onClick={e => this.handleOnSubmit(e)}
+                  >
+                    <div className="f7">{translate(send, intl)}</div>
+                  </Button>
+                )}
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     )
   }
