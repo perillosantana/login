@@ -92,7 +92,13 @@ class Login extends Component {
       intl: { formatMessage }
     } = this.props
     return (
-      <div className="relative w-100 fr">
+      <div className="vtex-login__container flex items-center relative f6 fr">
+        {profile &&
+          (<div
+            onMouseEnter={() => this.handleAccountContent()}>
+            {formatMessage({ id: 'login.hello' })} {profile.firstName}
+          </div>)
+        }
         <Button
           variation="tertiary"
           size="small"
@@ -100,12 +106,6 @@ class Login extends Component {
           onMouseEnter={() => this.handleUpdateState({ isMouseOnButton: true })}
           onMouseLeave={() => this.handleUpdateState({ isMouseOnButton: false })}
         >
-          {profile &&
-            (<div className="f7"
-              onMouseEnter={() => this.handleAccountContent()}>
-              {formatMessage({ id: 'login.hello' })} {profile.firstName}
-            </div>)
-          }
           <ProfileIcon />
         </Button>
         {(isMouseOnContent || isMouseOnButton) && (
