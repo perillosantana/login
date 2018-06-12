@@ -80,22 +80,21 @@ class Login extends Component {
     this.setState(state)
   }
 
-  handleAccountContent = () => {
-    this.setState({ step: 3 })
-  }
-
   render() {
-    const { isMouseOnButton, isMouseOnContent, step } = this.state
-    const render = STEPS[step](this.state, this.handleUpdateState)
     const {
       data: { profile },
       intl: { formatMessage }
     } = this.props
+
+    const { isMouseOnButton, isMouseOnContent } = this.state
+
+    const step = profile ? 3 : this.state.step
+    const render = STEPS[step](this.state, this.handleUpdateState)
+
     return (
       <div className="vtex-login__container flex items-center relative f6 fr">
         {profile &&
-          (<div
-            onMouseEnter={() => this.handleAccountContent()}>
+          (<div>
             {formatMessage({ id: 'login.hello' })} {profile.firstName}
           </div>)
         }
