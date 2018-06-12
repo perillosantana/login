@@ -10,8 +10,6 @@ class AccountOptions extends Component {
     intl: intlShape
   };
 
-  handleClickButton = path => location.assign(path);
-
   render() {
     const {
       intl: { formatMessage }
