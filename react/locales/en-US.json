@@ -8,5 +8,6 @@
     "login.email-code.title": "Inform the code received on your email",
     "login.my-account": "My Profile",
     "login.my-orders": "My orders",
-    "login.hello": "Hello,"
+    "login.hello": "Hello,",
+    "login.logout-label": "Logout"
 }

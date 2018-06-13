@@ -38,7 +38,7 @@ class EmailVerification extends Component {
           console.log(err)
         })
     }
-    event.preventDefault();
+    event.preventDefault()
   }
 
   render() {
