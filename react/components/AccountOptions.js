@@ -33,18 +33,6 @@ class AccountOptions extends Component {
               variation="tertiary"
               size="small"
             >
-              <div className="f7">
-                {formatMessage({ id: "login.my-account" })}
-              </div>
-            </Button>
-          </Link>
-        </div>
-        <div className="ma4 min-h-2 b--light-gray">
-          <Link page={"store/account/orders"}>
-            <Button
-              variation="tertiary"
-              size="small"
-            >
               <div className="f7">{formatMessage({ id: "login.my-orders" })}</div>
             </Button>
           </Link>

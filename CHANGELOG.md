@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Add form in login inputs and my-orders route in account options.
+- Remove My Profile from Account Options. 
 
 ## [0.1.0] - 2018-6-11
 
