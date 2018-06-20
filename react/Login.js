@@ -50,6 +50,7 @@ const STEPS = [
         next={3}
         previous={0}
         email={state.email}
+        password={state.password}
         onStateChange={func}
       />
     )
@@ -89,6 +90,7 @@ class Login extends Component {
     isMouseOnContent: false,
     step: 0,
     email: '',
+    password: '',
     code: '',
   }
 
