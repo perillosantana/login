@@ -16,14 +16,13 @@ class LoginOptions extends Component {
           {translate(titleLabel, intl)}
         </h3>
         <ul className="vtex-login-options__list">
-          {options.map(el => {
-            step++
+          {options.map((el, index) => {
             return (
-              <li className="mb5" key={`login-option-array-${step}`}>
+              <li className="mb5" key={`login-option-array-${index}`}>
                 <Button
                   variation="secondary"
                   size="small"
-                  onClick={() => onStateChange({ step: step + 1 })}
+                  onClick={() => onStateChange({ step: index + 1 })}
                   block
                 >
                   <div className="f7">{translate(el, intl)}</div>

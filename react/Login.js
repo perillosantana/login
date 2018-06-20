@@ -20,7 +20,7 @@ const STEPS = [
       <LoginOptions
         page="login-options"
         titleLabel="login-options.title"
-        options={['login-options.email-verification']}
+        options={['login-options.email-verification', 'login-options.email-and-password-verification']}
         onStateChange={func}
       />
     )
@@ -77,6 +77,7 @@ class Login extends Component {
   }
 
   handleUpdateState = state => {
+    console.log('clicked', state)
     this.setState(state)
   }
 
@@ -90,6 +91,8 @@ class Login extends Component {
 
     const step = profile ? 3 : this.state.step
     const render = STEPS[step](this.state, this.handleUpdateState)
+
+    console.log('STEP', step)
 
     return (
       <div className="vtex-login__container flex items-center relative f6 fr">
