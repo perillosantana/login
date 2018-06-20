@@ -1,6 +1,7 @@
 {
     "login-options.title": "Choose an option to sign in",
     "login-options.email-verification": "Receive access key by email",
+    "login-options.email-and-password-verification": "Sigin with email and password",
     "login.go-back": "Go back",
     "login.send": "Send",
     "login.confirm": "Confirm",
