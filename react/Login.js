@@ -4,6 +4,7 @@ import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
 import LoginOptions from './components/LoginOptions'
 import EmailVerification from './components/EmailVerification'
+import EmailAndPassworsVerification from './components/EmailAndPassworsVerification'
 import CodeConfirmation from './components/CodeConfirmation'
 import AccountOptions from './components/AccountOptions'
 import ProfileIcon from './images/ProfileIcon'
@@ -42,6 +43,12 @@ const STEPS = [
   // eslint-disable-next-line
   (state, func) => {
     return (
+      <EmailAndPassworsVerification />
+    )
+  },
+  // eslint-disable-next-line
+  (state, func) => {
+    return (
       <CodeConfirmation
         goBack={GO_BACK}
         confirm="login.confirm"
@@ -54,6 +61,7 @@ const STEPS = [
       />
     )
   },
+  // eslint-disable-next-line
   (state, func) => {
     return (
       <AccountOptions />
@@ -65,7 +73,7 @@ const STEPS = [
 class Login extends Component {
   static propTypes = {
     /** Intl object*/
-    intl: intlShape
+    intl: intlShape,
   }
 
   state = {
@@ -84,7 +92,7 @@ class Login extends Component {
   render() {
     const {
       data: { profile },
-      intl: { formatMessage }
+      intl: { formatMessage },
     } = this.props
 
     const { isMouseOnButton, isMouseOnContent } = this.state
