@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
 import LoginOptions from './components/LoginOptions'
 import EmailVerification from './components/EmailVerification'
-import EmailAndPasswordVerification from './components/EmailAndPasswordVerification'
+import EmailAndPassword from './components/EmailAndPassword'
 import CodeConfirmation from './components/CodeConfirmation'
 import AccountOptions from './components/AccountOptions'
 import ProfileIcon from './images/ProfileIcon'
@@ -21,7 +21,7 @@ const STEPS = [
       <LoginOptions
         page="login-options"
         titleLabel="login-options.title"
-        options={['login-options.email-verification', 'login-options.email-and-password-verification']}
+        options={['login-options.email-verification', 'login-options.email-and-password']}
         onStateChange={func}
       />
     )
@@ -43,9 +43,9 @@ const STEPS = [
   // eslint-disable-next-line
   (state, func) => {
     return (
-      <EmailAndPasswordVerification
+      <EmailAndPassword
         goBack={GO_BACK}
-        titleLabel="login-options.email-and-password-verification"
+        titleLabel="login-options.email-and-password"
         send="login.signin"
         next={4}
         previous={0}

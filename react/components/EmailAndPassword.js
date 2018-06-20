@@ -6,7 +6,7 @@ import { translate } from '../utils'
 import { Link } from 'render'
 
 /** EmailAndPasswordVerification tab component. */
-class EmailAndPasswordVerification extends Component {
+class EmailAndPassword extends Component {
   constructor(props) {
     super(props)
     this.state = { isLoading: false }
@@ -90,7 +90,7 @@ class EmailAndPasswordVerification extends Component {
   }
 }
 
-EmailAndPasswordVerification.propTypes = {
+EmailAndPassword.propTypes = {
   /** Next step */
   next: PropTypes.number.isRequired,
   /** Previous step */
@@ -111,4 +111,4 @@ EmailAndPasswordVerification.propTypes = {
   intl: intlShape,
 }
 
-export default injectIntl(EmailAndPasswordVerification)
+export default injectIntl(EmailAndPassword)

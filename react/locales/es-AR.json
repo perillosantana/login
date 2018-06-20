@@ -1,7 +1,7 @@
 {
     "login-options.title": "Elige una opción para iniciar sesión",
     "login-options.email-verification": "Recibir clave de acceso por correo electrónico",
-    "login-options.email-and-password-verification": "Entrar con correo electrónico y contraseña",
+    "login-options.email-and-password": "Entrar con correo electrónico y contraseña",
     "login.go-back": "Volver",
     "login.send": "Enviar",
     "login.confirm": "Confirmar",
