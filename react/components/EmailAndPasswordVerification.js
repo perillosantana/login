@@ -66,7 +66,7 @@ class EmailAndPasswordVerification extends Component {
           <div className="bt mt5 min-h-2 b--light-gray">
             <div className="fl mt4">
               <Button variation="secondary" size="small"
-                onClick={() => onStateChange({ step: previous })}>
+                onClick={() => onStateChange({ step: previous, password: '' })}>
                 <div className="f7">{translate(goBack, intl)}</div>
               </Button>
             </div>
