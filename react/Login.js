@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
 import LoginOptions from './components/LoginOptions'
 import EmailVerification from './components/EmailVerification'
-import EmailAndPassworsVerification from './components/EmailAndPassworsVerification'
+import EmailAndPasswordVerification from './components/EmailAndPasswordVerification'
 import CodeConfirmation from './components/CodeConfirmation'
 import AccountOptions from './components/AccountOptions'
 import ProfileIcon from './images/ProfileIcon'
@@ -33,7 +33,7 @@ const STEPS = [
         goBack={GO_BACK}
         titleLabel="login.email"
         send="login.send"
-        next={2}
+        next={3}
         previous={0}
         email={state.email}
         onStateChange={func}
@@ -43,7 +43,15 @@ const STEPS = [
   // eslint-disable-next-line
   (state, func) => {
     return (
-      <EmailAndPassworsVerification />
+      <EmailAndPasswordVerification
+        goBack={GO_BACK}
+        titleLabel="login-options.email-and-password-verification"
+        send="login.signin"
+        next={3}
+        previous={0}
+        email={state.email}
+        onStateChange={func}
+      />
     )
   },
   // eslint-disable-next-line
@@ -85,7 +93,6 @@ class Login extends Component {
   }
 
   handleUpdateState = state => {
-    console.log('clicked', state)
     this.setState(state)
   }
 
@@ -99,8 +106,6 @@ class Login extends Component {
 
     const step = profile ? 3 : this.state.step
     const render = STEPS[step](this.state, this.handleUpdateState)
-
-    console.log('STEP', step)
 
     return (
       <div className="vtex-login__container flex items-center relative f6 fr">

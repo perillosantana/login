@@ -1,7 +1,7 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { injectIntl, intlShape } from "react-intl"
-import { Button } from "vtex.styleguide"
+import { injectIntl, intlShape } from 'react-intl'
+import { Button } from 'vtex.styleguide'
 import { Link } from 'render'
 import { graphql } from 'react-apollo'
 
@@ -13,27 +13,27 @@ class AccountOptions extends Component {
     /** Intl object*/
     intl: intlShape,
     /** Graphql property to call a mutation */
-    logout: PropTypes.func
+    logout: PropTypes.func,
   };
 
   handleLogoutClick = () => {
     this.props.logout()
-    location.assign("/") // Needed to refetch all the data from GraphQL.
+    location.assign('/') // Needed to refetch all the data from GraphQL.
   }
 
   render() {
     const {
-      intl: { formatMessage }
-    } = this.props;
+      intl: { formatMessage },
+    } = this.props
     return (
       <div className="vtex-login__account-options items-center w-100">
         <div className="ma4 min-h-2 b--light-gray">
-          <Link page={"store/account"}>
+          <Link page={'store/account'}>
             <Button
               variation="tertiary"
               size="small"
             >
-              <div className="f7">{formatMessage({ id: "login.my-orders" })}</div>
+              <div className="f7">{formatMessage({ id: 'login.my-orders' })}</div>
             </Button>
           </Link>
         </div>
@@ -44,7 +44,7 @@ class AccountOptions extends Component {
             size="small"
             onClick={() => this.handleLogoutClick()}
           >
-            <div className="f7">{formatMessage({ id: "login.logout-label" })}</div>
+            <div className="f7">{formatMessage({ id: 'login.logout-label' })}</div>
           </Button>
         </div>
       </div>
@@ -53,5 +53,5 @@ class AccountOptions extends Component {
 }
 
 export default injectIntl(
-  graphql(logout, { name: "logout" })(AccountOptions)
+  graphql(logout, { name: 'logout' })(AccountOptions)
 )

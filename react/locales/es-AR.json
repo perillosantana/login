@@ -9,5 +9,9 @@
     "login.email-code.title": "Informar el código recibido en su correo electrónico",
     "login.my-orders": "Mis Pedidos",
     "login.hello": "Hola,",
-    "login.logout-label": "Cerrar sesión"
+    "login.logout-label": "Cerrar sesión",
+    "login.signin": "Entrar",
+    "login.password": "Contraseña",
+    "login.not-have-account": "No tiene una contraseña? Registrarse ahora",
+    "login.forgot-password": "Olvidé mi contraseña"
 }

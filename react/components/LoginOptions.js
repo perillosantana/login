@@ -8,7 +8,6 @@ import { Button } from 'vtex.styleguide'
 class LoginOptions extends Component {
   render() {
     const { onStateChange, titleLabel, options, intl } = this.props
-    let step = -1
 
     return (
       <div>

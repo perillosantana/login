@@ -2,14 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Button } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
-import { graphql } from 'react-apollo'
-
-import sendEmailVerification from '../mutations/sendEmailVerification.gql'
-
 import { translate } from '../utils'
+import { Link } from 'render'
 
-/** EmailVerification tab component. Receive a email from an input and call the sendEmailVerification mutation */
-class EmailVerification extends Component {
+/** EmailAndPasswordVerification tab component. */
+class EmailAndPasswordVerification extends Component {
   constructor(props) {
     super(props)
     this.state = { isLoading: false }
@@ -19,34 +16,28 @@ class EmailVerification extends Component {
     this.props.onStateChange({ email: event.target.value })
   }
 
+  handlePasswordChange = event => {
+    this.props.onStateChange({ password: event.target.value })
+  }
+
   componentWillUnmount() {
     this.setState({ isLoading: false })
   }
 
-  handleOnSubmit = event => {
-    const { sendEmailVerification, email, onStateChange, next } = this.props
+  handleOnSubmit = () => {
+    const { email, password } = this.props
 
-    if (email !== '') {
-      this.setState({ isLoading: true })
-      sendEmailVerification({ variables: { email } }).then(
-        ({ data }) => {
-          if (data && data.sendEmailVerification) {
-            onStateChange({ step: next })
-          }
-        },
-        err => {
-          console.log(err)
-        })
-    }
-    event.preventDefault()
+    console.log('Email:', email)
+    console.log('password:', password)
   }
 
   render() {
-    const { goBack, send, intl, onStateChange, previous, email, titleLabel } = this.props
+    const { goBack, send, intl, onStateChange, previous, email, password, titleLabel } = this.props
     const { isLoading } = this.state
 
     return (
-      <div className="vtex-login__email-verification w-100">
+      <div className="vtex-login_
+      onChange={this.handleInputChange}_email-verification w-100">
         <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
           {translate(titleLabel, intl)}
         </h3>
@@ -56,6 +47,22 @@ class EmailVerification extends Component {
             onChange={this.handleInputChange}
             placeholder={'Ex: example@mail.com'}
           />
+          <div className="flex justify-end pv3">
+            <Link className="link">
+              <span className="f7">{translate('login.forgot-password', intl)}</span>
+            </Link>
+          </div>
+          <Input
+            type="password"
+            value={password}
+            onChange={this.handlePasswordChange}
+            placeholder={translate('login.password', intl)}
+          />
+          <div className="flex justify-end pt3">
+            <Link className="link">
+              <span className="f7">{translate('login.not-have-account', intl)}</span>
+            </Link>
+          </div>
           <div className="bt mt5 min-h-2 b--light-gray">
             <div className="fl mt4">
               <Button variation="secondary" size="small"
@@ -84,13 +91,15 @@ class EmailVerification extends Component {
   }
 }
 
-EmailVerification.propTypes = {
+EmailAndPasswordVerification.propTypes = {
   /** Next step */
   next: PropTypes.number.isRequired,
   /** Previous step */
   previous: PropTypes.number.isRequired,
   /** Email set on state */
   email: PropTypes.string.isRequired,
+  /** Password set on state */
+  password: PropTypes.string.isRequired,
   /** Title that will be shown on top */
   titleLabel: PropTypes.string.isRequired,
   /** Locales go back string id */
@@ -99,14 +108,8 @@ EmailVerification.propTypes = {
   send: PropTypes.string.isRequired,
   /** Function to change de active tab */
   onStateChange: PropTypes.func.isRequired,
-  /** Graphql property to call a mutation */
-  sendEmailVerification: PropTypes.func.isRequired,
   /** Intl object*/
   intl: intlShape,
 }
 
-export default injectIntl(
-  graphql(sendEmailVerification, { name: 'sendEmailVerification' })(
-    EmailVerification
-  )
-)
+export default injectIntl(EmailAndPasswordVerification)
