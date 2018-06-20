@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Layout of the traditional login with email and password verification.
+- Login with email and password.
 
 ### Changed
 - Add email when user profile don't have firstName.
