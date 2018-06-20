@@ -95,7 +95,7 @@ class Login extends Component {
       <div className="vtex-login__container flex items-center relative f6 fr">
         {profile &&
           (<div>
-            {formatMessage({ id: 'login.hello' })} {profile.firstName}
+            {formatMessage({ id: 'login.hello' })} {profile.firstName || profile.email}
           </div>)
         }
         <Button
