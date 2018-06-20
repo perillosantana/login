@@ -36,8 +36,7 @@ class EmailAndPasswordVerification extends Component {
     const { isLoading } = this.state
 
     return (
-      <div className="vtex-login_
-      onChange={this.handleInputChange}_email-verification w-100">
+      <div className="vtex-login__email-verification w-100">
         <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
           {translate(titleLabel, intl)}
         </h3>
