@@ -47,7 +47,7 @@ const STEPS = [
         goBack={GO_BACK}
         titleLabel="login-options.email-and-password-verification"
         send="login.signin"
-        next={3}
+        next={4}
         previous={0}
         email={state.email}
         password={state.password}
@@ -62,7 +62,7 @@ const STEPS = [
         goBack={GO_BACK}
         confirm="login.confirm"
         titleLabel="login.email-code.title"
-        next={3}
+        next={4}
         previous={1}
         email={state.email}
         code={state.code}
@@ -106,7 +106,7 @@ class Login extends Component {
 
     const { isMouseOnButton, isMouseOnContent } = this.state
 
-    const step = profile ? 3 : this.state.step
+    const step = profile ? 4 : this.state.step
     const render = STEPS[step](this.state, this.handleUpdateState)
 
     return (
