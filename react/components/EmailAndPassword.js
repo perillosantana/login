@@ -24,11 +24,13 @@ class EmailAndPassword extends Component {
     this.setState({ isLoading: false })
   }
 
-  handleOnSubmit = () => {
+  handleOnSubmit = event => {
     const { email, password } = this.props
 
     console.log('Email:', email)
     console.log('password:', password)
+
+    event.preventDefault()
   }
 
   render() {
