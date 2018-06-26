@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Add email when user profile don't have firstName.
 
+### Fixed 
+- Fix `accessKeySignIn` and `sendEmailVerification` mutations to reflect the changes in resolvers. 
+
 ## [0.2.0] - 2018-6-14
 ### Added
 - Add form in login inputs and my-orders route in account options.

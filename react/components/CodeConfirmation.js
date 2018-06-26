@@ -21,15 +21,14 @@ class CodeConfirmation extends Component {
 
   handleOnSubmit = event => {
     const { accessKeySignIn, email, code, onStateChange, next } = this.props
-    if (code !== '') {
+    if (email !== '' || code !== '') {
       this.setState({ isLoading: true })
       accessKeySignIn({
-        variables: {
-          authInput: { email, code }
-        }
+        variables: { email, code },
       }).then(
         ({ data }) => {
           if (data && data.accessKeySignIn) {
+            console.log(data)
             this.setState({ isLoading: false })
             onStateChange({ step: next })
           }
@@ -37,7 +36,7 @@ class CodeConfirmation extends Component {
           console.log(err)
         })
     }
-    event.preventDefault();
+    event.preventDefault()
   }
 
   render() {
@@ -72,13 +71,13 @@ class CodeConfirmation extends Component {
                   <div className="f7">{translate(confirm, intl)}</div>
                 </Button>
               ) : (
-                  <Button size="small"
-                    type="submit"
-                    onClick={e => this.handleOnSubmit(e)}
-                  >
-                    <div className="f7">{translate(confirm, intl)}</div>
-                  </Button>
-                )}
+                <Button size="small"
+                  type="submit"
+                  onClick={e => this.handleOnSubmit(e)}
+                >
+                  <div className="f7">{translate(confirm, intl)}</div>
+                </Button>
+              )}
             </div>
           </div>
         </form>

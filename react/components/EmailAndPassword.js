@@ -5,6 +5,8 @@ import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils'
 import { Link } from 'render'
 
+import classicSignIn from '../mutations/classicSignIn.gql'
+
 /** EmailAndPasswordVerification tab component. */
 class EmailAndPassword extends Component {
   constructor(props) {
@@ -40,9 +42,9 @@ class EmailAndPassword extends Component {
     return (
       <div className="vtex-login__email-verification w-100">
         <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
-          {translate(titleLabel, intl)}
+          Coming soon! {/* {translate(titleLabel, intl)} */}
         </h3>
-        <form onSubmit={e => this.handleOnSubmit(e)}>
+        {/* <form onSubmit={e => this.handleOnSubmit(e)}>
           <Input
             value={email}
             onChange={this.handleInputChange}
@@ -86,7 +88,7 @@ class EmailAndPassword extends Component {
               )}
             </div>
           </div>
-        </form>
+        </form> */}
       </div>
     )
   }

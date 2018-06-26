@@ -25,7 +25,6 @@ class EmailVerification extends Component {
 
   handleOnSubmit = event => {
     const { sendEmailVerification, email, onStateChange, next } = this.props
-
     if (email !== '') {
       this.setState({ isLoading: true })
       sendEmailVerification({ variables: { email } }).then(

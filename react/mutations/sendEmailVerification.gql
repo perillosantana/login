@@ -1,3 +1,4 @@
-mutation sendEmailVerification($email: String) {
+mutation sendEmailVerification($email: String!) 
+  @context(scope: "private") {
   sendEmailVerification(email: $email)
 }
