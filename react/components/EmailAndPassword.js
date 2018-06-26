@@ -5,8 +5,6 @@ import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils'
 import { Link } from 'render'
 
-import classicSignIn from '../mutations/classicSignIn.gql'
-
 /** EmailAndPasswordVerification tab component. */
 class EmailAndPassword extends Component {
   constructor(props) {
@@ -44,8 +42,8 @@ class EmailAndPassword extends Component {
         <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
           Coming soon! {/* {translate(titleLabel, intl)} */}
         </h3>
-        {/* <form onSubmit={e => this.handleOnSubmit(e)}>
-          <Input
+        <form onSubmit={e => this.handleOnSubmit(e)}>
+          {/* <Input
             value={email}
             onChange={this.handleInputChange}
             placeholder={'Ex: example@mail.com'}
@@ -65,7 +63,7 @@ class EmailAndPassword extends Component {
             <Link className="link">
               <span className="f7">{translate('login.not-have-account', intl)}</span>
             </Link>
-          </div>
+          </div> */}
           <div className="bt mt5 min-h-2 b--light-gray">
             <div className="fl mt4">
               <Button variation="secondary" size="small"
@@ -73,7 +71,7 @@ class EmailAndPassword extends Component {
                 <div className="f7">{translate(goBack, intl)}</div>
               </Button>
             </div>
-            <div className="fr mt4">
+            {/* <div className="fr mt4">
               {isLoading ? (
                 <Button size="small" disabled isLoading={isLoading}>
                   <div className="f7">{translate(send, intl)}</div>
@@ -86,9 +84,9 @@ class EmailAndPassword extends Component {
                   <div className="f7">{translate(send, intl)}</div>
                 </Button>
               )}
-            </div>
+            </div> */}
           </div>
-        </form> */}
+        </form>
       </div>
     )
   }
