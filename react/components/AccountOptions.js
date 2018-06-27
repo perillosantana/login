@@ -28,7 +28,7 @@ class AccountOptions extends Component {
     return (
       <div className="vtex-login__account-options items-center w-100">
         <div className="ma4 min-h-2 b--light-gray">
-          <Link page={'store/account'}>
+          <Link page={'store/account/orders'}>
             <Button
               variation="tertiary"
               size="small"

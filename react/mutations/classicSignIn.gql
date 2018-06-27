@@ -1,0 +1,4 @@
+mutation classicSignIn($email: String!, $password: String!) 
+  @context(scope: "private") {
+  classicSignIn(email: $email, password: $password) 
+}

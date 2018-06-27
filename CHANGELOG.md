@@ -7,10 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.2.1] - 2018-6-26
 ### Added
 - Login with email and password.
 
+## [0.2.1] - 2018-6-26
 ### Changed
 - Add email when user profile don't have firstName.
 
