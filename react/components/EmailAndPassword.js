@@ -4,6 +4,9 @@ import { Input, Button } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils'
 import { Link } from 'render'
+import { graphql } from 'react-apollo'
+
+import classicSignIn from '../mutations/classicSignIn.gql'
 
 /** EmailAndPasswordVerification tab component. */
 class EmailAndPassword extends Component {
@@ -25,10 +28,21 @@ class EmailAndPassword extends Component {
   }
 
   handleOnSubmit = event => {
-    const { email, password } = this.props
-
-    console.log('Email:', email)
-    console.log('password:', password)
+    const { email, password, next, onStateChange, classicSignIn } = this.props
+    if (email !== '' || password !== '') {
+      this.setState({ isLoading: true })
+      classicSignIn({
+        variables: { email, password },
+      }).then(
+        ({ data }) => {
+          if (data && data.classicSignIn) {
+            this.setState({ isLoading: false })
+            onStateChange({ step: next })
+          }
+        }, err => {
+          console.log(err)
+        })
+    }
 
     event.preventDefault()
   }
@@ -40,10 +54,10 @@ class EmailAndPassword extends Component {
     return (
       <div className="vtex-login__email-verification w-100">
         <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
-          Coming soon! {/* {translate(titleLabel, intl)} */}
+          {translate(titleLabel, intl)}
         </h3>
         <form onSubmit={e => this.handleOnSubmit(e)}>
-          {/* <Input
+          <Input
             value={email}
             onChange={this.handleInputChange}
             placeholder={'Ex: example@mail.com'}
@@ -63,7 +77,7 @@ class EmailAndPassword extends Component {
             <Link className="link">
               <span className="f7">{translate('login.not-have-account', intl)}</span>
             </Link>
-          </div> */}
+          </div>
           <div className="bt mt5 min-h-2 b--light-gray">
             <div className="fl mt4">
               <Button variation="secondary" size="small"
@@ -71,7 +85,7 @@ class EmailAndPassword extends Component {
                 <div className="f7">{translate(goBack, intl)}</div>
               </Button>
             </div>
-            {/* <div className="fr mt4">
+            <div className="fr mt4">
               {isLoading ? (
                 <Button size="small" disabled isLoading={isLoading}>
                   <div className="f7">{translate(send, intl)}</div>
@@ -84,7 +98,7 @@ class EmailAndPassword extends Component {
                   <div className="f7">{translate(send, intl)}</div>
                 </Button>
               )}
-            </div> */}
+            </div>
           </div>
         </form>
       </div>
@@ -109,8 +123,12 @@ EmailAndPassword.propTypes = {
   send: PropTypes.string.isRequired,
   /** Function to change de active tab */
   onStateChange: PropTypes.func.isRequired,
+  /** Graphql property to call a mutation */
+  classicSignIn: PropTypes.func.isRequired,
   /** Intl object*/
   intl: intlShape,
 }
 
-export default injectIntl(EmailAndPassword)
+export default injectIntl(
+  graphql(classicSignIn, { name: 'classicSignIn' })(EmailAndPassword)
+)
