@@ -13,5 +13,7 @@
     "login.signin": "Entrar",
     "login.password": "Contraseña",
     "login.not-have-account": "No tiene una contraseña? Registrarse ahora",
-    "login.forgot-password": "Olvidé mi contraseña"
+    "login.forgot-password": "Olvidé mi contraseña",
+    "login.invalid-password": "Su contraseña debe contener al menos 8 caracteres",
+    "login.wrong-credentials": "Usuario y/o contraseña incorrecta"
 }
