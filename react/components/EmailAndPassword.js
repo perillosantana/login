@@ -8,11 +8,21 @@ import { graphql } from 'react-apollo'
 
 import classicSignIn from '../mutations/classicSignIn.gql'
 
+const checkPasswordFormat = password => {
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+  return regex.test(password)
+}
+
 /** EmailAndPasswordVerification tab component. */
 class EmailAndPassword extends Component {
   constructor(props) {
     super(props)
-    this.state = { isLoading: false }
+    this.state = {
+      isLoading: false,
+      isInvalidPassword: false,
+      isWrongCredentials: false,
+      isUserBlocked: false,
+    }
   }
 
   handleInputChange = event => {
@@ -27,29 +37,42 @@ class EmailAndPassword extends Component {
     this.setState({ isLoading: false })
   }
 
-  handleOnSubmit = event => {
-    const { email, password, next, onStateChange, classicSignIn } = this.props
-    if (email !== '' || password !== '') {
-      this.setState({ isLoading: true })
-      classicSignIn({
-        variables: { email, password },
-      }).then(
-        ({ data }) => {
-          if (data && data.classicSignIn) {
-            this.setState({ isLoading: false })
-            onStateChange({ step: next })
-          }
-        }, err => {
-          console.log(err)
-        })
+  handleSignInResult = status => {
+    const { onStateChange, next } = this.props
+    if (status === 'Success') {
+      onStateChange({ step: next })
+    } else if (status === 'WrongCredentials') {
+      this.setState({ isWrongCredentials: true })
+    } else if (status === 'UserBlocked') {
+      this.setState({ isUserBlocked: true })
     }
-
+  }
+  handleOnSubmit = event => {
     event.preventDefault()
+    const { email, password, classicSignIn } = this.props
+    if (!checkPasswordFormat(password)) {
+      this.setState({ isInvalidPassword: true })
+    } else {
+      if (email !== '') {
+        this.setState({ isLoading: true })
+        classicSignIn({
+          variables: { email, password },
+        }).then(
+          ({ data }) => {
+            if (data && data.classicSignIn) {
+              this.setState({ isLoading: false })
+              this.handleSignInResult(data.classicSignIn)
+            }
+          }, err => {
+            console.log(err)
+          })
+      }
+    }
   }
 
   render() {
     const { goBack, send, intl, onStateChange, previous, email, password, titleLabel } = this.props
-    const { isLoading } = this.state
+    const { isLoading, isInvalidPassword, isWrongCredentials } = this.state
 
     return (
       <div className="vtex-login__email-verification w-100">
@@ -78,6 +101,16 @@ class EmailAndPassword extends Component {
               <span className="f7">{translate('login.not-have-account', intl)}</span>
             </Link>
           </div>
+          {isInvalidPassword &&
+            <div className="f6 bg-washed-red pa3">
+              {translate('login.invalid-password', intl)}
+            </div>
+          }
+          {isWrongCredentials &&
+            <div className="f6 bg-washed-red pa3">
+              {translate('login.invalid-password', intl)}
+            </div>
+          }
           <div className="bt mt5 min-h-2 b--light-gray">
             <div className="fl mt4">
               <Button variation="secondary" size="small"
