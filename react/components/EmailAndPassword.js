@@ -9,8 +9,8 @@ import { graphql } from 'react-apollo'
 import classicSignIn from '../mutations/classicSignIn.gql'
 
 const checkPasswordFormat = password => {
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
-  return regex.test(password)
+  const pattern = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/)
+  return pattern.test(password)
 }
 
 /** EmailAndPasswordLogin component. */
@@ -68,9 +68,7 @@ class EmailAndPassword extends Component {
             this.handleWrongCredentials(data.classicSignIn)
             this.handleUserIsBlocked(data.classicSignIn)
           }
-        }, err => {
-          console.log(err)
-        })
+        }, err => { console.err(err) })
     }
   }
 

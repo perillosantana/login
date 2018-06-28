@@ -32,10 +32,7 @@ class EmailVerification extends Component {
           if (data && data.sendEmailVerification) {
             onStateChange({ step: next })
           }
-        },
-        err => {
-          console.log(err)
-        })
+        }, err => { console.err(err) })
     }
     event.preventDefault()
   }
