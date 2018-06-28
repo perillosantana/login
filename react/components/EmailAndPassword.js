@@ -2,16 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Button } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
-import { translate } from '../utils'
 import { Link } from 'render'
 import { graphql } from 'react-apollo'
 
+import { translate } from '../utils/translate'
+import { isValidEmail, isValidPassword } from '../utils/format-check'
 import classicSignIn from '../mutations/classicSignIn.gql'
-
-const checkPasswordFormat = password => {
-  const pattern = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/)
-  return pattern.test(password)
-}
 
 /** EmailAndPasswordLogin component. */
 class EmailAndPassword extends Component {
@@ -19,6 +15,7 @@ class EmailAndPassword extends Component {
     super(props)
     this.state = {
       isLoading: false,
+      isInvalidEmail: false,
       isInvalidPassword: false,
       isWrongCredentials: false,
       isUserBlocked: false,
@@ -26,10 +23,12 @@ class EmailAndPassword extends Component {
   }
 
   handleInputChange = event => {
+    this.setState({ isInvalidEmail: false })
     this.props.onStateChange({ email: event.target.value })
   }
 
   handlePasswordChange = event => {
+    this.setState({ isInvalidPassword: false })
     this.props.onStateChange({ password: event.target.value })
   }
 
@@ -51,17 +50,17 @@ class EmailAndPassword extends Component {
   }
 
   handleOnSubmit = event => {
-    this.setState({ isLoading: true })
     const { email, password, classicSignIn } = this.props
-    event.preventDefault()
-    if (!checkPasswordFormat(password)) {
+    if (!isValidEmail(email)) {
+      this.setState({ isInvalidEmail: true })
+    } else if (!isValidPassword(password)) {
       this.setState({ isInvalidPassword: true })
-      this.setState({ isLoading: false })
-    } else if (email !== '') {
+    } else {
+      this.setState({ isLoading: true })
       classicSignIn({
         variables: { email, password },
-      }).then(
-        ({ data }) => {
+      })
+        .then(({ data }) => {
           if (data && data.classicSignIn) {
             this.setState({ isLoading: false })
             this.handleSuccess(data.classicSignIn)
@@ -70,6 +69,7 @@ class EmailAndPassword extends Component {
           }
         }, err => { console.err(err) })
     }
+    event.preventDefault()
   }
 
   render() {
@@ -86,6 +86,7 @@ class EmailAndPassword extends Component {
 
     const {
       isLoading,
+      isInvalidEmail,
       isInvalidPassword,
       isWrongCredentials,
       isUserBlocked,
@@ -102,6 +103,11 @@ class EmailAndPassword extends Component {
             onChange={this.handleInputChange}
             placeholder={'Ex: example@mail.com'}
           />
+          {isInvalidEmail &&
+            <div className="f6 tc bg-washed-red pa2 ma1">
+              {translate('login.invalid-email', intl)}
+            </div>
+          }
           <div className="flex justify-end pv3">
             <Link className="link">
               <span className="f7">{translate('login.forgot-password', intl)}</span>
@@ -113,11 +119,6 @@ class EmailAndPassword extends Component {
             onChange={this.handlePasswordChange}
             placeholder={translate('login.password', intl)}
           />
-          <div className="flex justify-end pt3">
-            <Link className="link">
-              <span className="f7">{translate('login.not-have-account', intl)}</span>
-            </Link>
-          </div>
           {isInvalidPassword &&
             <div className="f6 tc bg-washed-red pa2 ma1">
               {translate('login.invalid-password', intl)}
@@ -133,6 +134,11 @@ class EmailAndPassword extends Component {
               {translate('login.user-blocked', intl)}
             </div>
           }
+          <div className="flex justify-end pt3">
+            <Link className="link">
+              <span className="f7">{translate('login.not-have-account', intl)}</span>
+            </Link>
+          </div>
           <div className="bt ma3 min-h-2 b--light-gray">
             <div className="fl mt3">
               <Button variation="secondary" size="small"

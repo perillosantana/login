@@ -1,4 +1,4 @@
-query getProfile @context(scope: "private") {
+query profile @context(scope: "private") {
   profile {
     id
     userId

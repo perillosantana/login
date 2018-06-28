@@ -14,7 +14,9 @@
     "login.password": "Password",
     "login.not-have-account": "Don't have account? Sign up now",
     "login.forgot-password": "Forgot my password",
+    "login.invalid-email": "Sign in with a valid email",
     "login.invalid-password": "Your password must contains at least 8 characters with numbers, lowercase and uppercase letters",
+    "login.invalid-code": "Insert a valid 6-digit access code",
     "login.wrong-credentials": "Wrong user and / or password",
     "login.user-blocked": "You missed your password 4 times. Your user has been blocked for an hour"
 }

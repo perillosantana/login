@@ -14,7 +14,9 @@
     "login.password": "Senha",
     "login.not-have-account": "Não tem uma senha? Cadastre-se agora",
     "login.forgot-password": "Esqueci minha senha",
+    "login.invalid-email": "Entre com um email válido",
     "login.invalid-password": "Sua senha deve conter pelo menos 8 caracteres com números, letras minúsculas e maiúsculas",
+    "login.invalid-code": "Insira os 6 dígitos do código de acesso",
     "login.wrong-credentials": "Usuário e/ou senha errada",
     "login.user-blocked": "Você errou sua senha 4 vezes. Seu usuário foi bloqueado por uma hora"
 }

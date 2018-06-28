@@ -4,24 +4,27 @@ import { Input, Button } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
+import { translate } from '../utils/translate'
+import { isValidAccesCode } from '../utils/format-check'
 import accessKeySignIn from '../mutations/accessKeySignIn.gql'
-
-import { translate } from '../utils'
 
 /** CodeConfirmation tab component. Receive the code from an input and call the signIn mutation */
 class CodeConfirmation extends Component {
   constructor(props) {
     super(props)
-    this.state = { isLoading: false }
+    this.state = { isLoading: false, isInvalidCode: false }
   }
 
   handleInputChange = event => {
+    this.setState({ isInvalidCode: false })
     this.props.onStateChange({ code: event.target.value })
   }
 
   handleOnSubmit = event => {
     const { accessKeySignIn, email, code, onStateChange, next } = this.props
-    if (email !== '' && code !== '') {
+    if (!isValidAccesCode(code)) {
+      this.setState({ isInvalidCode: true })
+    } else {
       this.setState({ isLoading: true })
       accessKeySignIn({
         variables: { email, code },
@@ -46,7 +49,7 @@ class CodeConfirmation extends Component {
       previous,
       code,
     } = this.props
-    const { isLoading } = this.state
+    const { isLoading, isInvalidCode } = this.state
 
     return (
       <div className="vtex-login__code-confirmation w-100">
@@ -55,6 +58,11 @@ class CodeConfirmation extends Component {
         </h3>
         <form onSubmit={e => this.handleOnSubmit(e)}>
           <Input value={code} onChange={this.handleInputChange} />
+          {isInvalidCode &&
+            <div className="f6 tc bg-washed-red pa2 ma1">
+              {translate('login.invalid-code', intl)}
+            </div>
+          }
           <div className="mt5 min-h-2 b--light-gray">
             <div className="fl mt4">
               <Button variation="secondary" size="small"
