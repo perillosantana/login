@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { translate } from '../utils'
 import { Button } from 'vtex.styleguide'
+
+import { translate } from '../utils/translate'
 
 /** LoginOptions tab component. Displays a list of login options */
 class LoginOptions extends Component {

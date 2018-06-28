@@ -8,7 +8,7 @@ import EmailAndPassword from './components/EmailAndPassword'
 import CodeConfirmation from './components/CodeConfirmation'
 import AccountOptions from './components/AccountOptions'
 import ProfileIcon from './images/ProfileIcon'
-import GET_USER_PROFILE from './queries/getProfile.gql'
+import GET_USER_PROFILE from './queries/profile.gql'
 import { injectIntl, intlShape } from 'react-intl'
 
 import './global.css'

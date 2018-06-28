@@ -4,18 +4,19 @@ import { Input, Button } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
+import { translate } from '../utils/translate'
+import { isValidEmail } from '../utils/format-check'
 import sendEmailVerification from '../mutations/sendEmailVerification.gql'
-
-import { translate } from '../utils'
 
 /** EmailVerification tab component. Receive a email from an input and call the sendEmailVerification mutation */
 class EmailVerification extends Component {
   constructor(props) {
     super(props)
-    this.state = { isLoading: false }
+    this.state = { isLoading: false, isInvalidEmail: false }
   }
 
   handleInputChange = event => {
+    this.setState({ isInvalidEmail: false })
     this.props.onStateChange({ email: event.target.value })
   }
 
@@ -25,11 +26,14 @@ class EmailVerification extends Component {
 
   handleOnSubmit = event => {
     const { sendEmailVerification, email, onStateChange, next } = this.props
-    if (email !== '') {
+    if (!isValidEmail(email)) {
+      this.setState({ isInvalidEmail: true })
+    } else {
       this.setState({ isLoading: true })
-      sendEmailVerification({ variables: { email } }).then(
-        ({ data }) => {
+      sendEmailVerification({ variables: { email } })
+        .then(({ data }) => {
           if (data && data.sendEmailVerification) {
+            this.setState({ isLoading: false })
             onStateChange({ step: next })
           }
         }, err => { console.err(err) })
@@ -39,7 +43,7 @@ class EmailVerification extends Component {
 
   render() {
     const { goBack, send, intl, onStateChange, previous, email, titleLabel } = this.props
-    const { isLoading } = this.state
+    const { isLoading, isInvalidEmail } = this.state
 
     return (
       <div className="vtex-login__email-verification w-100">
@@ -52,6 +56,11 @@ class EmailVerification extends Component {
             onChange={this.handleInputChange}
             placeholder={'Ex: example@mail.com'}
           />
+          {isInvalidEmail &&
+            <div className="f6 tc bg-washed-red pa2 ma1">
+              {translate('login.invalid-email', intl)}
+            </div>
+          }
           <div className="bt mt5 min-h-2 b--light-gray">
             <div className="fl mt4">
               <Button variation="secondary" size="small"

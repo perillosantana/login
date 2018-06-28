@@ -5,6 +5,7 @@ import { Button } from 'vtex.styleguide'
 import { Link } from 'render'
 import { graphql } from 'react-apollo'
 
+import { translate } from '../utils/translate'
 import logout from '../mutations/logout.gql'
 
 // Component that shows account options to the user.
@@ -22,9 +23,7 @@ class AccountOptions extends Component {
   }
 
   render() {
-    const {
-      intl: { formatMessage },
-    } = this.props
+    const { intl } = this.props
     return (
       <div className="vtex-login__account-options items-center w-100">
         <div className="ma4 min-h-2 b--light-gray">
@@ -33,7 +32,7 @@ class AccountOptions extends Component {
               variation="tertiary"
               size="small"
             >
-              <span className="f7">{formatMessage({ id: 'login.my-orders' })}</span>
+              <span className="f7">{translate('login.my-orders', intl)}</span>
             </Button>
           </Link>
         </div>
@@ -44,7 +43,7 @@ class AccountOptions extends Component {
             size="small"
             onClick={() => this.handleLogoutClick()}
           >
-            <span className="f7">{formatMessage({ id: 'login.logout-label' })}</span>
+            <span className="f7">{translate('login.logout-label', intl)}</span>
           </Button>
         </div>
       </div>
