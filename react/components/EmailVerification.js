@@ -12,11 +12,15 @@ import sendEmailVerification from '../mutations/sendEmailVerification.gql'
 class EmailVerification extends Component {
   constructor(props) {
     super(props)
-    this.state = { isLoading: false, isInvalidEmail: false }
+    this.state = {
+      isLoading: false,
+      isInvalidEmail: false,
+      isUserBlocked: false,
+    }
   }
 
   handleInputChange = event => {
-    this.setState({ isInvalidEmail: false })
+    this.setState({ isInvalidEmail: false, isUserBlocked: false })
     this.props.onStateChange({ email: event.target.value })
   }
 
@@ -36,14 +40,16 @@ class EmailVerification extends Component {
             this.setState({ isLoading: false })
             onStateChange({ step: next })
           }
-        }, err => { console.err(err) })
+        }, err => {
+          err && this.setState({ isLoading: false, isUserBlocked: true })
+        })
     }
     event.preventDefault()
   }
 
   render() {
     const { goBack, send, intl, onStateChange, previous, email, titleLabel } = this.props
-    const { isLoading, isInvalidEmail } = this.state
+    const { isLoading, isInvalidEmail, isUserBlocked } = this.state
 
     return (
       <div className="vtex-login__email-verification w-100">
@@ -57,8 +63,13 @@ class EmailVerification extends Component {
             placeholder={'Ex: example@mail.com'}
           />
           {isInvalidEmail &&
-            <div className="f6 tc bg-washed-red pa2 ma1">
+            <div className="f7 tc bg-washed-red pa2 ma1">
               {translate('login.invalidEmail', intl)}
+            </div>
+          }
+          {isUserBlocked &&
+            <div className="f7 tc bg-washed-red pa2 ma1">
+              {translate('login.userBlocked', intl)}
             </div>
           }
           <div className="bt mt5 min-h-2 b--light-gray">

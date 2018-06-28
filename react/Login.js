@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
-
 import { Button } from 'vtex.styleguide'
+
 import LoginOptions from './components/LoginOptions'
 import EmailVerification from './components/EmailVerification'
 import EmailAndPassword from './components/EmailAndPassword'
 import CodeConfirmation from './components/CodeConfirmation'
 import AccountOptions from './components/AccountOptions'
+import { truncateString } from './utils/truncate-string'
 import ProfileIcon from './images/ProfileIcon'
 import GET_USER_PROFILE from './queries/profile.gql'
 import { injectIntl, intlShape } from 'react-intl'
@@ -113,7 +114,7 @@ class Login extends Component {
       <div className="vtex-login__container flex items-center relative f6 fr">
         {profile &&
           (<div>
-            {formatMessage({ id: 'login.hello' })} {profile.firstName || profile.email}
+            {formatMessage({ id: 'login.hello' })} {profile.firstName || truncateString(profile.email)}
           </div>)
         }
         <Button

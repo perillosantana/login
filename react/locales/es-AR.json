@@ -15,7 +15,7 @@
     "login.notHaveAccount": "No tiene una contraseña? Registrarse ahora",
     "login.forgotPassword": "Olvidé mi contraseña",
     "login.invalidEmail": "Entra con un correo electrónico válido",
-    "login.invalidPassword": "Su contraseña debe contener al menos 8 caracteres con números y letras minúsculas y mayúsculas",
+    "login.invalidPassword": "Su contraseña debe contener: 8 caracteres, números y letras minúsculas y mayúsculas",
     "login.invalidCode": "Inserte un código de acceso de 6 dígitos válido",
     "login.wrongCredentials": "Usuario y/o contraseña incorrecta",
     "login.userBlocked": "Te perdiste tu contraseña 4 veces. Tu usuario ha sido bloqueado por una hora"

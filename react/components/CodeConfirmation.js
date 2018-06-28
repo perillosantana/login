@@ -12,7 +12,11 @@ import accessKeySignIn from '../mutations/accessKeySignIn.gql'
 class CodeConfirmation extends Component {
   constructor(props) {
     super(props)
-    this.state = { isLoading: false, isInvalidCode: false }
+    this.state = {
+      isLoading: false,
+      isInvalidCode: false,
+      isWrongCredentials: false,
+    }
   }
 
   handleInputChange = event => {
@@ -20,8 +24,17 @@ class CodeConfirmation extends Component {
     this.props.onStateChange({ code: event.target.value })
   }
 
+  handleSuccess = status => {
+    const { onStateChange, next } = this.props
+    status === 'Success' && onStateChange({ step: next })
+  }
+
+  handleWrongCredentials = status => {
+    status === 'WrongCredentials' && this.setState({ isWrongCredentials: true })
+  }
+
   handleOnSubmit = event => {
-    const { accessKeySignIn, email, code, onStateChange, next } = this.props
+    const { accessKeySignIn, email, code } = this.props
     if (!isValidAccesCode(code)) {
       this.setState({ isInvalidCode: true })
     } else {
@@ -32,9 +45,10 @@ class CodeConfirmation extends Component {
         ({ data }) => {
           if (data && data.accessKeySignIn) {
             this.setState({ isLoading: false })
-            onStateChange({ step: next })
+            this.handleSuccess(data.accessKeySignIn)
+            this.handleWrongCredentials(data.accessKeySignIn)
           }
-        }, err => { console.err(err) })
+        }, err => { console.error(err) })
     }
     event.preventDefault()
   }
@@ -49,7 +63,11 @@ class CodeConfirmation extends Component {
       previous,
       code,
     } = this.props
-    const { isLoading, isInvalidCode } = this.state
+    const {
+      isLoading,
+      isInvalidCode,
+      isWrongCredentials,
+    } = this.state
 
     return (
       <div className="vtex-login__code-confirmation w-100">
@@ -59,8 +77,13 @@ class CodeConfirmation extends Component {
         <form onSubmit={e => this.handleOnSubmit(e)}>
           <Input value={code} onChange={this.handleInputChange} />
           {isInvalidCode &&
-            <div className="f6 tc bg-washed-red pa2 ma1">
+            <div className="f7 tc bg-washed-red pa2 ma1">
               {translate('login.invalidCode', intl)}
+            </div>
+          }
+          {isWrongCredentials &&
+            <div className="f7 tc bg-washed-red pa2 ma1">
+              {translate('login.wrongCredentials', intl)}
             </div>
           }
           <div className="mt5 min-h-2 b--light-gray">
