@@ -15,5 +15,6 @@
     "login.not-have-account": "Não tem uma senha? Cadastre-se agora",
     "login.forgot-password": "Esqueci minha senha",
     "login.invalid-password": "Sua senha deve conter pelo menos 8 caracteres",
-    "login.wrong-credentials": "Usuário e/ou senha errada"
+    "login.wrong-credentials": "Usuário e/ou senha errada",
+    "login.user-blocked": "Você errou sua senha 4 vezes. Seu usuário foi bloqueado por uma hora"
 }

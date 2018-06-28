@@ -15,5 +15,6 @@
     "login.not-have-account": "Don't have account? Sign up now",
     "login.forgot-password": "Forgot my password",
     "login.invalid-password": " Your password must contains at least 8 characters",
-    "login.wrong-credentials": ""
+    "login.wrong-credentials": "Wrong user and / or password",
+    "login.user-blocked": "You missed your password 4 times. Your user has been blocked for an hour"
 }
