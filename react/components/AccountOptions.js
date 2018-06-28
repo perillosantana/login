@@ -32,7 +32,7 @@ class AccountOptions extends Component {
               variation="tertiary"
               size="small"
             >
-              <span className="f7">{translate('login.my-orders', intl)}</span>
+              <span className="f7">{translate('login.myOrders', intl)}</span>
             </Button>
           </Link>
         </div>
@@ -43,7 +43,7 @@ class AccountOptions extends Component {
             size="small"
             onClick={() => this.handleLogoutClick()}
           >
-            <span className="f7">{translate('login.logout-label', intl)}</span>
+            <span className="f7">{translate('login.logoutLabel', intl)}</span>
           </Button>
         </div>
       </div>

@@ -13,15 +13,15 @@ import { injectIntl, intlShape } from 'react-intl'
 
 import './global.css'
 
-const GO_BACK = 'login.go-back'
+const GO_BACK = 'login.goBack'
 const STEPS = [
   // eslint-disable-next-line
   (state, func) => {
     return (
       <LoginOptions
         page="login-options"
-        titleLabel="login-options.title"
-        options={['login-options.email-verification', 'login-options.email-and-password']}
+        titleLabel="loginOptions.title"
+        options={['loginOptions.emailVerification', 'loginOptions.emailAndPassword']}
         onStateChange={func}
       />
     )
@@ -45,8 +45,8 @@ const STEPS = [
     return (
       <EmailAndPassword
         goBack={GO_BACK}
-        titleLabel="login-options.email-and-password"
-        send="login.signin"
+        titleLabel="loginOptions.emailAndPassword"
+        send="login.signIn"
         next={4}
         previous={0}
         email={state.email}
@@ -61,7 +61,7 @@ const STEPS = [
       <CodeConfirmation
         goBack={GO_BACK}
         confirm="login.confirm"
-        titleLabel="login.email-code.title"
+        titleLabel="login.accessCodeTitle"
         next={4}
         previous={1}
         email={state.email}

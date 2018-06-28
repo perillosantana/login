@@ -58,7 +58,7 @@ class EmailVerification extends Component {
           />
           {isInvalidEmail &&
             <div className="f6 tc bg-washed-red pa2 ma1">
-              {translate('login.invalid-email', intl)}
+              {translate('login.invalidEmail', intl)}
             </div>
           }
           <div className="bt mt5 min-h-2 b--light-gray">

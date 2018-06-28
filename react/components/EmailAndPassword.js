@@ -105,12 +105,12 @@ class EmailAndPassword extends Component {
           />
           {isInvalidEmail &&
             <div className="f6 tc bg-washed-red pa2 ma1">
-              {translate('login.invalid-email', intl)}
+              {translate('login.invalidEmail', intl)}
             </div>
           }
           <div className="flex justify-end pv3">
             <Link className="link">
-              <span className="f7">{translate('login.forgot-password', intl)}</span>
+              <span className="f7">{translate('login.forgotPassword', intl)}</span>
             </Link>
           </div>
           <Input
@@ -121,22 +121,22 @@ class EmailAndPassword extends Component {
           />
           {isInvalidPassword &&
             <div className="f6 tc bg-washed-red pa2 ma1">
-              {translate('login.invalid-password', intl)}
+              {translate('login.invalidPassword', intl)}
             </div>
           }
           {isWrongCredentials &&
             <div className="f6 tc bg-washed-red pa2 ma1">
-              {translate('login.wrong-credentials', intl)}
+              {translate('login.wrongCredentials', intl)}
             </div>
           }
           {isUserBlocked &&
             <div className="f6 tc bg-washed-red pa2 ma1">
-              {translate('login.user-blocked', intl)}
+              {translate('login.userBlocked', intl)}
             </div>
           }
           <div className="flex justify-end pt3">
             <Link className="link">
-              <span className="f7">{translate('login.not-have-account', intl)}</span>
+              <span className="f7">{translate('login.notHaveAccount', intl)}</span>
             </Link>
           </div>
           <div className="bt ma3 min-h-2 b--light-gray">
