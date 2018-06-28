@@ -63,18 +63,15 @@ class EmailVerification extends Component {
               </Button>
             </div>
             <div className="fr mt4">
-              {isLoading ? (
-                <Button size="small" isLoading={isLoading}>
-                  <div className="f7">{translate(send, intl)}</div>
-                </Button>
-              ) : (
-                <Button size="small"
-                  type="submit"
-                  onClick={e => this.handleOnSubmit(e)}
-                >
-                  <div className="f7">{translate(send, intl)}</div>
-                </Button>
-              )}
+              <Button
+                variation="primary"
+                size="small"
+                type="submit"
+                onClick={e => this.handleOnSubmit(e)}
+                isLoading={isLoading}
+              >
+                <div className="f7">{translate(send, intl)}</div>
+              </Button>
             </div>
           </div>
         </form>
