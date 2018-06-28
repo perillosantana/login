@@ -57,22 +57,20 @@ class EmailAndPassword extends Component {
     if (!checkPasswordFormat(password)) {
       this.setState({ isInvalidPassword: true })
       this.setState({ isLoading: false })
-    } else {
-      if (email !== '') {
-        classicSignIn({
-          variables: { email, password },
-        }).then(
-          ({ data }) => {
-            if (data && data.classicSignIn) {
-              this.setState({ isLoading: false })
-              this.handleSuccess(data.classicSignIn)
-              this.handleWrongCredentials(data.classicSignIn)
-              this.handleUserIsBlocked(data.classicSignIn)
-            }
-          }, err => {
-            console.log(err)
-          })
-      }
+    } else if (email !== '') {
+      classicSignIn({
+        variables: { email, password },
+      }).then(
+        ({ data }) => {
+          if (data && data.classicSignIn) {
+            this.setState({ isLoading: false })
+            this.handleSuccess(data.classicSignIn)
+            this.handleWrongCredentials(data.classicSignIn)
+            this.handleUserIsBlocked(data.classicSignIn)
+          }
+        }, err => {
+          console.log(err)
+        })
     }
   }
 
@@ -141,7 +139,7 @@ class EmailAndPassword extends Component {
             <div className="fl mt3">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous, password: '' })}>
-                <div className="f7">{translate(goBack, intl)}</div>
+                <span className="f7">{translate(goBack, intl)}</span>
               </Button>
             </div>
             <div className="fr mt3">
@@ -152,7 +150,7 @@ class EmailAndPassword extends Component {
                 onClick={e => this.handleOnSubmit(e)}
                 isLoading={isLoading}
               >
-                <div className="f7">{translate(send, intl)}</div>
+                <span className="f7">{translate(send, intl)}</span>
               </Button>
             </div>
           </div>

@@ -24,7 +24,7 @@ class LoginOptions extends Component {
                   onClick={() => onStateChange({ step: index + 1 })}
                   block
                 >
-                  <div className="f7">{translate(el, intl)}</div>
+                  <span className="f7">{translate(el, intl)}</span>
                 </Button>
               </li>
             )

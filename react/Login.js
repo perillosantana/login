@@ -129,7 +129,7 @@ class Login extends Component {
           <div
             className="vtex-login__box absolute right-0 z-max flex flex-colunm"
             onMouseEnter={() => this.handleUpdateState({ isMouseOnContent: true })}
-            onMouseLeave={() => this.handleUpdateState({ isMouseOnContent: false })}
+            onMouseLeave={() => this.handleUpdateState({ isMouseOnContent: true })}
           >
             <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3" />
             <div className="shadow-3 mt3">

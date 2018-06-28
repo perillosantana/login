@@ -61,7 +61,7 @@ class CodeConfirmation extends Component {
             <div className="fl mt4">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous })}>
-                <div className="f7">{translate(goBack, intl)}</div>
+                <span className="f7">{translate(goBack, intl)}</span>
               </Button>
             </div>
             <div className="fr mt4">
@@ -72,7 +72,7 @@ class CodeConfirmation extends Component {
                 onClick={e => this.handleOnSubmit(e)}
                 isLoading={isLoading}
               >
-                <div className="f7">{translate(confirm, intl)}</div>
+                <span className="f7">{translate(confirm, intl)}</span>
               </Button>
             </div>
           </div>
