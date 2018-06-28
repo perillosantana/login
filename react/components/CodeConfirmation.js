@@ -21,7 +21,7 @@ class CodeConfirmation extends Component {
 
   handleOnSubmit = event => {
     const { accessKeySignIn, email, code, onStateChange, next } = this.props
-    if (email !== '' || code !== '') {
+    if (email !== '' && code !== '') {
       this.setState({ isLoading: true })
       accessKeySignIn({
         variables: { email, code },
@@ -31,9 +31,7 @@ class CodeConfirmation extends Component {
             this.setState({ isLoading: false })
             onStateChange({ step: next })
           }
-        }, err => {
-          console.log(err)
-        })
+        }, err => { console.err(err) })
     }
     event.preventDefault()
   }
