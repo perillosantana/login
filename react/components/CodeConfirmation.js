@@ -66,7 +66,7 @@ class CodeConfirmation extends Component {
             </div>
             <div className="fr mt4">
               {isLoading ? (
-                <Button size="small" disabled isLoading={isLoading}>
+                <Button size="small" isLoading={isLoading}>
                   <div className="f7">{translate(confirm, intl)}</div>
                 </Button>
               ) : (

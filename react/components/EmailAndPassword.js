@@ -51,18 +51,20 @@ class EmailAndPassword extends Component {
   }
 
   handleOnSubmit = event => {
-    event.preventDefault()
+    this.setState({ isLoading: true })
     const { email, password, classicSignIn } = this.props
+    event.preventDefault()
     if (!checkPasswordFormat(password)) {
       this.setState({ isInvalidPassword: true })
+      this.setState({ isLoading: false })
     } else {
       if (email !== '') {
-        this.setState({ isLoading: true })
         classicSignIn({
           variables: { email, password },
         }).then(
           ({ data }) => {
             if (data && data.classicSignIn) {
+              this.setState({ isLoading: false })
               this.handleSuccess(data.classicSignIn)
               this.handleWrongCredentials(data.classicSignIn)
               this.handleUserIsBlocked(data.classicSignIn)
@@ -70,7 +72,6 @@ class EmailAndPassword extends Component {
           }, err => {
             console.log(err)
           })
-        this.setState({ isLoading: false })
       }
     }
   }
@@ -122,30 +123,30 @@ class EmailAndPassword extends Component {
             </Link>
           </div>
           {isInvalidPassword &&
-            <div className="f6 bg-washed-red pa2 ma1">
+            <div className="f6 tc bg-washed-red pa2 ma1">
               {translate('login.invalid-password', intl)}
             </div>
           }
           {isWrongCredentials &&
-            <div className="f6 bg-washed-red pa2 ma1">
+            <div className="f6 tc bg-washed-red pa2 ma1">
               {translate('login.wrong-credentials', intl)}
             </div>
           }
           {isUserBlocked &&
-            <div className="f6 bg-washed-red pa2 ma1">
+            <div className="f6 tc bg-washed-red pa2 ma1">
               {translate('login.user-blocked', intl)}
             </div>
           }
-          <div className="bt mt5 min-h-2 b--light-gray">
-            <div className="fl mt4">
+          <div className="bt ma3 min-h-2 b--light-gray">
+            <div className="fl mt3">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous, password: '' })}>
                 <div className="f7">{translate(goBack, intl)}</div>
               </Button>
             </div>
-            <div className="fr mt4">
+            <div className="fr mt3">
               {isLoading ? (
-                <Button size="small" disabled isLoading={isLoading}>
+                <Button size="small" isLoading={isLoading}>
                   <div className="f7">{translate(send, intl)}</div>
                 </Button>
               ) : (
