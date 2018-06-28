@@ -60,7 +60,7 @@ class CodeConfirmation extends Component {
           <Input value={code} onChange={this.handleInputChange} />
           {isInvalidCode &&
             <div className="f6 tc bg-washed-red pa2 ma1">
-              {translate('login.invalid-code', intl)}
+              {translate('login.invalidCode', intl)}
             </div>
           }
           <div className="mt5 min-h-2 b--light-gray">
