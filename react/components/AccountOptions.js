@@ -33,7 +33,7 @@ class AccountOptions extends Component {
               variation="tertiary"
               size="small"
             >
-              <div className="f7">{formatMessage({ id: 'login.my-orders' })}</div>
+              <span className="f7">{formatMessage({ id: 'login.my-orders' })}</span>
             </Button>
           </Link>
         </div>
@@ -44,7 +44,7 @@ class AccountOptions extends Component {
             size="small"
             onClick={() => this.handleLogoutClick()}
           >
-            <div className="f7">{formatMessage({ id: 'login.logout-label' })}</div>
+            <span className="f7">{formatMessage({ id: 'login.logout-label' })}</span>
           </Button>
         </div>
       </div>
