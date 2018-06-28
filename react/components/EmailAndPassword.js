@@ -67,7 +67,7 @@ class EmailAndPassword extends Component {
             this.handleWrongCredentials(data.classicSignIn)
             this.handleUserIsBlocked(data.classicSignIn)
           }
-        }, err => { console.err(err) })
+        }, err => { console.error(err) })
     }
     event.preventDefault()
   }
@@ -104,7 +104,7 @@ class EmailAndPassword extends Component {
             placeholder={'Ex: example@mail.com'}
           />
           {isInvalidEmail &&
-            <div className="f6 tc bg-washed-red pa2 ma1">
+            <div className="f7 tc bg-washed-red pa2 ma1">
               {translate('login.invalidEmail', intl)}
             </div>
           }
@@ -120,17 +120,17 @@ class EmailAndPassword extends Component {
             placeholder={translate('login.password', intl)}
           />
           {isInvalidPassword &&
-            <div className="f6 tc bg-washed-red pa2 ma1">
+            <div className="f7 tc bg-washed-red pa2 ma1">
               {translate('login.invalidPassword', intl)}
             </div>
           }
           {isWrongCredentials &&
-            <div className="f6 tc bg-washed-red pa2 ma1">
+            <div className="f7 tc bg-washed-red pa2 ma1">
               {translate('login.wrongCredentials', intl)}
             </div>
           }
           {isUserBlocked &&
-            <div className="f6 tc bg-washed-red pa2 ma1">
+            <div className="f7 tc bg-washed-red pa2 ma1">
               {translate('login.userBlocked', intl)}
             </div>
           }
