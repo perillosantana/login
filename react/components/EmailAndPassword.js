@@ -13,7 +13,7 @@ const checkPasswordFormat = password => {
   return regex.test(password)
 }
 
-/** EmailAndPasswordVerification tab component. */
+/** EmailAndPasswordLogin component. */
 class EmailAndPassword extends Component {
   constructor(props) {
     super(props)
@@ -37,16 +37,19 @@ class EmailAndPassword extends Component {
     this.setState({ isLoading: false })
   }
 
-  handleSignInResult = status => {
+  handleSuccess = status => {
     const { onStateChange, next } = this.props
-    if (status === 'Success') {
-      onStateChange({ step: next })
-    } else if (status === 'WrongCredentials') {
-      this.setState({ isWrongCredentials: true })
-    } else if (status === 'UserBlocked') {
-      this.setState({ isUserBlocked: true })
-    }
+    status === 'Success' && onStateChange({ step: next })
   }
+
+  handleWrongCredentials = status => {
+    status === 'WrongCredentials' && this.setState({ isWrongCredentials: true })
+  }
+
+  handleUserIsBlocked = status => {
+    status === 'BlockedUser' && this.setState({ isUserBlocked: true })
+  }
+
   handleOnSubmit = event => {
     event.preventDefault()
     const { email, password, classicSignIn } = this.props
@@ -60,19 +63,36 @@ class EmailAndPassword extends Component {
         }).then(
           ({ data }) => {
             if (data && data.classicSignIn) {
-              this.setState({ isLoading: false })
-              this.handleSignInResult(data.classicSignIn)
+              this.handleSuccess(data.classicSignIn)
+              this.handleWrongCredentials(data.classicSignIn)
+              this.handleUserIsBlocked(data.classicSignIn)
             }
           }, err => {
             console.log(err)
           })
+        this.setState({ isLoading: false })
       }
     }
   }
 
   render() {
-    const { goBack, send, intl, onStateChange, previous, email, password, titleLabel } = this.props
-    const { isLoading, isInvalidPassword, isWrongCredentials } = this.state
+    const {
+      goBack,
+      send,
+      intl,
+      onStateChange,
+      previous,
+      email,
+      password,
+      titleLabel,
+    } = this.props
+
+    const {
+      isLoading,
+      isInvalidPassword,
+      isWrongCredentials,
+      isUserBlocked,
+    } = this.state
 
     return (
       <div className="vtex-login__email-verification w-100">
@@ -102,13 +122,18 @@ class EmailAndPassword extends Component {
             </Link>
           </div>
           {isInvalidPassword &&
-            <div className="f6 bg-washed-red pa3">
+            <div className="f6 bg-washed-red pa2 ma1">
               {translate('login.invalid-password', intl)}
             </div>
           }
           {isWrongCredentials &&
-            <div className="f6 bg-washed-red pa3">
-              {translate('login.invalid-password', intl)}
+            <div className="f6 bg-washed-red pa2 ma1">
+              {translate('login.wrong-credentials', intl)}
+            </div>
+          }
+          {isUserBlocked &&
+            <div className="f6 bg-washed-red pa2 ma1">
+              {translate('login.user-blocked', intl)}
             </div>
           }
           <div className="bt mt5 min-h-2 b--light-gray">

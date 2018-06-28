@@ -15,5 +15,6 @@
     "login.not-have-account": "No tiene una contraseña? Registrarse ahora",
     "login.forgot-password": "Olvidé mi contraseña",
     "login.invalid-password": "Su contraseña debe contener al menos 8 caracteres",
-    "login.wrong-credentials": "Usuario y/o contraseña incorrecta"
+    "login.wrong-credentials": "Usuario y/o contraseña incorrecta",
+    "login.user-blocked": "Te perdiste tu contraseña 4 veces. Tu usuario ha sido bloqueado por una hora"
 }
