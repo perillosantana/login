@@ -48,13 +48,13 @@ class EmailVerification extends Component {
   }
 
   render() {
-    const { goBack, send, intl, onStateChange, previous, email, titleLabel } = this.props
+    const { intl, onStateChange, previous, email } = this.props
     const { isLoading, isInvalidEmail, isUserBlocked } = this.state
 
     return (
       <div className="vtex-login__email-verification w-100">
         <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
-          {translate(titleLabel, intl)}
+          {translate('loginOptions.emailVerification', intl)}
         </h3>
         <form onSubmit={e => this.handleOnSubmit(e)}>
           <Input
@@ -76,7 +76,7 @@ class EmailVerification extends Component {
             <div className="fl mt4">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous })}>
-                <span className="f7">{translate(goBack, intl)}</span>
+                <span className="f7">{translate('login.goBack', intl)}</span>
               </Button>
             </div>
             <div className="fr mt4">
@@ -87,7 +87,7 @@ class EmailVerification extends Component {
                 onClick={e => this.handleOnSubmit(e)}
                 isLoading={isLoading}
               >
-                <span className="f7">{translate(send, intl)}</span>
+                <span className="f7">{translate('login.send', intl)}</span>
               </Button>
             </div>
           </div>
@@ -104,12 +104,6 @@ EmailVerification.propTypes = {
   previous: PropTypes.number.isRequired,
   /** Email set on state */
   email: PropTypes.string.isRequired,
-  /** Title that will be shown on top */
-  titleLabel: PropTypes.string.isRequired,
-  /** Locales go back string id */
-  goBack: PropTypes.string.isRequired,
-  /** Locales send string id */
-  send: PropTypes.string.isRequired,
   /** Function to change de active tab */
   onStateChange: PropTypes.func.isRequired,
   /** Graphql property to call a mutation */
