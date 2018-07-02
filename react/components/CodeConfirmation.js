@@ -55,11 +55,8 @@ class CodeConfirmation extends Component {
 
   render() {
     const {
-      goBack,
-      confirm,
       intl,
       onStateChange,
-      titleLabel,
       previous,
       code,
     } = this.props
@@ -90,7 +87,7 @@ class CodeConfirmation extends Component {
             <div className="fl mt4">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous })}>
-                <span className="f7">{translate(goBack, intl)}</span>
+                <span className="f7">{translate('login.goBack', intl)}</span>
               </Button>
             </div>
             <div className="fr mt4">
@@ -101,7 +98,7 @@ class CodeConfirmation extends Component {
                 onClick={e => this.handleOnSubmit(e)}
                 isLoading={isLoading}
               >
-                <span className="f7">{translate(confirm, intl)}</span>
+                <span className="f7">{translate('login.confirm', intl)}</span>
               </Button>
             </div>
           </div>
@@ -120,12 +117,6 @@ CodeConfirmation.propTypes = {
   next: PropTypes.number.isRequired,
   /** Previous step */
   previous: PropTypes.number.isRequired,
-  /** Title that will be shown on top */
-  titleLabel: PropTypes.string.isRequired,
-  /** Locales go back string id */
-  goBack: PropTypes.string.isRequired,
-  /** Locales confirm string id */
-  confirm: PropTypes.string.isRequired,
   /** Function to change de active tab */
   onStateChange: PropTypes.func.isRequired,
   /** Graphql property to call a mutation */

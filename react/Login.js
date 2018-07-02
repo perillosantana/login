@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
+import { injectIntl, intlShape } from 'react-intl'
 
 import LoginOptions from './components/LoginOptions'
 import EmailVerification from './components/EmailVerification'
@@ -10,11 +11,17 @@ import AccountOptions from './components/AccountOptions'
 import { truncateString } from './utils/truncate-string'
 import ProfileIcon from './images/ProfileIcon'
 import GET_USER_PROFILE from './queries/profile.gql'
-import { injectIntl, intlShape } from 'react-intl'
-
+import { translate } from './utils/translate'
 import './global.css'
 
-const GO_BACK = 'login.goBack'
+const content = {
+  LOGIN_OPTIONS: 0,
+  EMAIL_VERIFICATION: 1,
+  EMAIL_PASSWORD: 2,
+  CODE_CONFIRMATION: 3,
+  ACCOUNT_OPTIONS: 4,
+}
+
 const STEPS = [
   // eslint-disable-next-line
   (state, func) => {
@@ -31,11 +38,8 @@ const STEPS = [
   (state, func) => {
     return (
       <EmailVerification
-        goBack={GO_BACK}
-        titleLabel="login.email"
-        send="login.send"
-        next={3}
-        previous={0}
+        next={content.CODE_CONFIRMATION}
+        previous={content.LOGIN_OPTIONS}
         email={state.email}
         onStateChange={func}
       />
@@ -45,11 +49,8 @@ const STEPS = [
   (state, func) => {
     return (
       <EmailAndPassword
-        goBack={GO_BACK}
-        titleLabel="loginOptions.emailAndPassword"
-        send="login.signIn"
-        next={4}
-        previous={0}
+        next={content.ACCOUNT_OPTIONS}
+        previous={content.LOGIN_OPTIONS}
         email={state.email}
         password={state.password}
         onStateChange={func}
@@ -60,17 +61,15 @@ const STEPS = [
   (state, func) => {
     return (
       <CodeConfirmation
-        goBack={GO_BACK}
-        confirm="login.confirm"
-        titleLabel="login.accessCodeTitle"
-        next={4}
-        previous={1}
+        next={content.ACCOUNT_OPTIONS}
+        previous={content.EMAIL_VERIFICATION}
         email={state.email}
         code={state.code}
         onStateChange={func}
       />
     )
   },
+
   // eslint-disable-next-line
   (state, func) => {
     return (
@@ -100,21 +99,18 @@ class Login extends Component {
   }
 
   render() {
-    const {
-      data: { profile },
-      intl: { formatMessage },
-    } = this.props
+    const { data: { profile }, intl } = this.props
 
     const { isMouseOnButton, isMouseOnContent } = this.state
 
-    const step = profile ? 4 : this.state.step
+    const step = profile ? content.ACCOUNT_OPTIONS : this.state.step
     const render = STEPS[step](this.state, this.handleUpdateState)
 
     return (
       <div className="vtex-login__container flex items-center relative f6 fr">
         {profile &&
           (<div>
-            {formatMessage({ id: 'login.hello' })} {profile.firstName || truncateString(profile.email)}
+            {translate('login.hello', intl)} {profile.firstName || truncateString(profile.email)}
           </div>)
         }
         <Button

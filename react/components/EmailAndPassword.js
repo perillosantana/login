@@ -74,14 +74,11 @@ class EmailAndPassword extends Component {
 
   render() {
     const {
-      goBack,
-      send,
       intl,
       onStateChange,
       previous,
       email,
       password,
-      titleLabel,
     } = this.props
 
     const {
@@ -95,7 +92,7 @@ class EmailAndPassword extends Component {
     return (
       <div className="vtex-login__email-verification w-100">
         <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
-          {translate(titleLabel, intl)}
+          {translate('loginOptions.emailAndPassword', intl)}
         </h3>
         <form onSubmit={e => this.handleOnSubmit(e)}>
           <Input
@@ -143,7 +140,7 @@ class EmailAndPassword extends Component {
             <div className="fl mt3">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous, password: '' })}>
-                <span className="f7">{translate(goBack, intl)}</span>
+                <span className="f7">{translate('login.goBack', intl)}</span>
               </Button>
             </div>
             <div className="fr mt3">
@@ -154,7 +151,7 @@ class EmailAndPassword extends Component {
                 onClick={e => this.handleOnSubmit(e)}
                 isLoading={isLoading}
               >
-                <span className="f7">{translate(send, intl)}</span>
+                <span className="f7">{translate('login.signIn', intl)}</span>
               </Button>
             </div>
           </div>
@@ -173,12 +170,6 @@ EmailAndPassword.propTypes = {
   email: PropTypes.string.isRequired,
   /** Password set on state */
   password: PropTypes.string.isRequired,
-  /** Title that will be shown on top */
-  titleLabel: PropTypes.string.isRequired,
-  /** Locales go back string id */
-  goBack: PropTypes.string.isRequired,
-  /** Locales send string id */
-  send: PropTypes.string.isRequired,
   /** Function to change de active tab */
   onStateChange: PropTypes.func.isRequired,
   /** Graphql property to call a mutation */
