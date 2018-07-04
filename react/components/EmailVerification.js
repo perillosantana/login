@@ -7,6 +7,7 @@ import { graphql } from 'react-apollo'
 import { translate } from '../utils/translate'
 import { isValidEmail } from '../utils/format-check'
 import sendEmailVerification from '../mutations/sendEmailVerification.gql'
+import { steps } from '../utils/steps'
 
 /** EmailVerification tab component. Receive a email from an input and call the sendEmailVerification mutation */
 class EmailVerification extends Component {
@@ -29,7 +30,7 @@ class EmailVerification extends Component {
   }
 
   handleOnSubmit = event => {
-    const { sendEmailVerification, email, onStateChange, next } = this.props
+    const { isCreatePassword, sendEmailVerification, email, onStateChange, next } = this.props
     if (!isValidEmail(email)) {
       this.setState({ isInvalidEmail: true })
     } else {
@@ -38,7 +39,9 @@ class EmailVerification extends Component {
         .then(({ data }) => {
           if (data && data.sendEmailVerification) {
             this.setState({ isLoading: false })
-            onStateChange({ step: next })
+            isCreatePassword
+              ? onStateChange({ step: steps.CREATE_PASSWORD, isCreatePassword: false })
+              : onStateChange({ step: next })
           }
         }, err => {
           err && this.setState({ isLoading: false, isUserBlocked: true })
@@ -48,7 +51,7 @@ class EmailVerification extends Component {
   }
 
   render() {
-    const { intl, onStateChange, previous, email } = this.props
+    const { intl, onStateChange, previous, email, isCreatePassword } = this.props
     const { isLoading, isInvalidEmail, isUserBlocked } = this.state
 
     return (
@@ -74,8 +77,13 @@ class EmailVerification extends Component {
           }
           <div className="bt mt5 min-h-2 b--light-gray">
             <div className="fl mt4">
-              <Button variation="secondary" size="small"
-                onClick={() => onStateChange({ step: previous })}>
+              <Button
+                variation="secondary"
+                size="small"
+                onClick={() => isCreatePassword
+                  ? onStateChange({ step: steps.EMAIL_PASSWORD, isCreatePassword: false })
+                  : onStateChange({ step: previous })}
+              >
                 <span className="f7">{translate('login.goBack', intl)}</span>
               </Button>
             </div>
@@ -102,6 +110,8 @@ EmailVerification.propTypes = {
   next: PropTypes.number.isRequired,
   /** Previous step */
   previous: PropTypes.number.isRequired,
+  /** State that will send user to CreatePassword tab */
+  isCreatePassword: PropTypes.bool.isRequired,
   /** Email set on state */
   email: PropTypes.string.isRequired,
   /** Function to change de active tab */

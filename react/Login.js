@@ -8,19 +8,14 @@ import EmailVerification from './components/EmailVerification'
 import EmailAndPassword from './components/EmailAndPassword'
 import CodeConfirmation from './components/CodeConfirmation'
 import AccountOptions from './components/AccountOptions'
+import RecoveryPassword from './components/RecoveryPassword'
+
 import { truncateString } from './utils/truncate-string'
 import ProfileIcon from './images/ProfileIcon'
 import GET_USER_PROFILE from './queries/profile.gql'
 import { translate } from './utils/translate'
+import { steps } from './utils/steps'
 import './global.css'
-
-const content = {
-  LOGIN_OPTIONS: 0,
-  EMAIL_VERIFICATION: 1,
-  EMAIL_PASSWORD: 2,
-  CODE_CONFIRMATION: 3,
-  ACCOUNT_OPTIONS: 4,
-}
 
 const STEPS = [
   // eslint-disable-next-line
@@ -38,8 +33,9 @@ const STEPS = [
   (state, func) => {
     return (
       <EmailVerification
-        next={content.CODE_CONFIRMATION}
-        previous={content.LOGIN_OPTIONS}
+        next={steps.CODE_CONFIRMATION}
+        previous={steps.LOGIN_OPTIONS}
+        isCreatePassword={state.isCreatePassword}
         email={state.email}
         onStateChange={func}
       />
@@ -49,8 +45,8 @@ const STEPS = [
   (state, func) => {
     return (
       <EmailAndPassword
-        next={content.ACCOUNT_OPTIONS}
-        previous={content.LOGIN_OPTIONS}
+        next={steps.ACCOUNT_OPTIONS}
+        previous={steps.LOGIN_OPTIONS}
         email={state.email}
         password={state.password}
         onStateChange={func}
@@ -61,8 +57,8 @@ const STEPS = [
   (state, func) => {
     return (
       <CodeConfirmation
-        next={content.ACCOUNT_OPTIONS}
-        previous={content.EMAIL_VERIFICATION}
+        next={steps.ACCOUNT_OPTIONS}
+        previous={steps.EMAIL_VERIFICATION}
         email={state.email}
         code={state.code}
         onStateChange={func}
@@ -74,6 +70,17 @@ const STEPS = [
   (state, func) => {
     return (
       <AccountOptions />
+    )
+  },
+  // eslint-disable-next-line
+  (state, func) => {
+    return (
+      <RecoveryPassword
+        next={steps.ACCOUNT_OPTIONS}
+        previous={steps.EMAIL_PASSWORD}
+        email={state.email}
+        onStateChange={func}
+      />
     )
   },
 ]
@@ -88,6 +95,7 @@ class Login extends Component {
   state = {
     isMouseOnButton: false,
     isMouseOnContent: false,
+    isCreatePassword: false,
     step: 0,
     email: '',
     password: '',
@@ -103,7 +111,7 @@ class Login extends Component {
 
     const { isMouseOnButton, isMouseOnContent } = this.state
 
-    const step = profile ? content.ACCOUNT_OPTIONS : this.state.step
+    const step = profile ? steps.ACCOUNT_OPTIONS : this.state.step
     const render = STEPS[step](this.state, this.handleUpdateState)
 
     return (
