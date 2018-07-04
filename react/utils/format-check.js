@@ -8,7 +8,7 @@ export const isValidEmail = email => {
   return pattern.test(email)
 }
 
-export const isValidAccesCode = code => {
+export const isValidAccessCode = code => {
   const pattern = new RegExp(/^[0-9]{6}$/)
   return pattern.test(code)
 }

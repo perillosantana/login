@@ -30,6 +30,7 @@ class EmailVerification extends Component {
   }
 
   handleOnSubmit = event => {
+    event.preventDefault()
     const { isCreatePassword, sendEmailVerification, email, onStateChange, next } = this.props
     if (!isValidEmail(email)) {
       this.setState({ isInvalidEmail: true })
@@ -47,7 +48,6 @@ class EmailVerification extends Component {
           err && this.setState({ isLoading: false, isUserBlocked: true })
         })
     }
-    event.preventDefault()
   }
 
   render() {

@@ -12,6 +12,8 @@
     "login.logoutLabel": "Logout",
     "login.signIn": "Login",
     "login.password": "Password",
+    "login.newPassword": "New Password",
+    "login.confirmPassword": "Confirm Password",
     "login.code": "Access Code",
     "login.notHaveAccount": "Don't have account? Sign up now",
     "login.forgotPassword": "Forgot my password",

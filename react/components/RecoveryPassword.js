@@ -5,7 +5,7 @@ import { injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
 import { translate } from '../utils/translate'
-import { isValidPassword, isValidAccesCode } from '../utils/format-check'
+import { isValidPassword, isValidAccessCode } from '../utils/format-check'
 import recoveryPassword from '../mutations/recoveryPassword.gql'
 
 /** RecoveryPassword tab component. Receive a code and new password from an input
@@ -49,14 +49,14 @@ class RecoveryPassword extends Component {
   }
 
   handleOnSubmit = event => {
+    event.preventDefault()
     const { email, recoveryPassword } = this.props
     const { newPassword, code, confirmPassword } = this.state
-    if (!isValidAccesCode(code)) {
+    if (!isValidAccessCode(code)) {
       this.setState({ isInvalidCode: true })
     } else if (!isValidPassword(newPassword)) {
       this.setState({ isInvalidPassword: true })
     } else if (newPassword !== confirmPassword) {
-      console.log(newPassword, confirmPassword)
       this.setState({ isPasswordsMatch: false })
     } else {
       this.setState({ isLoading: true })
@@ -71,7 +71,6 @@ class RecoveryPassword extends Component {
           }
         }, err => { console.error(err) })
     }
-    event.preventDefault()
   }
   render() {
     const {
@@ -107,7 +106,7 @@ class RecoveryPassword extends Component {
             <Input
               type="password"
               onChange={this.handleNewPassword}
-              placeholder={translate('login.password', intl)}
+              placeholder={translate('login.newPassword', intl)}
             />
           </div>
           {isInvalidPassword &&
@@ -124,7 +123,7 @@ class RecoveryPassword extends Component {
             <Input
               type="password"
               onChange={this.handleConfirmPassword}
-              placeholder={translate('login.password', intl)}
+              placeholder={translate('login.confirmPassword', intl)}
             />
           </div>
           {!isPasswordsMatch &&
