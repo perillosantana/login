@@ -13,6 +13,8 @@
     "login.signIn": "Entrar",
     "login.code": "código de Acceso",
     "login.password": "Contraseña",
+    "login.newPassword": "Nueva Contraseña",
+    "login.confirmPassword": "Confirme la Contraseña",
     "login.notHaveAccount": "No tiene una contraseña? Registrarse ahora",
     "login.forgotPassword": "Olvidé mi contraseña",
     "login.invalidEmail": "Entra con un correo electrónico válido",

@@ -55,6 +55,7 @@ class EmailAndPassword extends Component {
   }
 
   handleOnSubmit = event => {
+    event.preventDefault()
     const { email, password, classicSignIn } = this.props
     if (!isValidEmail(email)) {
       this.setState({ isInvalidEmail: true })
@@ -74,7 +75,6 @@ class EmailAndPassword extends Component {
           }
         }, err => { console.error(err) })
     }
-    event.preventDefault()
   }
 
   render() {

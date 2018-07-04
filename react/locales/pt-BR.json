@@ -12,6 +12,8 @@
     "login.logoutLabel": "Sair",
     "login.signIn": "Entrar",
     "login.password": "Senha",
+    "login.newPassword": "Nova Senha",
+    "login.confirmPassword": "Confirme a Senha",
     "login.code": "Código de Acesso",
     "login.notHaveAccount": "Não tem uma senha? Cadastre-se agora",
     "login.forgotPassword": "Esqueci minha senha",

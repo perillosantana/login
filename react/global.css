@@ -13,8 +13,12 @@
 
 .vtex-login__box {
   top: 100%;
-  display: block;
+  display: none;
   visibility: visible;
+}
+
+.vtex-login__container:hover .vtex-login__box {
+  display: block;
 }
 
 .vtex-login__content {

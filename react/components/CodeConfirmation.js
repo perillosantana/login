@@ -5,7 +5,7 @@ import { injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
 import { translate } from '../utils/translate'
-import { isValidAccesCode } from '../utils/format-check'
+import { isValidAccessCode } from '../utils/format-check'
 import accessKeySignIn from '../mutations/accessKeySignIn.gql'
 
 /** CodeConfirmation tab component. Receive the code from an input and call the signIn mutation */
@@ -34,8 +34,9 @@ class CodeConfirmation extends Component {
   }
 
   handleOnSubmit = event => {
+    event.preventDefault()
     const { accessKeySignIn, email, code } = this.props
-    if (!isValidAccesCode(code)) {
+    if (!isValidAccessCode(code)) {
       this.setState({ isInvalidCode: true })
     } else {
       this.setState({ isLoading: true })
@@ -50,7 +51,6 @@ class CodeConfirmation extends Component {
           }
         }, err => { console.error(err) })
     }
-    event.preventDefault()
   }
 
   render() {

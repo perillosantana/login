@@ -93,8 +93,6 @@ class Login extends Component {
   }
 
   state = {
-    isMouseOnButton: false,
-    isMouseOnContent: false,
     isCreatePassword: false,
     step: 0,
     email: '',
@@ -108,8 +106,6 @@ class Login extends Component {
 
   render() {
     const { data: { profile }, intl } = this.props
-
-    const { isMouseOnButton, isMouseOnContent } = this.state
 
     const step = profile ? steps.ACCOUNT_OPTIONS : this.state.step
     const render = STEPS[step](this.state, this.handleUpdateState)
@@ -125,25 +121,17 @@ class Login extends Component {
           variation="tertiary"
           size="small"
           icon
-          onMouseEnter={() => this.handleUpdateState({ isMouseOnButton: true })}
-          onMouseLeave={() => this.handleUpdateState({ isMouseOnButton: false })}
         >
           <ProfileIcon />
         </Button>
-        {(isMouseOnContent || isMouseOnButton) && (
-          <div
-            className="vtex-login__box absolute right-0 z-max flex flex-colunm"
-            onMouseEnter={() => this.handleUpdateState({ isMouseOnContent: true })}
-            onMouseLeave={() => this.handleUpdateState({ isMouseOnContent: false })}
-          >
-            <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3" />
-            <div className="shadow-3 mt3">
-              <div className="vtex-login__content pa4 flex items-center justify-center relative bg-white">
-                {render}
-              </div>
+        <div className="vtex-login__box absolute right-0 z-max flex flex-colunm">
+          <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3" />
+          <div className="shadow-3 mt3">
+            <div className="vtex-login__content pa4 flex items-center justify-center relative bg-white">
+              {render}
             </div>
           </div>
-        )}
+        </div>
       </div>
     )
   }
