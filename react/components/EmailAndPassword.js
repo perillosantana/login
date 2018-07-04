@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Button } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
-import { Link } from 'render'
 import { graphql } from 'react-apollo'
 
 import { translate } from '../utils/translate'
 import { isValidEmail, isValidPassword } from '../utils/format-check'
 import classicSignIn from '../mutations/classicSignIn.gql'
+import { steps } from '../utils/steps'
 
 /** EmailAndPasswordLogin component. */
 class EmailAndPassword extends Component {
@@ -34,6 +34,11 @@ class EmailAndPassword extends Component {
 
   componentWillUnmount() {
     this.setState({ isLoading: false })
+  }
+
+  handleCreatePassword = event => {
+    this.props.onStateChange({ step: steps.EMAIL_VERIFICATION, isCreatePassword: true })
+    event.preventDefault()
   }
 
   handleSuccess = status => {
@@ -106,9 +111,9 @@ class EmailAndPassword extends Component {
             </div>
           }
           <div className="flex justify-end pv3">
-            <Link className="link">
+            <a href="" className="link" onClick={this.handleCreatePassword}>
               <span className="f7">{translate('login.forgotPassword', intl)}</span>
-            </Link>
+            </a>
           </div>
           <Input
             type="password"
@@ -132,9 +137,9 @@ class EmailAndPassword extends Component {
             </div>
           }
           <div className="flex justify-end pt3">
-            <Link className="link">
+            <a href="" className="link" onClick={e => this.handleCreatePassword(e)}>
               <span className="f7">{translate('login.notHaveAccount', intl)}</span>
-            </Link>
+            </a>
           </div>
           <div className="bt ma3 min-h-2 b--light-gray">
             <div className="fl mt3">
@@ -156,7 +161,7 @@ class EmailAndPassword extends Component {
             </div>
           </div>
         </form>
-      </div>
+      </div >
     )
   }
 }
