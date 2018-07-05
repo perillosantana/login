@@ -2,6 +2,7 @@
     "loginOptions.title": "Choose an option to sign in",
     "loginOptions.emailVerification": "Receive access code by email",
     "loginOptions.emailAndPassword": "Sign in with email and password",
+    "loginOptions.googleOAuth": "Sign in with Google",
     "login.goBack": "Go back",
     "login.send": "Send",
     "login.create": "Create",

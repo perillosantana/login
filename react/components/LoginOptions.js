@@ -5,6 +5,8 @@ import { Button } from 'vtex.styleguide'
 
 import { translate } from '../utils/translate'
 
+import GoogleOAuth from './GoogleOAuth'
+
 /** LoginOptions tab component. Displays a list of login options */
 class LoginOptions extends Component {
   render() {
@@ -30,6 +32,9 @@ class LoginOptions extends Component {
               </li>
             )
           })}
+          <li className="mb5">
+            <GoogleOAuth />
+          </li>
         </ul>
       </div>
     )

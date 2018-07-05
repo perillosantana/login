@@ -2,6 +2,7 @@
     "loginOptions.title": "Elige una opción para iniciar sesión",
     "loginOptions.emailVerification": "Recibir código de acceso por correo electrónico",
     "loginOptions.emailAndPassword": "Entrar con correo electrónico y contraseña",
+    "loginOptions.googleOAuth": "Entrar con Google",
     "login.goBack": "Volver",
     "login.send": "Enviar",
     "login.create": "Crear",

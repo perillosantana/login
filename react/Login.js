@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
+import { compose, map, fromPairs, split, tail } from 'ramda' 
 
 import LoginOptions from './components/LoginOptions'
 import EmailVerification from './components/EmailVerification'
@@ -15,6 +16,7 @@ import ProfileIcon from './images/ProfileIcon'
 import GET_USER_PROFILE from './queries/profile.gql'
 import { translate } from './utils/translate'
 import { steps } from './utils/steps'
+
 import './global.css'
 
 const STEPS = [
@@ -85,6 +87,27 @@ const STEPS = [
   },
 ]
 
+/**
+ * Set Cookie from the URL name=value and clean up the URL query params.
+ * @param {String} url To set cookie and cleaned up.
+ */
+const setCookie = (url) => {
+  const { accountAuthCookieName, authCookieValue } = compose(
+    fromPairs, map(split('=')), split('&'), tail
+  )(url);
+  if (accountAuthCookieName && authCookieValue) {
+    const date = new Date()
+    const ONE_DAY = 24*60*60*1000
+    date.setTime(date.getTime() + ONE_DAY)
+    document.cookie = `${accountAuthCookieName}=${authCookieValue};
+      expires=${date.toUTCString()};
+      path=/;
+      Http-Only=true;`
+    const cleanUrl = url.substring(0, url.indexOf("?"));
+    window.history.replaceState({}, document.title, cleanUrl)
+  }
+}
+
 /** Canonical login that calls a mutation to retrieve the authentication token */
 class Login extends Component {
   static propTypes = {
@@ -98,6 +121,12 @@ class Login extends Component {
     email: '',
     password: '',
     code: '',
+  }
+
+  componentDidMount = () => {
+    if (location.href.indexOf('accountAuthCookieName') > 0) {
+      setCookie(location.href)
+    }
   }
 
   handleUpdateState = state => {
