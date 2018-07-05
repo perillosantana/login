@@ -5,7 +5,10 @@ import { Button } from 'vtex.styleguide'
 
 import { translate } from '../utils/translate'
 
-import GoogleOAuth from './GoogleOAuth'
+import OAuth from './OAuth'
+
+import GoogleIcon from '../images/GoogleIcon'
+import FacebookIcon from '../images/FacebookIcon'
 
 /** LoginOptions tab component. Displays a list of login options */
 class LoginOptions extends Component {
@@ -33,7 +36,14 @@ class LoginOptions extends Component {
             )
           })}
           <li className="mb5">
-            <GoogleOAuth />
+            <OAuth provider="Google">
+              <GoogleIcon />
+            </OAuth>
+          </li>
+          <li className="mb5">
+            <OAuth provider="Facebook">
+              <FacebookIcon />
+            </OAuth>
           </li>
         </ul>
       </div>
@@ -49,7 +59,7 @@ LoginOptions.propTypes = {
   /** Title that will be shown on top */
   titleLabel: PropTypes.string.isRequired,
   /** List of options to be displayed */
-  options: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.arrayOf(PropTypes.string)
 }
 
 export default injectIntl(LoginOptions)
