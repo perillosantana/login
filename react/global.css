@@ -17,6 +17,10 @@
   visibility: visible;
 }
 
+.vtex-login__container {
+  height: 48px;
+}
+
 .vtex-login__container:hover .vtex-login__box {
   display: block;
 }
