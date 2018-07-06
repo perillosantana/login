@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { Button } from 'vtex.styleguide'
 
 import { translate } from '../utils/translate'
 
@@ -24,14 +23,11 @@ class LoginOptions extends Component {
           {options.map((el, index) => {
             return (
               <li className="mb5" key={`login-option-array-${index}`}>
-                <Button
-                  variation="secondary"
-                  size="small"
-                  onClick={() => onStateChange({ step: index + 1 })}
-                  block
-                >
-                  <span className="f7">{translate(el, intl)}</span>
-                </Button>
+                <button className="vtex-login__button" onClick={() => onStateChange({ step: index + 1 })}>
+                  <span className="f6">
+                    {translate(el, intl)}
+                  </span>
+                </button>
               </li>
             )
           })}
