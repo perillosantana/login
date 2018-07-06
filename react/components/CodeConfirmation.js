@@ -67,30 +67,30 @@ class CodeConfirmation extends Component {
     } = this.state
 
     return (
-      <div className="vtex-login__code-confirmation w-100">
-        <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
+      <div className="vtex-login__code-confirmation">
+        <h3 className="vtex-login__form-title">
           {translate('login.accessCodeTitle', intl)}
         </h3>
         <form onSubmit={e => this.handleOnSubmit(e)}>
           <Input value={code} onChange={this.handleInputChange} />
           {isInvalidCode &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.invalidCode', intl)}
             </div>
           }
           {isWrongCredentials &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.wrongCredentials', intl)}
             </div>
           }
-          <div className="mt5 min-h-2 b--light-gray">
-            <div className="fl mt4">
+          <div className="vtex-login__form-footer">
+            <div className="vtex-login__back-button">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous })}>
                 <span className="f7">{translate('login.goBack', intl)}</span>
               </Button>
             </div>
-            <div className="fr mt4">
+            <div className="vtex-login__send-button">
               <Button
                 variation="primary"
                 size="small"

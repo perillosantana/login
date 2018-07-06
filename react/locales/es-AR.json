@@ -24,5 +24,13 @@
     "login.invalidMatch": "Confirmación de contraseña es incorrecta",
     "login.wrongCredentials": "Usuario y/o contraseña incorrecta",
     "login.userBlocked": "Te perdiste tu contraseña 4 veces. Tu usuario ha sido bloqueado por una hora",
-    "login.createPassword": "Crear una nueva contraseña"
+    "login.createPassword": "Crear una nueva contraseña",
+    "editor.login.title": "Componente de login",
+    "editor.login.isInitialScreenOptionOnly.title": "Mostrar sólo las opciones de inicio de sesión en la pantalla de inicio",
+    "editor.login.initialStep.title": "Formulario inicial que se mostrará",
+    "editor.login.initialStep.token": "Inicio de sesión por token",
+    "editor.login.initialStep.emailAndPassword": "Inicio de sesión por correo electrónico y contraseña",
+    "editor.login.optionsTitle.title": "Titulo de opciones de acceso",
+    "editor.login.emailAndPasswordTitle.title": "Título de inicio de sesión con correo electrónico y contraseña",
+    "editor.login.accessCodeTitle.title": "Título de inicio de sesión por código de acceso"
 }

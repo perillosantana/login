@@ -9,15 +9,36 @@ import { isValidEmail } from '../utils/format-check'
 import sendEmailVerification from '../mutations/sendEmailVerification.gql'
 import { steps } from '../utils/steps'
 
-/** EmailVerification tab component. Receive a email from an input and call the sendEmailVerification mutation */
+/**
+ * EmailVerification tab component.
+ * Receive a email from an input and call the sendEmailVerification mutation
+ */
 class EmailVerification extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLoading: false,
-      isInvalidEmail: false,
-      isUserBlocked: false,
-    }
+  static propTypes = {
+    /** Next step */
+    next: PropTypes.number.isRequired,
+    /** Previous step */
+    previous: PropTypes.number.isRequired,
+    /** State that will send user to CreatePassword tab */
+    isCreatePassword: PropTypes.bool.isRequired,
+    /** Title to be displayed */
+    title: PropTypes.string,
+    /** Email set on state */
+    email: PropTypes.string.isRequired,
+    /** Function to change de active tab */
+    onStateChange: PropTypes.func.isRequired,
+    /** Graphql property to call a mutation */
+    sendEmailVerification: PropTypes.func.isRequired,
+    /** Intl object*/
+    intl: intlShape,
+    /** Whether to display the back button */
+    showBackButton: PropTypes.bool,
+  }
+
+  state = {
+    isLoading: false,
+    isInvalidEmail: false,
+    isUserBlocked: false,
   }
 
   handleInputChange = event => {
@@ -51,13 +72,21 @@ class EmailVerification extends Component {
   }
 
   render() {
-    const { intl, onStateChange, previous, email, isCreatePassword } = this.props
+    const {
+      title,
+      intl,
+      onStateChange,
+      previous,
+      email,
+      isCreatePassword,
+      showBackButton,
+    } = this.props
     const { isLoading, isInvalidEmail, isUserBlocked } = this.state
 
     return (
-      <div className="vtex-login__email-verification w-100">
-        <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
-          {translate('loginOptions.emailVerification', intl)}
+      <div className="vtex-login__email-verification">
+        <h3 className="vtex-login__email-verification-title vtex-login__form-title">
+          {title || translate('loginOptions.emailVerification', intl)}
         </h3>
         <form onSubmit={e => this.handleOnSubmit(e)}>
           <Input
@@ -66,28 +95,29 @@ class EmailVerification extends Component {
             placeholder={'Ex: example@mail.com'}
           />
           {isInvalidEmail &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.invalidEmail', intl)}
             </div>
           }
           {isUserBlocked &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.userBlocked', intl)}
             </div>
           }
-          <div className="bt mt5 min-h-2 b--light-gray">
-            <div className="fl mt4">
+          <div className="vtex-login__form-footer">
+            {(showBackButton || isCreatePassword) && <div className="vtex-login__back-button">
               <Button
                 variation="secondary"
                 size="small"
                 onClick={() => isCreatePassword
                   ? onStateChange({ step: steps.EMAIL_PASSWORD, isCreatePassword: false })
-                  : onStateChange({ step: previous })}
+                  : onStateChange({ step: previous })
+                }
               >
                 <span className="f7">{translate('login.goBack', intl)}</span>
               </Button>
-            </div>
-            <div className="fr mt4">
+            </div>}
+            <div className="vtex-login__send-button">
               <Button
                 variation="primary"
                 size="small"
@@ -103,23 +133,6 @@ class EmailVerification extends Component {
       </div>
     )
   }
-}
-
-EmailVerification.propTypes = {
-  /** Next step */
-  next: PropTypes.number.isRequired,
-  /** Previous step */
-  previous: PropTypes.number.isRequired,
-  /** State that will send user to CreatePassword tab */
-  isCreatePassword: PropTypes.bool.isRequired,
-  /** Email set on state */
-  email: PropTypes.string.isRequired,
-  /** Function to change de active tab */
-  onStateChange: PropTypes.func.isRequired,
-  /** Graphql property to call a mutation */
-  sendEmailVerification: PropTypes.func.isRequired,
-  /** Intl object*/
-  intl: intlShape,
 }
 
 export default injectIntl(

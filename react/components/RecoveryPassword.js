@@ -86,23 +86,23 @@ class RecoveryPassword extends Component {
       isPasswordsMatch,
     } = this.state
     return (
-      <div className="vtex-login__email-verification w-100">
-        <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
+      <div className="vtex-login__email-verification">
+        <h3 className="vtex-login__form-title">
           {translate('login.createPassword', intl)}
         </h3>
         <form onSubmit={e => this.handleOnSubmit(e)}>
-          <div className="pv3">
+          <div className="vtex-login__input-container">
             <Input
               onChange={this.handleCodeChange}
               placeholder={translate('login.code', intl)}
             />
           </div>
           {isInvalidCode &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.invalidCode', intl)}
             </div>
           }
-          <div className="pv3">
+          <div className="vtex-login__input-container">
             <Input
               type="password"
               onChange={this.handleNewPassword}
@@ -110,16 +110,16 @@ class RecoveryPassword extends Component {
             />
           </div>
           {isInvalidPassword &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.invalidPassword', intl)}
             </div>
           }
           {isUserBlocked &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.userBlocked', intl)}
             </div>
           }
-          <div className="pv3">
+          <div className="vtex-login__input-container">
             <Input
               type="password"
               onChange={this.handleConfirmPassword}
@@ -127,18 +127,18 @@ class RecoveryPassword extends Component {
             />
           </div>
           {!isPasswordsMatch &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.invalidMatch', intl)}
             </div>
           }
-          <div className="bt ma3 min-h-2 b--light-gray">
-            <div className="fl mt3">
+          <div className="vtex-login__form-footer">
+            <div className="vtex-login__back-button">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous })}>
                 <span className="f7">{translate('login.goBack', intl)}</span>
               </Button>
             </div>
-            <div className="fr mt3">
+            <div className="vtex-login__send-button">
               <Button
                 variation="primary"
                 size="small"

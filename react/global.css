@@ -1,8 +1,3 @@
-.vtex-login-options__list {
-  list-style-type: none;
-  padding: 0;
-}
-
 .vtex-login__arrow-up {
   transform: rotate(45deg);
   width: 25px;
@@ -13,21 +8,107 @@
 
 .vtex-login__box {
   top: 100%;
-  display: none;
+  display: block;
   visibility: visible;
+  max-height: 310px;
+  min-width: 310px;
 }
 
 .vtex-login__container {
   height: 48px;
 }
 
-.vtex-login__container:hover .vtex-login__box {
+.vtex-login-content {
+  display: flex;
+  position: relative;
+  align-items: baseline;
+  justify-content: space-around;
+  background-color: white;
+  padding: .75rem;
+  margin: 0 auto;
+}
+
+.vtex-login__code-confirmation,
+.vtex-login__email-verification {
+  width: 100%;
+}
+
+.vtex-login-content__form {
+  display: none;
+  min-width: 280px;
+}
+
+.vtex-login-content__form--visible {
   display: block;
 }
 
-.vtex-login__content {
-  max-height: 310px;
-  min-width: 310px;
+.vtex-login-content--always-with-options {
+  min-height: 300px;
+  max-width: 700px;
+}
+
+.vtex-login__form-title {
+  color: #3d5980;
+  font-size: .875rem;
+  vertical-align: middle;
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  font-weight: 500;
+  padding: .5rem 1rem;
+  border-radius: .25rem;
+}
+
+.vtex-login__form-error {
+  font-size: .75rem;
+  text-align: center;
+  background-color: #ffe6e6;
+  padding: .25rem;
+  margin: .25rem 0;
+}
+
+.vtex-login__form-footer {
+  display: flex;
+  border-top: 1px solid #e3e4e6;
+  margin-top: 1rem;
+  min-height: 2rem;
+  padding-top: .75rem;
+}
+
+.vtex-login__send-button {
+  margin-left: auto;
+}
+
+.vtex-login__send-button:only-child {
+  margin: 0;
+  width: 100%;
+}
+
+.vtex-login__send-button:only-child .vtex-button {
+  width: 100%;
+}
+
+.vtex-login__form-link-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: .5rem 0;
+}
+
+.vtex-login__input-container {
+  padding: .5rem 0;
+}
+
+.vtex-login-options__list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.vtex-login-options__list-item {
+  margin-bottom: 1rem;
+}
+
+.vtex-login__profile {
+  order: 1;
 }
 
 .vtex-login__button {
@@ -59,8 +140,15 @@
   .vtex-login__container {
     display: none;
   }
+
   .vtex-login__box {
     display: none;
     visibility: hidden;
+  }
+
+  .vtex-login-content--always-with-options {
+    flex-direction: column-reverse;
+    align-items: center;
+    max-width: 400px;
   }
 }

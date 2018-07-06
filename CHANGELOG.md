@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - The Login button padding.
 
+### Added
+- `LoginContent` component.
+
+### Changed
+- Moved from tachyons classes to custom classes with the tachyons properties.
+
 ## [0.7.2] - 2018-7-6
 ### Changed
 - Change to HTML button instead of VTEX Style Guide.

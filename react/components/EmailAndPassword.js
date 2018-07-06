@@ -11,15 +11,33 @@ import { steps } from '../utils/steps'
 
 /** EmailAndPasswordLogin component. */
 class EmailAndPassword extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLoading: false,
-      isInvalidEmail: false,
-      isInvalidPassword: false,
-      isWrongCredentials: false,
-      isUserBlocked: false,
-    }
+  static propTypes = {
+    /** Next step */
+    next: PropTypes.number.isRequired,
+    /** Previous step */
+    previous: PropTypes.number.isRequired,
+    /** Email set on state */
+    email: PropTypes.string.isRequired,
+    /** Title to be displayed */
+    title: PropTypes.string,
+    /** Password set on state */
+    password: PropTypes.string.isRequired,
+    /** Function to change de active tab */
+    onStateChange: PropTypes.func.isRequired,
+    /** Graphql property to call a mutation */
+    classicSignIn: PropTypes.func.isRequired,
+    /** Intl object*/
+    intl: intlShape,
+    /** Whether to display the back button */
+    showBackButton: PropTypes.bool,
+  }
+
+  state = {
+    isLoading: false,
+    isInvalidEmail: false,
+    isInvalidPassword: false,
+    isWrongCredentials: false,
+    isUserBlocked: false,
   }
 
   handleInputChange = event => {
@@ -79,11 +97,13 @@ class EmailAndPassword extends Component {
 
   render() {
     const {
+      title,
       intl,
       onStateChange,
       previous,
       email,
       password,
+      showBackButton,
     } = this.props
 
     const {
@@ -95,60 +115,59 @@ class EmailAndPassword extends Component {
     } = this.state
 
     return (
-      <div className="vtex-login__email-verification w-100">
-        <h3 className="fw5 ttu br2 tc fw4 v-mid pv3 ph5 f6 light-marine">
-          {translate('loginOptions.emailAndPassword', intl)}
+      <div className="vtex-login__email-verification">
+        <h3 className="vtex-login__form-title">
+          {title || translate('loginOptions.emailAndPassword', intl)}
         </h3>
         <form onSubmit={e => this.handleOnSubmit(e)}>
-          <Input
-            value={email}
-            onChange={this.handleInputChange}
-            placeholder={'Ex: example@mail.com'}
-          />
+          <div className="vtex-login__input-container">
+            <Input
+              value={email}
+              onChange={this.handleInputChange}
+              placeholder={'Ex: example@mail.com'}
+            />
+          </div>
           {isInvalidEmail &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.invalidEmail', intl)}
             </div>
           }
-          <div className="flex justify-end pv3">
-            <a href="" className="link" onClick={this.handleCreatePassword}>
-              <span className="f7">{translate('login.forgotPassword', intl)}</span>
-            </a>
+          <div className="vtex-login__input-container">
+            <Input
+              type="password"
+              value={password}
+              onChange={this.handlePasswordChange}
+              placeholder={translate('login.password', intl)}
+            />
           </div>
-          <Input
-            type="password"
-            value={password}
-            onChange={this.handlePasswordChange}
-            placeholder={translate('login.password', intl)}
-          />
           {isInvalidPassword &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.invalidPassword', intl)}
             </div>
           }
           {isWrongCredentials &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.wrongCredentials', intl)}
             </div>
           }
           {isUserBlocked &&
-            <div className="f7 tc bg-washed-red pa2 ma1">
+            <div className="vtex-login__form-error">
               {translate('login.userBlocked', intl)}
             </div>
           }
-          <div className="flex justify-end pt3">
-            <a href="" className="link" onClick={e => this.handleCreatePassword(e)}>
-              <span className="f7">{translate('login.notHaveAccount', intl)}</span>
+          <div className="vtex-login__form-link-container">
+            <a href="" className="link" onClick={this.handleCreatePassword}>
+              <span className="f7">{translate('login.forgotPassword', intl)}</span>
             </a>
           </div>
-          <div className="bt ma3 min-h-2 b--light-gray">
-            <div className="fl mt3">
+          <div className="vtex-login__form-footer">
+            {showBackButton && <div className="vtex-login__back-button">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous, password: '' })}>
                 <span className="f7">{translate('login.goBack', intl)}</span>
               </Button>
-            </div>
-            <div className="fr mt3">
+            </div>}
+            <div className="vtex-login__send-button">
               <Button
                 variation="primary"
                 size="small"
@@ -160,27 +179,15 @@ class EmailAndPassword extends Component {
               </Button>
             </div>
           </div>
+          <div className="vtex-login__form-link-container">
+            <a href="" className="link" onClick={e => this.handleCreatePassword(e)}>
+              <span className="f7">{translate('login.notHaveAccount', intl)}</span>
+            </a>
+          </div>
         </form>
-      </div >
+      </div>
     )
   }
-}
-
-EmailAndPassword.propTypes = {
-  /** Next step */
-  next: PropTypes.number.isRequired,
-  /** Previous step */
-  previous: PropTypes.number.isRequired,
-  /** Email set on state */
-  email: PropTypes.string.isRequired,
-  /** Password set on state */
-  password: PropTypes.string.isRequired,
-  /** Function to change de active tab */
-  onStateChange: PropTypes.func.isRequired,
-  /** Graphql property to call a mutation */
-  classicSignIn: PropTypes.func.isRequired,
-  /** Intl object*/
-  intl: intlShape,
 }
 
 export default injectIntl(

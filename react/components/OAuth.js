@@ -15,7 +15,9 @@ class OAuth extends Component {
     /** Graphql property to call a mutation */
     oAuth: PropTypes.func,
     /** Name of the Provider to proceed with the Authentication */
-    provider: PropTypes.string
+    provider: PropTypes.string,
+    /** Actual button */
+    children: PropTypes.node,
   };
 
   handleLoginClick = event => {
@@ -23,8 +25,8 @@ class OAuth extends Component {
     this.props.oAuth({
       variables: {
         provider: this.props.provider,
-        redirectUrl: location.origin
-      }
+        redirectUrl: location.origin,
+      },
     }).then(({ data: { oAuth } }) => {
       location.assign(oAuth)
     })
@@ -36,7 +38,7 @@ class OAuth extends Component {
       <button className="vtex-login__button" onClick={event => this.handleLoginClick(event)}>
         {children}
         <span className="f6 vtex-login__oauth-label">
-          {translate('loginOptions.oAuth', intl)} 
+          {translate('loginOptions.oAuth', intl)}
           <span className="vtex-login__oauth-provider">{provider}</span>
         </span>
       </button>
