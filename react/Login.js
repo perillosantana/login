@@ -4,6 +4,7 @@ import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import { compose, map, fromPairs, split, tail } from 'ramda'
+import { Link } from 'render'
 
 import LoginContent from './LoginContent'
 
@@ -48,6 +49,7 @@ class Login extends Component {
 
   state = {
     isBoxOpen: false,
+    renderIconAsLink: false,
   }
 
   handleDocumentMouseUp = e => {
@@ -70,10 +72,30 @@ class Login extends Component {
     if (location.href.indexOf('accountAuthCookieName') > 0) {
       setCookie(location.href)
     }
+
+    window.addEventListener('resize', this.handleResize)
+
+    this.handleResize()
   }
 
   componentWillUnmount() {
     this.removeListeners()
+
+    window.removeEventListener('resize', this.handleResize)
+  }
+
+  handleResize = () => {
+    const WIDTH_THRESHOLD = 640
+
+    if (window.innerWidth < WIDTH_THRESHOLD && !this.state.renderIconAsLink) {
+      this.setState({
+        renderIconAsLink: true,
+      })
+    } else if (window.innerWidth >= WIDTH_THRESHOLD && this.state.renderIconAsLink) {
+      this.setState({
+        renderIconAsLink: false,
+      })
+    }
   }
 
   removeListeners = () => {
@@ -89,6 +111,29 @@ class Login extends Component {
     })
   }
 
+  renderIcon() {
+    const { renderIconAsLink } = this.state
+
+    if (renderIconAsLink) {
+      return (
+        <Link to="/login" className="vtex-login__button--link">
+          <ProfileIcon />
+        </Link>
+      )
+    }
+
+    return (
+      <Button
+        variation="tertiary"
+        size="small"
+        icon
+        onClick={this.handleProfileIconClick}
+      >
+        <ProfileIcon />
+      </Button>
+    )
+  }
+
   render() {
     const { data: { profile }, intl } = this.props
     const { isBoxOpen } = this.state
@@ -100,14 +145,7 @@ class Login extends Component {
             {translate('login.hello', intl)} {truncateString(profile.firstName) || truncateString(profile.email)}
           </div>
         )}
-        <Button
-          variation="tertiary"
-          size="small"
-          icon
-          onClick={this.handleProfileIconClick}
-        >
-          <ProfileIcon />
-        </Button>
+        {this.renderIcon()}
         {isBoxOpen && (
           <div
             className="vtex-login__box absolute right-0 z-max flex"
