@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.1] - 2018-7-9
+
 ## [0.9.0] - 2018-7-9
 ### Changed
 - Render login icon as a link when mobile.
