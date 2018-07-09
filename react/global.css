@@ -143,15 +143,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .vtex-login__container {
-    display: none;
-  }
-
-  .vtex-login__box {
-    display: none;
-    visibility: hidden;
-  }
-
   .vtex-login-content--always-with-options {
     flex-direction: column-reverse;
     align-items: center;
