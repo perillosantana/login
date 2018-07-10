@@ -74,47 +74,6 @@ class LoginContent extends Component {
     isInitialScreenOptionOnly: true,
   }
 
-  static schema = {
-    title: 'editor.login.title',
-    type: 'object',
-    properties: {
-      isInitialScreenOptionOnly: {
-        title: 'editor.login.isInitialScreenOptionOnly.title',
-        type: 'boolean',
-        default: true,
-        isLayout: true,
-      },
-      initialStep: {
-        title: 'editor.login.initialStep.title',
-        type: 'number',
-        default: 0,
-        enum: [0, 1],
-        enumNames: [
-          'editor.login.initialStep.token',
-          'editor.login.initialStep.emailAndPassword',
-        ],
-        widget: {
-          'ui:widget': 'radio',
-          'ui:options': {
-            inline: true,
-          },
-        },
-      },
-      optionsTitle: {
-        title: 'editor.login.optionsTitle.title',
-        type: 'string',
-      },
-      emailAndPasswordTitle: {
-        title: 'editor.login.emailAndPasswordTitle.title',
-        type: 'string',
-      },
-      accessCodeTitle: {
-        title: 'editor.login.accessCodeTitle.title',
-        type: 'string',
-      },
-    },
-  }
-
   get shouldRenderLoginOptions() {
     const { isInitialScreenOptionOnly } = this.props
     const { isOnInitialScreen } = this.state
@@ -209,4 +168,49 @@ class LoginContent extends Component {
     )
   }
 }
-export default injectIntl(LoginContent)
+
+const LoginWithIntl = injectIntl(LoginContent)
+
+LoginWithIntl.schema = {
+  title: 'editor.login.title',
+  type: 'object',
+  properties: {
+    isInitialScreenOptionOnly: {
+      title: 'editor.login.isInitialScreenOptionOnly.title',
+      type: 'boolean',
+      default: true,
+      isLayout: true,
+    },
+    initialStep: {
+      title: 'editor.login.initialStep.title',
+      type: 'number',
+      default: 0,
+      enum: [0, 1],
+      enumNames: [
+        'editor.login.initialStep.token',
+        'editor.login.initialStep.emailAndPassword',
+      ],
+      widget: {
+        'ui:widget': 'radio',
+        'ui:options': {
+          inline: true,
+        },
+      },
+    },
+    optionsTitle: {
+      title: 'editor.login.optionsTitle.title',
+      type: 'string',
+    },
+    emailAndPasswordTitle: {
+      title: 'editor.login.emailAndPasswordTitle.title',
+      type: 'string',
+    },
+    accessCodeTitle: {
+      title: 'editor.login.accessCodeTitle.title',
+      type: 'string',
+    },
+  },
+}
+
+export default LoginWithIntl
+
