@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { injectIntl } from 'react-intl'
 
 import LoginOptions from './components/LoginOptions'
 import EmailVerification from './components/EmailVerification'
@@ -8,8 +9,9 @@ import EmailAndPassword from './components/EmailAndPassword'
 import CodeConfirmation from './components/CodeConfirmation'
 import AccountOptions from './components/AccountOptions'
 import RecoveryPassword from './components/RecoveryPassword'
-
 import { steps } from './utils/steps'
+
+import './global.css'
 
 const STEPS = [
   /* eslint-disable react/display-name, react/prop-types */
@@ -58,7 +60,7 @@ const STEPS = [
   /* eslint-enable react/display-name react/prop-types */
 ]
 
-export default class LoginContent extends Component {
+class LoginContent extends Component {
   static propTypes = {
     profile: PropTypes.shape({}),
     isInitialScreenOptionOnly: PropTypes.bool,
@@ -207,3 +209,4 @@ export default class LoginContent extends Component {
     )
   }
 }
+export default injectIntl(LoginContent)
