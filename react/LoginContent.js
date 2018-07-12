@@ -26,8 +26,8 @@ const STEPS = [
       showBackButton={!isOptionsMenuDisplayed}
     />
   ),
-  (props, state, func, isOptionsMenuDisplayed) => (
-    <EmailAndPassword
+  (props, state, func, isOptionsMenuDisplayed) => {
+    return <EmailAndPassword
       next={steps.ACCOUNT_OPTIONS}
       previous={steps.LOGIN_OPTIONS}
       title={props.emailAndPasswordTitle}
@@ -35,8 +35,9 @@ const STEPS = [
       password={state.password}
       onStateChange={func}
       showBackButton={!isOptionsMenuDisplayed}
+      loginCallback={props.loginCallback}
     />
-  ),
+  },
   (props, state, func) => (
     <CodeConfirmation
       next={steps.ACCOUNT_OPTIONS}
@@ -44,6 +45,7 @@ const STEPS = [
       email={state.email}
       code={state.code}
       onStateChange={func}
+      loginCallback={props.loginCallback}
     />
   ),
   () => (
@@ -55,6 +57,7 @@ const STEPS = [
       previous={steps.EMAIL_PASSWORD}
       email={state.email}
       onStateChange={func}
+      loginCallback={props.loginCallback}
     />
   ),
   /* eslint-enable react/display-name react/prop-types */
@@ -68,6 +71,8 @@ class LoginContent extends Component {
     optionsTitle: PropTypes.string,
     emailAndPasswordTitle: PropTypes.string,
     accessCodeTitle: PropTypes.string,
+    /** Function called after login success */
+    loginCallback: PropTypes.func,
   }
 
   static defaultProps = {
@@ -159,6 +164,7 @@ class LoginContent extends Component {
             currentStep={step === 0 ? 'loginOptions.emailVerification' : 'loginOptions.emailAndPassword'}
             isAlwaysShown={!isInitialScreenOptionOnly}
             onOptionsClick={this.handleOptionsClick}
+            loginCallback={this.props.loginCallback}
           />
         )}
         <div className={formClassName}>

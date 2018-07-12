@@ -27,6 +27,7 @@ class CodeConfirmation extends Component {
   handleSuccess = status => {
     const { onStateChange, next } = this.props
     status === 'Success' && onStateChange({ step: next })
+    this.props.loginCallback()
   }
 
   handleWrongCredentials = status => {
@@ -123,6 +124,8 @@ CodeConfirmation.propTypes = {
   accessKeySignIn: PropTypes.func.isRequired,
   /** Intl object*/
   intl: intlShape,
+  /** Function called after login success */
+  loginCallback: PropTypes.func,
 }
 
 export default injectIntl(

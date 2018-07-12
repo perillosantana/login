@@ -42,6 +42,7 @@ class RecoveryPassword extends Component {
   handleSuccess = status => {
     const { onStateChange, next } = this.props
     status === 'Success' && onStateChange({ step: next })
+    this.props.loginCallback()
   }
 
   handleUserIsBlocked = status => {
@@ -169,6 +170,8 @@ RecoveryPassword.propTypes = {
   recoveryPassword: PropTypes.func.isRequired,
   /** Intl object*/
   intl: intlShape,
+  /** Function called after login success */
+  loginCallback: PropTypes.func,
 }
 
 export default injectIntl(
