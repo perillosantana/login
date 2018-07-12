@@ -10,7 +10,7 @@ import CodeConfirmation from './components/CodeConfirmation'
 import AccountOptions from './components/AccountOptions'
 import RecoveryPassword from './components/RecoveryPassword'
 import { steps } from './utils/steps'
-
+import { setCookie } from './utils/set-cookie'
 import './global.css'
 
 const STEPS = [
@@ -77,6 +77,12 @@ class LoginContent extends Component {
 
   static defaultProps = {
     isInitialScreenOptionOnly: true,
+  }
+
+  componentDidMount() {
+    if (location.href.indexOf('accountAuthCookieName') > 0) {
+      setCookie(location.href)
+    }
   }
 
   get shouldRenderLoginOptions() {

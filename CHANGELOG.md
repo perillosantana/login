@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.3] - 2018-07-12
+### Fixed
+- Fix oAuth Set-Cookie in `LoginContent`. 
+
 ## [0.9.2] - 2018-07-11
 ### Fixed
 - Add intl and css in `LoginContent`.
