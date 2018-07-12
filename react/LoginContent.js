@@ -45,7 +45,7 @@ const STEPS = [
       email={state.email}
       code={state.code}
       onStateChange={func}
-      loginCallback={props.loginCallback}
+      loginCallback={props.loginCallback || }
     />
   ),
   () => (
@@ -136,6 +136,11 @@ class LoginContent extends Component {
     })
   }
 
+  /** Default action after login success. */
+  onLoginSuccess = () => {
+    location.assign("/")
+  }
+
   render() {
     const { profile, isInitialScreenOptionOnly, optionsTitle } = this.props
     const { isOnInitialScreen } = this.state
@@ -170,7 +175,7 @@ class LoginContent extends Component {
             currentStep={step === 0 ? 'loginOptions.emailVerification' : 'loginOptions.emailAndPassword'}
             isAlwaysShown={!isInitialScreenOptionOnly}
             onOptionsClick={this.handleOptionsClick}
-            loginCallback={this.props.loginCallback}
+            loginCallback={this.props.loginCallback || this.onLoginSuccess}
           />
         )}
         <div className={formClassName}>
