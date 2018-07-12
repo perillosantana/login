@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
-import { compose, map, fromPairs, split, tail } from 'ramda'
 import { Link } from 'render'
-
+import { setCookie } from './utils/set-cookie'
 import LoginContent from './LoginContent'
 
 import { truncateString } from './utils/truncate-string'
@@ -13,29 +12,6 @@ import ProfileIcon from './images/ProfileIcon'
 import GET_USER_PROFILE from './queries/profile.gql'
 import { translate } from './utils/translate'
 import './global.css'
-
-/**
- * Set Cookie from the URL name=value and clean up the URL query params.
- * Used in the OAuth login.
- *
- * @param {String} url To set cookie and cleaned up.
- */
-const setCookie = (url) => {
-  const { accountAuthCookieName, authCookieValue } = compose(
-    fromPairs, map(split('=')), split('&'), tail
-  )(url)
-  if (accountAuthCookieName && authCookieValue) {
-    const date = new Date()
-    const ONE_DAY = 24 * 60 * 60 * 1000
-    date.setTime(date.getTime() + ONE_DAY)
-    document.cookie = `${accountAuthCookieName}=${authCookieValue};
-      expires=${date.toUTCString()};
-      path=/;
-      Http-Only=true;`
-    const cleanUrl = url.substring(0, url.indexOf('?'))
-    window.history.replaceState({}, document.title, cleanUrl)
-  }
-}
 
 /** Canonical login that calls a mutation to retrieve the authentication token */
 class Login extends Component {
@@ -59,9 +35,7 @@ class Login extends Component {
 
     if (this.boxRef_.current && !this.boxRef_.current.contains(target)) {
       if (isBoxOpen) {
-        this.setState({
-          isBoxOpen: false,
-        })
+        this.setState({ isBoxOpen: false })
       }
 
       this.removeListeners()
@@ -103,7 +77,6 @@ class Login extends Component {
   }
 
   handleProfileIconClick = () => {
-    console.log(this.state)
     document.addEventListener('mouseup', this.handleDocumentMouseUp)
 
     this.setState({
@@ -137,7 +110,6 @@ class Login extends Component {
   render() {
     const { data: { profile }, intl } = this.props
     const { isBoxOpen } = this.state
-
     return (
       <div className="vtex-login__container flex items-center relative f6 fr">
         {profile && (
