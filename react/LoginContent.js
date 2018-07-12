@@ -45,7 +45,7 @@ const STEPS = [
       email={state.email}
       code={state.code}
       onStateChange={func}
-      loginCallback={props.loginCallback || }
+      loginCallback={props.loginCallback}
     />
   ),
   () => (
