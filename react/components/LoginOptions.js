@@ -86,6 +86,7 @@ LoginOptions.propTypes = {
   isAlwaysShown: PropTypes.bool,
   /** Current option being displayed */
   currentStep: PropTypes.string,
+  loginCallback: PropTypes.func,
 }
 
 export default injectIntl(LoginOptions)

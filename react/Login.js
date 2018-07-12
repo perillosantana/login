@@ -19,6 +19,7 @@ class Login extends Component {
     /** Intl object*/
     intl: intlShape,
     data: PropTypes.shape({}).isRequired,
+    mutate: PropTypes.func.isRequired,
   }
 
   boxRef_ = React.createRef()
@@ -26,6 +27,7 @@ class Login extends Component {
   state = {
     isBoxOpen: false,
     renderIconAsLink: false,
+    profile: null
   }
 
   handleDocumentMouseUp = e => {
@@ -41,6 +43,13 @@ class Login extends Component {
       this.removeListeners()
     }
   }
+  
+  /** Function called after login success */
+  onHandleLogin = () => {
+    this.props.data.refetch().then(({data: { profile }}) => {
+      this.setState({ profile })
+    })
+  }
 
   componentDidMount() {
     if (location.href.indexOf('accountAuthCookieName') > 0) {
@@ -50,6 +59,8 @@ class Login extends Component {
     window.addEventListener('resize', this.handleResize)
 
     this.handleResize()
+
+    this.setState({ profile: this.props.data.profile })
   }
 
   componentWillUnmount() {
@@ -108,8 +119,9 @@ class Login extends Component {
   }
 
   render() {
-    const { data: { profile }, intl } = this.props
-    const { isBoxOpen } = this.state
+    const { intl } = this.props
+    const { isBoxOpen, profile } = this.state
+
     return (
       <div className="vtex-login__container flex items-center relative f6 fr">
         {profile && (
@@ -125,7 +137,7 @@ class Login extends Component {
           >
             <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3" />
             <div className="shadow-3 mt3">
-              <LoginContent profile={profile} isInitialScreenOptionOnly />
+              <LoginContent profile={profile} loginCallback={this.onHandleLogin} isInitialScreenOptionOnly />
             </div>
           </div>
         )}

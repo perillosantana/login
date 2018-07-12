@@ -30,6 +30,8 @@ class EmailAndPassword extends Component {
     intl: intlShape,
     /** Whether to display the back button */
     showBackButton: PropTypes.bool,
+    /** Function called after login success */
+    loginCallback: PropTypes.func,
   }
 
   state = {
@@ -62,6 +64,7 @@ class EmailAndPassword extends Component {
   handleSuccess = status => {
     const { onStateChange, next } = this.props
     status === 'Success' && onStateChange({ step: next })
+    this.props.loginCallback()
   }
 
   handleWrongCredentials = status => {

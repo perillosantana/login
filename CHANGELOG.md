@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.4] - 2018-07-12
+### Fixed
+- Callback after login success.
+
 ## [0.9.3] - 2018-07-12
 ### Fixed
 - Fix oAuth Set-Cookie in `LoginContent`. 
