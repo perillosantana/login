@@ -136,9 +136,13 @@ class LoginContent extends Component {
     })
   }
 
-  /** Default action after login success. */
+  /**
+   * Action after login success. If loginCallback isn't 
+   * a prop, it will call a root page redirect as default.
+  */
   onLoginSuccess = () => {
-    location.assign("/")
+    const { loginCallback } = this.props
+    return loginCallback ? loginCallback : location.replace("/")    
   }
 
   render() {
@@ -148,7 +152,10 @@ class LoginContent extends Component {
     const step = profile ? steps.ACCOUNT_OPTIONS : this.state.step
 
     const render = STEPS[step](
-      this.props,
+      { 
+        loginCallback: this.onLoginSuccess, 
+        ...this.props
+      },
       this.state,
       this.handleUpdateState,
       this.shouldRenderLoginOptions
@@ -175,7 +182,6 @@ class LoginContent extends Component {
             currentStep={step === 0 ? 'loginOptions.emailVerification' : 'loginOptions.emailAndPassword'}
             isAlwaysShown={!isInitialScreenOptionOnly}
             onOptionsClick={this.handleOptionsClick}
-            loginCallback={this.props.loginCallback || this.onLoginSuccess}
           />
         )}
         <div className={formClassName}>
