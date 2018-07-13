@@ -55,12 +55,19 @@ class Login extends Component {
     if (location.href.indexOf('accountAuthCookieName') > 0) {
       setCookie(location.href)
     }
-
     window.addEventListener('resize', this.handleResize)
-
     this.handleResize()
-
     this.setState({ profile: this.props.data.profile })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.state.profile && this.props.data) {
+      const { profile } = this.props.data
+      if (profile === prevState.profile) {
+        return null
+      }
+      this.setState({ profile })
+    }
   }
 
   componentWillUnmount() {
@@ -96,11 +103,12 @@ class Login extends Component {
   }
 
   renderIcon() {
-    const { renderIconAsLink } = this.state
+    const { renderIconAsLink, profile } = this.state
 
     if (renderIconAsLink) {
+      const linkTo = profile ? "/account" : "/login"
       return (
-        <Link to="/login" className="vtex-login__button--link">
+        <Link to={linkTo} className="vtex-login__button--link">
           <ProfileIcon />
         </Link>
       )

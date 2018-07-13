@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Default callback after login success.
 
+### Fixed
+- Get profile after login.
+
 ## [0.9.4] - 2018-07-12
 ### Fixed
 - Callback after login success.
