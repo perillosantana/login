@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import classNames from 'classnames'
-
+import { ExtensionPoint } from 'render'
 import { translate } from '../utils/translate'
 
 import OAuth from './OAuth'
@@ -62,6 +62,9 @@ class LoginOptions extends Component {
             <OAuth provider="Facebook">
               <FacebookIcon />
             </OAuth>
+          </li>
+          <li className="vtex-login-options__list-item vtex-login-options__list-item--custom">
+            <ExtensionPoint id="custom" />
           </li>
         </ul>
       </div>

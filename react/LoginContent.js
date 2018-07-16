@@ -11,6 +11,7 @@ import AccountOptions from './components/AccountOptions'
 import RecoveryPassword from './components/RecoveryPassword'
 import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
+
 import './global.css'
 
 const STEPS = [
@@ -65,11 +66,17 @@ const STEPS = [
 
 class LoginContent extends Component {
   static propTypes = {
+    /** User profile information */
     profile: PropTypes.shape({}),
+    /** Which screen option will renderize  */
     isInitialScreenOptionOnly: PropTypes.bool,
+    /** Step that will be render first */
     initialStep: PropTypes.number,
+    /** Title of login options */
     optionsTitle: PropTypes.string,
+    /** Title of classic login */
     emailAndPasswordTitle: PropTypes.string,
+    /** Title of access code login */
     accessCodeTitle: PropTypes.string,
     /** Function called after login success */
     loginCallback: PropTypes.func,
@@ -77,27 +84,6 @@ class LoginContent extends Component {
 
   static defaultProps = {
     isInitialScreenOptionOnly: true,
-  }
-
-  componentDidMount() {
-    if (location.href.indexOf('accountAuthCookieName') > 0) {
-      setCookie(location.href)
-    }
-  }
-
-  get shouldRenderLoginOptions() {
-    const { isInitialScreenOptionOnly } = this.props
-    const { isOnInitialScreen } = this.state
-
-    return isInitialScreenOptionOnly
-      ? isOnInitialScreen : true
-  }
-
-  get shouldRenderForm() {
-    const { isInitialScreenOptionOnly } = this.props
-    const { isOnInitialScreen } = this.state
-
-    return !isInitialScreenOptionOnly || !isOnInitialScreen
   }
 
   state = {
@@ -109,15 +95,28 @@ class LoginContent extends Component {
     code: '',
   }
 
+  componentDidMount() {
+    if (location.href.indexOf('accountAuthCookieName') > 0) {
+      setCookie(location.href)
+    }
+  }
+
+  get shouldRenderLoginOptions() {
+    return this.props.isInitialScreenOptionOnly ? this.state.isOnInitialScreen : true
+  }
+
+  get shouldRenderForm() {
+    return !this.props.isInitialScreenOptionOnly || !this.state.isOnInitialScreen
+  }
+
+
   handleUpdateState = state => {
     if (state.hasOwnProperty('step') && state.step === -1) {
       state.step = 0
       state.isOnInitialScreen = true
     }
 
-    this.setState({
-      ...state,
-    })
+    this.setState({ ...state })
   }
 
   handleOptionsClick = option => {
@@ -147,10 +146,9 @@ class LoginContent extends Component {
 
   render() {
     const { profile, isInitialScreenOptionOnly, optionsTitle } = this.props
-    const { isOnInitialScreen } = this.state
 
     const step = profile ? steps.ACCOUNT_OPTIONS : this.state.step
-
+    
     const render = STEPS[step](
       { 
         loginCallback: this.onLoginSuccess, 
@@ -162,7 +160,7 @@ class LoginContent extends Component {
     )
 
     const className = classNames('vtex-login-content', {
-      'vtex-login-content--initial-screen': isOnInitialScreen,
+      'vtex-login-content--initial-screen': this.state.isOnInitialScreen,
       'vtex-login-content--always-with-options': !isInitialScreenOptionOnly,
     })
 

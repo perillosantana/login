@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.6] - 2018-07-16
+### Added
+- Add `ExtensionPoint` as a custom login option.
+
 ## [0.9.5] - 2018-07-13
 ### Added
 - Default callback after login success.
