@@ -27,8 +27,8 @@ const STEPS = [
       showBackButton={!isOptionsMenuDisplayed}
     />
   ),
-  (props, state, func, isOptionsMenuDisplayed) => {
-    return <EmailAndPassword
+  (props, state, func, isOptionsMenuDisplayed) => (
+    <EmailAndPassword
       next={steps.ACCOUNT_OPTIONS}
       previous={steps.LOGIN_OPTIONS}
       title={props.emailAndPasswordTitle}
@@ -38,7 +38,7 @@ const STEPS = [
       showBackButton={!isOptionsMenuDisplayed}
       loginCallback={props.loginCallback}
     />
-  },
+  ),
   (props, state, func) => (
     <CodeConfirmation
       next={steps.ACCOUNT_OPTIONS}
@@ -136,12 +136,12 @@ class LoginContent extends Component {
   }
 
   /**
-   * Action after login success. If loginCallback isn't 
+   * Action after login success. If loginCallback isn't
    * a prop, it will call a root page redirect as default.
   */
   onLoginSuccess = () => {
     const { loginCallback } = this.props
-    return loginCallback ? loginCallback : location.replace("/")    
+    return loginCallback || location.replace('/')
   }
 
   render() {
@@ -150,9 +150,9 @@ class LoginContent extends Component {
     const step = profile ? steps.ACCOUNT_OPTIONS : this.state.step
     
     const render = STEPS[step](
-      { 
-        loginCallback: this.onLoginSuccess, 
-        ...this.props
+      {
+        loginCallback: this.onLoginSuccess,
+        ...this.props,
       },
       this.state,
       this.handleUpdateState,

@@ -28,7 +28,7 @@ class Login extends Component {
   state = {
     isBoxOpen: false,
     renderIconAsLink: false,
-    profile: null
+    profile: null,
   }
 
   handleDocumentMouseUp = e => {
@@ -40,10 +40,10 @@ class Login extends Component {
       this.removeListeners()
     }
   }
-  
+
   /** Function called after login success */
   onHandleLogin = () => {
-    this.props.data.refetch().then(({data: { profile }}) => {
+    this.props.data.refetch().then(({ data: { profile } }) => {
       this.setState({ profile })
     })
   }
@@ -102,7 +102,7 @@ class Login extends Component {
     const { renderIconAsLink, profile } = this.state
 
     if (renderIconAsLink) {
-      const linkTo = profile ? "/account" : "/login"
+      const linkTo = profile ? '/account' : '/login'
       return (
         <Link to={linkTo} className="vtex-login__button--link">
           <ProfileIcon />
