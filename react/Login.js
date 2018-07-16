@@ -11,6 +11,7 @@ import { truncateString } from './utils/truncate-string'
 import ProfileIcon from './images/ProfileIcon'
 import GET_USER_PROFILE from './queries/profile.gql'
 import { translate } from './utils/translate'
+
 import './global.css'
 
 /** Canonical login that calls a mutation to retrieve the authentication token */
@@ -18,8 +19,8 @@ class Login extends Component {
   static propTypes = {
     /** Intl object*/
     intl: intlShape,
+    /** Data object with user profile */
     data: PropTypes.shape({}).isRequired,
-    mutate: PropTypes.func.isRequired,
   }
 
   boxRef_ = React.createRef()
@@ -32,14 +33,10 @@ class Login extends Component {
 
   handleDocumentMouseUp = e => {
     const { isBoxOpen } = this.state
-
     const target = e.target
 
     if (this.boxRef_.current && !this.boxRef_.current.contains(target)) {
-      if (isBoxOpen) {
-        this.setState({ isBoxOpen: false })
-      }
-
+      isBoxOpen && this.setState({ isBoxOpen: false })
       this.removeListeners()
     }
   }
@@ -55,6 +52,7 @@ class Login extends Component {
     if (location.href.indexOf('accountAuthCookieName') > 0) {
       setCookie(location.href)
     }
+
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
     this.setState({ profile: this.props.data.profile })
@@ -97,9 +95,7 @@ class Login extends Component {
   handleProfileIconClick = () => {
     document.addEventListener('mouseup', this.handleDocumentMouseUp)
 
-    this.setState({
-      isBoxOpen: !this.state.isBoxOpen,
-    })
+    this.setState({ isBoxOpen: !this.state.isBoxOpen })
   }
 
   renderIcon() {
@@ -155,9 +151,7 @@ class Login extends Component {
 }
 
 const options = {
-  options: () => ({
-    ssr: false,
-  }),
+  options: () => ({ ssr: false }),
 }
 
 export default injectIntl(
