@@ -8,8 +8,11 @@
 .vtex-login__box {
   top: 100%;
   visibility: visible;
-  max-height: 310px;
   min-width: 310px;
+}
+
+.vtex-login__content-container {
+  min-width: 100%;
 }
 
 .vtex-login__button--link {
