@@ -109,7 +109,6 @@ class LoginContent extends Component {
     return !this.props.isInitialScreenOptionOnly || !this.state.isOnInitialScreen
   }
 
-
   handleUpdateState = state => {
     if (state.hasOwnProperty('step') && state.step === -1) {
       state.step = 0
@@ -148,7 +147,7 @@ class LoginContent extends Component {
     const { profile, isInitialScreenOptionOnly, optionsTitle } = this.props
 
     const step = profile ? steps.ACCOUNT_OPTIONS : this.state.step
-    
+
     const render = STEPS[step](
       {
         loginCallback: this.onLoginSuccess,
@@ -159,14 +158,16 @@ class LoginContent extends Component {
       this.shouldRenderLoginOptions
     )
 
-    const className = classNames('vtex-login-content', {
+    const className = classNames('vtex-login-content flex relative bg-white justify-around', {
       'vtex-login-content--initial-screen': this.state.isOnInitialScreen,
-      'vtex-login-content--always-with-options': !isInitialScreenOptionOnly,
+      'vtex-login-content--always-with-options flex-column-reverse items-center flex-row-ns items-baseline-ns':
+        !isInitialScreenOptionOnly,
+      'items-baseline': isInitialScreenOptionOnly,
     })
 
-    const formClassName = classNames('vtex-login-content__form', {
+    const formClassName = classNames('vtex-login-content__form dn', {
       [`vtex-login-content__form--step-${step}`]: step >= 0,
-      'vtex-login-content__form--visible': this.shouldRenderForm,
+      'vtex-login-content__form--visible db': this.shouldRenderForm,
     })
 
     return (

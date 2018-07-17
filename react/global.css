@@ -3,12 +3,10 @@
   width: 25px;
   height: 25px;
   right: 7px;
-  background-color: white;
 }
 
 .vtex-login__box {
   top: 100%;
-  display: block;
   visibility: visible;
   max-height: 310px;
   min-width: 310px;
@@ -17,7 +15,6 @@
 .vtex-login__button--link {
   height: 20px;
   width: 40px;
-  text-align: center;
 }
 
 .vtex-login__container {
@@ -25,11 +22,6 @@
 }
 
 .vtex-login-content {
-  display: flex;
-  position: relative;
-  align-items: baseline;
-  justify-content: space-around;
-  background-color: white;
   padding: .75rem;
   margin: 0 auto;
 }
@@ -40,12 +32,7 @@
 }
 
 .vtex-login-content__form {
-  display: none;
   min-width: 280px;
-}
-
-.vtex-login-content__form--visible {
-  display: block;
 }
 
 .vtex-login-content--always-with-options {
@@ -55,14 +42,6 @@
 
 .vtex-login__form-title {
   color: #3d5980;
-  font-size: .875rem;
-  vertical-align: middle;
-  text-transform: uppercase;
-  text-align: center;
-  position: relative;
-  font-weight: 500;
-  padding: .5rem 1rem;
-  border-radius: .25rem;
 }
 
 .vtex-login__form-error {
@@ -74,9 +53,7 @@
 }
 
 .vtex-login__form-footer {
-  display: flex;
   border-top: 1px solid #e3e4e6;
-  margin-top: 1rem;
   min-height: 2rem;
   padding-top: .75rem;
 }
@@ -94,58 +71,32 @@
   width: 100%;
 }
 
-.vtex-login__form-link-container {
-  display: flex;
-  justify-content: flex-end;
-  padding: .5rem 0;
-}
-
 .vtex-login__input-container {
   padding: .5rem 0;
 }
 
-.vtex-login-options__list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.vtex-login-options__list-item {
-  margin-bottom: 1rem;
-}
-
-.vtex-login__profile {
-  order: 1;
-}
-
-.vtex-login__button {
+.vtex-login__button .vtex-button {
   background: none;
   border: 1px solid rgb(233, 233, 233);
-  border-radius: 5px;
   width: 100%;
-  padding: 5px;
   height: 40px;
-  cursor: pointer;
 }
 
-.vtex-login__button:hover {
+.vtex-login__button .vtex-button:hover {
   background: rgb(235, 235, 235);
 }
 
-.vtex-login__button .vtex-login__oauth-label {
-  position: relative;
+.vtex-login__button .vtex-button .vtex-login__oauth-label {
   bottom: 4px;
   margin: 0 20px 0 20px;
 }
 
 .vtex-login__oauth-provider {
   margin-left: 5px;
-  font-weight: normal;
 }
 
 @media only screen and (max-width: 600px) {
   .vtex-login-content--always-with-options {
-    flex-direction: column-reverse;
-    align-items: center;
     max-width: 400px;
   }
 }

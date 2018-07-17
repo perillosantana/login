@@ -8,6 +8,8 @@ import { translate } from '../utils/translate'
 import { isValidEmail, isValidPassword } from '../utils/format-check'
 import classicSignIn from '../mutations/classicSignIn.gql'
 import { steps } from '../utils/steps'
+import Form from './Form'
+import FormError from './FormError'
 
 /** EmailAndPasswordLogin component. */
 class EmailAndPassword extends Component {
@@ -118,52 +120,48 @@ class EmailAndPassword extends Component {
     } = this.state
 
     return (
-      <div className="vtex-login__email-verification">
-        <h3 className="vtex-login__form-title">
-          {title || translate('loginOptions.emailAndPassword', intl)}
-        </h3>
-        <form onSubmit={e => this.handleOnSubmit(e)}>
-          <div className="vtex-login__input-container">
-            <Input
-              value={email}
-              onChange={this.handleInputChange}
-              placeholder={'Ex: example@mail.com'}
-            />
-          </div>
-          {isInvalidEmail &&
-            <div className="vtex-login__form-error">
+      <Form
+        className="vtex-login__email-verification"
+        title={title || translate('loginOptions.emailAndPassword', intl)}
+        onSubmit={e => this.handleOnSubmit(e)}
+        content={(
+          <React.Fragment>
+            <div className="vtex-login__input-container">
+              <Input
+                value={email}
+                onChange={this.handleInputChange}
+                placeholder={'Ex: example@mail.com'}
+              />
+            </div>
+            <FormError show={isInvalidEmail}>
               {translate('login.invalidEmail', intl)}
+            </FormError>
+            <div className="vtex-login__input-container">
+              <Input
+                type="password"
+                value={password}
+                onChange={this.handlePasswordChange}
+                placeholder={translate('login.password', intl)}
+              />
             </div>
-          }
-          <div className="vtex-login__input-container">
-            <Input
-              type="password"
-              value={password}
-              onChange={this.handlePasswordChange}
-              placeholder={translate('login.password', intl)}
-            />
-          </div>
-          {isInvalidPassword &&
-            <div className="vtex-login__form-error">
+            <FormError show={isInvalidPassword}>
               {translate('login.invalidPassword', intl)}
-            </div>
-          }
-          {isWrongCredentials &&
-            <div className="vtex-login__form-error">
+            </FormError>
+            <FormError show={isWrongCredentials}>
               {translate('login.wrongCredentials', intl)}
-            </div>
-          }
-          {isUserBlocked &&
-            <div className="vtex-login__form-error">
+            </FormError>
+            <FormError show={isUserBlocked}>
               {translate('login.userBlocked', intl)}
+            </FormError>
+            <div className="vtex-login__form-link-container">
+              <a href="" className="link" onClick={this.handleCreatePassword}>
+                <span className="f7">{translate('login.forgotPassword', intl)}</span>
+              </a>
             </div>
-          }
-          <div className="vtex-login__form-link-container">
-            <a href="" className="link" onClick={this.handleCreatePassword}>
-              <span className="f7">{translate('login.forgotPassword', intl)}</span>
-            </a>
-          </div>
-          <div className="vtex-login__form-footer">
+          </React.Fragment>
+        )}
+        footer={(
+          <React.Fragment>
             {showBackButton && <div className="vtex-login__back-button">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous, password: '' })}>
@@ -181,14 +179,15 @@ class EmailAndPassword extends Component {
                 <span className="f7">{translate('login.signIn', intl)}</span>
               </Button>
             </div>
-          </div>
-          <div className="vtex-login__form-link-container">
-            <a href="" className="link" onClick={e => this.handleCreatePassword(e)}>
-              <span className="f7">{translate('login.notHaveAccount', intl)}</span>
-            </a>
-          </div>
-        </form>
-      </div>
+          </React.Fragment>
+        )}
+      >
+        <div className="vtex-login__form-link-container flex justify-end ph0 pv2">
+          <a href="" className="link" onClick={e => this.handleCreatePassword(e)}>
+            <span className="f7">{translate('login.notHaveAccount', intl)}</span>
+          </a>
+        </div>
+      </Form>
     )
   }
 }

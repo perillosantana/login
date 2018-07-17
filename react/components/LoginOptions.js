@@ -3,12 +3,15 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import classNames from 'classnames'
 import { ExtensionPoint } from 'render'
+import { Button } from 'vtex.styleguide'
+
 import { translate } from '../utils/translate'
 
 import OAuth from './OAuth'
 
 import GoogleIcon from '../images/GoogleIcon'
 import FacebookIcon from '../images/FacebookIcon'
+import FormTitle from './FormTitle'
 
 /** LoginOptions tab component. Displays a list of login options */
 class LoginOptions extends Component {
@@ -33,37 +36,39 @@ class LoginOptions extends Component {
 
     return (
       <div className={classes}>
-        <h3 className="vtex-login-options__title vtex-login__form-title">
+        <FormTitle>
           {title || translate(fallbackTitle, intl)}
-        </h3>
-        <ul className="vtex-login-options__list">
+        </FormTitle>
+        <ul className="vtex-login-options__list list pa0">
           {options
             .filter(el => !isAlwaysShown ? true : currentStep !== el)
             .map((el, index) => (
-              <li className="vtex-login-options__list-item" key={`login-option-array-${index}`}>
-                <button className="vtex-login__button" onClick={this.handleOptionClick(el)}>
-                  <span className="f6">
-                    {translate(el, intl)}
-                  </span>
-                </button>
+              <li className="vtex-login-options__list-item mb3" key={`login-option-array-${index}`}>
+                <div className="vtex-login__button">
+                  <Button variation="tertiary" onClick={this.handleOptionClick(el)}>
+                    <span className="f6">
+                      {translate(el, intl)}
+                    </span>
+                  </Button>
+                </div>
               </li>
             ))
           }
           <li
-            className="vtex-login-options__list-item vtex-login-options__list-item--google"
+            className="vtex-login-options__list-item vtex-login-options__list-item--google mb3"
           >
             <OAuth provider="Google">
               <GoogleIcon />
             </OAuth>
           </li>
           <li
-            className="vtex-login-options__list-item vtex-login-options__list-item--facebook"
+            className="vtex-login-options__list-item vtex-login-options__list-item--facebook mb3"
           >
             <OAuth provider="Facebook">
               <FacebookIcon />
             </OAuth>
           </li>
-          <li className="vtex-login-options__list-item vtex-login-options__list-item--custom">
+          <li className="vtex-login-options__list-item vtex-login-options__list-item--custom mb3">
             <ExtensionPoint id="custom" />
           </li>
         </ul>

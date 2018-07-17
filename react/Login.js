@@ -20,7 +20,10 @@ class Login extends Component {
     /** Intl object*/
     intl: intlShape,
     /** Data object with user profile */
-    data: PropTypes.shape({}).isRequired,
+    data: PropTypes.shape({
+      refetch: PropTypes.func.isRequired,
+      profile: PropTypes.shape({}),
+    }).isRequired,
   }
 
   boxRef_ = React.createRef()
@@ -104,7 +107,7 @@ class Login extends Component {
     if (renderIconAsLink) {
       const linkTo = profile ? '/account' : '/login'
       return (
-        <Link to={linkTo} className="vtex-login__button--link">
+        <Link to={linkTo} className="vtex-login__button--link tc">
           <ProfileIcon />
         </Link>
       )
@@ -129,17 +132,17 @@ class Login extends Component {
     return (
       <div className="vtex-login__container flex items-center relative f6 fr">
         {profile && (
-          <div className="vtex-login__profile">
+          <div className="vtex-login__profile order-1">
             {translate('login.hello', intl)} {truncateString(profile.firstName) || truncateString(profile.email)}
           </div>
         )}
         {this.renderIcon()}
         {isBoxOpen && (
           <div
-            className="vtex-login__box absolute right-0 z-max flex"
+            className="vtex-login__box absolute right-0 z-max flex db"
             ref={this.boxRef_}
           >
-            <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3" />
+            <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-white" />
             <div className="shadow-3 mt3">
               <LoginContent profile={profile} loginCallback={this.onHandleLogin} isInitialScreenOptionOnly />
             </div>

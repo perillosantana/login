@@ -7,6 +7,8 @@ import { graphql } from 'react-apollo'
 import { translate } from '../utils/translate'
 import { isValidPassword, isValidAccessCode } from '../utils/format-check'
 import recoveryPassword from '../mutations/recoveryPassword.gql'
+import Form from './Form'
+import FormError from './FormError'
 
 /** RecoveryPassword tab component. Receive a code and new password from an input
  * and call the recoveryPassword mutation.
@@ -74,11 +76,8 @@ class RecoveryPassword extends Component {
     }
   }
   render() {
-    const {
-      intl,
-      previous,
-      onStateChange,
-    } = this.props
+    const { intl, previous, onStateChange } = this.props
+
     const {
       isLoading,
       isInvalidPassword,
@@ -86,53 +85,50 @@ class RecoveryPassword extends Component {
       isInvalidCode,
       isPasswordsMatch,
     } = this.state
+
     return (
-      <div className="vtex-login__email-verification">
-        <h3 className="vtex-login__form-title">
-          {translate('login.createPassword', intl)}
-        </h3>
-        <form onSubmit={e => this.handleOnSubmit(e)}>
-          <div className="vtex-login__input-container">
-            <Input
-              onChange={this.handleCodeChange}
-              placeholder={translate('login.code', intl)}
-            />
-          </div>
-          {isInvalidCode &&
-            <div className="vtex-login__form-error">
+      <Form
+        className="vtex-login__email-verification"
+        title={translate('login.createPassword', intl)}
+        onSubmit={e => this.handleOnSubmit(e)}
+        content={(
+          <React.Fragment>
+            <div className="vtex-login__input-container">
+              <Input
+                onChange={this.handleCodeChange}
+                placeholder={translate('login.code', intl)}
+              />
+            </div>
+            <FormError show={isInvalidCode}>
               {translate('login.invalidCode', intl)}
+            </FormError>
+            <div className="vtex-login__input-container">
+              <Input
+                type="password"
+                onChange={this.handleNewPassword}
+                placeholder={translate('login.newPassword', intl)}
+              />
             </div>
-          }
-          <div className="vtex-login__input-container">
-            <Input
-              type="password"
-              onChange={this.handleNewPassword}
-              placeholder={translate('login.newPassword', intl)}
-            />
-          </div>
-          {isInvalidPassword &&
-            <div className="vtex-login__form-error">
+            <FormError show={isInvalidPassword}>
               {translate('login.invalidPassword', intl)}
-            </div>
-          }
-          {isUserBlocked &&
-            <div className="vtex-login__form-error">
+            </FormError>
+            <FormError show={isUserBlocked}>
               {translate('login.userBlocked', intl)}
+            </FormError>
+            <div className="vtex-login__input-container">
+              <Input
+                type="password"
+                onChange={this.handleConfirmPassword}
+                placeholder={translate('login.confirmPassword', intl)}
+              />
             </div>
-          }
-          <div className="vtex-login__input-container">
-            <Input
-              type="password"
-              onChange={this.handleConfirmPassword}
-              placeholder={translate('login.confirmPassword', intl)}
-            />
-          </div>
-          {!isPasswordsMatch &&
-            <div className="vtex-login__form-error">
+            <FormError show={!isPasswordsMatch}>
               {translate('login.invalidMatch', intl)}
-            </div>
-          }
-          <div className="vtex-login__form-footer">
+            </FormError>
+          </React.Fragment>
+        )}
+        footer={(
+          <React.Fragment>
             <div className="vtex-login__back-button">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous })}>
@@ -150,9 +146,9 @@ class RecoveryPassword extends Component {
                 <span className="f7">{translate('login.create', intl)}</span>
               </Button>
             </div>
-          </div>
-        </form>
-      </div>
+          </React.Fragment>
+        )}
+      />
     )
   }
 }
