@@ -143,7 +143,7 @@ class Login extends Component {
             ref={this.boxRef_}
           >
             <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-white" />
-            <div className="shadow-3 mt3">
+            <div className="vtex-login__content-container shadow-3 mt3">
               <LoginContent profile={profile} loginCallback={this.onHandleLogin} isInitialScreenOptionOnly />
             </div>
           </div>
