@@ -4,6 +4,8 @@ import { Input, Button } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
+import Form from './Form'
+import FormError from './FormError'
 import { translate } from '../utils/translate'
 import { isValidEmail } from '../utils/format-check'
 import sendEmailVerification from '../mutations/sendEmailVerification.gql'
@@ -84,27 +86,27 @@ class EmailVerification extends Component {
     const { isLoading, isInvalidEmail, isUserBlocked } = this.state
 
     return (
-      <div className="vtex-login__email-verification">
-        <h3 className="vtex-login__email-verification-title vtex-login__form-title">
-          {title || translate('loginOptions.emailVerification', intl)}
-        </h3>
-        <form onSubmit={e => this.handleOnSubmit(e)}>
-          <Input
-            value={email}
-            onChange={this.handleInputChange}
-            placeholder={'Ex: example@mail.com'}
-          />
-          {isInvalidEmail &&
-            <div className="vtex-login__form-error">
+      <Form
+        className="vtex-login__email-verification"
+        title={title || translate('loginOptions.emailVerification', intl)}
+        onSubmit={e => this.handleOnSubmit(e)}
+        content={(
+          <React.Fragment>
+            <Input
+              value={email}
+              onChange={this.handleInputChange}
+              placeholder={'Ex: example@mail.com'}
+            />
+            <FormError show={isInvalidEmail}>
               {translate('login.invalidEmail', intl)}
-            </div>
-          }
-          {isUserBlocked &&
-            <div className="vtex-login__form-error">
+            </FormError>
+            <FormError show={isUserBlocked}>
               {translate('login.userBlocked', intl)}
-            </div>
-          }
-          <div className="vtex-login__form-footer">
+            </FormError>
+          </React.Fragment>
+        )}
+        footer={(
+          <React.Fragment>
             {(showBackButton || isCreatePassword) && <div className="vtex-login__back-button">
               <Button
                 variation="secondary"
@@ -128,9 +130,9 @@ class EmailVerification extends Component {
                 <span className="f7">{translate('login.send', intl)}</span>
               </Button>
             </div>
-          </div>
-        </form>
-      </div>
+          </React.Fragment>
+        )}
+      />
     )
   }
 }

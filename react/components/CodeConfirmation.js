@@ -7,6 +7,8 @@ import { graphql } from 'react-apollo'
 import { translate } from '../utils/translate'
 import { isValidAccessCode } from '../utils/format-check'
 import accessKeySignIn from '../mutations/accessKeySignIn.gql'
+import Form from './Form'
+import FormError from './FormError'
 
 /** CodeConfirmation tab component. Receive the code from an input and call the signIn mutation */
 class CodeConfirmation extends Component {
@@ -68,23 +70,23 @@ class CodeConfirmation extends Component {
     } = this.state
 
     return (
-      <div className="vtex-login__code-confirmation">
-        <h3 className="vtex-login__form-title">
-          {translate('login.accessCodeTitle', intl)}
-        </h3>
-        <form onSubmit={e => this.handleOnSubmit(e)}>
-          <Input value={code} onChange={this.handleInputChange} />
-          {isInvalidCode &&
-            <div className="vtex-login__form-error">
+      <Form
+        className="vtex-login__code-confirmation"
+        title={translate('login.accessCodeTitle', intl)}
+        onSubmit={e => this.handleOnSubmit(e)}
+        content={(
+          <React.Fragment>
+            <Input value={code} onChange={this.handleInputChange} />
+            <FormError show={isInvalidCode}>
               {translate('login.invalidCode', intl)}
-            </div>
-          }
-          {isWrongCredentials &&
-            <div className="vtex-login__form-error">
+            </FormError>
+            <FormError show={isWrongCredentials}>
               {translate('login.wrongCredentials', intl)}
-            </div>
-          }
-          <div className="vtex-login__form-footer">
+            </FormError>
+          </React.Fragment>
+        )}
+        footer={(
+          <React.Fragment>
             <div className="vtex-login__back-button">
               <Button variation="secondary" size="small"
                 onClick={() => onStateChange({ step: previous })}>
@@ -102,9 +104,9 @@ class CodeConfirmation extends Component {
                 <span className="f7">{translate('login.confirm', intl)}</span>
               </Button>
             </div>
-          </div>
-        </form>
-      </div>
+          </React.Fragment>
+        )}
+      />
     )
   }
 }

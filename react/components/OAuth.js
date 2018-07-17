@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
+import { Button } from 'vtex.styleguide'
 
 import { translate } from '../utils/translate'
 
@@ -35,13 +36,18 @@ class OAuth extends Component {
   render() {
     const { intl, children, provider } = this.props
     return (
-      <button className="vtex-login__button" onClick={event => this.handleLoginClick(event)}>
-        {children}
-        <span className="f6 vtex-login__oauth-label">
-          {translate('loginOptions.oAuth', intl)}
-          <span className="vtex-login__oauth-provider">{provider}</span>
-        </span>
-      </button>
+      <div className="vtex-login__button">
+        <Button
+          variation="secondary"
+          onClick={event => this.handleLoginClick(event)}
+        >
+          {children}
+          <span className="f6 vtex-login__oauth-label relative normal">
+            {translate('loginOptions.oAuth', intl)}
+            <span className="vtex-login__oauth-provider b">{provider}</span>
+          </span>
+        </Button>
+      </div>
     )
   }
 }
