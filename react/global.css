@@ -35,7 +35,11 @@
 }
 
 .vtex-login-content__form {
-  min-width: 280px;
+  min-width: 290px;
+}
+
+.vtex-login-options {
+  min-width: 320px;
 }
 
 .vtex-login-content--always-with-options {
