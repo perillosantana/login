@@ -36,9 +36,9 @@ class OAuth extends Component {
   render() {
     const { intl, children, provider } = this.props
     return (
-      <div className="vtex-login__button">
+      <div className="vtex-login__button vtex-login__button--social">
         <Button
-          variation="secondary"
+          variation="tertiary"
           onClick={event => this.handleLoginClick(event)}
         >
           {children}

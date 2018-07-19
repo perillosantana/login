@@ -45,7 +45,7 @@ class LoginOptions extends Component {
             .map((el, index) => (
               <li className="vtex-login-options__list-item mb3" key={`login-option-array-${index}`}>
                 <div className="vtex-login__button">
-                  <Button variation="tertiary" onClick={this.handleOptionClick(el)}>
+                  <Button variation="secondary" onClick={this.handleOptionClick(el)}>
                     <span className="f6">
                       {translate(el, intl)}
                     </span>
