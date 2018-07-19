@@ -79,13 +79,12 @@
 }
 
 .vtex-login__button .vtex-button {
-  background: none;
   border: 1px solid rgb(233, 233, 233);
   width: 100%;
   min-height: 40px;
 }
 
-.vtex-login__button .vtex-button:hover {
+.vtex-login__button--social .vtex-button:hover {
   background: rgb(235, 235, 235);
 }
 
