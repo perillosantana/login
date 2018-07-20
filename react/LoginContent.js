@@ -107,6 +107,10 @@ class LoginContent extends Component {
   }
 
   get shouldRenderForm() {
+    if (this.props.profile) {
+      return true
+    }
+
     return !this.props.isInitialScreenOptionOnly || !this.state.isOnInitialScreen
   }
 

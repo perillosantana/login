@@ -38,9 +38,16 @@ class Login extends Component {
     const { isBoxOpen } = this.state
     const target = e.target
 
-    if (this.boxRef_.current && !this.boxRef_.current.contains(target)) {
+    if (this.boxRef_.current && (
+      !this.boxRef_.current.contains(target) ||
+      (this.boxRef_.current.contains(target) && target.hasAttribute('closeonclick'))
+    )) {
       isBoxOpen && this.setState({ isBoxOpen: false })
       this.removeListeners()
+
+      setTimeout(() => {
+        target.dispatchEvent(e)
+      }, 0)
     }
   }
 
@@ -137,17 +144,15 @@ class Login extends Component {
           </div>
         )}
         {this.renderIcon()}
-        {isBoxOpen && (
-          <div
-            className="vtex-login__box absolute right-0 z-max flex db"
-            ref={this.boxRef_}
-          >
-            <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-white" />
-            <div className="vtex-login__content-container shadow-3 mt3">
-              <LoginContent profile={profile} loginCallback={this.onHandleLogin} isInitialScreenOptionOnly />
-            </div>
+        <div
+          className={`vtex-login__box absolute right-0 z-max ${isBoxOpen ? 'flex' : 'dn'}`}
+          ref={this.boxRef_}
+        >
+          <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-white" />
+          <div className="vtex-login__content-container shadow-3 mt3">
+            <LoginContent profile={profile} loginCallback={this.onHandleLogin} isInitialScreenOptionOnly />
           </div>
-        )}
+        </div>
       </div>
     )
   }
