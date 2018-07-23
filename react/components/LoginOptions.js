@@ -1,17 +1,15 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { injectIntl, intlShape } from 'react-intl'
 import classNames from 'classnames'
-import { ExtensionPoint } from 'render'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { injectIntl, intlShape } from 'react-intl'
+import { ExtensionContainer } from 'render'
 import { Button } from 'vtex.styleguide'
 
-import { translate } from '../utils/translate'
-
-import OAuth from './OAuth'
-
-import GoogleIcon from '../images/GoogleIcon'
 import FacebookIcon from '../images/FacebookIcon'
+import GoogleIcon from '../images/GoogleIcon'
+import { translate } from '../utils/translate'
 import FormTitle from './FormTitle'
+import OAuth from './OAuth'
 
 /** LoginOptions tab component. Displays a list of login options */
 class LoginOptions extends Component {
@@ -36,40 +34,35 @@ class LoginOptions extends Component {
 
     return (
       <div className={classes}>
-        <FormTitle>
-          {title || translate(fallbackTitle, intl)}
-        </FormTitle>
+        <FormTitle>{title || translate(fallbackTitle, intl)}</FormTitle>
         <ul className="vtex-login-options__list list pa0">
           {options
-            .filter(el => !isAlwaysShown ? true : currentStep !== el)
+            .filter(el => (!isAlwaysShown ? true : currentStep !== el))
             .map((el, index) => (
-              <li className="vtex-login-options__list-item mb3" key={`login-option-array-${index}`}>
+              <li
+                className="vtex-login-options__list-item mb3"
+                key={`login-option-array-${index}`}>
                 <div className="vtex-login__button">
-                  <Button variation="secondary" onClick={this.handleOptionClick(el)}>
-                    <span className="f6">
-                      {translate(el, intl)}
-                    </span>
+                  <Button
+                    variation="secondary"
+                    onClick={this.handleOptionClick(el)}>
+                    <span className="f6">{translate(el, intl)}</span>
                   </Button>
                 </div>
               </li>
-            ))
-          }
-          <li
-            className="vtex-login-options__list-item vtex-login-options__list-item--google mb3"
-          >
+            ))}
+          <li className="vtex-login-options__list-item vtex-login-options__list-item--google mb3">
             <OAuth provider="Google">
               <GoogleIcon />
             </OAuth>
           </li>
-          <li
-            className="vtex-login-options__list-item vtex-login-options__list-item--facebook mb3"
-          >
+          <li className="vtex-login-options__list-item vtex-login-options__list-item--facebook mb3">
             <OAuth provider="Facebook">
               <FacebookIcon />
             </OAuth>
           </li>
-          <li className="vtex-login-options__list-item vtex-login-options__list-item--custom mb3">
-            <ExtensionPoint id="custom" />
+          <li className="vtex-login-options__list-item vtex-login-options__list-item--container mb3">
+            <ExtensionContainer id="container" />
           </li>
         </ul>
       </div>
