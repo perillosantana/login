@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Add `ExtensionContainer` to allow multiple `ExtensionPoint`s.
+- Add `ExtensionContainer` to allow multiple `ExtensionPoints`.
+
+### Fixed
+- Set cookie properly when is a social login. 
 
 ## [0.9.7] - 2018-07-19
 ### Changed

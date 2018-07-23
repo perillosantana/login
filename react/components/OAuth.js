@@ -22,11 +22,15 @@ class OAuth extends Component {
   };
 
   handleLoginClick = event => {
+    let callbackUrl = location.href
+    if (location.href.substr(-1) === '/') {
+      callbackUrl = location.href.slice(0, -1)
+    }
     event.preventDefault()
     this.props.oAuth({
       variables: {
         provider: this.props.provider,
-        redirectUrl: location.origin,
+        redirectUrl: callbackUrl,
       },
     }).then(({ data: { oAuth } }) => {
       location.assign(oAuth)
