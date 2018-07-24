@@ -27,9 +27,9 @@
     "login.createPassword": "Crear una nueva contraseña",
     "editor.login.title": "Componente de login",
     "editor.login.isInitialScreenOptionOnly.title": "Mostrar sólo las opciones de inicio de sesión en la pantalla de inicio",
-    "editor.login.initialStep.title": "Formulario inicial que se mostrará",
-    "editor.login.initialStep.token": "Inicio de sesión por token",
-    "editor.login.initialStep.emailAndPassword": "Inicio de sesión por correo electrónico y contraseña",
+    "editor.login.defaultOption.title": "Formulario inicial que se mostrará",
+    "editor.login.defaultOption.token": "Inicio de sesión por token",
+    "editor.login.defaultOption.emailAndPassword": "Inicio de sesión por correo electrónico y contraseña",
     "editor.login.optionsTitle.title": "Titulo de opciones de acceso",
     "editor.login.emailAndPasswordTitle.title": "Título de inicio de sesión con correo electrónico y contraseña",
     "editor.login.accessCodeTitle.title": "Título de inicio de sesión por código de acceso"

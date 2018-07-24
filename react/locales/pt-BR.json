@@ -27,9 +27,9 @@
     "login.createPassword": "Criar uma nova senha",
     "editor.login.title": "Componente de login",
     "editor.login.isInitialScreenOptionOnly.title": "Mostrar apenas as opções de login na tela inicial",
-    "editor.login.initialStep.title": "Formulário inicial a ser mostrado",
-    "editor.login.initialStep.token": "Login por código de acesso",
-    "editor.login.initialStep.emailAndPassword": "Login por email e senha",
+    "editor.login.defaultOption.title": "Formulário inicial a ser mostrado",
+    "editor.login.defaultOption.token": "Login por código de acesso",
+    "editor.login.defaultOption.emailAndPassword": "Login por email e senha",
     "editor.login.optionsTitle.title": "Título das opções de login",
     "editor.login.emailAndPasswordTitle.title": "Título do login com email e senha",
     "editor.login.accessCodeTitle.title": "Título do login por código de acesso"

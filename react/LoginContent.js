@@ -71,7 +71,7 @@ class LoginContent extends Component {
     /** Which screen option will renderize  */
     isInitialScreenOptionOnly: PropTypes.bool,
     /** Step that will be render first */
-    initialStep: PropTypes.number,
+    defaultOption: PropTypes.number,
     /** Title of login options */
     optionsTitle: PropTypes.string,
     /** Title of classic login */
@@ -84,12 +84,13 @@ class LoginContent extends Component {
 
   static defaultProps = {
     isInitialScreenOptionOnly: true,
+    defaultOption: 0
   }
 
   state = {
     isOnInitialScreen: !this.props.profile,
     isCreatePassword: false,
-    step: this.props.initialStep || 0,
+    step: this.props.defaultOption,
     email: '',
     password: '',
     code: '',
@@ -144,9 +145,15 @@ class LoginContent extends Component {
   }
 
   render() {
-    const { profile, isInitialScreenOptionOnly, optionsTitle } = this.props
+    const { profile, isInitialScreenOptionOnly, optionsTitle, defaultOption } = this.props
+    const { isOnInitialScreen } = this.state
 
-    const step = profile ? steps.ACCOUNT_OPTIONS : this.state.step
+    let step = this.state.step
+    if (profile) {
+      step = steps.ACCOUNT_OPTIONS
+    } else if (isOnInitialScreen) {
+      step = defaultOption
+    }
 
     const render = STEPS[step](
       {
@@ -203,14 +210,14 @@ LoginWithIntl.schema = {
       default: true,
       isLayout: true,
     },
-    initialStep: {
-      title: 'editor.login.initialStep.title',
+    defaultOption: {
+      title: 'editor.login.defaultOption.title',
       type: 'number',
       default: 0,
       enum: [0, 1],
       enumNames: [
-        'editor.login.initialStep.token',
-        'editor.login.initialStep.emailAndPassword',
+        'editor.login.defaultOption.token',
+        'editor.login.defaultOption.emailAndPassword',
       ],
       widget: {
         'ui:widget': 'radio',
