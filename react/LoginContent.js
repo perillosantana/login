@@ -98,8 +98,8 @@ class LoginContent extends Component {
     isInitialScreenOptionOnly: true,
     defaultOption: 0,
     emailPlaceholder: 'Ex.: example@vtex.com',
-    passwordPlaceholder: '',
-    accessCodePlaceholder: ''
+    passwordPlaceholder: 'Entre com a senha',
+    accessCodePlaceholder: 'Código de acesso'
   }
 
   state = {
