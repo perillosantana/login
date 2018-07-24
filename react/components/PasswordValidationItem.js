@@ -14,6 +14,8 @@ export default class PasswordValidationItem extends Component {
 }
 
 PasswordValidationItem.propTypes = {
+  /** Switch the icon to appear with the text (failed or success) */
   valid: PropTypes.bool,
+  /** Label to appear into the item */
   label: PropTypes.string.isRequired,
 }
