@@ -233,14 +233,23 @@ LoginWithIntl.schema = {
     optionsTitle: {
       title: 'editor.login.optionsTitle.title',
       type: 'string',
+      widget: {
+        'ui:widget': 'textarea',
+      },
     },
     emailAndPasswordTitle: {
       title: 'editor.login.emailAndPasswordTitle.title',
       type: 'string',
+      widget: {
+        'ui:widget': 'textarea',
+      },
     },
     accessCodeTitle: {
       title: 'editor.login.accessCodeTitle.title',
       type: 'string',
+      widget: {
+        'ui:widget': 'textarea',
+      },
     },
   },
 }

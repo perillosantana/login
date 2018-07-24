@@ -48,6 +48,7 @@
 }
 
 .vtex-login__form-title {
+  white-space: pre-line;
   color: #3d5980;
 }
 
