@@ -84,7 +84,7 @@ class LoginContent extends Component {
 
   static defaultProps = {
     isInitialScreenOptionOnly: true,
-    defaultOption: 0
+    defaultOption: 0,
   }
 
   state = {

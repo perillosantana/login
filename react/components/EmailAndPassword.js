@@ -10,6 +10,8 @@ import classicSignIn from '../mutations/classicSignIn.gql'
 import { steps } from '../utils/steps'
 import Form from './Form'
 import FormError from './FormError'
+import EyeSightEnable from '../images/EyeSightEnable'
+import EyeSightDisable from '../images/EyeSightDisable'
 
 /** EmailAndPasswordLogin component. */
 class EmailAndPassword extends Component {
@@ -42,6 +44,7 @@ class EmailAndPassword extends Component {
     isInvalidPassword: false,
     isWrongCredentials: false,
     isUserBlocked: false,
+    showPassword: false,
   }
 
   handleInputChange = event => {
@@ -100,6 +103,8 @@ class EmailAndPassword extends Component {
     }
   }
 
+  handleEyeIcon = () => this.setState({ showPassword: !this.state.showPassword })
+
   render() {
     const {
       title,
@@ -117,6 +122,7 @@ class EmailAndPassword extends Component {
       isInvalidPassword,
       isWrongCredentials,
       isUserBlocked,
+      showPassword,
     } = this.state
 
     return (
@@ -138,10 +144,15 @@ class EmailAndPassword extends Component {
             </FormError>
             <div className="vtex-login__input-container vtex-login__input-container--password">
               <Input
-                type="password"
+                type={`${showPassword ? 'text' : 'password'}`}
                 value={password}
                 onChange={this.handlePasswordChange}
                 placeholder={translate('login.password', intl)}
+                suffixIcon={(
+                  <span className="pointer" onClick={this.handleEyeIcon}>
+                    {showPassword ? <EyeSightEnable /> : <EyeSightDisable />}
+                  </span>
+                )}
               />
             </div>
             <FormError show={isInvalidPassword}>

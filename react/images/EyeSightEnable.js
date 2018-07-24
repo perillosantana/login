@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 /**
  * Profile icon component in svg
  */
-export default class FacebookIcon extends Component {
+export default class EyeSightEnable extends Component {
   static propTypes = {
     /* Percentage size of the icon */
     size: PropTypes.number,
@@ -13,7 +13,7 @@ export default class FacebookIcon extends Component {
   }
 
   static defaultProps = {
-    size: 20,
+    size: 14,
   }
 
   render() {
@@ -22,13 +22,12 @@ export default class FacebookIcon extends Component {
       <svg
         width={size}
         height={size}
+        viewBox={'0 0 16 16'}
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="88.428 12.828 107.543 207.085"
       >
-        <path
-          d="M158.232 219.912v-94.461h31.707l4.747-36.813h-36.454V65.134c0-10.658 2.96-17.922 18.245-17.922l19.494-.009V14.278c-3.373-.447-14.944-1.449-28.406-1.449-28.106 0-47.348 17.155-47.348 48.661v27.149H88.428v36.813h31.788v94.461l38.016-.001z"
-          fill="#3c5a9a"
-        />
+        <g transform="translate(0, 0)">
+          <path fill="#444444" d="M8,14c3.6,0,6.4-3.1,7.6-4.9c0.5-0.7,0.5-1.6,0-2.3C14.4,5.1,11.6,2,8,2C4.4,2,1.6,5.1,0.4,6.9c-0.5,0.7-0.5,1.6,0,2.2C1.6,10.9,4.4,14,8,14z M8,5c1.7,0,3,1.3,3,3s-1.3,3-3,3S5,9.7,5,8S6.3,5,8,5z"></path>
+        </g>
       </svg>
     )
   }
