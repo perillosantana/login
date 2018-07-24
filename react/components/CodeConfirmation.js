@@ -62,6 +62,7 @@ class CodeConfirmation extends Component {
       onStateChange,
       previous,
       code,
+      accessCodePlaceholder,
     } = this.props
     const {
       isLoading,
@@ -77,7 +78,7 @@ class CodeConfirmation extends Component {
         content={(
           <React.Fragment>
             <div className="vtex-login__input-container vtex-login__input-container--access-code">
-              <Input value={code} onChange={this.handleInputChange} />
+              <Input value={code} onChange={this.handleInputChange} placeholder={accessCodePlaceholder} />
             </div>
             <FormError show={isInvalidCode}>
               {translate('login.invalidCode', intl)}
@@ -128,6 +129,8 @@ CodeConfirmation.propTypes = {
   accessKeySignIn: PropTypes.func.isRequired,
   /** Intl object*/
   intl: intlShape,
+  /** Placeholder to access code input */
+  accessCodePlaceholder: PropTypes.string,
   /** Function called after login success */
   loginCallback: PropTypes.func,
 }

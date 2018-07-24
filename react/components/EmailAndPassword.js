@@ -22,10 +22,14 @@ class EmailAndPassword extends Component {
     previous: PropTypes.number.isRequired,
     /** Email set on state */
     email: PropTypes.string.isRequired,
-    /** Title to be displayed */
-    title: PropTypes.string,
     /** Password set on state */
     password: PropTypes.string.isRequired,
+    /** Title to be displayed */
+    title: PropTypes.string,
+    /** Placeholder to email input */
+    emailPlaceholder: PropTypes.string,
+    /** Placeholder to password input */
+    passwordPlaceholder: PropTypes.string,
     /** Function to change de active tab */
     onStateChange: PropTypes.func.isRequired,
     /** Graphql property to call a mutation */
@@ -114,6 +118,8 @@ class EmailAndPassword extends Component {
       email,
       password,
       showBackButton,
+      emailPlaceholder,
+      passwordPlaceholder,
     } = this.props
 
     const {
@@ -136,7 +142,7 @@ class EmailAndPassword extends Component {
               <Input
                 value={email}
                 onChange={this.handleInputChange}
-                placeholder={'Ex: example@mail.com'}
+                placeholder={emailPlaceholder}
               />
             </div>
             <FormError show={isInvalidEmail}>
@@ -147,7 +153,7 @@ class EmailAndPassword extends Component {
                 type={`${showPassword ? 'text' : 'password'}`}
                 value={password}
                 onChange={this.handlePasswordChange}
-                placeholder={translate('login.password', intl)}
+                placeholder={passwordPlaceholder}
                 suffixIcon={(
                   <span className="pointer" onClick={this.handleEyeIcon}>
                     {showPassword ? <EyeSightDisable /> : <EyeSightEnable />}

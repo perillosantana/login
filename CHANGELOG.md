@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Show password icon.
 
+## [0.9.11] - 2018-07-24
+### Added
+- Now, placeholders are customize by schema props.
+
+### Changed
+- Allow breakline on Login Titles.
+
 ## [0.9.10] - 2018-07-24
 ### Added
 - Support for attribute `closeonclick` to close on click events inside modal.

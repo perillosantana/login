@@ -25,6 +25,8 @@ class EmailVerification extends Component {
     isCreatePassword: PropTypes.bool.isRequired,
     /** Title to be displayed */
     title: PropTypes.string,
+    /** Placeholder to email input */
+    emailPlaceholder: PropTypes.string,
     /** Email set on state */
     email: PropTypes.string.isRequired,
     /** Function to change de active tab */
@@ -82,6 +84,7 @@ class EmailVerification extends Component {
       email,
       isCreatePassword,
       showBackButton,
+      emailPlaceholder,
     } = this.props
     const { isLoading, isInvalidEmail, isUserBlocked } = this.state
 
@@ -96,7 +99,7 @@ class EmailVerification extends Component {
               <Input
                 value={email}
                 onChange={this.handleInputChange}
-                placeholder={'Ex: example@mail.com'}
+                placeholder={emailPlaceholder}
               />
             </div>
             <FormError show={isInvalidEmail}>
