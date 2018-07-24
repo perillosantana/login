@@ -8,8 +8,6 @@ export default class FacebookIcon extends Component {
   static propTypes = {
     /* Percentage size of the icon */
     size: PropTypes.number,
-    /* Fill color for the icon */
-    fillColor: PropTypes.string,
   }
 
   static defaultProps = {
