@@ -34,13 +34,19 @@ class InputPassword extends Component {
       atLeastEightCharacteres,
     } = this.state
 
+    const { intl } = this.props
+
     return (
       <div>
         <Input
           type="password"
           value={this.props.password}
           onChange={this.handlePasswordChange}
+<<<<<<< HEAD
           placeholder={this.props.placeholder}
+=======
+          placeholder={translate('login.password', intl)}
+>>>>>>> Add locales to password validation item
           onBlur={() => this.setState({ showVerification: true })}
           onFocus={() => this.setState({ showVerification: true })}
         >
@@ -48,12 +54,12 @@ class InputPassword extends Component {
         {showVerification &&
           <div className="flex flex-row pt4">
             <div className="flex flex-column mr4">
-              <PasswordValidationItem label="Uma letra maiúscula" valid={containsUpperLetter} />
-              <PasswordValidationItem label="Uma letra minúscula" valid={containsLowerLetter} />
+              <PasswordValidationItem label={translate('login.password.uppercaseLetter', intl)} valid={containsUpperLetter} />
+              <PasswordValidationItem label={translate('login.password.lowercaseLetter', intl)} valid={containsLowerLetter} />
             </div>
             <div className="flex flex-column">
-              <PasswordValidationItem label="Um número" valid={containsNumber} />
-              <PasswordValidationItem label="No mínimo 8 caracteres" valid={atLeastEightCharacteres} />
+              <PasswordValidationItem label={translate('login.password.number', intl)} valid={containsNumber} />
+              <PasswordValidationItem label={translate('login.password.eightCharacteres', intl)} valid={atLeastEightCharacteres} />
             </div>
           </div>
         }
