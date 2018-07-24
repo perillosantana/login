@@ -13,7 +13,6 @@ import FormError from './FormError'
 /** RecoveryPassword tab component. Receive a code and new password from an input
  * and call the recoveryPassword mutation.
  */
-
 class RecoveryPassword extends Component {
   constructor(props) {
     super(props)
@@ -76,7 +75,13 @@ class RecoveryPassword extends Component {
     }
   }
   render() {
-    const { intl, previous, onStateChange } = this.props
+    const {
+      intl,
+      previous,
+      onStateChange,
+      passwordPlaceholder,
+      accessCodePlaceholder,
+    } = this.props
 
     const {
       isLoading,
@@ -96,7 +101,7 @@ class RecoveryPassword extends Component {
             <div className="vtex-login__input-container vtex-login__input-container--access-code">
               <Input
                 onChange={this.handleCodeChange}
-                placeholder={translate('login.code', intl)}
+                placeholder={accessCodePlaceholder}
               />
             </div>
             <FormError show={isInvalidCode}>
@@ -106,7 +111,7 @@ class RecoveryPassword extends Component {
               <Input
                 type="password"
                 onChange={this.handleNewPassword}
-                placeholder={translate('login.newPassword', intl)}
+                placeholder={passwordPlaceholder}
               />
             </div>
             <FormError show={isInvalidPassword}>
@@ -119,7 +124,7 @@ class RecoveryPassword extends Component {
               <Input
                 type="password"
                 onChange={this.handleConfirmPassword}
-                placeholder={translate('login.confirmPassword', intl)}
+                placeholder={passwordPlaceholder}
               />
             </div>
             <FormError show={!isPasswordsMatch}>
@@ -166,6 +171,10 @@ RecoveryPassword.propTypes = {
   recoveryPassword: PropTypes.func.isRequired,
   /** Intl object*/
   intl: intlShape,
+  /** Placeholder to password input */
+  passwordPlaceholder: PropTypes.string,
+  /** Placeholder to access code input */
+  accessCodePlaceholder: PropTypes.string,
   /** Function called after login success */
   loginCallback: PropTypes.func,
 }
