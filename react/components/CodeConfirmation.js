@@ -76,7 +76,9 @@ class CodeConfirmation extends Component {
         onSubmit={e => this.handleOnSubmit(e)}
         content={(
           <React.Fragment>
-            <Input value={code} onChange={this.handleInputChange} />
+            <div className="vtex-login__input-container vtex-login__input-container--access-code">
+              <Input value={code} onChange={this.handleInputChange} />
+            </div>
             <FormError show={isInvalidCode}>
               {translate('login.invalidCode', intl)}
             </FormError>

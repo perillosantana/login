@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Support for attribute `closeonclick` to close on click events inside modal.
 
+### Changed
+- Update CCS classes to improve customization.
+
 ## [0.9.9] - 2018-07-24
 ### Fixed 
 - Set default option correctly in `LoginContent`.

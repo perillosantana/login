@@ -126,7 +126,7 @@ class EmailAndPassword extends Component {
         onSubmit={e => this.handleOnSubmit(e)}
         content={(
           <React.Fragment>
-            <div className="vtex-login__input-container">
+            <div className="vtex-login__input-container vtex-login__input-container--email">
               <Input
                 value={email}
                 onChange={this.handleInputChange}
@@ -136,7 +136,7 @@ class EmailAndPassword extends Component {
             <FormError show={isInvalidEmail}>
               {translate('login.invalidEmail', intl)}
             </FormError>
-            <div className="vtex-login__input-container">
+            <div className="vtex-login__input-container vtex-login__input-container--password">
               <Input
                 type="password"
                 value={password}

@@ -92,11 +92,13 @@ class EmailVerification extends Component {
         onSubmit={e => this.handleOnSubmit(e)}
         content={(
           <React.Fragment>
-            <Input
-              value={email}
-              onChange={this.handleInputChange}
-              placeholder={'Ex: example@mail.com'}
-            />
+            <div className="vtex-login__input-container vtex-login__input-container--email">
+              <Input
+                value={email}
+                onChange={this.handleInputChange}
+                placeholder={'Ex: example@mail.com'}
+              />
+            </div>
             <FormError show={isInvalidEmail}>
               {translate('login.invalidEmail', intl)}
             </FormError>

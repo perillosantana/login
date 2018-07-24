@@ -93,7 +93,7 @@ class RecoveryPassword extends Component {
         onSubmit={e => this.handleOnSubmit(e)}
         content={(
           <React.Fragment>
-            <div className="vtex-login__input-container">
+            <div className="vtex-login__input-container vtex-login__input-container--access-code">
               <Input
                 onChange={this.handleCodeChange}
                 placeholder={translate('login.code', intl)}
@@ -102,7 +102,7 @@ class RecoveryPassword extends Component {
             <FormError show={isInvalidCode}>
               {translate('login.invalidCode', intl)}
             </FormError>
-            <div className="vtex-login__input-container">
+            <div className="vtex-login__input-container vtex-login__input-container--password">
               <Input
                 type="password"
                 onChange={this.handleNewPassword}
@@ -115,7 +115,7 @@ class RecoveryPassword extends Component {
             <FormError show={isUserBlocked}>
               {translate('login.userBlocked', intl)}
             </FormError>
-            <div className="vtex-login__input-container">
+            <div className="vtex-login__input-container vtex-login__input-container--password">
               <Input
                 type="password"
                 onChange={this.handleConfirmPassword}
