@@ -8,8 +8,6 @@ export default class GoogleIcon extends Component {
   static propTypes = {
     /* Percentage size of the icon */
     size: PropTypes.number,
-    /* Fill color for the icon */
-    fillColor: PropTypes.string,
   }
 
   static defaultProps = {
@@ -26,7 +24,6 @@ export default class GoogleIcon extends Component {
         width={size}
         height={size}
         viewBox="0 0 48 48"
-        style={{ fill: '#000000' }}
       >
         <g id="surface1">
           <path
