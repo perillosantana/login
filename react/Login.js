@@ -39,15 +39,12 @@ class Login extends Component {
     const target = e.target
 
     if (this.boxRef_.current && (
-      !this.boxRef_.current.contains(target) ||
-      (this.boxRef_.current.contains(target) && target.hasAttribute('closeonclick'))
+      !this.boxRef_.current.contains(target) || target.hasAttribute('closeonclick')
     )) {
       isBoxOpen && this.setState({ isBoxOpen: false })
       this.removeListeners()
 
-      setTimeout(() => {
-        target.dispatchEvent(e)
-      }, 0)
+      target.dispatchEvent(e)
     }
   }
 
