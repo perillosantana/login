@@ -160,7 +160,7 @@ class EmailAndPassword extends Component {
                 placeholder={passwordPlaceholder}
                 suffixIcon={(
                   <span className="pointer" onClick={this.handleEyeIcon}>
-                    {showPassword ? <EyeSightEnable /> : <EyeSightDisable />}
+                    {showPassword ? <EyeSightDisable /> : <EyeSightEnable />}
                   </span>
                 )}
               />
