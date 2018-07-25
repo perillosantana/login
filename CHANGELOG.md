@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Show password icon.
 
+## [0.9.13] - 2018-07-25
+### Fixed
+- `LoginContent` position to be always under the `ProfileIcon`.
+
+## [0.9.12] - 2018-07-24
+### Fixed
+- Fix onClick handle of recovery password.
+
 ## [0.9.11] - 2018-07-24
 ### Added
 - Now, placeholders are customize by schema props.

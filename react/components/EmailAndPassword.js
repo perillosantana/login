@@ -66,7 +66,11 @@ class EmailAndPassword extends Component {
   }
 
   handleCreatePassword = event => {
-    this.props.onStateChange({ step: steps.EMAIL_VERIFICATION, isCreatePassword: true })
+    this.props.onStateChange({
+      step: steps.EMAIL_VERIFICATION,
+      isCreatePassword: true,
+      isOnInitialScreen: false,
+    })
     event.preventDefault()
   }
 
