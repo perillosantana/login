@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 import PropTypes from 'prop-types'
 import { Input } from 'vtex.styleguide'
@@ -43,7 +43,7 @@ class PasswordInput extends Component {
     } = this.props
 
     return (
-      <React.Fragment>
+      <Fragment>
         <Input
           type="password"
           value={password}
@@ -65,7 +65,7 @@ class PasswordInput extends Component {
             </div>
           </div>
         }
-      </React.Fragment>
+      </Fragment>
     )
   }
 }
