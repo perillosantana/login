@@ -22,6 +22,7 @@ const STEPS = [
       previous={steps.LOGIN_OPTIONS}
       isCreatePassword={state.isCreatePassword}
       title={props.accessCodeTitle}
+      emailPlaceholder={props.emailPlaceholder}
       email={state.email}
       onStateChange={func}
       showBackButton={!isOptionsMenuDisplayed}
@@ -32,6 +33,8 @@ const STEPS = [
       next={steps.ACCOUNT_OPTIONS}
       previous={steps.LOGIN_OPTIONS}
       title={props.emailAndPasswordTitle}
+      emailPlaceholder={props.emailPlaceholder}
+      passwordPlaceholder={props.passwordPlaceholder}
       email={state.email}
       password={state.password}
       onStateChange={func}
@@ -44,6 +47,7 @@ const STEPS = [
       next={steps.ACCOUNT_OPTIONS}
       previous={steps.EMAIL_VERIFICATION}
       email={state.email}
+      accessCodePlaceholder={props.accessCodePlaceholder}
       code={state.code}
       onStateChange={func}
       loginCallback={props.loginCallback}
@@ -57,6 +61,8 @@ const STEPS = [
       next={steps.ACCOUNT_OPTIONS}
       previous={steps.EMAIL_PASSWORD}
       email={state.email}
+      passwordPlaceholder={props.passwordPlaceholder}
+      accessCodePlaceholder={props.accessCodePlaceholder}
       onStateChange={func}
       loginCallback={props.loginCallback}
     />
@@ -78,13 +84,22 @@ class LoginContent extends Component {
     emailAndPasswordTitle: PropTypes.string,
     /** Title of access code login */
     accessCodeTitle: PropTypes.string,
+    /** Placeholder to email input */
+    emailPlaceholder: PropTypes.string,
+    /** Placeholder to password input */
+    passwordPlaceholder: PropTypes.string,
+    /** Placeholder to access code input */
+    accessCodePlaceholder: PropTypes.string,
     /** Function called after login success */
     loginCallback: PropTypes.func,
   }
 
   static defaultProps = {
     isInitialScreenOptionOnly: true,
-    defaultOption: 0
+    defaultOption: 0,
+    emailPlaceholder: 'Ex.: example@vtex.com',
+    passwordPlaceholder: 'Entre com a senha',
+    accessCodePlaceholder: 'Código de acesso'
   }
 
   state = {
@@ -218,6 +233,7 @@ LoginWithIntl.schema = {
       title: 'editor.login.defaultOption.title',
       type: 'number',
       default: 0,
+      isLayout: true,
       enum: [0, 1],
       enumNames: [
         'editor.login.defaultOption.token',
@@ -231,15 +247,36 @@ LoginWithIntl.schema = {
       },
     },
     optionsTitle: {
-      title: 'editor.login.optionsTitle.title',
+      title: 'editor.login.optionsTitle',
       type: 'string',
+      widget: {
+        'ui:widget': 'textarea',
+      },
     },
     emailAndPasswordTitle: {
-      title: 'editor.login.emailAndPasswordTitle.title',
+      title: 'editor.login.emailAndPasswordTitle',
       type: 'string',
+      widget: {
+        'ui:widget': 'textarea',
+      },
     },
     accessCodeTitle: {
-      title: 'editor.login.accessCodeTitle.title',
+      title: 'editor.login.accessCodeTitle',
+      type: 'string',
+      widget: {
+        'ui:widget': 'textarea',
+      },
+    },
+    emailPlaceholder: {
+      title: 'editor.login.emailPlaceholder',
+      type: 'string',
+    },
+    passwordPlaceholder: {
+      title: 'editor.login.passwordPlaceholder',
+      type: 'string',
+    },
+    accessCodePlaceholder: {
+      title: 'editor.login.accessCodePlaceholder',
       type: 'string',
     },
   },

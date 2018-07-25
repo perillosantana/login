@@ -20,10 +20,14 @@ class EmailAndPassword extends Component {
     previous: PropTypes.number.isRequired,
     /** Email set on state */
     email: PropTypes.string.isRequired,
-    /** Title to be displayed */
-    title: PropTypes.string,
     /** Password set on state */
     password: PropTypes.string.isRequired,
+    /** Title to be displayed */
+    title: PropTypes.string,
+    /** Placeholder to email input */
+    emailPlaceholder: PropTypes.string,
+    /** Placeholder to password input */
+    passwordPlaceholder: PropTypes.string,
     /** Function to change de active tab */
     onStateChange: PropTypes.func.isRequired,
     /** Graphql property to call a mutation */
@@ -59,7 +63,11 @@ class EmailAndPassword extends Component {
   }
 
   handleCreatePassword = event => {
-    this.props.onStateChange({ step: steps.EMAIL_VERIFICATION, isCreatePassword: true })
+    this.props.onStateChange({
+      step: steps.EMAIL_VERIFICATION,
+      isCreatePassword: true,
+      isOnInitialScreen: false,
+    })
     event.preventDefault()
   }
 
@@ -109,6 +117,8 @@ class EmailAndPassword extends Component {
       email,
       password,
       showBackButton,
+      emailPlaceholder,
+      passwordPlaceholder,
     } = this.props
 
     const {
@@ -126,22 +136,22 @@ class EmailAndPassword extends Component {
         onSubmit={e => this.handleOnSubmit(e)}
         content={(
           <React.Fragment>
-            <div className="vtex-login__input-container">
+            <div className="vtex-login__input-container vtex-login__input-container--email">
               <Input
                 value={email}
                 onChange={this.handleInputChange}
-                placeholder={'Ex: example@mail.com'}
+                placeholder={emailPlaceholder}
               />
             </div>
             <FormError show={isInvalidEmail}>
               {translate('login.invalidEmail', intl)}
             </FormError>
-            <div className="vtex-login__input-container">
+            <div className="vtex-login__input-container vtex-login__input-container--password">
               <Input
                 type="password"
                 value={password}
                 onChange={this.handlePasswordChange}
-                placeholder={translate('login.password', intl)}
+                placeholder={passwordPlaceholder}
               />
             </div>
             <FormError show={isInvalidPassword}>
