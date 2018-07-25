@@ -55,7 +55,7 @@ class PasswordInput extends Component {
         </Input>
         {showVerification &&
           <div className="flex flex-row pt4">
-            <div className="flex flex-column mr4">
+            <div className="flex flex-column mr3">
               <PasswordValidationItem label={translate('login.password.uppercaseLetter', intl)} valid={containsUpperLetter} />
               <PasswordValidationItem label={translate('login.password.lowercaseLetter', intl)} valid={containsLowerLetter} />
             </div>
