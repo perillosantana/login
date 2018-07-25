@@ -10,7 +10,7 @@ import classicSignIn from '../mutations/classicSignIn.gql'
 import { steps } from '../utils/steps'
 import Form from './Form'
 import FormError from './FormError'
-import InputPassword from './InputPassword'
+import PasswordInput from './PasswordInput'
 
 /** EmailAndPasswordLogin component. */
 class EmailAndPassword extends Component {
@@ -143,7 +143,7 @@ class EmailAndPassword extends Component {
               {translate('login.invalidEmail', intl)}
             </FormError>
             <div className="vtex-login__input-container vtex-login__input-container--password">
-              <InputPassword
+              <PasswordInput
                 password={password}
                 onStateChange={onStateChange}
                 placeholder={passwordPlaceholder}

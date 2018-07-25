@@ -6,7 +6,7 @@ import { injectIntl, intlShape } from 'react-intl'
 import PasswordValidationItem from './PasswordValidationItem'
 import { translate } from '../utils/translate'
 
-class InputPassword extends Component {
+class PasswordInput extends Component {
   state = {
     showVerification: false,
   }
@@ -35,13 +35,16 @@ class InputPassword extends Component {
       atLeastEightCharacteres,
     } = this.state
 
-    const { intl } = this.props
+    const {
+      intl,
+      password,
+    } = this.props
 
     return (
       <div>
         <Input
           type="password"
-          value={this.props.password}
+          value={password}
           onChange={this.handlePasswordChange}
           placeholder={this.props.placeholder}
           onBlur={() => this.setState({ showVerification: false })}
@@ -65,7 +68,7 @@ class InputPassword extends Component {
   }
 }
 
-InputPassword.propTypes = {
+PasswordInput.propTypes = {
   /** Password set on state */
   password: PropTypes.string.isRequired,
   /** Placeholder to appear into the input */
@@ -76,4 +79,4 @@ InputPassword.propTypes = {
   intl: intlShape,
 }
 
-export default injectIntl(InputPassword)
+export default injectIntl(PasswordInput)
