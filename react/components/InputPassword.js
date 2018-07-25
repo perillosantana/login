@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Input } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import PasswordValidationItem from './PasswordValidationItem'
+import { translate } from '../utils/translate'
 
 class InputPassword extends Component {
   state = {
@@ -42,12 +43,8 @@ class InputPassword extends Component {
           type="password"
           value={this.props.password}
           onChange={this.handlePasswordChange}
-<<<<<<< HEAD
           placeholder={this.props.placeholder}
-=======
-          placeholder={translate('login.password', intl)}
->>>>>>> Add locales to password validation item
-          onBlur={() => this.setState({ showVerification: true })}
+          onBlur={() => this.setState({ showVerification: false })}
           onFocus={() => this.setState({ showVerification: true })}
         >
         </Input>
