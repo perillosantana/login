@@ -9,6 +9,7 @@ import { isValidPassword, isValidAccessCode } from '../utils/format-check'
 import recoveryPassword from '../mutations/recoveryPassword.gql'
 import Form from './Form'
 import FormError from './FormError'
+import PasswordInput from './PasswordInput'
 
 /** RecoveryPassword tab component. Receive a code and new password from an input
  * and call the recoveryPassword mutation.
@@ -33,7 +34,7 @@ class RecoveryPassword extends Component {
   }
 
   handleNewPassword = event => {
-    this.setState({ isInvalidPassword: false, newPassword: event.target.value })
+    this.setState({ isInvalidPassword: false, newPassword: event.password })
   }
 
   handleConfirmPassword = event => {
@@ -89,6 +90,7 @@ class RecoveryPassword extends Component {
       isUserBlocked,
       isInvalidCode,
       isPasswordsMatch,
+      newPassword,
     } = this.state
 
     return (
@@ -108,10 +110,10 @@ class RecoveryPassword extends Component {
               {translate('login.invalidCode', intl)}
             </FormError>
             <div className="vtex-login__input-container vtex-login__input-container--password">
-              <Input
-                type="password"
-                onChange={this.handleNewPassword}
+              <PasswordInput
+                onStateChange={this.handleNewPassword}
                 placeholder={passwordPlaceholder}
+                password={newPassword}
               />
             </div>
             <FormError show={isInvalidPassword}>
