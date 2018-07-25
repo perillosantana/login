@@ -43,7 +43,7 @@ class PasswordInput extends Component {
     } = this.props
 
     return (
-      <div>
+      <React.Fragment>
         <Input
           type="password"
           value={password}
@@ -65,7 +65,7 @@ class PasswordInput extends Component {
             </div>
           </div>
         }
-      </div>
+      </React.Fragment>
     )
   }
 }
