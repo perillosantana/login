@@ -16,14 +16,16 @@ class PasswordInput extends Component {
     const upperCaseLetters = /[A-Z]/g
     const numbers = /[0-9]/g
 
+    const value = event.target.value
+
     this.setState({
-      containsLowerLetter: event.target.value.match(lowerCaseLetters),
-      containsUpperLetter: event.target.value.match(upperCaseLetters),
-      containsNumber: event.target.value.match(numbers),
-      atLeastEightCharacteres: event.target.value.length >= 8,
+      containsLowerLetter: value.match(lowerCaseLetters),
+      containsUpperLetter: value.match(upperCaseLetters),
+      containsNumber: value.match(numbers),
+      atLeastEightCharacteres: value.length >= 8,
     })
 
-    this.props.onStateChange({ password: event.target.value })
+    this.props.onStateChange({ password: value })
   }
 
   render() {
