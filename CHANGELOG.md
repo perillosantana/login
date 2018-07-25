@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.13] - 2018-07-25
+### Fixed
+- `LoginContent` position to be always under the `ProfileIcon`.
+
 ## [0.9.12] - 2018-07-24
 ### Fixed
 - Fix onClick handle of recovery password.

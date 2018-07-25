@@ -134,20 +134,22 @@ class Login extends Component {
     const { isBoxOpen, profile } = this.state
 
     return (
-      <div className="vtex-login__container flex items-center relative f6 fr">
+      <div className="vtex-login__container flex items-center f6 fr">
         {profile && (
           <div className="vtex-login__profile order-1">
             {translate('login.hello', intl)} {truncateString(profile.firstName) || truncateString(profile.email)}
           </div>
         )}
-        {this.renderIcon()}
-        <div
-          className={`vtex-login__box absolute right-0 z-max ${isBoxOpen ? 'flex' : 'dn'}`}
-          ref={this.boxRef_}
-        >
-          <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-white" />
-          <div className="vtex-login__content-container shadow-3 mt3">
-            <LoginContent profile={profile} loginCallback={this.onHandleLogin} isInitialScreenOptionOnly />
+        <div className="relative">
+          {this.renderIcon()}
+          <div
+            className={`vtex-login__box absolute right-0 z-max ${isBoxOpen ? 'flex' : 'dn'}`}
+            ref={this.boxRef_}
+          >
+            <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-white" />
+            <div className="vtex-login__content-container shadow-3 mt3">
+              <LoginContent profile={profile} loginCallback={this.onHandleLogin} isInitialScreenOptionOnly />
+            </div>
           </div>
         </div>
       </div>
