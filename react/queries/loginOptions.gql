@@ -1,4 +1,4 @@
-query LoginOptionsQuery {
+query LoginOptions {
   loginOptions {
     providers {
       providerName

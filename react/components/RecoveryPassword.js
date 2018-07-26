@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Input, Button } from 'vtex.styleguide'
+import { Input, Button, IconArrowBack } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
@@ -137,9 +137,13 @@ class RecoveryPassword extends Component {
         footer={(
           <React.Fragment>
             <div className="vtex-login__back-button">
-              <Button variation="secondary" size="small"
-                onClick={() => onStateChange({ step: previous })}>
-                <span className="f7">{translate('login.goBack', intl)}</span>
+              <Button 
+                variation="tertiary" 
+                size="small"
+                onClick={() => onStateChange({ step: previous })}
+              >
+                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7"/></span>
+                <span className="f7 ml2">{translate('login.goBack', intl)}</span>
               </Button>
             </div>
             <div className="vtex-login__send-button">

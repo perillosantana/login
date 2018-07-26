@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Input, Button } from 'vtex.styleguide'
+import { Input, Button, IconArrowBack } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
@@ -163,8 +163,8 @@ class EmailAndPassword extends Component {
             <FormError show={isUserBlocked}>
               {translate('login.userBlocked', intl)}
             </FormError>
-            <div className="vtex-login__form-link-container">
-              <a href="" className="link" onClick={this.handleCreatePassword}>
+            <div className="vtex-login__form-link-container flex justify-end ph0 pv2">
+              <a href="" className="link dim blue" onClick={this.handleCreatePassword}>
                 <span className="f7">{translate('login.forgotPassword', intl)}</span>
               </a>
             </div>
@@ -173,9 +173,13 @@ class EmailAndPassword extends Component {
         footer={(
           <React.Fragment>
             {showBackButton && <div className="vtex-login__back-button">
-              <Button variation="secondary" size="small"
-                onClick={() => onStateChange({ step: previous, password: '' })}>
-                <span className="f7">{translate('login.goBack', intl)}</span>
+              <Button 
+                variation="tertiary" 
+                size="small"
+                onClick={() => onStateChange({ step: previous, password: '' })}
+              >
+                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7"/></span>
+                <span className="f7 ml2">{translate('login.goBack', intl)}</span>
               </Button>
             </div>}
             <div className="vtex-login__send-button">
@@ -192,8 +196,8 @@ class EmailAndPassword extends Component {
           </React.Fragment>
         )}
       >
-        <div className="vtex-login__form-link-container flex justify-end ph0 pv2">
-          <a href="" className="link" onClick={e => this.handleCreatePassword(e)}>
+        <div className="vtex-login__form-link-container flex justify-center ph0 mt4">
+          <a href="" className="link dim blue" onClick={e => this.handleCreatePassword(e)}>
             <span className="f7">{translate('login.notHaveAccount', intl)}</span>
           </a>
         </div>

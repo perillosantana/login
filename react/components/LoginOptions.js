@@ -45,7 +45,8 @@ class LoginOptions extends Component {
               <div className="vtex-login__button">
                 <Button
                   variation="secondary"
-                  onClick={this.handleOptionClick('loginOptions.emailVerification')}>
+                  onClick={this.handleOptionClick('loginOptions.emailVerification')}
+                >
                   <span className="f6">{translate('loginOptions.emailVerification', intl)}</span>
                 </Button>
               </div>
@@ -56,7 +57,8 @@ class LoginOptions extends Component {
               <div className="vtex-login__button">
                 <Button
                   variation="secondary"
-                  onClick={this.handleOptionClick('loginOptions.emailAndPassword')}>
+                  onClick={this.handleOptionClick('loginOptions.emailAndPassword')}
+                >
                   <span className="f6">{translate('loginOptions.emailAndPassword', intl)}</span>
                 </Button>
               </div>
@@ -65,7 +67,8 @@ class LoginOptions extends Component {
           {options.providers && options.providers.map(({ providerName }, index) => {
             return (
               <li className={`vtex-login-options__list-item vtex-login-options__list-item--${providerName} mb3`}
-                key={`${providerName}-${index}`}>
+                key={`${providerName}-${index}`}
+              >
                 <OAuth provider={providerName}>
                   {React.createElement(PROVIDERS_ICONS[providerName])}
                 </OAuth>
