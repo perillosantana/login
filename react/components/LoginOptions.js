@@ -11,6 +11,11 @@ import { translate } from '../utils/translate'
 import FormTitle from './FormTitle'
 import OAuth from './OAuth'
 
+const PROVIDERS_ICONS = {
+  'Google': GoogleIcon,
+  'Facebook': FacebookIcon,
+}
+
 /** LoginOptions tab component. Displays a list of login options */
 class LoginOptions extends Component {
   handleOptionClick = el => () => {
@@ -25,7 +30,6 @@ class LoginOptions extends Component {
       options,
       intl,
       isAlwaysShown,
-      currentStep,
     } = this.props
 
     const classes = classNames('vtex-login-options', className, {
@@ -36,31 +40,38 @@ class LoginOptions extends Component {
       <div className={classes}>
         <FormTitle>{title || translate(fallbackTitle, intl)}</FormTitle>
         <ul className="vtex-login-options__list list pa0">
-          {options
-            .filter(el => (!isAlwaysShown ? true : currentStep !== el))
-            .map((el, index) => (
-              <li
-                className="vtex-login-options__list-item mb3"
-                key={`login-option-array-${index}`}>
-                <div className="vtex-login__button">
-                  <Button
-                    variation="secondary"
-                    onClick={this.handleOptionClick(el)}>
-                    <span className="f6">{translate(el, intl)}</span>
-                  </Button>
-                </div>
+          {options.classicAuthentication && 
+            <li className="vtex-login-options__list-item mb3">
+              <div className="vtex-login__button">
+                <Button
+                  variation="secondary"
+                  onClick={this.handleOptionClick('loginOptions.emailVerification')}>
+                  <span className="f6">{translate('loginOptions.emailVerification', intl)}</span>
+                </Button>
+              </div>
+            </li>
+          }
+          {options.accessKeyAuthentication && 
+            <li className="vtex-login-options__list-item mb3">
+              <div className="vtex-login__button">
+                <Button
+                  variation="secondary"
+                  onClick={this.handleOptionClick('loginOptions.emailAndPassword')}>
+                  <span className="f6">{translate('loginOptions.emailAndPassword', intl)}</span>
+                </Button>
+              </div>
+            </li>
+          }
+          {options.providers && options.providers.map(({ providerName }, index) => {
+            return (
+              <li className={`vtex-login-options__list-item vtex-login-options__list-item--${providerName} mb3`}
+                key={`${providerName}-${index}`}>
+                <OAuth provider={providerName}>
+                  {React.createElement(PROVIDERS_ICONS[providerName])}
+                </OAuth>
               </li>
-            ))}
-          <li className="vtex-login-options__list-item vtex-login-options__list-item--google mb3">
-            <OAuth provider="Google">
-              <GoogleIcon />
-            </OAuth>
-          </li>
-          <li className="vtex-login-options__list-item vtex-login-options__list-item--facebook mb3">
-            <OAuth provider="Facebook">
-              <FacebookIcon />
-            </OAuth>
-          </li>
+            )
+          })}
           <li className="vtex-login-options__list-item vtex-login-options__list-item--container mb3">
             <ExtensionContainer id="container" />
           </li>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 
 import LoginOptions from './components/LoginOptions'
@@ -11,6 +12,8 @@ import AccountOptions from './components/AccountOptions'
 import RecoveryPassword from './components/RecoveryPassword'
 import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
+
+import LoginOptionsQuery from './queries/loginOptions.gql'
 
 import './global.css'
 
@@ -164,7 +167,13 @@ class LoginContent extends Component {
   }
 
   render() {
-    const { profile, isInitialScreenOptionOnly, optionsTitle, defaultOption } = this.props
+    const { 
+      profile, 
+      isInitialScreenOptionOnly, 
+      optionsTitle, 
+      defaultOption,
+      data: { loginOptions },
+    } = this.props
     const { isOnInitialScreen } = this.state
 
     let step = this.state.step
@@ -203,7 +212,7 @@ class LoginContent extends Component {
             page="login-options"
             fallbackTitle="loginOptions.title"
             title={optionsTitle}
-            options={['loginOptions.emailVerification', 'loginOptions.emailAndPassword']}
+            options={loginOptions}
             currentStep={step === 0 ? 'loginOptions.emailVerification' : 'loginOptions.emailAndPassword'}
             isAlwaysShown={!isInitialScreenOptionOnly}
             onOptionsClick={this.handleOptionsClick}
@@ -282,5 +291,5 @@ LoginWithIntl.schema = {
   },
 }
 
-export default LoginWithIntl
+export default graphql(LoginOptionsQuery)(LoginWithIntl)
 
