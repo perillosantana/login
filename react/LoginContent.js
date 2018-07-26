@@ -99,7 +99,7 @@ class LoginContent extends Component {
     defaultOption: 0,
     emailPlaceholder: 'Ex.: example@vtex.com',
     passwordPlaceholder: 'Entre com a senha',
-    accessCodePlaceholder: 'Código de acesso'
+    accessCodePlaceholder: 'Código de acesso',
   }
 
   state = {

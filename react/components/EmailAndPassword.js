@@ -10,6 +10,7 @@ import classicSignIn from '../mutations/classicSignIn.gql'
 import { steps } from '../utils/steps'
 import Form from './Form'
 import FormError from './FormError'
+import PasswordInput from './PasswordInput'
 
 /** EmailAndPasswordLogin component. */
 class EmailAndPassword extends Component {
@@ -51,11 +52,6 @@ class EmailAndPassword extends Component {
   handleInputChange = event => {
     this.setState({ isInvalidEmail: false })
     this.props.onStateChange({ email: event.target.value })
-  }
-
-  handlePasswordChange = event => {
-    this.setState({ isInvalidPassword: false })
-    this.props.onStateChange({ password: event.target.value })
   }
 
   componentWillUnmount() {
@@ -147,10 +143,9 @@ class EmailAndPassword extends Component {
               {translate('login.invalidEmail', intl)}
             </FormError>
             <div className="vtex-login__input-container vtex-login__input-container--password">
-              <Input
-                type="password"
-                value={password}
-                onChange={this.handlePasswordChange}
+              <PasswordInput
+                password={password}
+                onStateChange={onStateChange}
                 placeholder={passwordPlaceholder}
               />
             </div>
