@@ -54,6 +54,11 @@ class EmailAndPassword extends Component {
     this.props.onStateChange({ email: event.target.value })
   }
 
+  handlePasswordChange = event => {
+    this.setState({ isInvalidPassword: false })
+    this.props.onStateChange({ password: event.target.value })
+  }
+
   componentWillUnmount() {
     this.setState({ isLoading: false })
   }

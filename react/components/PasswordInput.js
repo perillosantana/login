@@ -5,11 +5,16 @@ import { Input } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import PasswordValidationItem from './PasswordValidationItem'
 import { translate } from '../utils/translate'
+import EyeSightEnable from '../images/EyeSightEnable'
+import EyeSightDisable from '../images/EyeSightDisable'
 
 class PasswordInput extends Component {
   state = {
     showVerification: false,
+    showPassword: false,
   }
+
+  handleEyeIcon = () => this.setState({ showPassword: !this.state.showPassword })
 
   handlePasswordChange = event => {
     const lowerCaseLetters = /[a-z]/g
@@ -35,6 +40,7 @@ class PasswordInput extends Component {
       containsUpperLetter,
       containsNumber,
       atLeastEightCharacteres,
+      showPassword,
     } = this.state
 
     const {
@@ -45,12 +51,17 @@ class PasswordInput extends Component {
     return (
       <Fragment>
         <Input
-          type="password"
+          type={`${showPassword ? 'text' : 'password'}`}
           value={password}
           onChange={this.handlePasswordChange}
           placeholder={this.props.placeholder}
           onBlur={() => this.setState({ showVerification: false })}
           onFocus={() => this.setState({ showVerification: true })}
+          suffixIcon={(
+            <span className="pointer" onClick={this.handleEyeIcon}>
+              {showPassword ? <EyeSightDisable /> : <EyeSightEnable />}
+            </span>
+          )}
         >
         </Input>
         {showVerification &&

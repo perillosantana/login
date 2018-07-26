@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 /**
  * Profile icon component in svg
@@ -8,16 +8,14 @@ export default class FacebookIcon extends Component {
   static propTypes = {
     /* Percentage size of the icon */
     size: PropTypes.number,
-    /* Fill color for the icon */
-    fillColor: PropTypes.string
   }
 
   static defaultProps = {
-    size: 20
+    size: 20,
   }
 
   render() {
-    const { size } = this.props;
+    const { size } = this.props
     return (
       <svg
         width={size}
