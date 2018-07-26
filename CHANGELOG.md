@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- `PasswordInput` to validate the password and show the validation to the user.
 - Show password icon.
 
 ## [0.9.13] - 2018-07-25
