@@ -107,3 +107,28 @@
     max-width: 400px;
   }
 }
+
+.vtex-tooltip {
+  right: 102%;
+  color: white;
+  top: -100%;
+}
+
+.vtex-tooltip__container {
+  background-color: #3b3b3b;
+  top: -100%;
+  right: 102%;
+  width: 300px;
+  color: white;
+  margin-right: 10px;
+}
+
+.vtex-tooltip__container::after {
+  content: "";
+  position: absolute;
+  top: 38%;
+  left: 100%;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent #3b3b3b;
+}

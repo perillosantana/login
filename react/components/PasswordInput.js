@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 import PropTypes from 'prop-types'
 import { Input } from 'vtex.styleguide'
@@ -7,6 +7,7 @@ import PasswordValidationItem from './PasswordValidationItem'
 import { translate } from '../utils/translate'
 import EyeSightEnable from '../images/EyeSightEnable'
 import EyeSightDisable from '../images/EyeSightDisable'
+import Tooltip from './Tooltip'
 
 class PasswordInput extends Component {
   state = {
@@ -49,7 +50,7 @@ class PasswordInput extends Component {
     } = this.props
 
     return (
-      <Fragment>
+      <div className="relative">
         <Input
           type={`${showPassword ? 'text' : 'password'}`}
           value={password}
@@ -65,18 +66,14 @@ class PasswordInput extends Component {
         >
         </Input>
         {showVerification &&
-          <div className="flex flex-row pt4">
-            <div className="flex flex-column mr3">
-              <PasswordValidationItem label={translate('login.password.uppercaseLetter', intl)} valid={containsUpperLetter} />
-              <PasswordValidationItem label={translate('login.password.lowercaseLetter', intl)} valid={containsLowerLetter} />
-            </div>
-            <div className="flex flex-column">
-              <PasswordValidationItem label={translate('login.password.number', intl)} valid={containsNumber} />
-              <PasswordValidationItem label={translate('login.password.eightCharacteres', intl)} valid={atLeastEightCharacteres} />
-            </div>
-          </div>
+          <Tooltip title="Sua senha precisa ter:">
+            <PasswordValidationItem label={translate('login.password.uppercaseLetter', intl)} valid={containsUpperLetter} />
+            <PasswordValidationItem label={translate('login.password.lowercaseLetter', intl)} valid={containsLowerLetter} />
+            <PasswordValidationItem label={translate('login.password.number', intl)} valid={containsNumber} />
+            <PasswordValidationItem label={translate('login.password.eightCharacteres', intl)} valid={atLeastEightCharacteres} />
+          </Tooltip>
         }
-      </Fragment>
+      </div>
     )
   }
 }
@@ -88,6 +85,8 @@ PasswordInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   /** Function to change de active tab */
   onStateChange: PropTypes.func.isRequired,
+  /** Set the password verification visualization type */
+  showInTooltip: PropTypes.bool,
   /** Intl object*/
   intl: intlShape,
 }
