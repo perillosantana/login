@@ -6,7 +6,7 @@ export default class PasswordValidationItem extends Component {
   render() {
     return (
       <div>
-        {this.props.valid ? <IconCheck size={10} color="#BDBDBD" /> : <IconDeny size={10} color="#BDBDBD" />}
+        {this.props.valid ? <IconCheck size={10} color="#8BC34A" /> : <IconDeny size={10} color="#FF4C4C" />}
         <span className="ml2 f7 mid-gray">{this.props.label}</span>
       </div>
     )

@@ -1,0 +1,10 @@
+query LoginOptions {
+  loginOptions {
+    providers {
+      providerName
+      className
+    }
+    classicAuthentication
+    accessKeyAuthentication
+  }
+}

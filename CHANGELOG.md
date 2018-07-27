@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.0] - 2018-07-26
+### Added
+- Receive from the `VTEX-ID` all the login options available to authenticate users.
+- Arrow icon to the back button.
+
+### Changed
+- Validation component tick color to red (error) and green (success).
+
 ## [0.10.0] - 2018-07-26
 ### Added
 - `PasswordInput` to validate the password and show the validation to the user.

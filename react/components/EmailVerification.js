@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Input, Button } from 'vtex.styleguide'
+import { Input, Button, IconArrowBack } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
@@ -114,14 +114,17 @@ class EmailVerification extends Component {
           <React.Fragment>
             {(showBackButton || isCreatePassword) && <div className="vtex-login__back-button">
               <Button
-                variation="secondary"
+                variation="tertiary"
                 size="small"
                 onClick={() => isCreatePassword
                   ? onStateChange({ step: steps.EMAIL_PASSWORD, isCreatePassword: false })
                   : onStateChange({ step: previous })
                 }
               >
-                <span className="f7">{translate('login.goBack', intl)}</span>
+                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7"/></span>
+                <span className="f7 ml2">
+                  {translate('login.goBack', intl)}
+                </span>
               </Button>
             </div>}
             <div className="vtex-login__send-button">
