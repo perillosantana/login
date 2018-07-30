@@ -8,6 +8,7 @@ import EyeSightEnable from '../images/EyeSightEnable'
 import EyeSightDisable from '../images/EyeSightDisable'
 import Tooltip from './Tooltip'
 import PasswordValidationContent from './PasswordValidationContent'
+import { isMobile } from 'react-device-detect'
 
 class PasswordInput extends Component {
   state = {
@@ -88,10 +89,13 @@ class PasswordInput extends Component {
           )}
         >
         </Input>
-        {showVerification &&
-          <Tooltip title={translate('login.password.tooltip.title', intl)}>
-            <PasswordValidationContent fields={fields} />
-          </Tooltip>
+        {showVerification && (
+          isMobile
+            ? <PasswordValidationContent horizontal fields={fields} />
+            : <Tooltip title={translate('login.password.tooltip.title', intl)}>
+              <PasswordValidationContent fields={fields} />
+            </Tooltip>
+        )
         }
       </div>
     )
