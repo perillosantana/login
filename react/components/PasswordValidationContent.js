@@ -31,7 +31,7 @@ export default class PasswordValidationContent extends Component {
 
     return (
       <div className="flex flex-row">
-        <div className="flex flex-column">
+        <div className="flex flex-column mr2">
           {leftItens}
         </div>
         <div className="flex flex-column">
