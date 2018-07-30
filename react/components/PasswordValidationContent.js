@@ -13,7 +13,7 @@ export default class PasswordValidationContent extends Component {
     return results
   }
 
-  renderVerticalItens = fields => fields.map(
+  renderVerticalitems = fields => fields.map(
     field => (
       <div className="mt2" key={field.id}>
         <PasswordValidationItem
@@ -24,18 +24,18 @@ export default class PasswordValidationContent extends Component {
     )
   )
 
-  renderHorizontalItens = fields => {
+  renderHorizontalitems = fields => {
     const chunkFields = this.chunkArray(fields, 2)
-    const leftItens = this.renderVerticalItens(chunkFields[0])
-    const rightItens = this.renderVerticalItens(chunkFields[1])
+    const leftitems = this.renderVerticalitems(chunkFields[0])
+    const rightitems = this.renderVerticalitems(chunkFields[1])
 
     return (
       <div className="flex flex-row">
         <div className="flex flex-column mr2">
-          {leftItens}
+          {leftitems}
         </div>
         <div className="flex flex-column">
-          {rightItens}
+          {rightitems}
         </div>
       </div>
     )
@@ -44,7 +44,7 @@ export default class PasswordValidationContent extends Component {
   render() {
     const { fields, horizontal } = this.props
 
-    const content = horizontal ? this.renderHorizontalItens(fields) : this.renderVerticalItens(fields)
+    const content = horizontal ? this.renderHorizontalitems(fields) : this.renderVerticalitems(fields)
 
     return (
       <Fragment>
