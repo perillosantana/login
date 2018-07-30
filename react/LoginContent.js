@@ -103,6 +103,7 @@ class LoginContent extends Component {
     emailPlaceholder: 'Ex.: example@vtex.com',
     passwordPlaceholder: 'Entre com a senha',
     accessCodePlaceholder: 'Código de acesso',
+    optionsTitle: '',
   }
 
   state = {
@@ -167,10 +168,10 @@ class LoginContent extends Component {
   }
 
   render() {
-    const { 
-      profile, 
-      isInitialScreenOptionOnly, 
-      optionsTitle, 
+    const {
+      profile,
+      isInitialScreenOptionOnly,
+      optionsTitle,
       defaultOption,
       data: { loginOptions },
     } = this.props

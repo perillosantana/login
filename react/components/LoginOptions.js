@@ -40,7 +40,7 @@ class LoginOptions extends Component {
       <div className={classes}>
         <FormTitle>{title || translate(fallbackTitle, intl)}</FormTitle>
         <ul className="vtex-login-options__list list pa0">
-          {options.classicAuthentication && 
+          {options.classicAuthentication &&
             <li className="vtex-login-options__list-item mb3">
               <div className="vtex-login__button">
                 <Button
@@ -52,7 +52,7 @@ class LoginOptions extends Component {
               </div>
             </li>
           }
-          {options.accessKeyAuthentication && 
+          {options.accessKeyAuthentication &&
             <li className="vtex-login-options__list-item mb3">
               <div className="vtex-login__button">
                 <Button
@@ -94,7 +94,14 @@ LoginOptions.propTypes = {
   /** Fallback title that will be shown if there's no title */
   fallbackTitle: PropTypes.string.isRequired,
   /** List of options to be displayed */
-  options: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.shape({
+    accessKeyAuthentication: PropTypes.bool,
+    classicAuthentication: PropTypes.bool,
+    providers: PropTypes.arrayOf(PropTypes.shape({
+      className: PropTypes.string,
+      providerName: PropTypes.string,
+    })),
+  }),
   /** Class of the root element */
   className: PropTypes.string,
   /** Whether this component is always rendered */
