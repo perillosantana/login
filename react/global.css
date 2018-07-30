@@ -124,7 +124,6 @@
 }
 
 .vtex-tooltip__container::after {
-  content: "";
   position: absolute;
   top: 38%;
   left: 100%;
