@@ -25,9 +25,9 @@ class PasswordInput extends Component {
     const value = event.target.value
 
     this.setState({
-      containsLowerLetter: value.match(lowerCaseLetters),
-      containsUpperLetter: value.match(upperCaseLetters),
-      containsNumber: value.match(numbers),
+      containsLowerLetter: value.match(lowerCaseLetters) && value.match(lowerCaseLetters).length > 0,
+      containsUpperLetter: value.match(upperCaseLetters) && value.match(upperCaseLetters).length > 0,
+      containsNumber: value.match(numbers) && value.match(numbers).length > 0,
       atLeastEightCharacteres: value.length >= 8,
     })
 

@@ -5,6 +5,7 @@ import PasswordValidationItem from './PasswordValidationItem'
 export default class PasswordValidationContent extends Component {
   render() {
     const { fields } = this.props
+
     return (
       <Fragment>
         {
