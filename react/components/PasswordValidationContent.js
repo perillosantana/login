@@ -9,11 +9,12 @@ export default class PasswordValidationContent extends Component {
       <Fragment>
         {
           fields.map(field => (
-            <PasswordValidationItem
-              key={field.id}
-              label={field.label}
-              valid={field.valid}
-            />
+            <div className="mt2" key={field.id}>
+              <PasswordValidationItem
+                label={field.label}
+                valid={field.valid}
+              />
+            </div>
           )
           )
         }
