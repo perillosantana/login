@@ -3,11 +3,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Input } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
-import PasswordValidationItem from './PasswordValidationItem'
 import { translate } from '../utils/translate'
 import EyeSightEnable from '../images/EyeSightEnable'
 import EyeSightDisable from '../images/EyeSightDisable'
 import Tooltip from './Tooltip'
+import PasswordValidationContent from './PasswordValidationContent'
 
 class PasswordInput extends Component {
   state = {
@@ -49,6 +49,29 @@ class PasswordInput extends Component {
       password,
     } = this.props
 
+    const fields = [
+      {
+        id: 0,
+        label: translate('login.password.uppercaseLetter', intl),
+        valid: containsUpperLetter,
+      },
+      {
+        id: 1,
+        label: translate('login.password.lowercaseLetter', intl),
+        valid: containsLowerLetter,
+      },
+      {
+        id: 2,
+        label: translate('login.password.number', intl),
+        valid: containsNumber,
+      },
+      {
+        id: 3,
+        label: translate('login.password.eightCharacteres', intl),
+        valid: atLeastEightCharacteres,
+      },
+    ]
+
     return (
       <div className="relative">
         <Input
@@ -67,10 +90,7 @@ class PasswordInput extends Component {
         </Input>
         {showVerification &&
           <Tooltip title="Sua senha precisa ter:">
-            <PasswordValidationItem label={translate('login.password.uppercaseLetter', intl)} valid={containsUpperLetter} />
-            <PasswordValidationItem label={translate('login.password.lowercaseLetter', intl)} valid={containsLowerLetter} />
-            <PasswordValidationItem label={translate('login.password.number', intl)} valid={containsNumber} />
-            <PasswordValidationItem label={translate('login.password.eightCharacteres', intl)} valid={atLeastEightCharacteres} />
+            <PasswordValidationContent fields={fields} />
           </Tooltip>
         }
       </div>
