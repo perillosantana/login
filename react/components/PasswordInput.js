@@ -89,7 +89,7 @@ class PasswordInput extends Component {
         >
         </Input>
         {showVerification &&
-          <Tooltip title="Sua senha precisa ter:">
+          <Tooltip title={translate('login.password.tooltip.title', intl)}>
             <PasswordValidationContent fields={fields} />
           </Tooltip>
         }
