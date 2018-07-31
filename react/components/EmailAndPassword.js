@@ -147,7 +147,7 @@ class EmailAndPassword extends Component {
             <FormError show={isInvalidEmail}>
               {translate('login.invalidEmail', intl)}
             </FormError>
-            <div className="vtex-login__input-container vtex-login__input-container--password">
+            <div className="vtex-login__input-container vtex-login__input-container--password flex flex-column">
               <PasswordInput
                 password={password}
                 onStateChange={onStateChange}
@@ -173,12 +173,12 @@ class EmailAndPassword extends Component {
         footer={(
           <React.Fragment>
             {showBackButton && <div className="vtex-login__back-button">
-              <Button 
-                variation="tertiary" 
+              <Button
+                variation="tertiary"
                 size="small"
                 onClick={() => onStateChange({ step: previous, password: '' })}
               >
-                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7"/></span>
+                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7" /></span>
                 <span className="f7 ml2">{translate('login.goBack', intl)}</span>
               </Button>
             </div>}
