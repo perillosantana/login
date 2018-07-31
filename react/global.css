@@ -110,25 +110,41 @@
 
 .vtex-tooltip {
   right: 102%;
-  color: white;
   top: -100%;
 }
 
 .vtex-tooltip__container {
   background-color: #3b3b3b;
-  top: -100%;
+  width: 100%;
+}
+
+.vtex-tooltip__container-top {
+  bottom: 110%;
+  margin-bottom: 10px;
+}
+
+.vtex-tooltip__container-left {
+  bottom: -140%;
   right: 102%;
-  width: 270px;
-  color: white;
   margin-right: 10px;
 }
 
-.vtex-tooltip__container::after {
+.vtex-tooltip__container-left::after {
   content: "";
   position: absolute;
-  top: 38%;
+  top: 45%;
   left: 100%;
   border-width: 10px;
   border-style: solid;
   border-color: transparent transparent transparent #3b3b3b;
+}
+
+.vtex-tooltip__container-top::after {
+  content: "";
+  position: absolute;
+  left: 45%;
+  top: 100%;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #3b3b3b transparent transparent transparent;
 }

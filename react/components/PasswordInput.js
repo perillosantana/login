@@ -53,21 +53,25 @@ class PasswordInput extends Component {
     const fields = [
       {
         id: 0,
+        prefix: 'ABC',
         label: translate('login.password.uppercaseLetter', intl),
         valid: containsUpperLetter,
       },
       {
         id: 1,
+        prefix: 'abc',
         label: translate('login.password.lowercaseLetter', intl),
         valid: containsLowerLetter,
       },
       {
         id: 2,
+        prefix: '123',
         label: translate('login.password.number', intl),
         valid: containsNumber,
       },
       {
         id: 3,
+        prefix: '***',
         label: translate('login.password.eightCharacteres', intl),
         valid: atLeastEightCharacteres,
       },
@@ -91,7 +95,9 @@ class PasswordInput extends Component {
         </Input>
         {showVerification && (
           isMobile
-            ? <PasswordValidationContent horizontal fields={fields} />
+            ? <Tooltip top title={translate('login.password.tooltip.title', intl)}>
+              <PasswordValidationContent fields={fields} />
+            </Tooltip>
             : <Tooltip title={translate('login.password.tooltip.title', intl)}>
               <PasswordValidationContent fields={fields} />
             </Tooltip>
