@@ -109,8 +109,6 @@ PasswordInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   /** Function to change de active tab */
   onStateChange: PropTypes.func.isRequired,
-  /** Set the password verification visualization type */
-  showInTooltip: PropTypes.bool,
   /** Intl object*/
   intl: intlShape,
 }
