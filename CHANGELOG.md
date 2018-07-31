@@ -13,6 +13,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Console warning of `loginTitle` being undefined.
 
+## [1.0.2] - 2018-07-30
+- Fix error of undefined LoginOption props.
+
+## [1.0.1] - 2018-07-30
+### Fixed
+- Console warning of `loginTitle` being undefined.
+
 ## [1.0.0] - 2018-07-26
 ### Added
 - Receive from the `VTEX-ID` all the login options available to authenticate users.

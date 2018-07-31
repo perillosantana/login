@@ -173,7 +173,7 @@ class LoginContent extends Component {
       isInitialScreenOptionOnly,
       optionsTitle,
       defaultOption,
-      data: { loginOptions },
+      data: { loginOptions, loading },
     } = this.props
     const { isOnInitialScreen } = this.state
 
@@ -208,7 +208,7 @@ class LoginContent extends Component {
 
     return (
       <div className={className}>
-        {!profile && this.shouldRenderLoginOptions && (
+        {!profile && this.shouldRenderLoginOptions && !loading && (
           <LoginOptions
             page="login-options"
             fallbackTitle="loginOptions.title"
