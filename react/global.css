@@ -107,3 +107,44 @@
     max-width: 400px;
   }
 }
+
+.vtex-tooltip {
+  right: 102%;
+  top: -100%;
+}
+
+.vtex-tooltip__container {
+  background-color: #3b3b3b;
+  width: 100%;
+}
+
+.vtex-tooltip__container-top {
+  bottom: 110%;
+  margin-bottom: 10px;
+}
+
+.vtex-tooltip__container-left {
+  bottom: -140%;
+  right: 102%;
+  margin-right: 10px;
+}
+
+.vtex-tooltip__container-left::after {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 100%;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent #3b3b3b;
+}
+
+.vtex-tooltip__container-top::after {
+  content: "";
+  position: absolute;
+  left: 45%;
+  top: 100%;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #3b3b3b transparent transparent transparent;
+}

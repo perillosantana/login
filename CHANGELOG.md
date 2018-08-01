@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `Tooltip` component to show to the user if the password is attending the requisites.
+
+## [1.0.1] - 2018-07-30
+### Fixed
+- Console warning of `loginTitle` being undefined.
 
 ## [1.0.2] - 2018-07-30
 - Fix error of undefined LoginOption props.

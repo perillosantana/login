@@ -27,6 +27,7 @@
     "login.password.lowercaseLetter": "Una letra minúscula",
     "login.password.number": "Un número",
     "login.password.eightCharacteres": "Al menos 8 caracteres",
+    "login.password.tooltip.title": "Su contraseña debe tener:",
     "editor.login.isInitialScreenOptionOnly.title": "Mostrar sólo las opciones de inicio de sesión en la pantalla de inicio",
     "editor.login.defaultOption.title": "Formulario inicial que se mostrará",
     "editor.login.defaultOption.token": "Inicio de sesión por token",
