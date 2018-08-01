@@ -48,6 +48,8 @@ class PasswordInput extends Component {
     const {
       intl,
       password,
+      showPasswordVerification,
+      passwordVerificationType,
     } = this.props
 
     const fields = [
@@ -91,16 +93,19 @@ class PasswordInput extends Component {
               {showPassword ? <EyeSightDisable /> : <EyeSightEnable />}
             </span>
           )}
-        >
-        </Input>
-        {showVerification && (
-          isMobile
-            ? <Tooltip top title={translate('login.password.tooltip.title', intl)}>
-              <PasswordValidationContent fields={fields} />
-            </Tooltip>
-            : <Tooltip title={translate('login.password.tooltip.title', intl)}>
-              <PasswordValidationContent fields={fields} />
-            </Tooltip>
+        />
+        {showPasswordVerification && showVerification && (
+          (passwordVerificationType && passwordVerificationType === 'box')
+            ? <PasswordValidationContent horizontal fields={fields} />
+            : (
+              isMobile
+                ? <Tooltip top title={translate('login.password.tooltip.title', intl)}>
+                  <PasswordValidationContent fields={fields} />
+                </Tooltip>
+                : <Tooltip title={translate('login.password.tooltip.title', intl)}>
+                  <PasswordValidationContent fields={fields} />
+                </Tooltip>
+            )
         )
         }
       </div>
@@ -113,6 +118,10 @@ PasswordInput.propTypes = {
   password: PropTypes.string.isRequired,
   /** Placeholder to appear into the input */
   placeholder: PropTypes.string.isRequired,
+  /** Set the visibility of password verification */
+  showPasswordVerification: PropTypes.bool,
+  /** Set the type of password verification ui */
+  passwordVerificationType: PropTypes.string,
   /** Function to change de active tab */
   onStateChange: PropTypes.func.isRequired,
   /** Intl object*/

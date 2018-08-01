@@ -37,5 +37,9 @@
     "editor.login.accessCodeTitle": "Título do login por código de acesso",
     "editor.login.emailPlaceholder": "Placeholder do campo de email",
     "editor.login.passwordPlaceholder": "Placeholder do campo de senha",
-    "editor.login.accessCodePlaceholder": "Placeholder do campo de código de acesso"
+    "editor.login.accessCodePlaceholder": "Placeholder do campo de código de acesso",
+    "editor.login.showPasswordVerification.title": "Mostrar verificação de senha",
+    "editor.login.passwordVerificationType.title": "Tipo de layout da verificação de senha",
+    "editor.login.passwordVerificationType.tooltip": "Tooltip",
+    "editor.login.passwordVerificationType.box": "Caixa"
 }

@@ -82,6 +82,8 @@ class RecoveryPassword extends Component {
       onStateChange,
       passwordPlaceholder,
       accessCodePlaceholder,
+      showPasswordVerification,
+      passwordVerificationType,
     } = this.props
 
     const {
@@ -114,6 +116,8 @@ class RecoveryPassword extends Component {
                 onStateChange={this.handleNewPassword}
                 placeholder={passwordPlaceholder}
                 password={newPassword}
+                showPasswordVerification={showPasswordVerification}
+                passwordVerificationType={passwordVerificationType}
               />
             </div>
             <FormError show={isInvalidPassword}>
@@ -137,12 +141,12 @@ class RecoveryPassword extends Component {
         footer={(
           <React.Fragment>
             <div className="vtex-login__back-button">
-              <Button 
-                variation="tertiary" 
+              <Button
+                variation="tertiary"
                 size="small"
                 onClick={() => onStateChange({ step: previous })}
               >
-                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7"/></span>
+                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7" /></span>
                 <span className="f7 ml2">{translate('login.goBack', intl)}</span>
               </Button>
             </div>
@@ -171,6 +175,10 @@ RecoveryPassword.propTypes = {
   previous: PropTypes.number.isRequired,
   /** Email set on state */
   email: PropTypes.string.isRequired,
+  /** Set the visibility of password verification */
+  showPasswordVerification: PropTypes.bool,
+  /** Set the type of password verification ui */
+  passwordVerificationType: PropTypes.string,
   /** Function to change de active tab */
   onStateChange: PropTypes.func.isRequired,
   /** Graphql property to call a mutation */
