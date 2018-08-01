@@ -42,7 +42,7 @@ const STEPS = [
       passwordPlaceholder={props.passwordPlaceholder}
       email={state.email}
       password={state.password}
-      passwordVerificationType={props.passwordVerificationType}
+      showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
       onStateChange={func}
       showBackButton={!isOptionsMenuDisplayed}
       loginCallback={props.loginCallback}
@@ -68,7 +68,7 @@ const STEPS = [
       previous={steps.EMAIL_PASSWORD}
       email={state.email}
       passwordPlaceholder={props.passwordPlaceholder}
-      passwordVerificationType={props.passwordVerificationType}
+      showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
       accessCodePlaceholder={props.accessCodePlaceholder}
       onStateChange={func}
       loginCallback={props.loginCallback}
@@ -94,7 +94,7 @@ class LoginContent extends Component {
     emailPlaceholder: LoginPropTypes.emailPlaceholder,
     passwordPlaceholder: LoginPropTypes.passwordPlaceholder,
     accessCodePlaceholder: LoginPropTypes.accessCodePlaceholder,
-    passwordVerificationType: LoginPropTypes.passwordVerificationType,
+    showPasswordVerificationIntoTooltip: LoginPropTypes.showPasswordVerificationIntoTooltip,
   }
 
   static defaultProps = {

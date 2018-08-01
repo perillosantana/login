@@ -22,5 +22,5 @@ export const LoginPropTypes = {
   /** Placeholder to access code input */
   accessCodePlaceholder: PropTypes.string,
   /** Set the type of password verification ui */
-  passwordVerificationType: PropTypes.string,
+  showPasswordVerificationIntoTooltip: PropTypes.bool,
 }
