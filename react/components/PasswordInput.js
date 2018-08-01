@@ -48,7 +48,6 @@ class PasswordInput extends Component {
     const {
       intl,
       password,
-      showPasswordVerification,
       passwordVerificationType,
     } = this.props
 
@@ -94,7 +93,7 @@ class PasswordInput extends Component {
             </span>
           )}
         />
-        {showPasswordVerification && showVerification && (
+        {showVerification && (
           (passwordVerificationType && passwordVerificationType === 'box')
             ? <PasswordValidationContent horizontal fields={fields} />
             : (
@@ -118,8 +117,6 @@ PasswordInput.propTypes = {
   password: PropTypes.string.isRequired,
   /** Placeholder to appear into the input */
   placeholder: PropTypes.string.isRequired,
-  /** Set the visibility of password verification */
-  showPasswordVerification: PropTypes.bool,
   /** Set the type of password verification ui */
   passwordVerificationType: PropTypes.string,
   /** Function to change de active tab */
