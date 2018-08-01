@@ -23,6 +23,7 @@
     "login.userBlocked": "You missed your password 4 times. Your user has been blocked for an hour",
     "login.createPassword": "Create a new password",
     "editor.login.title": "Login",
+    "editor.loginPage.title": "Login Page",
     "login.password.uppercaseLetter": "One uppercase letter",
     "login.password.lowercaseLetter": "One lowercase letter",
     "login.password.number": "One number",

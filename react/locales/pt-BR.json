@@ -23,6 +23,7 @@
     "login.userBlocked": "Você errou sua senha 4 vezes. Seu usuário foi bloqueado por uma hora",
     "login.createPassword": "Criar uma nova senha",
     "editor.login.title": "Login",
+    "editor.loginPage.title": "Página de Login",
     "login.password.uppercaseLetter": "Uma letra maiúscula",
     "login.password.lowercaseLetter": "Uma letra minúscula",
     "login.password.number": "Um número",

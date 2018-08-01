@@ -23,6 +23,7 @@
     "login.userBlocked": "Te perdiste tu contraseña 4 veces. Tu usuario ha sido bloqueado por una hora",
     "login.createPassword": "Crear una nueva contraseña",
     "editor.login.title": "Login",
+    "editor.loginPage.title": "Página de Login",
     "login.password.uppercaseLetter": "Una letra mayúscula",
     "login.password.lowercaseLetter": "Una letra minúscula",
     "login.password.number": "Un número",

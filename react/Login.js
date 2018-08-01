@@ -11,6 +11,7 @@ import { truncateString } from './utils/truncate-string'
 import ProfileIcon from './images/ProfileIcon'
 import GET_USER_PROFILE from './queries/profile.gql'
 import { translate } from './utils/translate'
+import { loginSchema } from './schema'
 
 import './global.css'
 
@@ -161,6 +162,14 @@ const options = {
   options: () => ({ ssr: false }),
 }
 
-export default injectIntl(
-  graphql(GET_USER_PROFILE, options)(Login)
-)
+const LoginWithIntl = injectIntl(graphql(GET_USER_PROFILE, options)(Login))
+
+LoginWithIntl.schema = {
+  title: 'editor.login.title',
+  type: 'object',
+  properties: {
+    ...loginSchema,
+  },
+}
+
+export default LoginWithIntl
