@@ -95,15 +95,23 @@ class PasswordInput extends Component {
         />
         {showVerification && (
           (passwordVerificationType && passwordVerificationType === 'box')
-            ? <PasswordValidationContent horizontal fields={fields} />
+            ? (
+              <div className="pa2">
+                <PasswordValidationContent fields={fields} />
+              </div>
+            )
             : (
               isMobile
-                ? <Tooltip top title={translate('login.password.tooltip.title', intl)}>
-                  <PasswordValidationContent fields={fields} />
-                </Tooltip>
-                : <Tooltip title={translate('login.password.tooltip.title', intl)}>
-                  <PasswordValidationContent fields={fields} />
-                </Tooltip>
+                ? (
+                  <Tooltip top title={translate('login.password.tooltip.title', intl)}>
+                    <PasswordValidationContent fields={fields} />
+                  </Tooltip>
+                )
+                : (
+                  <Tooltip title={translate('login.password.tooltip.title', intl)}>
+                    <PasswordValidationContent fields={fields} />
+                  </Tooltip>
+                )
             )
         )
         }
