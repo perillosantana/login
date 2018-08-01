@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - `Tooltip` component to show to the user if the password is attending the requisites.
+- Schema into `Login` component.
+
+### Fixed
+- `LoginContent` form position.
 
 ## [1.0.1] - 2018-07-30
 ### Fixed
