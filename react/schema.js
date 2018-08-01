@@ -1,4 +1,4 @@
-export const loginSchema = {
+export const LoginSchema = {
   optionsTitle: {
     title: 'editor.login.optionsTitle',
     type: 'string',

@@ -14,7 +14,8 @@ import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
 
 import LoginOptionsQuery from './queries/loginOptions.gql'
-import { loginSchema } from './schema'
+import { LoginSchema } from './schema'
+import { LoginPropTypes } from './propTypes'
 
 import './global.css'
 
@@ -84,24 +85,16 @@ class LoginContent extends Component {
     isInitialScreenOptionOnly: PropTypes.bool,
     /** Step that will be render first */
     defaultOption: PropTypes.number,
-    /** Title of login options */
-    optionsTitle: PropTypes.string,
-    /** Title of classic login */
-    emailAndPasswordTitle: PropTypes.string,
-    /** Title of access code login */
-    accessCodeTitle: PropTypes.string,
-    /** Placeholder to email input */
-    emailPlaceholder: PropTypes.string,
-    /** Placeholder to password input */
-    passwordPlaceholder: PropTypes.string,
-    /** Placeholder to access code input */
-    accessCodePlaceholder: PropTypes.string,
     /** Function called after login success */
     loginCallback: PropTypes.func,
-    /** Set the visibility of password verification */
-    showPasswordVerification: PropTypes.bool,
-    /** Set the type of password verification ui */
-    passwordVerificationType: PropTypes.string,
+    /* Reused props */
+    optionsTitle: LoginPropTypes.optionsTitle,
+    emailAndPasswordTitle: LoginPropTypes.emailAndPasswordTitle,
+    accessCodeTitle: LoginPropTypes.accessCodePlaceholder,
+    emailPlaceholder: LoginPropTypes.emailPlaceholder,
+    passwordPlaceholder: LoginPropTypes.passwordPlaceholder,
+    accessCodePlaceholder: LoginPropTypes.accessCodePlaceholder,
+    passwordVerificationType: LoginPropTypes.passwordVerificationType,
   }
 
   static defaultProps = {
@@ -263,7 +256,7 @@ LoginWithIntl.schema = {
         },
       },
     },
-    ...loginSchema,
+    ...LoginSchema,
   },
 }
 

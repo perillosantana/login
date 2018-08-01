@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
-import { injectIntl, intlShape } from 'react-intl'
+import { injectIntl } from 'react-intl'
 import { Link } from 'render'
 import { setCookie } from './utils/set-cookie'
 import LoginContent from './LoginContent'
@@ -11,21 +10,14 @@ import { truncateString } from './utils/truncate-string'
 import ProfileIcon from './images/ProfileIcon'
 import GET_USER_PROFILE from './queries/profile.gql'
 import { translate } from './utils/translate'
-import { loginSchema } from './schema'
+import { LoginSchema } from './schema'
+import { LoginPropTypes } from './propTypes'
 
 import './global.css'
 
 /** Canonical login that calls a mutation to retrieve the authentication token */
 class Login extends Component {
-  static propTypes = {
-    /** Intl object*/
-    intl: intlShape,
-    /** Data object with user profile */
-    data: PropTypes.shape({
-      refetch: PropTypes.func.isRequired,
-      profile: PropTypes.shape({}),
-    }).isRequired,
-  }
+  static propTypes = LoginPropTypes
 
   boxRef_ = React.createRef()
 
@@ -131,7 +123,7 @@ class Login extends Component {
   }
 
   render() {
-    const { intl } = this.props
+    const { intl, ...others } = this.props
     const { isBoxOpen, profile } = this.state
 
     return (
@@ -149,7 +141,11 @@ class Login extends Component {
           >
             <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-white" />
             <div className="vtex-login__content-container shadow-3 mt3">
-              <LoginContent profile={profile} loginCallback={this.onHandleLogin} isInitialScreenOptionOnly />
+              <LoginContent
+                profile={profile}
+                loginCallback={this.onHandleLogin}
+                isInitialScreenOptionOnly
+                {...others} />
             </div>
           </div>
         </div>
@@ -168,7 +164,7 @@ LoginWithIntl.schema = {
   title: 'editor.login.title',
   type: 'object',
   properties: {
-    ...loginSchema,
+    ...LoginSchema,
   },
 }
 
