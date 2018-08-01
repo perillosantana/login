@@ -24,6 +24,7 @@
     "login.createPassword": "Crear una nueva contraseña",
     "editor.login.title": "Login",
     "editor.loginPage.title": "Página de Login",
+    "login.confirmPassword": "Confirmar la contraseña",
     "login.password.uppercaseLetter": "Una letra mayúscula",
     "login.password.lowercaseLetter": "Una letra minúscula",
     "login.password.number": "Un número",
