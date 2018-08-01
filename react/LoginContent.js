@@ -40,7 +40,6 @@ const STEPS = [
       passwordPlaceholder={props.passwordPlaceholder}
       email={state.email}
       password={state.password}
-      showPasswordVerification={props.showPasswordVerification}
       passwordVerificationType={props.passwordVerificationType}
       onStateChange={func}
       showBackButton={!isOptionsMenuDisplayed}
@@ -67,7 +66,6 @@ const STEPS = [
       previous={steps.EMAIL_PASSWORD}
       email={state.email}
       passwordPlaceholder={props.passwordPlaceholder}
-      showPasswordVerification={props.showPasswordVerification}
       passwordVerificationType={props.passwordVerificationType}
       accessCodePlaceholder={props.accessCodePlaceholder}
       onStateChange={func}
@@ -214,6 +212,8 @@ class LoginContent extends Component {
       'vtex-login-content__form--visible db': this.shouldRenderForm,
     })
 
+    console.log('login content', this.props.passwordVerificationType)
+
     return (
       <div className={className}>
         {!profile && this.shouldRenderLoginOptions && !loading && (
@@ -237,99 +237,84 @@ class LoginContent extends Component {
 
 const LoginWithIntl = injectIntl(LoginContent)
 
-LoginWithIntl.getSchema = props => {
-  const getPasswordVerificationTypeSchema = () => {
-    return {
-      passwordVerificationType: {
-        title: 'editor.login.passwordVerificationType.title',
-        type: 'string',
-        default: 'tooltip',
-        enum: ['tooltip', 'box'],
-        enumNames: [
-          'editor.login.passwordVerificationType.tooltip',
-          'editor.login.passwordVerificationType.box',
-        ],
-        widget: {
-          'ui:widget': 'radio',
-          'ui:options': {
-            'inline': true,
-          },
+LoginWithIntl.schema = {
+  title: 'editor.login.title',
+  type: 'object',
+  properties: {
+    isInitialScreenOptionOnly: {
+      title: 'editor.login.isInitialScreenOptionOnly.title',
+      type: 'boolean',
+      default: true,
+      isLayout: true,
+    },
+    defaultOption: {
+      title: 'editor.login.defaultOption.title',
+      type: 'number',
+      default: 0,
+      isLayout: true,
+      enum: [0, 1],
+      enumNames: [
+        'editor.login.defaultOption.token',
+        'editor.login.defaultOption.emailAndPassword',
+      ],
+      widget: {
+        'ui:widget': 'radio',
+        'ui:options': {
+          inline: true,
         },
-        isLayout: true,
-      },
-    }
-  }
-
-  const generatedSchema = props.showPasswordVerification && getPasswordVerificationTypeSchema()
-
-  return {
-    title: 'editor.login.title',
-    type: 'object',
-    properties: {
-      isInitialScreenOptionOnly: {
-        title: 'editor.login.isInitialScreenOptionOnly.title',
-        type: 'boolean',
-        default: true,
-        isLayout: true,
-      },
-      defaultOption: {
-        title: 'editor.login.defaultOption.title',
-        type: 'number',
-        default: 0,
-        isLayout: true,
-        enum: [0, 1],
-        enumNames: [
-          'editor.login.defaultOption.token',
-          'editor.login.defaultOption.emailAndPassword',
-        ],
-        widget: {
-          'ui:widget': 'radio',
-          'ui:options': {
-            inline: true,
-          },
-        },
-      },
-      optionsTitle: {
-        title: 'editor.login.optionsTitle',
-        type: 'string',
-        widget: {
-          'ui:widget': 'textarea',
-        },
-      },
-      emailAndPasswordTitle: {
-        title: 'editor.login.emailAndPasswordTitle',
-        type: 'string',
-        widget: {
-          'ui:widget': 'textarea',
-        },
-      },
-      accessCodeTitle: {
-        title: 'editor.login.accessCodeTitle',
-        type: 'string',
-        widget: {
-          'ui:widget': 'textarea',
-        },
-      },
-      emailPlaceholder: {
-        title: 'editor.login.emailPlaceholder',
-        type: 'string',
-      },
-      passwordPlaceholder: {
-        title: 'editor.login.passwordPlaceholder',
-        type: 'string',
-      },
-      showPasswordVerification: {
-        title: 'editor.login.showPasswordVerification.title',
-        type: 'boolean',
-        isLayout: true,
-      },
-      ...generatedSchema,
-      accessCodePlaceholder: {
-        title: 'editor.login.accessCodePlaceholder',
-        type: 'string',
       },
     },
-  }
+    optionsTitle: {
+      title: 'editor.login.optionsTitle',
+      type: 'string',
+      widget: {
+        'ui:widget': 'textarea',
+      },
+    },
+    emailAndPasswordTitle: {
+      title: 'editor.login.emailAndPasswordTitle',
+      type: 'string',
+      widget: {
+        'ui:widget': 'textarea',
+      },
+    },
+    accessCodeTitle: {
+      title: 'editor.login.accessCodeTitle',
+      type: 'string',
+      widget: {
+        'ui:widget': 'textarea',
+      },
+    },
+    emailPlaceholder: {
+      title: 'editor.login.emailPlaceholder',
+      type: 'string',
+    },
+    passwordPlaceholder: {
+      title: 'editor.login.passwordPlaceholder',
+      type: 'string',
+    },
+    passwordVerificationType: {
+      title: 'editor.login.passwordVerificationType.title',
+      type: 'string',
+      default: 'tooltip',
+      enum: ['tooltip', 'box'],
+      enumNames: [
+        'editor.login.passwordVerificationType.tooltip',
+        'editor.login.passwordVerificationType.box',
+      ],
+      widget: {
+        'ui:widget': 'radio',
+        'ui:options': {
+          'inline': true,
+        },
+      },
+      isLayout: true,
+    },
+    accessCodePlaceholder: {
+      title: 'editor.login.accessCodePlaceholder',
+      type: 'string',
+    },
+  },
 }
 
 export default graphql(LoginOptionsQuery)(LoginWithIntl)

@@ -82,7 +82,6 @@ class RecoveryPassword extends Component {
       onStateChange,
       passwordPlaceholder,
       accessCodePlaceholder,
-      showPasswordVerification,
       passwordVerificationType,
     } = this.props
 
@@ -116,7 +115,6 @@ class RecoveryPassword extends Component {
                 onStateChange={this.handleNewPassword}
                 placeholder={passwordPlaceholder}
                 password={newPassword}
-                showPasswordVerification={showPasswordVerification}
                 passwordVerificationType={passwordVerificationType}
               />
             </div>
@@ -175,8 +173,6 @@ RecoveryPassword.propTypes = {
   previous: PropTypes.number.isRequired,
   /** Email set on state */
   email: PropTypes.string.isRequired,
-  /** Set the visibility of password verification */
-  showPasswordVerification: PropTypes.bool,
   /** Set the type of password verification ui */
   passwordVerificationType: PropTypes.string,
   /** Function to change de active tab */

@@ -23,8 +23,6 @@ class EmailAndPassword extends Component {
     email: PropTypes.string.isRequired,
     /** Password set on state */
     password: PropTypes.string.isRequired,
-    /** Set the visibility of password verification */
-    showPasswordVerification: PropTypes.bool,
     /** Set the type of password verification ui */
     passwordVerificationType: PropTypes.string,
     /** Title to be displayed */
@@ -124,7 +122,6 @@ class EmailAndPassword extends Component {
       showBackButton,
       emailPlaceholder,
       passwordPlaceholder,
-      showPasswordVerification,
       passwordVerificationType,
     } = this.props
 
@@ -158,7 +155,6 @@ class EmailAndPassword extends Component {
                 password={password}
                 onStateChange={onStateChange}
                 placeholder={passwordPlaceholder}
-                showPasswordVerification={showPasswordVerification}
                 passwordVerificationType={passwordVerificationType}
               />
             </div>
