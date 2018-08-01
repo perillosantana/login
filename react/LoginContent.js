@@ -14,6 +14,7 @@ import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
 
 import LoginOptionsQuery from './queries/loginOptions.gql'
+import { loginSchema } from './schema'
 
 import './global.css'
 
@@ -212,8 +213,6 @@ class LoginContent extends Component {
       'vtex-login-content__form--visible db': this.shouldRenderForm,
     })
 
-    console.log('login content', this.props.passwordVerificationType)
-
     return (
       <div className={className}>
         {!profile && this.shouldRenderLoginOptions && !loading && (
@@ -238,7 +237,7 @@ class LoginContent extends Component {
 const LoginWithIntl = injectIntl(LoginContent)
 
 LoginWithIntl.schema = {
-  title: 'editor.login.title',
+  title: 'editor.loginPage.title',
   type: 'object',
   properties: {
     isInitialScreenOptionOnly: {
@@ -264,56 +263,7 @@ LoginWithIntl.schema = {
         },
       },
     },
-    optionsTitle: {
-      title: 'editor.login.optionsTitle',
-      type: 'string',
-      widget: {
-        'ui:widget': 'textarea',
-      },
-    },
-    emailAndPasswordTitle: {
-      title: 'editor.login.emailAndPasswordTitle',
-      type: 'string',
-      widget: {
-        'ui:widget': 'textarea',
-      },
-    },
-    accessCodeTitle: {
-      title: 'editor.login.accessCodeTitle',
-      type: 'string',
-      widget: {
-        'ui:widget': 'textarea',
-      },
-    },
-    emailPlaceholder: {
-      title: 'editor.login.emailPlaceholder',
-      type: 'string',
-    },
-    passwordPlaceholder: {
-      title: 'editor.login.passwordPlaceholder',
-      type: 'string',
-    },
-    passwordVerificationType: {
-      title: 'editor.login.passwordVerificationType.title',
-      type: 'string',
-      default: 'tooltip',
-      enum: ['tooltip', 'box'],
-      enumNames: [
-        'editor.login.passwordVerificationType.tooltip',
-        'editor.login.passwordVerificationType.box',
-      ],
-      widget: {
-        'ui:widget': 'radio',
-        'ui:options': {
-          'inline': true,
-        },
-      },
-      isLayout: true,
-    },
-    accessCodePlaceholder: {
-      title: 'editor.login.accessCodePlaceholder',
-      type: 'string',
-    },
+    ...loginSchema,
   },
 }
 
