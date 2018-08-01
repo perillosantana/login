@@ -128,7 +128,7 @@ class RecoveryPassword extends Component {
               <Input
                 type="password"
                 onChange={this.handleConfirmPassword}
-                placeholder={passwordPlaceholder}
+                placeholder={translate('login.confirmPassword', intl)}
               />
             </div>
             <FormError show={!isPasswordsMatch}>
