@@ -28,21 +28,9 @@ export const LoginSchema = {
     title: 'editor.login.passwordPlaceholder',
     type: 'string',
   },
-  passwordVerificationType: {
-    title: 'editor.login.passwordVerificationType.title',
-    type: 'string',
-    default: 'tooltip',
-    enum: ['tooltip', 'box'],
-    enumNames: [
-      'editor.login.passwordVerificationType.tooltip',
-      'editor.login.passwordVerificationType.box',
-    ],
-    widget: {
-      'ui:widget': 'radio',
-      'ui:options': {
-        'inline': true,
-      },
-    },
+  showPasswordVerificationIntoTooltip: {
+    title: 'editor.login.showPasswordVerificationIntoTooltip.title',
+    type: 'boolean',
     isLayout: true,
   },
   accessCodePlaceholder: {

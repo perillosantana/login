@@ -82,7 +82,7 @@ class RecoveryPassword extends Component {
       onStateChange,
       passwordPlaceholder,
       accessCodePlaceholder,
-      passwordVerificationType,
+      showPasswordVerificationIntoTooltip,
     } = this.props
 
     const {
@@ -115,7 +115,7 @@ class RecoveryPassword extends Component {
                 onStateChange={this.handleNewPassword}
                 placeholder={passwordPlaceholder}
                 password={newPassword}
-                passwordVerificationType={passwordVerificationType}
+                showPasswordVerificationIntoTooltip={showPasswordVerificationIntoTooltip}
               />
             </div>
             <FormError show={isInvalidPassword}>
@@ -174,7 +174,7 @@ RecoveryPassword.propTypes = {
   /** Email set on state */
   email: PropTypes.string.isRequired,
   /** Set the type of password verification ui */
-  passwordVerificationType: PropTypes.string,
+  showPasswordVerificationIntoTooltip: PropTypes.bool,
   /** Function to change de active tab */
   onStateChange: PropTypes.func.isRequired,
   /** Graphql property to call a mutation */

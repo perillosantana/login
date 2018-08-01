@@ -39,8 +39,5 @@
     "editor.login.emailPlaceholder": "Placeholder to email input",
     "editor.login.passwordPlaceholder": "Placeholder to password input",
     "editor.login.accessCodePlaceholder": "Placeholder to access code input",
-    "editor.login.showPasswordVerification.title": "Show password verification",
-    "editor.login.passwordVerificationType.title": "Type of password verification ui",
-    "editor.login.passwordVerificationType.tooltip": "Tooltip",
-    "editor.login.passwordVerificationType.box": "Box"
+    "editor.login.showPasswordVerificationIntoTooltip.title": "Show password format verification as tooltip"
 }
