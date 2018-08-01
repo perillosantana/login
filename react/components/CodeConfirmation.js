@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Button, IconArrowBack } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
@@ -76,7 +76,7 @@ class CodeConfirmation extends Component {
         title={translate('login.accessCodeTitle', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={(
-          <React.Fragment>
+          <Fragment>
             <div className="vtex-login__input-container vtex-login__input-container--access-code">
               <Input value={code} onChange={this.handleInputChange} placeholder={accessCodePlaceholder} />
             </div>
@@ -86,17 +86,17 @@ class CodeConfirmation extends Component {
             <FormError show={isWrongCredentials}>
               {translate('login.wrongCredentials', intl)}
             </FormError>
-          </React.Fragment>
+          </Fragment>
         )}
         footer={(
-          <React.Fragment>
+          <Fragment>
             <div className="vtex-login__back-button">
-              <Button 
-                variation="tertiary" 
+              <Button
+                variation="tertiary"
                 size="small"
                 onClick={() => onStateChange({ step: previous })}
               >
-                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7"/></span>
+                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7" /></span>
                 <span className="f7 ml2">{translate('login.goBack', intl)}</span>
               </Button>
             </div>
@@ -111,7 +111,7 @@ class CodeConfirmation extends Component {
                 <span className="f7">{translate('login.confirm', intl)}</span>
               </Button>
             </div>
-          </React.Fragment>
+          </Fragment>
         )}
       />
     )

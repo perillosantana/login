@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Button, IconArrowBack } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
@@ -139,7 +139,7 @@ class EmailAndPassword extends Component {
         title={title || translate('loginOptions.emailAndPassword', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={(
-          <React.Fragment>
+          <Fragment>
             <div className="vtex-login__input-container vtex-login__input-container--email">
               <Input
                 value={email}
@@ -172,10 +172,10 @@ class EmailAndPassword extends Component {
                 <span className="f7">{translate('login.forgotPassword', intl)}</span>
               </a>
             </div>
-          </React.Fragment>
+          </Fragment>
         )}
         footer={(
-          <React.Fragment>
+          <Fragment>
             {showBackButton && <div className="vtex-login__back-button">
               <Button
                 variation="tertiary"
@@ -197,7 +197,7 @@ class EmailAndPassword extends Component {
                 <span className="f7">{translate('login.signIn', intl)}</span>
               </Button>
             </div>
-          </React.Fragment>
+          </Fragment>
         )}
       >
         <div className="vtex-login__form-link-container flex justify-center ph0 mt4">

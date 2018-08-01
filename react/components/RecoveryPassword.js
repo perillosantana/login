@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Button, IconArrowBack } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
@@ -100,7 +100,7 @@ class RecoveryPassword extends Component {
         title={translate('login.createPassword', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={(
-          <React.Fragment>
+          <Fragment>
             <div className="vtex-login__input-container vtex-login__input-container--access-code">
               <Input
                 onChange={this.handleCodeChange}
@@ -134,10 +134,10 @@ class RecoveryPassword extends Component {
             <FormError show={!isPasswordsMatch}>
               {translate('login.invalidMatch', intl)}
             </FormError>
-          </React.Fragment>
+          </Fragment>
         )}
         footer={(
-          <React.Fragment>
+          <Fragment>
             <div className="vtex-login__back-button">
               <Button
                 variation="tertiary"
@@ -159,7 +159,7 @@ class RecoveryPassword extends Component {
                 <span className="f7">{translate('login.create', intl)}</span>
               </Button>
             </div>
-          </React.Fragment>
+          </Fragment>
         )}
       />
     )

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Button, IconArrowBack } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
@@ -94,7 +94,7 @@ class EmailVerification extends Component {
         title={title || translate('loginOptions.emailVerification', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={(
-          <React.Fragment>
+          <Fragment>
             <div className="vtex-login__input-container vtex-login__input-container--email">
               <Input
                 value={email}
@@ -108,10 +108,10 @@ class EmailVerification extends Component {
             <FormError show={isUserBlocked}>
               {translate('login.userBlocked', intl)}
             </FormError>
-          </React.Fragment>
+          </Fragment>
         )}
         footer={(
-          <React.Fragment>
+          <Fragment>
             {(showBackButton || isCreatePassword) && <div className="vtex-login__back-button">
               <Button
                 variation="tertiary"
@@ -121,7 +121,7 @@ class EmailVerification extends Component {
                   : onStateChange({ step: previous })
                 }
               >
-                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7"/></span>
+                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7" /></span>
                 <span className="f7 ml2">
                   {translate('login.goBack', intl)}
                 </span>
@@ -138,7 +138,7 @@ class EmailVerification extends Component {
                 <span className="f7">{translate('login.send', intl)}</span>
               </Button>
             </div>
-          </React.Fragment>
+          </Fragment>
         )}
       />
     )
