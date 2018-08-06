@@ -65,12 +65,15 @@ class LoginOptions extends Component {
             </li>
           }
           {options.providers && options.providers.map(({ providerName }, index) => {
+            const hasIcon = PROVIDERS_ICONS.hasOwnProperty(providerName)
+
             return (
-              <li className={`vtex-login-options__list-item vtex-login-options__list-item--${providerName} mb3`}
+              <li
+                className={`vtex-login-options__list-item vtex-login-options__list-item--${providerName} mb3`}
                 key={`${providerName}-${index}`}
               >
                 <OAuth provider={providerName}>
-                  {React.createElement(PROVIDERS_ICONS[providerName])}
+                  {hasIcon ? React.createElement(PROVIDERS_ICONS[providerName], null) : null}
                 </OAuth>
               </li>
             )
