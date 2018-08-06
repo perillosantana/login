@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.1.1] - 2018-08-06
+### Fixed
+- `LoginOptions` throwing error on invalid element type
+
 ## [1.1.0] - 2018-08-02
 ### Added
 - `Tooltip` component to show to the user if the password is attending the requisites.
