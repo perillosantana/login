@@ -6,7 +6,7 @@ import { Link } from 'render'
 import { setCookie } from './utils/set-cookie'
 import LoginContent from './LoginContent'
 
-import { truncateString } from './utils/truncate-string'
+import { truncateString } from './utils/format-string'
 import ProfileIcon from './images/ProfileIcon'
 import GET_USER_PROFILE from './queries/profile.gql'
 import { translate } from './utils/translate'

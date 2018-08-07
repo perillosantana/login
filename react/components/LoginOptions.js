@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { injectIntl, intlShape } from 'react-intl'
+import { slugify } from '../utils/format-string'
 import { ExtensionContainer } from 'render'
 import { Button } from 'vtex.styleguide'
 
@@ -69,7 +70,7 @@ class LoginOptions extends Component {
 
             return (
               <li
-                className={`vtex-login-options__list-item vtex-login-options__list-item--${providerName} mb3`}
+                className={`vtex-login-options__list-item vtex-login-options__list-item--${slugify(providerName)} mb3`}
                 key={`${providerName}-${index}`}
               >
                 <OAuth provider={providerName}>
