@@ -8,6 +8,7 @@ import { Button } from 'vtex.styleguide'
 import FacebookIcon from '../images/FacebookIcon'
 import GoogleIcon from '../images/GoogleIcon'
 import { translate } from '../utils/translate'
+import { slugify } from '../utils/format-string'
 import FormTitle from './FormTitle'
 import OAuth from './OAuth'
 
@@ -69,7 +70,7 @@ class LoginOptions extends Component {
 
             return (
               <li
-                className={`vtex-login-options__list-item vtex-login-options__list-item--${providerName} mb3`}
+                className={`vtex-login-options__list-item vtex-login-options__list-item--${slugify(providerName)} mb3`}
                 key={`${providerName}-${index}`}
               >
                 <OAuth provider={providerName}>
