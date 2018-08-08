@@ -23,6 +23,11 @@ class LoginOptions extends Component {
     this.props.onOptionsClick(el)
   }
 
+  showOption = (option, optionName) => {
+    const { isAlwaysShown, currentStep, options } = this.props
+    return options[option] && !isAlwaysShown ? true : currentStep !== optionName
+  }
+
   render() {
     const {
       className,
@@ -41,7 +46,7 @@ class LoginOptions extends Component {
       <div className={classes}>
         <FormTitle>{title || translate(fallbackTitle, intl)}</FormTitle>
         <ul className="vtex-login-options__list list pa0">
-          {options.classicAuthentication &&
+          {this.showOption('accessKeyAuthentication', 'loginOptions.emailVerification') &&
             <li className="vtex-login-options__list-item mb3">
               <div className="vtex-login__button">
                 <Button
@@ -53,7 +58,7 @@ class LoginOptions extends Component {
               </div>
             </li>
           }
-          {options.accessKeyAuthentication &&
+          {this.showOption('classicAuthentication', 'loginOptions.emailAndPassword') &&
             <li className="vtex-login-options__list-item mb3">
               <div className="vtex-login__button">
                 <Button
