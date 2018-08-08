@@ -46,7 +46,7 @@ class LoginOptions extends Component {
       <div className={classes}>
         <FormTitle>{title || translate(fallbackTitle, intl)}</FormTitle>
         <ul className="vtex-login-options__list list pa0">
-          {this.showOption('classicAuthentication', 'loginOptions.emailVerification') &&
+          {this.showOption('accessKeyAuthentication', 'loginOptions.emailVerification') &&
             <li className="vtex-login-options__list-item mb3">
               <div className="vtex-login__button">
                 <Button
@@ -58,7 +58,7 @@ class LoginOptions extends Component {
               </div>
             </li>
           }
-          {this.showOption('accessKeyAuthentication', 'loginOptions.emailAndPassword') &&
+          {this.showOption('classicAuthentication', 'loginOptions.emailAndPassword') &&
             <li className="vtex-login-options__list-item mb3">
               <div className="vtex-login__button">
                 <Button
