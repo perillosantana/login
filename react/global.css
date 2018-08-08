@@ -124,7 +124,8 @@
 }
 
 .vtex-tooltip__container-left {
-  bottom: -140%;
+  top: 50%;
+  transform: translateY(-50%);
   right: 102%;
   margin-right: 10px;
 }
@@ -143,7 +144,8 @@
   content: "";
   position: absolute;
   left: 45%;
-  top: 100%;
+  top: 50%;
+  transform: translateY(-50%);
   border-width: 10px;
   border-style: solid;
   border-color: #3b3b3b transparent transparent transparent;
