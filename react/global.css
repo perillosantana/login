@@ -115,16 +115,19 @@
 
 .vtex-tooltip__container {
   background-color: #3b3b3b;
-  width: 100%;
+  width: max-content;
 }
 
 .vtex-tooltip__container-top {
   bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
   margin-bottom: 10px;
 }
 
 .vtex-tooltip__container-left {
-  bottom: -140%;
+  top: 50%;
+  transform: translateY(-50%);
   right: 102%;
   margin-right: 10px;
 }
