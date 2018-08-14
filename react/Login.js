@@ -103,7 +103,7 @@ class Login extends Component {
     const { iconSize, iconLabel } = this.props
     const iconContent = (
       <Fragment>
-        <ProfileIcon size={iconSize} />,
+        <ProfileIcon size={iconSize} />
         {iconLabel && <span className="white f6 pl4">{iconLabel}</span>}
       </Fragment>
     )
