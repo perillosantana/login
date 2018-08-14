@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
 import { injectIntl } from 'react-intl'
@@ -100,12 +100,19 @@ class Login extends Component {
 
   renderIcon() {
     const { renderIconAsLink, profile } = this.state
+    const { iconSize, iconLabel } = this.props
+    const iconContent = (
+      <Fragment>
+        <ProfileIcon size={iconSize} />,
+        {iconLabel && <span className="white f6 pl4">{iconLabel}</span>}
+      </Fragment>
+    )
 
     if (renderIconAsLink) {
       const linkTo = profile ? '/account' : '/login'
       return (
-        <Link to={linkTo} className="vtex-login__button--link tc">
-          <ProfileIcon />
+        <Link to={linkTo} className="vtex-login__button--link tc flex items-center">
+          {iconContent}
         </Link>
       )
     }
@@ -113,11 +120,12 @@ class Login extends Component {
     return (
       <Button
         variation="tertiary"
-        size="small"
         icon
         onClick={this.handleProfileIconClick}
       >
-        <ProfileIcon />
+        <div className="flex items-center">
+          {iconContent}
+        </div>
       </Button>
     )
   }
