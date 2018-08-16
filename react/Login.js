@@ -100,10 +100,10 @@ class Login extends Component {
 
   renderIcon() {
     const { renderIconAsLink, profile } = this.state
-    const { iconSize, iconLabel } = this.props
+    const { iconSize, iconLabel, iconColor } = this.props
     const iconContent = (
       <Fragment>
-        <ProfileIcon size={iconSize} />
+        <ProfileIcon size={iconSize} fillColor={iconColor} />
         {iconLabel && <span className="white f6 pl4">{iconLabel}</span>}
       </Fragment>
     )

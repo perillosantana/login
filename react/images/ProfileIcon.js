@@ -14,7 +14,7 @@ export default class ProfileIcon extends Component {
 
   static defaultProps = {
     size: 20,
-    fillColor: '#FFF',
+    fillColor: '#4F4F4F',
   }
 
   render() {
