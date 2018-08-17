@@ -23,4 +23,10 @@ export const LoginPropTypes = {
   accessCodePlaceholder: PropTypes.string,
   /** Set the type of password verification ui */
   showPasswordVerificationIntoTooltip: PropTypes.bool,
+  /** Icon's size */
+  iconSize: PropTypes.number,
+  /** Icon's color */
+  iconColor: PropTypes.string,
+  /** Icon's label */
+  iconLabel: PropTypes.string,
 }
