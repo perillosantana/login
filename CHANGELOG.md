@@ -10,8 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - prop `fillColor` to `ProfileIcon` component.
 - props `iconLabel`, `iconSize`, `iconColor` to `Login` component.
 
+## [1.1.4] - 2018-08-17
 ### Fixed
 - `Tooltip` position and container width.
+- Close `Login` when clicking outside it.
 
 ## [1.1.3] - 2018-08-08
 ### Fixed
