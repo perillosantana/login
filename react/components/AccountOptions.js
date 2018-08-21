@@ -15,7 +15,7 @@ class AccountOptions extends Component {
     intl: intlShape,
     /** Graphql property to call a mutation */
     logout: PropTypes.func,
-  };
+  }
 
   handleLogoutClick = () => {
     this.props.logout()
@@ -51,6 +51,4 @@ class AccountOptions extends Component {
   }
 }
 
-export default injectIntl(
-  graphql(logout, { name: 'logout' })(AccountOptions)
-)
+export default injectIntl(graphql(logout, { name: 'logout' })(AccountOptions))

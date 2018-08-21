@@ -64,7 +64,10 @@ class Login extends Component {
       this.setState({
         renderIconAsLink: true,
       })
-    } else if (window.innerWidth >= WIDTH_THRESHOLD && this.state.renderIconAsLink) {
+    } else if (
+      window.innerWidth >= WIDTH_THRESHOLD &&
+      this.state.renderIconAsLink
+    ) {
       this.setState({
         renderIconAsLink: false,
       })
@@ -81,30 +84,41 @@ class Login extends Component {
 
   renderIcon() {
     const { renderIconAsLink, profile } = this.state
-    const { iconSize, iconLabel, iconColor } = this.props
+    const { iconSize, iconLabel, iconColor, intl } = this.props
     const iconContent = (
       <Fragment>
         <ProfileIcon size={iconSize} fillColor={iconColor} />
-        {iconLabel && <span className="white f6 pl4">{iconLabel}</span>}
+        {profile ? (
+          <span className="vtex-login__profile order-1 white f6 pl4">
+            {translate('login.hello', intl)}{' '}
+            {truncateString(profile.firstName) || truncateString(profile.email)}
+          </span>
+        ) : (
+          iconLabel && <span className="white f6 pl4">{iconLabel}</span>
+        )}
       </Fragment>
     )
 
     if (renderIconAsLink) {
       const linkTo = profile ? '/account' : '/login'
       return (
-        <Link to={linkTo} className="vtex-login__button--link tc flex items-center">
+        <Link
+          to={linkTo}
+          className="vtex-login__button--link tc flex items-center"
+        >
           {iconContent}
         </Link>
       )
     }
 
     return (
-      <Button
-        variation="tertiary"
-        icon
-        onClick={this.handleProfileIconClick}
-      >
-        <div className="flex items-center">
+      <Button variation="tertiary" icon onClick={this.handleProfileIconClick}>
+        <div
+          className="flex items-center"
+          ref={e => {
+            this.iconRef = e
+          }}
+        >
           {iconContent}
         </div>
       </Button>
@@ -115,18 +129,20 @@ class Login extends Component {
     const { intl, ...others } = this.props
     const { isBoxOpen, profile } = this.state
 
+    const boxPositionStyle = {
+      right: this.iconRef && this.iconRef.offsetWidth - 21,
+    }
+
     return (
       <div className="vtex-login__container flex items-center f6 fr">
-        {profile && (
-          <div className="vtex-login__profile order-1">
-            {translate('login.hello', intl)} {truncateString(profile.firstName) || truncateString(profile.email)}
-          </div>
-        )}
         <div className="relative">
           {this.renderIcon()}
           <OutsideClickHandler onOutsideClick={this.handleOutSideBoxClick}>
             <div
-              className={`vtex-login__box absolute right-0 z-max ${isBoxOpen ? 'flex' : 'dn'}`}
+              className={`vtex-login__box absolute z-max ${
+                isBoxOpen ? 'flex' : 'dn'
+              }`}
+              style={boxPositionStyle}
             >
               <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-white" />
               <div className="vtex-login__content-container shadow-3 mt3">
@@ -134,7 +150,8 @@ class Login extends Component {
                   profile={profile}
                   loginCallback={this.onHandleLogin}
                   isInitialScreenOptionOnly
-                  {...others} />
+                  {...others}
+                />
               </div>
             </div>
           </OutsideClickHandler>
