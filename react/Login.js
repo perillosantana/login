@@ -94,7 +94,7 @@ class Login extends Component {
             {truncateString(profile.firstName) || truncateString(profile.email)}
           </span>
         ) : (
-          iconLabel && <span className="white f6 pl4">{iconLabel}</span>
+          iconLabel && <span className="vtex-login__label white f6 pl4">{iconLabel}</span>
         )}
       </Fragment>
     )
