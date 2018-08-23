@@ -17,63 +17,85 @@ import LoginOptionsQuery from './queries/loginOptions.gql'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
 
+import { Transition } from 'react-spring'
+
 import './global.css'
 
 const STEPS = [
   /* eslint-disable react/display-name, react/prop-types */
-  (props, state, func, isOptionsMenuDisplayed) => (
-    <EmailVerification
-      next={steps.CODE_CONFIRMATION}
-      previous={steps.LOGIN_OPTIONS}
-      isCreatePassword={state.isCreatePassword}
-      title={props.accessCodeTitle}
-      emailPlaceholder={props.emailPlaceholder}
-      email={state.email}
-      onStateChange={func}
-      showBackButton={!isOptionsMenuDisplayed}
-    />
-  ),
-  (props, state, func, isOptionsMenuDisplayed) => (
-    <EmailAndPassword
-      next={steps.ACCOUNT_OPTIONS}
-      previous={steps.LOGIN_OPTIONS}
-      title={props.emailAndPasswordTitle}
-      emailPlaceholder={props.emailPlaceholder}
-      passwordPlaceholder={props.passwordPlaceholder}
-      email={state.email}
-      password={state.password}
-      showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
-      onStateChange={func}
-      showBackButton={!isOptionsMenuDisplayed}
-      loginCallback={props.loginCallback}
-    />
-  ),
-  (props, state, func) => (
-    <CodeConfirmation
-      next={steps.ACCOUNT_OPTIONS}
-      previous={steps.EMAIL_VERIFICATION}
-      email={state.email}
-      accessCodePlaceholder={props.accessCodePlaceholder}
-      code={state.code}
-      onStateChange={func}
-      loginCallback={props.loginCallback}
-    />
-  ),
-  () => (
-    <AccountOptions />
-  ),
-  (props, state, func) => (
-    <RecoveryPassword
-      next={steps.ACCOUNT_OPTIONS}
-      previous={steps.EMAIL_PASSWORD}
-      email={state.email}
-      passwordPlaceholder={props.passwordPlaceholder}
-      showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
-      accessCodePlaceholder={props.accessCodePlaceholder}
-      onStateChange={func}
-      loginCallback={props.loginCallback}
-    />
-  ),
+  (props, state, func, isOptionsMenuDisplayed) => {
+    return style => (
+      <div style={style}>
+        <EmailVerification
+          next={steps.CODE_CONFIRMATION}
+          previous={steps.LOGIN_OPTIONS}
+          isCreatePassword={state.isCreatePassword}
+          title={props.accessCodeTitle}
+          emailPlaceholder={props.emailPlaceholder}
+          email={state.email}
+          onStateChange={func}
+          showBackButton={!isOptionsMenuDisplayed}
+        />
+      </div>
+    )
+  },
+  (props, state, func, isOptionsMenuDisplayed) => {
+    return style => (
+      <div style={style}>
+        <EmailAndPassword
+          next={steps.ACCOUNT_OPTIONS}
+          previous={steps.LOGIN_OPTIONS}
+          title={props.emailAndPasswordTitle}
+          emailPlaceholder={props.emailPlaceholder}
+          passwordPlaceholder={props.passwordPlaceholder}
+          email={state.email}
+          password={state.password}
+          showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
+          onStateChange={func}
+          showBackButton={!isOptionsMenuDisplayed}
+          loginCallback={props.loginCallback}
+        />
+      </div>
+    )
+  },
+  (props, state, func) => {
+    return style => (
+      <div style={style}>
+        <CodeConfirmation
+          next={steps.ACCOUNT_OPTIONS}
+          previous={steps.EMAIL_VERIFICATION}
+          email={state.email}
+          accessCodePlaceholder={props.accessCodePlaceholder}
+          code={state.code}
+          onStateChange={func}
+          loginCallback={props.loginCallback}
+        />
+      </div>
+    )
+  },
+  () => {
+    return style => (
+      <div style={style}>
+        <AccountOptions />
+      </div>
+    )
+  },
+  (props, state, func) => {
+    return style => (
+      <div style={style}>
+        <RecoveryPassword
+          next={steps.ACCOUNT_OPTIONS}
+          previous={steps.EMAIL_PASSWORD}
+          email={state.email}
+          passwordPlaceholder={props.passwordPlaceholder}
+          showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
+          accessCodePlaceholder={props.accessCodePlaceholder}
+          onStateChange={func}
+          loginCallback={props.loginCallback}
+        />
+      </div>
+    )
+  },
   /* eslint-enable react/display-name react/prop-types */
 ]
 
@@ -167,13 +189,44 @@ class LoginContent extends Component {
     return loginCallback || location.replace('/')
   }
 
-  render() {
+  renderChildren = style => {
     const {
       profile,
       isInitialScreenOptionOnly,
       optionsTitle,
       defaultOption,
-      data: { loginOptions, loading },
+      data: { loginOptions },
+    } = this.props
+    const { isOnInitialScreen } = this.state
+
+    let step = this.state.step
+    if (profile) {
+      step = steps.ACCOUNT_OPTIONS
+    } else if (isOnInitialScreen) {
+      step = defaultOption
+    }
+
+    return (
+      <div style={style}>
+        <LoginOptions
+          page="login-options"
+          fallbackTitle="loginOptions.title"
+          title={optionsTitle}
+          options={loginOptions}
+          currentStep={step === 0 ? 'loginOptions.emailVerification' : 'loginOptions.emailAndPassword'}
+          isAlwaysShown={!isInitialScreenOptionOnly}
+          onOptionsClick={this.handleOptionsClick}
+        />
+      </div>
+    )
+  }
+
+  render() {
+    const {
+      profile,
+      isInitialScreenOptionOnly,
+      defaultOption,
+      data: { loading },
     } = this.props
     const { isOnInitialScreen } = this.state
 
@@ -194,7 +247,7 @@ class LoginContent extends Component {
       this.shouldRenderLoginOptions
     )
 
-    const className = classNames('vtex-login-content flex relative bg-white justify-around', {
+    const className = classNames('vtex-login-content flex relative bg-white justify-around overflow-hidden', {
       'vtex-login-content--initial-screen': this.state.isOnInitialScreen,
       'vtex-login-content--always-with-options flex-column-reverse items-center flex-row-ns items-baseline-ns':
         !isInitialScreenOptionOnly,
@@ -208,19 +261,23 @@ class LoginContent extends Component {
 
     return (
       <div className={className}>
-        {!profile && this.shouldRenderLoginOptions && !loading && (
-          <LoginOptions
-            page="login-options"
-            fallbackTitle="loginOptions.title"
-            title={optionsTitle}
-            options={loginOptions}
-            currentStep={step === 0 ? 'loginOptions.emailVerification' : 'loginOptions.emailAndPassword'}
-            isAlwaysShown={!isInitialScreenOptionOnly}
-            onOptionsClick={this.handleOptionsClick}
-          />
-        )}
+        <Transition
+          keys={(!profile && this.shouldRenderLoginOptions && !loading) ? ['children'] : []}
+          from={{ opacity: 0, transform: 'translateX(-25%)' }}
+          enter={{ opacity: 1, transform: 'translateX(0%)' }}
+          leave={{ display: 'none' }}
+        >
+          {(!profile && this.shouldRenderLoginOptions && !loading) ? [this.renderChildren] : []}
+        </Transition>
         <div className={formClassName}>
-          {this.shouldRenderForm && render}
+          <Transition
+            keys={this.shouldRenderForm && render ? ['children'] : []}
+            from={{ opacity: 0, transform: 'translateX(25%)' }}
+            enter={{ opacity: 1, transform: 'translateX(0%)' }}
+            leave={{ display: 'none' }}
+          >
+            {this.shouldRenderForm && render ? [render] : []}
+          </Transition>
         </div>
       </div>
     )
