@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.3.0] - 2018-08-23
+### Added
+- `LoginContent` animation.
+
 ## [1.2.2] - 2018-08-21
 ### Fixed
 - Box position to be compatible with the new header design.
