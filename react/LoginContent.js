@@ -263,7 +263,7 @@ class LoginContent extends Component {
       <div className={className}>
         <Transition
           keys={(!profile && this.shouldRenderLoginOptions && !loading) ? ['children'] : []}
-          from={{ opacity: 0, transform: 'translateX(-25%)' }}
+          from={{ opacity: 0, transform: 'translateX(-50%)' }}
           enter={{ opacity: 1, transform: 'translateX(0%)' }}
           leave={{ display: 'none' }}
         >
@@ -272,7 +272,7 @@ class LoginContent extends Component {
         <div className={formClassName}>
           <Transition
             keys={this.shouldRenderForm && render ? ['children'] : []}
-            from={{ opacity: 0, transform: 'translateX(25%)' }}
+            from={{ opacity: 0, transform: 'translateX(50%)' }}
             enter={{ opacity: 1, transform: 'translateX(0%)' }}
             leave={{ display: 'none' }}
           >
