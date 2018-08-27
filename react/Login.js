@@ -9,7 +9,7 @@ import LoginContent from './LoginContent'
 
 import { truncateString } from './utils/format-string'
 import ProfileIcon from './images/ProfileIcon'
-import GET_USER_PROFILE from './queries/profile.gql'
+import GET_USER_PROFILE from './queries/session.gql'
 import { translate } from './utils/translate'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
