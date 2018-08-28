@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Add HOC to initialize user session.
+- Add HOC `withSession` to initialize user session.
 
 ### Changed
 - Change profile query to session query. 

@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
 import { injectIntl } from 'react-intl'
-import { Link } from 'render'
+import { Link, withSession } from 'render'
 import { setCookie } from './utils/set-cookie'
 import OutsideClickHandler from 'react-outside-click-handler'
 import LoginContent from './LoginContent'
@@ -35,7 +35,7 @@ class Login extends Component {
 
   /** Function called after login success */
   onHandleLogin = () => {
-    this.props.data.refetch().then(({ data: { profile } }) => {
+    this.props.data.refetch().then(({ data: { getSession: { profile } } }) => {
       this.setState({ profile })
     })
   }
@@ -47,13 +47,13 @@ class Login extends Component {
 
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
-    this.setState({ profile: this.props.data.profile })
+    this.setState({ profile: this.props.data.getSession.profile })
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (!this.state.profile && this.props.data) {
-      const { profile } = this.props.data
-      if (profile === prevState.profile) {
+      const { getSession } = this.props.data
+      if (getSession === prevState.profile) {
         return null
       }
       this.setState({ profile })
@@ -137,7 +137,7 @@ class Login extends Component {
   render() {
     const { ...others } = this.props
     const { isBoxOpen, profile } = this.state
-
+    console.log("profile >>>", profile)
     const boxPositionStyle = {
       right: this.iconRef && this.iconRef.offsetWidth - 21,
     }
@@ -170,13 +170,7 @@ class Login extends Component {
   }
 }
 
-const options = {
-  options: () => ({ ssr: false }),
-}
-
-const LoginWithIntl = injectIntl(graphql(GET_USER_PROFILE, options)(Login))
-
-LoginWithIntl.schema = {
+Login.schema = {
   title: 'editor.login.title',
   type: 'object',
   properties: {
@@ -184,4 +178,11 @@ LoginWithIntl.schema = {
   },
 }
 
-export default LoginWithIntl
+const options = {
+  options: () => ({ ssr: false }),
+}
+
+export default compose(
+  graphql(GET_USER_PROFILE, options),
+  withSession,
+  injectIntl)(Login)
