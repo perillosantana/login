@@ -2,11 +2,12 @@ import React, { Component, Fragment } from 'react'
 import { graphql, compose } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
 import { injectIntl } from 'react-intl'
+import { path } from 'ramda'
 import { Link, withSession } from 'render'
+
 import { setCookie } from './utils/set-cookie'
 import OutsideClickHandler from 'react-outside-click-handler'
 import LoginContent from './LoginContent'
-
 import { truncateString } from './utils/format-string'
 import ProfileIcon from './images/ProfileIcon'
 import GET_USER_PROFILE from './queries/session.gql'
@@ -44,16 +45,25 @@ class Login extends Component {
     if (location.href.indexOf('accountAuthCookieName') > 0) {
       setCookie(location.href)
     }
+    this.onHandleLogin()
 
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
-    this.setState({ profile: this.props.data.getSession.profile })
+
+    const { data } = this.props
+    if (data && !data.loading) {
+      const { getSession: { profile } } = data
+      this.setState({ profile })
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!this.state.profile && this.props.data) {
-      const { getSession } = this.props.data
-      if (getSession === prevState.profile) {
+    this.onHandleLogin()
+
+    const { data } = this.props
+    if (!this.state.profile && data && !data.loading) {
+      const { getSession: { profile } } = data
+      if (profile === prevState.profile) {
         return null
       }
       this.setState({ profile })
@@ -100,7 +110,7 @@ class Login extends Component {
         {profile ? (
           <span className={`vtex-login__profile order-1 f6 pl4 ${labelClasses}`}>
             {translate('login.hello', intl)}{' '}
-            {truncateString(profile.firstName) || truncateString(profile.email)}
+            {profile.firstName || truncateString(profile.email)}
           </span>
         ) : (
           iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses}`}>{iconLabel}</span>
@@ -137,7 +147,6 @@ class Login extends Component {
   render() {
     const { ...others } = this.props
     const { isBoxOpen, profile } = this.state
-    console.log("profile >>>", profile)
     const boxPositionStyle = {
       right: this.iconRef && this.iconRef.offsetWidth - 21,
     }
