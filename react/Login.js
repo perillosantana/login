@@ -16,9 +16,16 @@ import { LoginPropTypes } from './propTypes'
 
 import './global.css'
 
+const DEFAULT_CLASSES = 'white'
+
 /** Canonical login that calls a mutation to retrieve the authentication token */
 class Login extends Component {
   static propTypes = LoginPropTypes
+
+  static defaultProps = {
+    labelClasses: DEFAULT_CLASSES,
+    iconClasses: DEFAULT_CLASSES,
+  }
 
   state = {
     isBoxOpen: false,
@@ -87,16 +94,16 @@ class Login extends Component {
     const { iconSize, iconLabel, labelClasses, iconClasses, intl } = this.props
     const iconContent = (
       <Fragment>
-        <div className={`${iconClasses || 'white'}`}>
+        <div className={`${iconClasses}`}>
           <ProfileIcon size={iconSize} fillColor="currentColor" />
         </div>
         {profile ? (
-          <span className={`vtex-login__profile order-1 f6 pl4 ${labelClasses || 'white'}`}>
+          <span className={`vtex-login__profile order-1 f6 pl4 ${labelClasses}`}>
             {translate('login.hello', intl)}{' '}
             {truncateString(profile.firstName) || truncateString(profile.email)}
           </span>
         ) : (
-          iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses || 'white'}`}>{iconLabel}</span>
+          iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses}`}>{iconLabel}</span>
         )}
       </Fragment>
     )
