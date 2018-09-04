@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react'
 import { graphql, compose } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
 import { injectIntl } from 'react-intl'
-import { path } from 'ramda'
 import { Link, withSession } from 'render'
 
 import { setCookie } from './utils/set-cookie'
@@ -36,9 +35,7 @@ class Login extends Component {
 
   /** Function called after login success */
   onHandleLogin = () => {
-    this.props.data.refetch().then(({ data: { getSession: { profile } } }) => {
-      this.setState({ profile })
-    })
+    this.props.data.refetch()
   }
 
   componentDidMount() {
@@ -57,16 +54,12 @@ class Login extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    this.onHandleLogin()
-
-    const { data } = this.props
-    if (!this.state.profile && data && !data.loading) {
+  static getDerivedStateFromProps(props, state) {
+    console.log("Fui chamado!")
+    const { data } = props
+    if (state.profile && data && !data.loading) {
       const { getSession: { profile } } = data
-      if (profile === prevState.profile) {
-        return null
-      }
-      this.setState({ profile })
+      return ({ profile })
     }
   }
 
@@ -100,6 +93,7 @@ class Login extends Component {
   }
 
   renderIcon() {
+    console.log("vemnimim")
     const { renderIconAsLink, profile } = this.state
     const { iconSize, iconLabel, labelClasses, iconClasses, intl } = this.props
     const iconContent = (
@@ -179,6 +173,10 @@ class Login extends Component {
   }
 }
 
+const options = {
+  options: () => ({ ssr: false }),
+}
+
 Login.schema = {
   title: 'editor.login.title',
   type: 'object',
@@ -187,11 +185,8 @@ Login.schema = {
   },
 }
 
-const options = {
-  options: () => ({ ssr: false }),
-}
-
 export default compose(
+  withSession(),
+  injectIntl,
   graphql(GET_USER_PROFILE, options),
-  withSession,
-  injectIntl)(Login)
+)(Login)
