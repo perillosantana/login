@@ -55,7 +55,7 @@ class Login extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log("Fui chamado!")
+    console.log('Fui chamado!')
     const { data } = props
     if (state.profile && data && !data.loading) {
       const { getSession: { profile } } = data
@@ -93,7 +93,7 @@ class Login extends Component {
   }
 
   renderIcon() {
-    console.log("vemnimim")
+    console.log('vemnimim')
     const { renderIconAsLink, profile } = this.state
     const { iconSize, iconLabel, labelClasses, iconClasses, intl } = this.props
     const iconContent = (
@@ -152,8 +152,7 @@ class Login extends Component {
           <OutsideClickHandler onOutsideClick={this.handleOutSideBoxClick}>
             <div
               className={`vtex-login__box absolute z-max ${
-                isBoxOpen ? 'flex' : 'dn'
-              }`}
+                isBoxOpen ? 'flex' : 'dn'}`}
               style={boxPositionStyle}
             >
               <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-white" />
