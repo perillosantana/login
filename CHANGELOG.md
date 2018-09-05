@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.4.1] - 2018-09-05
+### Changed
+- Update the `Login` to receive classnames for the label and icon.
+
 ## [1.4.0] - 2018-08-31
 ### Changed
 - Update `Styleguide` version.

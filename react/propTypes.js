@@ -25,8 +25,10 @@ export const LoginPropTypes = {
   showPasswordVerificationIntoTooltip: PropTypes.bool,
   /** Icon's size */
   iconSize: PropTypes.number,
-  /** Icon's color */
-  iconColor: PropTypes.string,
+  /** Icon's classnames */
+  iconClasses: PropTypes.string,
   /** Icon's label */
   iconLabel: PropTypes.string,
+  /** Label's classnames */
+  labelClasses: PropTypes.string,
 }
