@@ -38,8 +38,6 @@ export const LoginPropTypes = {
   isBoxOpen: PropTypes.bool.isRequired,
   /** Should the Icon be rendered as link or not */
   renderIconAsLink: PropTypes.bool.isRequired,
-  /** Function to remount the component and refetch the queries*/
-  onRefetch: PropTypes.func.isRequired,
   /** Function called when the user click outside of the box*/
   onOutSideBoxClick: PropTypes.func.isRequired,
   /** Function called when the user clicks on the icon*/

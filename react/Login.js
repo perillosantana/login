@@ -34,7 +34,6 @@ export default class Login extends Component {
 
     if (location.href.indexOf('accountAuthCookieName') > 0) {
       setCookie(location.href)
-      this.handleRefetch()
     }
   }
 
@@ -72,7 +71,6 @@ export default class Login extends Component {
       <LoginWithSession
         {...this.props}
         {...this.state}
-        onRefetch={this.handleRefetch}
         onOutSideBoxClick={this.handleOutSideBoxClick}
         onProfileIconClick={this.handleProfileIconClick}
       />

@@ -9,16 +9,17 @@ import { truncateString } from '../utils/format-string'
 import { translate } from '../utils/translate'
 import { LoginPropTypes } from '../propTypes'
 
-
 export default class LoginComponent extends Component {
   static propTypes = LoginPropTypes
 
   /** Function called after login success */
   handleLogin = () => {
-    const { data: { refetch } } = this.props
+    const { data: { refetch }, onOutSideBoxClick } = this.props
 
     this.context.patchSession().then(() => {
-      refetch()
+      refetch().then(() => {
+        onOutSideBoxClick()
+      })
     })
   }
 
@@ -37,7 +38,8 @@ export default class LoginComponent extends Component {
     const {
       iconSize,
       iconLabel,
-      iconColor,
+      iconClasses,
+      labelClasses,
       intl,
       renderIconAsLink,
       onProfileIconClick,
@@ -47,14 +49,16 @@ export default class LoginComponent extends Component {
 
     const iconContent = (
       <Fragment>
-        <ProfileIcon size={iconSize} fillColor={iconColor} />
+        <div className={`${iconClasses}`}>
+          <ProfileIcon size={iconSize} />
+        </div>
         {profile ? (
-          <span className="vtex-login__profile order-1 gray f6 pl4">
+          <span className={`vtex-login__profile order-1 f6 pl4 ${labelClasses}`}>
             {translate('login.hello', intl)}{' '}
-            {profile.firstName || truncateString(profile.email)}
+            {truncateString(profile.firstName) || truncateString(profile.email)}
           </span>
         ) : (
-            iconLabel && <span className="vtex-login__label gray f6 pl4">{iconLabel}</span>
+            iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses}`}>{iconLabel}</span>
           )}
       </Fragment>
     )
