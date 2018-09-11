@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.5.0] - 2018-09-06
+### Added
+- Add HOC `withSession` to initialize user session.
+
+### Changed
+- Change profile query to session query. 
+
 ## [1.4.1] - 2018-09-05
 ### Changed
 - Update the `Login` to receive classnames for the label and icon.

@@ -1,0 +1,10 @@
+query session {
+  getSession {
+    profile {
+      id
+      firstName
+      lastName
+      email
+    }
+  }
+}

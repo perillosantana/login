@@ -1,8 +1,0 @@
-query profile {
-  profile {
-    id
-    userId
-    firstName
-    email
-  }
-}
