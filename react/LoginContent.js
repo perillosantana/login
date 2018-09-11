@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
+import { Transition } from 'react-spring'
+import { withSession } from 'render'
 
 import LoginOptions from './components/LoginOptions'
 import EmailVerification from './components/EmailVerification'
@@ -17,7 +19,6 @@ import LoginOptionsQuery from './queries/loginOptions.gql'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
 
-import { Transition } from 'react-spring'
 
 import './global.css'
 
@@ -317,5 +318,5 @@ LoginWithIntl.schema = {
   },
 }
 
-export default graphql(LoginOptionsQuery)(LoginWithIntl)
+export default withSession()(graphql(LoginOptionsQuery)(LoginWithIntl))
 
