@@ -16,10 +16,8 @@ export default class LoginComponent extends Component {
   handleLogin = () => {
     const { data: { refetch }, onOutSideBoxClick } = this.props
 
-    this.context.patchSession().then(() => {
-      refetch().then(() => {
-        onOutSideBoxClick()
-      })
+    refetch().then(() => {
+      onOutSideBoxClick()
     })
   }
 
@@ -124,9 +122,4 @@ export default class LoginComponent extends Component {
       </div>
     )
   }
-}
-
-
-LoginComponent.contextTypes = {
-  patchSession: PropTypes.func,
 }

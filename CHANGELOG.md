@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.5.1] - 2018-09-12
+### Fixed
+- Add HOC `withSession` to the `LoginContent` component.
+
 ## [1.5.0] - 2018-09-06
 ### Added
 - Add HOC `withSession` to initialize user session.

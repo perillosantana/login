@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
+import { Transition } from 'react-spring'
+import { withSession } from 'render'
+import { compose } from 'ramda'
 
 import LoginOptions from './components/LoginOptions'
 import EmailVerification from './components/EmailVerification'
@@ -13,11 +16,10 @@ import RecoveryPassword from './components/RecoveryPassword'
 import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
 
-import LoginOptionsQuery from './queries/loginOptions.gql'
+import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
 
-import { Transition } from 'react-spring'
 
 import './global.css'
 
@@ -128,6 +130,10 @@ class LoginContent extends Component {
     optionsTitle: '',
   }
 
+  static contextTypes = {
+    patchSession: PropTypes.func,
+  }
+
   state = {
     isOnInitialScreen: !this.props.profile,
     isCreatePassword: false,
@@ -186,7 +192,14 @@ class LoginContent extends Component {
   */
   onLoginSuccess = () => {
     const { loginCallback } = this.props
-    return loginCallback || location.replace('/')
+
+    return this.context.patchSession().then(() => {
+      if (loginCallback) {
+        loginCallback()
+      } else {
+        location.replace('/')
+      }
+    })
   }
 
   renderChildren = style => {
@@ -239,8 +252,8 @@ class LoginContent extends Component {
 
     const render = STEPS[step](
       {
-        loginCallback: this.onLoginSuccess,
         ...this.props,
+        loginCallback: this.onLoginSuccess,
       },
       this.state,
       this.handleUpdateState,
@@ -284,9 +297,12 @@ class LoginContent extends Component {
   }
 }
 
-const LoginWithIntl = injectIntl(LoginContent)
+const content = withSession()(compose(
+  injectIntl,
+  graphql(LOGIN_OPTIONS_QUERY),
+)(LoginContent))
 
-LoginWithIntl.schema = {
+content.schema = {
   title: 'editor.loginPage.title',
   type: 'object',
   properties: {
@@ -317,5 +333,5 @@ LoginWithIntl.schema = {
   },
 }
 
-export default graphql(LoginOptionsQuery)(LoginWithIntl)
+export default content
 
