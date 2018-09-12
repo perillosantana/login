@@ -5,6 +5,7 @@ import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 import { Transition } from 'react-spring'
 import { withSession } from 'render'
+import { compose } from 'ramda'
 
 import LoginOptions from './components/LoginOptions'
 import EmailVerification from './components/EmailVerification'
@@ -15,7 +16,7 @@ import RecoveryPassword from './components/RecoveryPassword'
 import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
 
-import LoginOptionsQuery from './queries/loginOptions.gql'
+import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
 
@@ -285,9 +286,12 @@ class LoginContent extends Component {
   }
 }
 
-const LoginWithIntl = injectIntl(LoginContent)
+const content = withSession()(compose(
+  injectIntl,
+  graphql(LOGIN_OPTIONS_QUERY),
+)(LoginContent))
 
-LoginWithIntl.schema = {
+content.schema = {
   title: 'editor.loginPage.title',
   type: 'object',
   properties: {
@@ -318,5 +322,5 @@ LoginWithIntl.schema = {
   },
 }
 
-export default withSession()(graphql(LoginOptionsQuery)(LoginWithIntl))
+export default content
 
