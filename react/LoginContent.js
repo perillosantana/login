@@ -130,6 +130,10 @@ class LoginContent extends Component {
     optionsTitle: '',
   }
 
+  static contextTypes = {
+    patchSession: PropTypes.func,
+  }
+
   state = {
     isOnInitialScreen: !this.props.profile,
     isCreatePassword: false,
@@ -188,7 +192,14 @@ class LoginContent extends Component {
   */
   onLoginSuccess = () => {
     const { loginCallback } = this.props
-    return loginCallback || location.replace('/')
+
+    return this.context.patchSession().then(() => {
+      if (loginCallback) {
+        loginCallback()
+      } else {
+        location.replace('/')
+      }
+    })
   }
 
   renderChildren = style => {
@@ -241,8 +252,8 @@ class LoginContent extends Component {
 
     const render = STEPS[step](
       {
-        loginCallback: this.onLoginSuccess,
         ...this.props,
+        loginCallback: this.onLoginSuccess,
       },
       this.state,
       this.handleUpdateState,
