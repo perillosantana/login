@@ -27,12 +27,12 @@ class AccountOptions extends Component {
     return (
       <div className="vtex-login__account-options items-center w-100">
         <div className="ma4 min-h-2 b--light-gray">
-          <Link page={'store/account/orders'}>
+          <Link page={'store/account'}>
             <button
               className="vtex-button bw1 ba fw5 ttu br2 fw4 v-mid relative pv3 ph5 f6 bg-transparent b--transparent blue hover-b--transparent hover-heavy-blue pointer"
               closeonclick=""
             >
-              <span className="f7">{translate('login.myOrders', intl)}</span>
+              <span className="f7">{translate('login.myAccount', intl)}</span>
             </button>
           </Link>
         </div>
