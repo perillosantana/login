@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.5.2] - 2018-09-13
+### Changed
+- Change My Orders to My account route. 
+
 ## [1.5.1] - 2018-09-12
 ### Fixed
 - Add HOC `withSession` to the `LoginContent` component.
