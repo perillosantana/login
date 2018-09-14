@@ -54,7 +54,7 @@ export default class LoginComponent extends Component {
         {profile ? (
           <span className={`vtex-login__profile order-1 f6 pl4 ${labelClasses}`}>
             {translate('login.hello', intl)}{' '}
-            {truncateString(profile.firstName) || truncateString(profile.email)}
+            {profile.firstName || truncateString(profile.email)}
           </span>
         ) : (
           iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses}`}>{iconLabel}</span>
