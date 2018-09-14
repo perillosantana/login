@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 import { Transition } from 'react-spring'
-import { withSession } from 'render'
+import { withSession, withRuntimeContext } from 'render'
 import { compose } from 'ramda'
 
 import LoginOptions from './components/LoginOptions'
@@ -19,7 +19,6 @@ import { setCookie } from './utils/set-cookie'
 import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
-
 
 import './global.css'
 
@@ -111,6 +110,10 @@ class LoginContent extends Component {
     defaultOption: PropTypes.number,
     /** Function called after login success */
     loginCallback: PropTypes.func,
+    /** Runtime context. */
+    runtime: PropTypes.shape({
+      navigate: PropTypes.func,
+    }),
     /* Reused props */
     optionsTitle: LoginPropTypes.optionsTitle,
     emailAndPasswordTitle: LoginPropTypes.emailAndPasswordTitle,
@@ -141,11 +144,15 @@ class LoginContent extends Component {
     email: '',
     password: '',
     code: '',
+    returnUrl: '/home',
   }
 
   componentDidMount() {
     if (location.href.indexOf('accountAuthCookieName') > 0) {
       setCookie(location.href)
+    }
+    if (location.search) {
+      this.setState({ returnUrl: location.search.substring(11) })
     }
   }
 
@@ -191,13 +198,16 @@ class LoginContent extends Component {
    * a prop, it will call a root page redirect as default.
   */
   onLoginSuccess = () => {
-    const { loginCallback } = this.props
+    const { loginCallback, runtime } = this.props
 
     return this.context.patchSession().then(() => {
       if (loginCallback) {
         loginCallback()
       } else {
-        location.replace('/')
+        runtime.navigate({
+          page: `store${this.state.returnUrl}`,
+          fallbackToWindowLocation: false,
+        })
       }
     })
   }
@@ -333,5 +343,5 @@ content.schema = {
   },
 }
 
-export default content
+export default withRuntimeContext(content)
 

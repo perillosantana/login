@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.5.3] - 2018-09-14
+### Fixed
+- Redirect to return URL after login success.
+
 ## [1.5.2] - 2018-09-13
 ### Changed
 - Change My Orders to My account route. 
