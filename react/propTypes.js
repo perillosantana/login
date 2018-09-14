@@ -43,5 +43,5 @@ export const LoginPropTypes = {
   /** Function called when the user clicks on the icon*/
   onProfileIconClick: PropTypes.func.isRequired,
   /** Props received through the LoginContainer */
-  ...LoginContainerProptypes
+  ...LoginContainerProptypes,
 }

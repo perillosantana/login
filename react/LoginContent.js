@@ -20,7 +20,6 @@ import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
 
-
 import './global.css'
 
 const STEPS = [

@@ -13,7 +13,7 @@ export default class LoginComponent extends Component {
   static propTypes = LoginPropTypes
 
   /** Function called after login success */
-  handleLogin = () => {
+  onClickLoginButton = () => {
     const { data: { refetch }, onOutSideBoxClick } = this.props
 
     refetch().then(() => {
@@ -57,8 +57,8 @@ export default class LoginComponent extends Component {
             {truncateString(profile.firstName) || truncateString(profile.email)}
           </span>
         ) : (
-            iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses}`}>{iconLabel}</span>
-          )}
+          iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses}`}>{iconLabel}</span>
+        )}
       </Fragment>
     )
 
@@ -104,14 +104,14 @@ export default class LoginComponent extends Component {
             <div
               className={`vtex-login__box absolute z-max ${
                 isBoxOpen ? 'flex' : 'dn'
-                }`}
+              }`}
               style={boxPositionStyle}
             >
               <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-white" />
               <div className="vtex-login__content-container shadow-3 mt3">
                 <LoginContent
                   profile={profile}
-                  loginCallback={this.handleLogin}
+                  loginCallback={this.onClickLoginButton}
                   isInitialScreenOptionOnly
                   {...this.props}
                 />
