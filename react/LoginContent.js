@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 import { Transition } from 'react-spring'
-import { withSession } from 'render'
+import { withSession, withRuntimeContext } from 'render'
 import { compose } from 'ramda'
 
 import LoginOptions from './components/LoginOptions'
@@ -110,6 +110,10 @@ class LoginContent extends Component {
     defaultOption: PropTypes.number,
     /** Function called after login success */
     loginCallback: PropTypes.func,
+    /** Runtime context. */
+    runtime: PropTypes.shape({
+      navigate: PropTypes.func,
+    }),
     /* Reused props */
     optionsTitle: LoginPropTypes.optionsTitle,
     emailAndPasswordTitle: LoginPropTypes.emailAndPasswordTitle,
@@ -140,7 +144,7 @@ class LoginContent extends Component {
     email: '',
     password: '',
     code: '',
-    returnUrl: '/',
+    returnUrl: '/home',
   }
 
   componentDidMount() {
@@ -194,13 +198,16 @@ class LoginContent extends Component {
    * a prop, it will call a root page redirect as default.
   */
   onLoginSuccess = () => {
-    const { loginCallback } = this.props
+    const { loginCallback, runtime } = this.props
 
     return this.context.patchSession().then(() => {
       if (loginCallback) {
         loginCallback()
       } else {
-        location.replace(this.state.returnUrl)
+        runtime.navigate({
+          page: `store${this.state.returnUrl}`,
+          fallbackToWindowLocation: false,
+        })
       }
     })
   }
@@ -336,5 +343,5 @@ content.schema = {
   },
 }
 
-export default content
+export default withRuntimeContext(content)
 
