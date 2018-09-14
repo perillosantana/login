@@ -140,11 +140,15 @@ class LoginContent extends Component {
     email: '',
     password: '',
     code: '',
+    returnUrl: '/',
   }
 
   componentDidMount() {
     if (location.href.indexOf('accountAuthCookieName') > 0) {
       setCookie(location.href)
+    }
+    if (location.search) {
+      this.setState({ returnUrl: location.search.substring(11) })
     }
   }
 
@@ -196,7 +200,7 @@ class LoginContent extends Component {
       if (loginCallback) {
         loginCallback()
       } else {
-        location.replace('/')
+        location.replace(this.state.returnUrl)
       }
     })
   }
