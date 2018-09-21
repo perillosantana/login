@@ -20,6 +20,7 @@ import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 import GET_USER_PROFILE from './queries/session.gql'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
+import { getProfile } from './utils/login-utils'
 
 import './global.css'
 
@@ -266,8 +267,14 @@ class LoginContent extends Component {
       isInitialScreenOptionOnly,
       defaultOption,
       data: { loading },
+      session,
     } = this.props
     const { isOnInitialScreen } = this.state
+
+    if (getProfile(session)) {
+      this.redirect()
+      return null
+    }
 
     let step = this.state.step
     if (profile) {
