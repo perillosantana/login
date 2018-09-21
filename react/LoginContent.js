@@ -194,21 +194,25 @@ class LoginContent extends Component {
     })
   }
 
+  redirect = () => {
+    this.props.runtime.navigate({
+      page: `store${this.state.returnUrl}`,
+      fallbackToWindowLocation: false,
+    })
+  }
+
   /**
    * Action after login success. If loginCallback isn't
    * a prop, it will call a root page redirect as default.
   */
   onLoginSuccess = () => {
-    const { loginCallback, runtime } = this.props
+    const { loginCallback } = this.props
 
     return this.context.patchSession().then(() => {
       if (loginCallback) {
         loginCallback()
       } else {
-        runtime.navigate({
-          page: `store${this.state.returnUrl}`,
-          fallbackToWindowLocation: false,
-        })
+        this.redirect()
       }
     })
   }
