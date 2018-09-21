@@ -17,6 +17,7 @@ import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
 
 import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
+import GET_USER_PROFILE from './queries/session.gql'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
 
@@ -318,9 +319,15 @@ class LoginContent extends Component {
   }
 }
 
+const options = {
+  name: 'session',
+  options: () => ({ ssr: false }),
+}
+
 const content = withSession()(compose(
   injectIntl,
   graphql(LOGIN_OPTIONS_QUERY),
+  graphql(GET_USER_PROFILE, options),
 )(LoginContent))
 
 content.schema = {
