@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
+
+import { compose } from 'ramda'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 import { Transition } from 'react-spring'
 import { withSession, withRuntimeContext } from 'render'
-import { compose } from 'ramda'
 
 import LoginOptions from './components/LoginOptions'
-import EmailVerification from './components/EmailVerification'
+import AccountOptions from './components/AccountOptions'
 import EmailAndPassword from './components/EmailAndPassword'
 import CodeConfirmation from './components/CodeConfirmation'
-import AccountOptions from './components/AccountOptions'
 import RecoveryPassword from './components/RecoveryPassword'
+import EmailVerification from './components/EmailVerification'
+
 import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
 
-import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
-import GET_USER_PROFILE from './queries/session.gql'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
 import { getProfile } from './utils/login-utils'
+import GET_USER_PROFILE from './queries/session.gql'
+import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 
 import './global.css'
 

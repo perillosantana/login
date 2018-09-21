@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
+
+import { compose } from 'ramda'
+import { withSession } from 'render'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
-import { withSession } from 'render'
-import { compose } from 'ramda'
 
-import GET_USER_PROFILE from './queries/session.gql'
-import LoginComponent from './components/LoginComponent'
-import { setCookie } from './utils/set-cookie'
 import { LoginSchema } from './schema'
+import { setCookie } from './utils/set-cookie'
+import GET_USER_PROFILE from './queries/session.gql'
 import { LoginContainerProptypes } from './propTypes'
+import LoginComponent from './components/LoginComponent'
 
 import './global.css'
 
