@@ -8,6 +8,7 @@ import ProfileIcon from '../images/ProfileIcon'
 import { truncateString } from '../utils/format-string'
 import { translate } from '../utils/translate'
 import { LoginPropTypes } from '../propTypes'
+import { getProfile } from '../utils/login-utils'
 
 export default class LoginComponent extends Component {
   static propTypes = LoginPropTypes
@@ -21,19 +22,6 @@ export default class LoginComponent extends Component {
     })
   }
 
-  getProfile = () => {
-    const { data } = this.props
-
-    let profile = null
-
-    if (data && !data.loading && data.getSession && data.getSession.profile &&
-      (data.getSession.profile.id || data.getSession.profile.email)) {
-      profile = data.getSession.profile
-    }
-
-    return profile
-  }
-
   renderIcon = () => {
     const {
       iconSize,
@@ -43,9 +31,10 @@ export default class LoginComponent extends Component {
       intl,
       renderIconAsLink,
       onProfileIconClick,
+      data,
     } = this.props
 
-    const profile = this.getProfile()
+    const profile = getProfile(data)
 
     const iconContent = (
       <Fragment>
@@ -90,12 +79,12 @@ export default class LoginComponent extends Component {
   }
 
   render() {
-    const { isBoxOpen, onOutSideBoxClick } = this.props
+    const { isBoxOpen, onOutSideBoxClick, data } = this.props
     const boxPositionStyle = {
       right: this.iconRef && this.iconRef.offsetWidth - 21,
     }
 
-    const profile = this.getProfile()
+    const profile = getProfile(data)
 
     return (
       <div className="vtex-login__container flex items-center f6 fr">
