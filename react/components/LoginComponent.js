@@ -26,7 +26,8 @@ export default class LoginComponent extends Component {
 
     let profile = null
 
-    if (data && !data.loading && data.getSession && data.getSession.profile && data.getSession.profile.id) {
+    if (data && !data.loading && data.getSession && data.getSession.profile &&
+      (data.getSession.profile.id || data.getSession.profile.email)) {
       profile = data.getSession.profile
     }
 
