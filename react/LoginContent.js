@@ -148,7 +148,7 @@ class LoginContent extends Component {
     email: '',
     password: '',
     code: '',
-    returnUrl: '/home',
+    returnUrl: '/',
   }
 
   componentDidMount() {
@@ -199,7 +199,7 @@ class LoginContent extends Component {
 
   redirect = () => {
     this.props.runtime.navigate({
-      page: `store${this.state.returnUrl}`,
+      to: this.state.returnUrl,
       fallbackToWindowLocation: false,
     })
   }
