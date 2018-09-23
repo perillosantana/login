@@ -273,7 +273,7 @@ class LoginContent extends Component {
     } = this.props
     const { isOnInitialScreen } = this.state
 
-    if (getProfile(session)) {
+    if (getProfile(session) && !profile) {
       this.redirect()
       return null
     }
