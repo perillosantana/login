@@ -8,7 +8,7 @@ import ProfileIcon from '../images/ProfileIcon'
 import { truncateString } from '../utils/format-string'
 import { translate } from '../utils/translate'
 import { LoginPropTypes } from '../propTypes'
-import { getProfile } from '../utils/login-utils'
+import { getProfile } from '../utils/profile'
 
 export default class LoginComponent extends Component {
   static propTypes = LoginPropTypes

@@ -20,7 +20,7 @@ import { setCookie } from './utils/set-cookie'
 
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
-import { getProfile } from './utils/login-utils'
+import { getProfile } from './utils/profile'
 import GET_USER_PROFILE from './queries/session.gql'
 import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 
