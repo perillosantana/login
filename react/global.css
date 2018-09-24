@@ -152,3 +152,12 @@
   border-style: solid;
   border-color: #3b3b3b transparent transparent transparent;
 }
+
+.vtex-login__button--danger > .vtex-button {
+  background-color: #ffe6e6;
+  color: #FF4C4C;
+}
+
+.vtex-login__button--danger > .vtex-button .vtex__icon-spinner{
+  color: #FF4C4C;
+}

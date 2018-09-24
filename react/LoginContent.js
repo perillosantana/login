@@ -212,6 +212,13 @@ class LoginContent extends Component {
     })
   }
 
+  refetchOptions = () => {
+    const { data : query } = this.props
+    if (true && !query.loading /* && !query.loadingOptions */) {
+      return query.refetch()
+    }
+  }
+
   renderChildren = style => {
     const {
       profile,
@@ -239,6 +246,7 @@ class LoginContent extends Component {
           currentStep={step === 0 ? 'loginOptions.emailVerification' : 'loginOptions.emailAndPassword'}
           isAlwaysShown={!isInitialScreenOptionOnly}
           onOptionsClick={this.handleOptionsClick}
+          refetchOptions={this.refetchOptions}
         />
       </div>
     )

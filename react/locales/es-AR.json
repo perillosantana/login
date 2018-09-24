@@ -3,6 +3,8 @@
     "loginOptions.emailVerification": "Recibir código de acceso por correo electrónico",
     "loginOptions.emailAndPassword": "Entrar con correo electrónico y contraseña",
     "loginOptions.oAuth": "Entrar con",
+    "loginOptions.error.title": "Algo incorrecto sucedió...",
+    "loginOptions.error.subhead": "Intentar nuevamente.",
     "login.goBack": "Volver",
     "login.send": "Enviar",
     "login.create": "Crear",
