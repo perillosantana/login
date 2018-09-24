@@ -52,12 +52,12 @@ export default class LoginComponent extends Component {
           <ProfileIcon size={iconSize} />
         </div>
         {profile ? (
-          <span className={`vtex-login__profile order-1 f6 pl4 ${labelClasses}`}>
+          <span className={`vtex-login__profile order-1 f6 pl4 ${labelClasses} dn-m db-l`}>
             {translate('login.hello', intl)}{' '}
             {profile.firstName || truncateString(profile.email)}
           </span>
         ) : (
-          iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses}`}>{iconLabel}</span>
+          iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses} dn-m db-l`}>{iconLabel}</span>
         )}
       </Fragment>
     )
