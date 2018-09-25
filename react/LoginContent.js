@@ -216,6 +216,9 @@ class LoginContent extends Component {
     const { data : query } = this.props
     if (!query.loading && !query.loginOptions) {
       return query.refetch()
+    } 
+    if (query.loginOptions) {
+      return Promise.resolve()
     }
   }
 

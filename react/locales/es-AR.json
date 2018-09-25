@@ -4,7 +4,7 @@
     "loginOptions.emailAndPassword": "Entrar con correo electrónico y contraseña",
     "loginOptions.oAuth": "Entrar con",
     "loginOptions.error.title": "Algo incorrecto sucedió...",
-    "loginOptions.error.subhead": "Intentar nuevamente.",
+    "loginOptions.error.subhead": "Haga clic to intentar nuevamente.",
     "login.goBack": "Volver",
     "login.send": "Enviar",
     "login.create": "Crear",

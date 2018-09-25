@@ -4,7 +4,7 @@
     "loginOptions.emailAndPassword": "Entrar com e-mail e senha",
     "loginOptions.oAuth": "Entrar com",
     "loginOptions.error.title": "Algo errado aconteceu...",
-    "loginOptions.error.subhead": "Tentar novamente.",
+    "loginOptions.error.subhead": "Clique para tentar novamente.",
     "login.goBack": "Voltar",
     "login.send": "Enviar",
     "login.create": "Criar",
