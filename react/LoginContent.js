@@ -214,7 +214,7 @@ class LoginContent extends Component {
 
   refetchOptions = () => {
     const { data : query } = this.props
-    if (true && !query.loading /* && !query.loadingOptions */) {
+    if (!query.loading && !query.loginOptions) {
       return query.refetch()
     }
   }

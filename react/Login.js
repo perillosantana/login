@@ -90,9 +90,9 @@ const options = {
   options: () => ({ ssr: false }),
 }
 
-const LoginWithSession = withSession(
-  { loading: () => <div></div> }
-)(compose(
+const LoginWithSession = withSession({
+  loading: () => <div></div>
+})(compose(
   injectIntl,
   graphql(GET_USER_PROFILE, options),
 )(LoginComponent))

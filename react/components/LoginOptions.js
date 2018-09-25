@@ -37,7 +37,7 @@ class LoginOptions extends Component {
 
   showOption = (option, optionName) => {
     const { isAlwaysShown, currentStep, options } = this.props
-    return options && (options[option] && !isAlwaysShown ? true : currentStep !== optionName)
+    return options && ((options[option] && !isAlwaysShown) || currentStep !== optionName)
   }
 
   render() {
