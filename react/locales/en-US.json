@@ -3,6 +3,8 @@
     "loginOptions.emailVerification": "Receive access code by email",
     "loginOptions.emailAndPassword": "Sign in with email and password",
     "loginOptions.oAuth": "Sign in with",
+    "loginOptions.error.title": "Something bad happened...",
+    "loginOptions.error.subhead": "Click to try again.",
     "login.goBack": "Go back",
     "login.send": "Send",
     "login.create": "Create",

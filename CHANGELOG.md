@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.5.5] - 2018-09-26
+### Fixed
+- Login does not break when there are no options. Now it allows the user to refetch it.
+
 ## [1.5.4] - 2018-09-24
 ### Changed
 - Hide label in screens thinner than the laptop resolution.

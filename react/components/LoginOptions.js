@@ -19,13 +19,25 @@ const PROVIDERS_ICONS = {
 
 /** LoginOptions tab component. Displays a list of login options */
 class LoginOptions extends Component {
+  state = {
+    loadingOptions: false
+  }
+
+  handleRefetchOptions = () => {
+    if (!this.state.loadingOptions) {
+      this.setState({ loadingOptions: true })
+      this.props.refetchOptions()
+        .then(() => this.setState({ loadingOptions: false }))
+    }
+  }
+
   handleOptionClick = el => () => {
     this.props.onOptionsClick(el)
   }
 
   showOption = (option, optionName) => {
     const { isAlwaysShown, currentStep, options } = this.props
-    return options[option] && !isAlwaysShown ? true : currentStep !== optionName
+    return options && ((options[option] && !isAlwaysShown) || currentStep !== optionName)
   }
 
   render() {
@@ -37,6 +49,8 @@ class LoginOptions extends Component {
       intl,
       isAlwaysShown,
     } = this.props
+
+    const { loadingOptions } = this.state
 
     const classes = classNames('vtex-login-options', className, {
       'vtex-login-options--sticky': isAlwaysShown,
@@ -70,7 +84,7 @@ class LoginOptions extends Component {
               </div>
             </li>
           }
-          {options.providers && options.providers.map(({ providerName }, index) => {
+          {options && options.providers && options.providers.map(({ providerName }, index) => {
             const hasIcon = PROVIDERS_ICONS.hasOwnProperty(providerName)
 
             return (
@@ -84,6 +98,21 @@ class LoginOptions extends Component {
               </li>
             )
           })}
+          {!options && (
+            <li className="vtex-login-options__list-item mb3">
+              <div className="vtex-login__button vtex-login__button--danger">
+                <Button
+                  type="danger"
+                  variation="secondary"
+                  isLoading={loadingOptions}
+                  onClick={this.handleRefetchOptions}
+                >
+                  <div className={`${loadingOptions ? 'dn' : 'db'} f6`}>{translate('loginOptions.error.title', intl)}</div>
+                  <span className="f7 pt1">{translate('loginOptions.error.subhead', intl)}</span>
+                </Button>
+              </div>
+            </li>
+          )}
           <li className="vtex-login-options__list-item vtex-login-options__list-item--container mb3">
             <ExtensionContainer id="container" />
           </li>
@@ -98,6 +127,8 @@ LoginOptions.propTypes = {
   intl: intlShape,
   /** Function to change de active tab */
   onOptionsClick: PropTypes.func.isRequired,
+  /** Function to refetch login options */
+  refetchOptions: PropTypes.func.isRequired,
   /** Title that will be shown on top */
   title: PropTypes.string.isRequired,
   /** Fallback title that will be shown if there's no title */
