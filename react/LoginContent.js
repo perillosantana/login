@@ -273,6 +273,8 @@ class LoginContent extends Component {
     } = this.props
     const { isOnInitialScreen } = this.state
 
+    // Check if the user is already logged and redirect to the return URL if it didn't receive
+    // the profile by the props, if recieve it, should render the account options.
     if (getProfile(session) && !profile) {
       this.redirect()
       return null
