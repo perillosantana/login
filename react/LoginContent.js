@@ -1,24 +1,28 @@
 import React, { Component } from 'react'
+
+import { compose } from 'ramda'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 import { Transition } from 'react-spring'
 import { withSession, withRuntimeContext } from 'render'
-import { compose } from 'ramda'
 
 import LoginOptions from './components/LoginOptions'
-import EmailVerification from './components/EmailVerification'
+import AccountOptions from './components/AccountOptions'
 import EmailAndPassword from './components/EmailAndPassword'
 import CodeConfirmation from './components/CodeConfirmation'
-import AccountOptions from './components/AccountOptions'
 import RecoveryPassword from './components/RecoveryPassword'
+import EmailVerification from './components/EmailVerification'
+
 import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
 
-import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
+import { getProfile } from './utils/profile'
+import GET_USER_PROFILE from './queries/session.gql'
+import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 
 import './global.css'
 
@@ -144,7 +148,7 @@ class LoginContent extends Component {
     email: '',
     password: '',
     code: '',
-    returnUrl: '/home',
+    returnUrl: '/',
   }
 
   componentDidMount() {
@@ -193,21 +197,25 @@ class LoginContent extends Component {
     })
   }
 
+  redirect = () => {
+    this.props.runtime.navigate({
+      to: this.state.returnUrl,
+      fallbackToWindowLocation: false,
+    })
+  }
+
   /**
    * Action after login success. If loginCallback isn't
    * a prop, it will call a root page redirect as default.
   */
   onLoginSuccess = () => {
-    const { loginCallback, runtime } = this.props
+    const { loginCallback } = this.props
 
     return this.context.patchSession().then(() => {
       if (loginCallback) {
         loginCallback()
       } else {
-        runtime.navigate({
-          page: `store${this.state.returnUrl}`,
-          fallbackToWindowLocation: false,
-        })
+        this.redirect()
       }
     })
   }
@@ -261,8 +269,16 @@ class LoginContent extends Component {
       isInitialScreenOptionOnly,
       defaultOption,
       data: { loading },
+      session,
     } = this.props
     const { isOnInitialScreen } = this.state
+
+    // Check if the user is already logged and redirect to the return URL if it didn't receive
+    // the profile by the props, if recieve it, should render the account options.
+    if (getProfile(session) && !profile) {
+      this.redirect()
+      return null
+    }
 
     let step = this.state.step
     if (profile) {
@@ -318,9 +334,15 @@ class LoginContent extends Component {
   }
 }
 
+const options = {
+  name: 'session',
+  options: () => ({ ssr: false }),
+}
+
 const content = withSession()(compose(
   injectIntl,
   graphql(LOGIN_OPTIONS_QUERY),
+  graphql(GET_USER_PROFILE, options),
 )(LoginContent))
 
 content.schema = {
