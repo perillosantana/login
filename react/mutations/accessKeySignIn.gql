@@ -1,4 +1,3 @@
-mutation accessKeySignIn($email: String!, $code: String!) 
-  @context(scope: "private") {
+mutation accessKeySignIn($email: String!, $code: String!)  {
   accessKeySignIn(email: $email, code: $code) 
 }
