@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.6.0] - 2018-10-02
+### Changed
+- Uses session query provided by vtex.store
+
 ## [1.5.6] - 2018-09-26
 ### Fixed
 - Redirecting to the previous route in the app when the user tries to go to Login when already logged
