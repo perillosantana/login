@@ -17,8 +17,8 @@ class AccountOptions extends Component {
     logout: PropTypes.func,
   }
 
-  handleLogoutClick = () => {
-    this.props.logout()
+  handleLogoutClick = async () => {
+    await this.props.logout()
     location.assign('/') // Needed to refetch all the data from GraphQL.
   }
 
