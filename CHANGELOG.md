@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fix redirect behavior, now this function is called only when `returnUrl` is defined in location.search.
 
 ## [1.6.2] - 2018-10-09
 ### Fixed
