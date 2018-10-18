@@ -221,10 +221,10 @@ class LoginContent extends Component {
   }
 
   refetchOptions = () => {
-    const { data : query } = this.props
+    const { data: query } = this.props
     if (!query.loading && !query.loginOptions) {
       return query.refetch()
-    } 
+    }
     if (query.loginOptions) {
       return Promise.resolve()
     }
@@ -274,10 +274,12 @@ class LoginContent extends Component {
     const { isOnInitialScreen } = this.state
 
     // Check if the user is already logged and redirect to the return URL if it didn't receive
-    // the profile by the props, if recieve it, should render the account options.
+    // the profile by the props, if receive it, should render the account options.
     if (getProfile(session) && !profile) {
-      this.redirect()
-      return null
+      if (location.search.includes('returnUrl')) {
+        this.redirect()
+        return null
+      }
     }
 
     let step = this.state.step

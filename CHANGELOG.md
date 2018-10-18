@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.6.3] - 2018-10-18
+### Fixed
+- Fix redirect behavior, now this function is called only when `returnUrl` is defined in location.search.
+
 ## [1.6.2] - 2018-10-09
 ### Fixed
 - Warning message on loading element being a function.
