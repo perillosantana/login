@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.6.4] - 2018-10-18
+### Fixed
+- *Hotfix* - Move out the return null of redirect logic.
+
 ## [1.6.3] - 2018-10-18
 ### Fixed
 - Fix redirect behavior, now this function is called only when `returnUrl` is defined in location.search.
