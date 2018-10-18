@@ -278,8 +278,8 @@ class LoginContent extends Component {
     if (getProfile(session) && !profile) {
       if (location.search.includes('returnUrl')) {
         this.redirect()
-        return null
       }
+      return null
     }
 
     let step = this.state.step
