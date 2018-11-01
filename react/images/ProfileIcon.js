@@ -28,7 +28,7 @@ export default class ProfileIcon extends Component {
         xmlns="http://www.w3.org/2000/svg"
         color={fillColor}
       >
-        <use href="#ds-profile" />
+        <use href="#profile" />
       </svg>
     )
   }

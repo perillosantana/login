@@ -26,7 +26,7 @@ export default class EyeSightEnable extends Component {
         viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <use fill={fillColor} href="#ds-eyesight-enable" />
+        <use fill={fillColor} href="#eyesight-enable" />
       </svg>
     )
   }
