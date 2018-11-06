@@ -16,7 +16,7 @@ export default class Tooltip extends Component {
         <div className="pa2">
           {title &&
             <div className="mb3">
-              <span className="f5 b ttu white">
+              <span className="f5 b ttu c-on-base--inverted">
                 {title}
               </span>
             </div>

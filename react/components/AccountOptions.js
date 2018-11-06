@@ -26,10 +26,10 @@ class AccountOptions extends Component {
     const { intl } = this.props
     return (
       <div className="vtex-login__account-options items-center w-100">
-        <div className="ma4 min-h-2 b--light-gray">
+        <div className="ma4 min-h-2 b--muted-4">
           <Link page={'store/account'}>
             <button
-              className="vtex-button bw1 ba fw5 ttu br2 fw4 v-mid relative pv3 ph5 f6 bg-transparent b--transparent blue hover-b--transparent hover-heavy-blue pointer"
+              className="vtex-button bw1 ba fw5 ttu br2 fw4 v-mid relative pv3 ph5 f6 bg-base b--transparent c-action-primary hover-b--transparent hover-c-action-primary pointer"
               closeonclick=""
             >
               <span className="f7">{translate('login.myAccount', intl)}</span>
@@ -37,7 +37,7 @@ class AccountOptions extends Component {
           </Link>
         </div>
         <hr className="mv2 o-30" />
-        <div className="ma4 min-h-2 b--light-gray">
+        <div className="ma4 min-h-2 b--muted-4">
           <Button
             variation="tertiary"
             size="small"

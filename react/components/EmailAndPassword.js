@@ -168,7 +168,7 @@ class EmailAndPassword extends Component {
               {translate('login.userBlocked', intl)}
             </FormError>
             <div className="vtex-login__form-link-container flex justify-end ph0 pv2">
-              <a href="" className="link dim blue" onClick={this.handleCreatePassword}>
+              <a href="" className="link dim c-link" onClick={this.handleCreatePassword}>
                 <span className="f7">{translate('login.forgotPassword', intl)}</span>
               </a>
             </div>
@@ -201,7 +201,7 @@ class EmailAndPassword extends Component {
         )}
       >
         <div className="vtex-login__form-link-container flex justify-center ph0 mt4">
-          <a href="" className="link dim blue" onClick={e => this.handleCreatePassword(e)}>
+          <a href="" className="link dim c-link" onClick={e => this.handleCreatePassword(e)}>
             <span className="f7">{translate('login.notHaveAccount', intl)}</span>
           </a>
         </div>
