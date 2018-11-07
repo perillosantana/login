@@ -209,8 +209,8 @@ class LoginContent extends Component {
    * a prop, it will call a root page redirect as default.
   */
   onLoginSuccess = () => {
-    const { loginCallback } = this.props
-
+    const { loginCallback, onOutSideBoxClick } = this.props
+    onOutSideBoxClick()
     return this.context.patchSession().then(() => {
       if (loginCallback) {
         loginCallback()

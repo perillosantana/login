@@ -28,11 +28,11 @@ class CodeConfirmation extends Component {
 
   handleSuccess = status => {
     const { onStateChange, next } = this.props
-    status === 'Success' && onStateChange({ step: next })
-    this.props.loginCallback()
+    status === 'Success' && this.props.loginCallback()
   }
 
   handleWrongCredentials = status => {
+    this.setState({ isLoading: false })
     status === 'WrongCredentials' && this.setState({ isWrongCredentials: true })
   }
 
@@ -48,7 +48,6 @@ class CodeConfirmation extends Component {
       }).then(
         ({ data }) => {
           if (data && data.accessKeySignIn) {
-            this.setState({ isLoading: false })
             this.handleSuccess(data.accessKeySignIn)
             this.handleWrongCredentials(data.accessKeySignIn)
           }
