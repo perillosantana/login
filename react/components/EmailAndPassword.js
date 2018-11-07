@@ -79,12 +79,10 @@ class EmailAndPassword extends Component {
   }
 
   handleWrongCredentials = status => {
-    this.setState({ isLoading: false })
     status === 'WrongCredentials' && this.setState({ isWrongCredentials: true })
   }
 
   handleUserIsBlocked = status => {
-    this.setState({ isLoading: false })
     status === 'BlockedUser' && this.setState({ isUserBlocked: true })
   }
 
@@ -102,6 +100,7 @@ class EmailAndPassword extends Component {
       })
         .then(({ data }) => {
           if (data && data.classicSignIn) {
+            this.setState({ isLoading: false })
             this.handleSuccess(data.classicSignIn)
             this.handleWrongCredentials(data.classicSignIn)
             this.handleUserIsBlocked(data.classicSignIn)

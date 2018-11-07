@@ -32,7 +32,6 @@ class CodeConfirmation extends Component {
   }
 
   handleWrongCredentials = status => {
-    this.setState({ isLoading: false })
     status === 'WrongCredentials' && this.setState({ isWrongCredentials: true })
   }
 
@@ -48,6 +47,7 @@ class CodeConfirmation extends Component {
       }).then(
         ({ data }) => {
           if (data && data.accessKeySignIn) {
+            this.setState({ isLoading: false })
             this.handleSuccess(data.accessKeySignIn)
             this.handleWrongCredentials(data.accessKeySignIn)
           }
