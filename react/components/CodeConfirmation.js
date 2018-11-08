@@ -28,8 +28,7 @@ class CodeConfirmation extends Component {
 
   handleSuccess = status => {
     const { onStateChange, next } = this.props
-    status === 'Success' && onStateChange({ step: next })
-    this.props.loginCallback()
+    status === 'Success' && this.props.loginCallback()
   }
 
   handleWrongCredentials = status => {

@@ -200,7 +200,7 @@ class LoginContent extends Component {
   redirect = () => {
     this.props.runtime.navigate({
       to: this.state.returnUrl,
-      fallbackToWindowLocation: false,
+      fallbackToWindowLocation: true,
     })
   }
 
@@ -210,12 +210,11 @@ class LoginContent extends Component {
   */
   onLoginSuccess = () => {
     const { loginCallback } = this.props
-
     return this.context.patchSession().then(() => {
       if (loginCallback) {
         loginCallback()
-      } else {
-        this.redirect()
+      } else {      
+        location.assign(this.state.returnUrl)
       }
     })
   }
@@ -276,10 +275,7 @@ class LoginContent extends Component {
     // Check if the user is already logged and redirect to the return URL if it didn't receive
     // the profile by the props, if receive it, should render the account options.
     if (getProfile(session) && !profile) {
-      if (location.search.includes('returnUrl')) {
-        this.redirect()
-      }
-      return null
+      this.redirect()
     }
 
     let step = this.state.step
