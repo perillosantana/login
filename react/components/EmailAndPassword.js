@@ -79,11 +79,11 @@ class EmailAndPassword extends Component {
   }
 
   handleWrongCredentials = status => {
-    status === 'WrongCredentials' && this.setState({ isWrongCredentials: true })
+    status === 'WrongCredentials' && this.setState({ isWrongCredentials: true, isLoading: false })
   }
 
   handleUserIsBlocked = status => {
-    status === 'BlockedUser' && this.setState({ isUserBlocked: true })
+    status === 'BlockedUser' && this.setState({ isUserBlocked: true, isLoading: false })
   }
 
   handleOnSubmit = event => {
@@ -100,7 +100,6 @@ class EmailAndPassword extends Component {
       })
         .then(({ data }) => {
           if (data && data.classicSignIn) {
-            this.setState({ isLoading: false })
             this.handleSuccess(data.classicSignIn)
             this.handleWrongCredentials(data.classicSignIn)
             this.handleUserIsBlocked(data.classicSignIn)
