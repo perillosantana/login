@@ -295,7 +295,7 @@ class LoginContent extends Component {
       this.shouldRenderLoginOptions
     )
 
-    const className = classNames('vtex-login-content flex relative bg-white justify-around overflow-hidden', {
+    const className = classNames('vtex-login-content flex relative bg-base justify-around overflow-hidden', {
       'vtex-login-content--initial-screen': this.state.isOnInitialScreen,
       'vtex-login-content--always-with-options flex-column-reverse items-center flex-row-ns items-baseline-ns':
         !isInitialScreenOptionOnly,

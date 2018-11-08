@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
+- Replace tachyons classes with design tokens.
 - Use icons from dreamstore icon pack.
 
 ## [1.6.5] - 2018-11-08

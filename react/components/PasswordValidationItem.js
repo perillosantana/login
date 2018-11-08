@@ -6,7 +6,7 @@ export default class PasswordValidationItem extends Component {
     const { valid, prefix, label } = this.props
 
     return (
-      <div className={`flex flex-row ${valid ? 'green' : 'red'}`}>
+      <div className={`flex flex-row ${valid ? 'c-success' : 'c-danger'}`}>
         <div className="w-20">
           <span className="f6">{prefix}</span>
         </div>
