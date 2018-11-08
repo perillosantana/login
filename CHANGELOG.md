@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Replace tachyons classes with design tokens.
+- Use icons from dreamstore icon pack.
+
+## [1.6.5] - 2018-11-08
+### Fixed
+- Fix Account Options is showing before complete login action
 
 ## [1.6.4] - 2018-10-18
 ### Fixed
