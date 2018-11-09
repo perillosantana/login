@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.1] - 2018-11-09
+### Fixed
+- Fix redirect behavior, now this function is called only when `/login` is in path
+
 ## [2.0.0] - 2018-11-08
 ### Changed
 - Replace tachyons classes with design tokens.
