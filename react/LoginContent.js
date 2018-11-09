@@ -275,7 +275,9 @@ class LoginContent extends Component {
     // Check if the user is already logged and redirect to the return URL if it didn't receive
     // the profile by the props, if receive it, should render the account options.
     if (getProfile(session) && !profile) {
-      this.redirect()
+      if (location.pathname.includes('/login')) {
+        this.redirect()
+      }
     }
 
     let step = this.state.step
