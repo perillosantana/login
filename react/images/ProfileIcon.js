@@ -11,7 +11,7 @@ const ProfileIcon = ({ size, fillColor }) => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       width={size}
       height={size}
-      viewBox="0 0 44 44"
+      viewBox="0 0 22 22"
       fill="none"
       color={fillColor}
     >
