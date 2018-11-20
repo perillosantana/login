@@ -33,7 +33,6 @@ export default class LoginComponent extends Component {
       data,
     } = this.props
 
-    console.log(iconSize)
     const profile = getProfile(data)
 
     const iconContent = (
