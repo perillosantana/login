@@ -46,8 +46,8 @@ export default class LoginComponent extends Component {
             {profile.firstName || truncateString(profile.email)}
           </span>
         ) : (
-          iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses} dn-m db-l`}>{iconLabel}</span>
-        )}
+            iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses} dn-m db-l`}>{iconLabel}</span>
+          )}
       </Fragment>
     )
 
@@ -93,7 +93,7 @@ export default class LoginComponent extends Component {
             <div
               className={`vtex-login__box absolute z-max ${
                 isBoxOpen ? 'flex' : 'dn'
-              }`}
+                }`}
               style={boxPositionStyle}
             >
               <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-base" />
