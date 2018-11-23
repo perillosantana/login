@@ -1,22 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import Icon from 'vtex.use-svg/Icon'
 /**
  * Profile icon component in svg
  */
-const ProfileIcon = ({ size, fillColor }) => {
+const ProfileIcon = ({ size, fillColor, viewBox }) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-      width={size}
-      height={size}
-      viewBox="0 0 22 22"
-      fill="none"
+    <Icon
+      id="profile"
+      size={size}
+      viewBox={viewBox}
       color={fillColor}
-    >
-      <use href="#profile" xlinkHref="#profile" />
-    </svg>
+    />
   )
 }
 
@@ -25,11 +20,14 @@ ProfileIcon.propTypes = {
   size: PropTypes.number,
   /* Fill color for the icon */
   fillColor: PropTypes.string,
+  /* Icon Viewbox */
+  viewBox: PropTypes.string
 }
 
 ProfileIcon.defaultProps = {
   size: 20,
   fillColor: 'currentColor',
+  viewBox: '0 0 22 22'
 }
 
 export default ProfileIcon
