@@ -131,9 +131,6 @@ class LoginContent extends Component {
   static defaultProps = {
     isInitialScreenOptionOnly: true,
     defaultOption: 0,
-    emailPlaceholder: 'Ex.: example@vtex.com',
-    passwordPlaceholder: 'Entre com a senha',
-    accessCodePlaceholder: 'Código de acesso',
     optionsTitle: '',
   }
 
@@ -213,7 +210,7 @@ class LoginContent extends Component {
     return this.context.patchSession().then(() => {
       if (loginCallback) {
         loginCallback()
-      } else {      
+      } else {
         location.assign(this.state.returnUrl)
       }
     })
