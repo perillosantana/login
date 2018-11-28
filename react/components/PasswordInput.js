@@ -84,7 +84,7 @@ class PasswordInput extends Component {
           type={`${showPassword ? 'text' : 'password'}`}
           value={password}
           onChange={this.handlePasswordChange}
-          placeholder={this.props.placeholder}
+          placeholder={this.props.placeholder || translate('login.password.placeholder', intl)}
           onBlur={() => this.setState({ showVerification: false })}
           onFocus={() => this.setState({ showVerification: true })}
           suffixIcon={(

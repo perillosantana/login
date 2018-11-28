@@ -141,7 +141,7 @@ class EmailAndPassword extends Component {
               <Input
                 value={email}
                 onChange={this.handleInputChange}
-                placeholder={emailPlaceholder}
+                placeholder={emailPlaceholder || translate('login.email.placeholder', intl)}
               />
             </div>
             <FormError show={isInvalidEmail}>

@@ -4,7 +4,7 @@ import { compose } from 'ramda'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { graphql } from 'react-apollo'
-import { injectIntl } from 'react-intl'
+import { injectIntl, FormattedMessage } from 'react-intl'
 import { Transition } from 'react-spring'
 import { withSession, withRuntimeContext } from 'render'
 
@@ -17,7 +17,7 @@ import EmailVerification from './components/EmailVerification'
 
 import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
-
+import { translate } from './utils/translate'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
 import { getProfile } from './utils/profile'
@@ -70,7 +70,7 @@ const STEPS = [
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_VERIFICATION}
           email={state.email}
-          accessCodePlaceholder={props.accessCodePlaceholder}
+          accessCodePlaceholder={props.accessCodePlaceholder || <FormattedMessage id="login.accessCode.placeholder" />}
           code={state.code}
           onStateChange={func}
           loginCallback={props.loginCallback}
@@ -131,9 +131,9 @@ class LoginContent extends Component {
   static defaultProps = {
     isInitialScreenOptionOnly: true,
     defaultOption: 0,
-    emailPlaceholder: 'Ex.: example@vtex.com',
-    passwordPlaceholder: 'Entre com a senha',
-    accessCodePlaceholder: 'Código de acesso',
+    emailPlaceholder: '',
+    passwordPlaceholder: '',
+    accessCodePlaceholder: '',
     optionsTitle: '',
   }
 
@@ -213,7 +213,7 @@ class LoginContent extends Component {
     return this.context.patchSession().then(() => {
       if (loginCallback) {
         loginCallback()
-      } else {      
+      } else {
         location.assign(this.state.returnUrl)
       }
     })

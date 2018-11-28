@@ -77,7 +77,7 @@ class CodeConfirmation extends Component {
         content={(
           <Fragment>
             <div className="vtex-login__input-container vtex-login__input-container--access-code">
-              <Input value={code} onChange={this.handleInputChange} placeholder={accessCodePlaceholder} />
+              <Input value={code} onChange={this.handleInputChange} placeholder={accessCodePlaceholder || translate('login.accessCode.placeholder', intl)} />
             </div>
             <FormError show={isInvalidCode}>
               {translate('login.invalidCode', intl)}
