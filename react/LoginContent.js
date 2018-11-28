@@ -131,9 +131,6 @@ class LoginContent extends Component {
   static defaultProps = {
     isInitialScreenOptionOnly: true,
     defaultOption: 0,
-    emailPlaceholder: 'Ex.: example@vtex.com',
-    passwordPlaceholder: 'Entre com a senha',
-    accessCodePlaceholder: 'Código de acesso',
     optionsTitle: '',
   }
 

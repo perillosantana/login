@@ -104,7 +104,7 @@ class RecoveryPassword extends Component {
             <div className="vtex-login__input-container vtex-login__input-container--access-code">
               <Input
                 onChange={this.handleCodeChange}
-                placeholder={accessCodePlaceholder}
+                placeholder={emailPlaceholder || translate('login.accessCode.placeholder', intl)}
               />
             </div>
             <FormError show={isInvalidCode}>
