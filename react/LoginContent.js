@@ -131,9 +131,6 @@ class LoginContent extends Component {
   static defaultProps = {
     isInitialScreenOptionOnly: true,
     defaultOption: 0,
-    emailPlaceholder: '',
-    passwordPlaceholder: '',
-    accessCodePlaceholder: '',
     optionsTitle: '',
   }
 
