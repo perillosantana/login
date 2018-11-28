@@ -4,7 +4,7 @@ import { compose } from 'ramda'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { graphql } from 'react-apollo'
-import { injectIntl, FormattedMessage } from 'react-intl'
+import { injectIntl } from 'react-intl'
 import { Transition } from 'react-spring'
 import { withSession, withRuntimeContext } from 'render'
 
@@ -17,7 +17,7 @@ import EmailVerification from './components/EmailVerification'
 
 import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
-import { translate } from './utils/translate'
+
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
 import { getProfile } from './utils/profile'
@@ -70,7 +70,7 @@ const STEPS = [
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_VERIFICATION}
           email={state.email}
-          accessCodePlaceholder={props.accessCodePlaceholder || <FormattedMessage id="login.accessCode.placeholder" />}
+          accessCodePlaceholder={props.accessCodePlaceholder}
           code={state.code}
           onStateChange={func}
           loginCallback={props.loginCallback}
