@@ -4,7 +4,7 @@ import { Button } from 'vtex.styleguide'
 import OutsideClickHandler from 'react-outside-click-handler'
 
 import LoginContent from '../LoginContent'
-import ProfileIcon from '../images/ProfileIcon'
+import Icon from 'vtex.use-svg/Icon'
 import { truncateString } from '../utils/format-string'
 import { translate } from '../utils/translate'
 import { LoginPropTypes } from '../propTypes'
@@ -38,7 +38,7 @@ export default class LoginComponent extends Component {
     const iconContent = (
       <Fragment>
         <div className={`${iconClasses}`}>
-          <ProfileIcon size={iconSize} />
+          <Icon id="hpa-profile" size={iconSize} />
         </div>
         {profile ? (
           <span className={`vtex-login__profile order-1 f6 pl4 ${labelClasses} dn-m db-l`}>

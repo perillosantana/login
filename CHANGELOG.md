@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.4] - 2018-11-29
+### Changed
+- Use of `vtex.use-svg` lib to display icons.
+
 ## [2.0.3] - 2018-11-27
 ### Added
 - Internationalization on all the inputs placeholder.

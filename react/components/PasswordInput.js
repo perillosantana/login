@@ -4,8 +4,7 @@ import PropTypes from 'prop-types'
 import { Input } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils/translate'
-import EyeSightEnable from '../images/EyeSightEnable'
-import EyeSightDisable from '../images/EyeSightDisable'
+import Icon from 'vtex.use-svg/Icon'
 import Tooltip from './Tooltip'
 import PasswordValidationContent from './PasswordValidationContent'
 import { isMobile } from 'react-device-detect'
@@ -89,7 +88,7 @@ class PasswordInput extends Component {
           onFocus={() => this.setState({ showVerification: true })}
           suffixIcon={(
             <span className="pointer" onClick={this.handleEyeIcon}>
-              {showPassword ? <EyeSightDisable /> : <EyeSightEnable />}
+              {showPassword ? <Icon id='mpa-s-eyesight--off' size={16} /> : <Icon id='mpa-s-eyesight--on' size={16} />}
             </span>
           )}
         />
