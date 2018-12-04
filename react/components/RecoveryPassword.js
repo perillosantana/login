@@ -82,7 +82,7 @@ class RecoveryPassword extends Component {
       onStateChange,
       passwordPlaceholder,
       accessCodePlaceholder,
-      showPasswordVerificationIntoTooltip,
+      showPasswordVerificationIntoTooltip
     } = this.props
 
     const {
@@ -104,7 +104,7 @@ class RecoveryPassword extends Component {
             <div className="vtex-login__input-container vtex-login__input-container--access-code">
               <Input
                 onChange={this.handleCodeChange}
-                placeholder={emailPlaceholder || translate('login.accessCode.placeholder', intl)}
+                placeholder={accessCodePlaceholder || translate('login.accessCode.placeholder', intl)}
               />
             </div>
             <FormError show={isInvalidCode}>
