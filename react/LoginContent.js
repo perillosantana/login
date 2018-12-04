@@ -92,6 +92,7 @@ const STEPS = [
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_PASSWORD}
           email={state.email}
+          emailPlaceholder={props.emailPlaceholder}
           passwordPlaceholder={props.passwordPlaceholder}
           showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
           accessCodePlaceholder={props.accessCodePlaceholder}

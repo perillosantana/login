@@ -49,6 +49,7 @@ class PasswordInput extends Component {
       intl,
       password,
       showPasswordVerificationIntoTooltip,
+      placeholder
     } = this.props
 
     const fields = [
@@ -84,7 +85,7 @@ class PasswordInput extends Component {
           type={`${showPassword ? 'text' : 'password'}`}
           value={password}
           onChange={this.handlePasswordChange}
-          placeholder={this.props.placeholder || translate('login.password.placeholder', intl)}
+          placeholder={placeholder || translate('login.password.placeholder', intl)}
           onBlur={() => this.setState({ showVerification: false })}
           onFocus={() => this.setState({ showVerification: true })}
           suffixIcon={(
@@ -124,7 +125,7 @@ PasswordInput.propTypes = {
   /** Password set on state */
   password: PropTypes.string.isRequired,
   /** Placeholder to appear into the input */
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   /** Set the type of password verification ui */
   showPasswordVerificationIntoTooltip: PropTypes.bool,
   /** Function to change de active tab */
