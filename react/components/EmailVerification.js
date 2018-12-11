@@ -2,18 +2,17 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Button, IconArrowBack } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
-import { graphql } from 'react-apollo'
 
 import Form from './Form'
 import FormError from './FormError'
 import { translate } from '../utils/translate'
-import { isValidEmail } from '../utils/format-check'
-import sendEmailVerification from '../mutations/sendEmailVerification.gql'
 import { steps } from '../utils/steps'
+
+import { AuthState, AuthService } from 'vtex.auth'
 
 /**
  * EmailVerification tab component.
- * Receive a email from an input and call the sendEmailVerification mutation
+ * Receive a email from an input and call the sendEmailVerification API
  */
 class EmailVerification extends Component {
   static propTypes = {
@@ -27,12 +26,8 @@ class EmailVerification extends Component {
     title: PropTypes.string,
     /** Placeholder to email input */
     emailPlaceholder: PropTypes.string,
-    /** Email set on state */
-    email: PropTypes.string.isRequired,
     /** Function to change de active tab */
     onStateChange: PropTypes.func.isRequired,
-    /** Graphql property to call a mutation */
-    sendEmailVerification: PropTypes.func.isRequired,
     /** Intl object*/
     intl: intlShape,
     /** Whether to display the back button */
@@ -40,38 +35,16 @@ class EmailVerification extends Component {
   }
 
   state = {
-    isLoading: false,
     isInvalidEmail: false,
     isUserBlocked: false,
   }
 
-  handleInputChange = event => {
-    this.setState({ isInvalidEmail: false, isUserBlocked: false })
-    this.props.onStateChange({ email: event.target.value })
-  }
-
-  componentWillUnmount() {
-    this.setState({ isLoading: false })
-  }
-
-  handleOnSubmit = event => {
+  handleOnSubmit = (event, email, validate, sendToken) => {
     event.preventDefault()
-    const { isCreatePassword, sendEmailVerification, email, onStateChange, next } = this.props
-    if (!isValidEmail(email)) {
+    if (!validate(email)) {
       this.setState({ isInvalidEmail: true })
     } else {
-      this.setState({ isLoading: true })
-      sendEmailVerification({ variables: { email } })
-        .then(({ data }) => {
-          if (data && data.sendEmailVerification) {
-            this.setState({ isLoading: false })
-            isCreatePassword
-              ? onStateChange({ step: steps.CREATE_PASSWORD, isCreatePassword: false })
-              : onStateChange({ step: next })
-          }
-        }, err => {
-          err && this.setState({ isLoading: false, isUserBlocked: true })
-        })
+      sendToken()
     }
   }
 
@@ -81,26 +54,34 @@ class EmailVerification extends Component {
       intl,
       onStateChange,
       previous,
-      email,
       isCreatePassword,
       showBackButton,
       emailPlaceholder,
     } = this.props
-    const { isLoading, isInvalidEmail, isUserBlocked } = this.state
+    const { isInvalidEmail, isUserBlocked } = this.state
 
     return (
       <Form
         className="vtex-login__email-verification"
         title={title || translate('loginOptions.emailVerification', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
-        content={(
+        content={
           <Fragment>
             <div className="vtex-login__input-container vtex-login__input-container--email">
-              <Input
-                value={email}
-                onChange={this.handleInputChange}
-                placeholder={emailPlaceholder || translate('login.email.placeholder', intl)}
-              />
+              <AuthState.Email>
+                {({ value, setValue }) => (
+                  <Input
+                    type="email"
+                    name="email"
+                    value={value || ''}
+                    onChange={e => setValue(e.target.value)}
+                    placeholder={
+                      emailPlaceholder ||
+                      translate('login.email.placeholder', intl)
+                    }
+                  />
+                )}
+              </AuthState.Email>
             </div>
             <FormError show={isInvalidEmail}>
               {translate('login.invalidEmail', intl)}
@@ -109,44 +90,72 @@ class EmailVerification extends Component {
               {translate('login.userBlocked', intl)}
             </FormError>
           </Fragment>
-        )}
-        footer={(
+        }
+        footer={
           <Fragment>
-            {(showBackButton || isCreatePassword) && <div className="vtex-login__back-button">
-              <Button
-                variation="tertiary"
-                size="small"
-                onClick={() => isCreatePassword
-                  ? onStateChange({ step: steps.EMAIL_PASSWORD, isCreatePassword: false })
-                  : onStateChange({ step: previous })
-                }
-              >
-                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7" /></span>
-                <span className="f7 ml2">
-                  {translate('login.goBack', intl)}
-                </span>
-              </Button>
-            </div>}
+            {(showBackButton || isCreatePassword) && (
+              <div className="vtex-login__back-button">
+                <Button
+                  variation="tertiary"
+                  size="small"
+                  onClick={() =>
+                    isCreatePassword
+                      ? onStateChange({
+                        step: steps.EMAIL_PASSWORD,
+                        isCreatePassword: false,
+                      })
+                      : onStateChange({ step: previous })
+                  }
+                >
+                  <span className="vtex-login__back-icon c-link">
+                    <IconArrowBack size={10} color="currentColor" />
+                  </span>
+                  <span className="f7 ml2">
+                    {translate('login.goBack', intl)}
+                  </span>
+                </Button>
+              </div>
+            )}
             <div className="vtex-login__send-button">
-              <Button
-                variation="primary"
-                size="small"
-                type="submit"
-                onClick={e => this.handleOnSubmit(e)}
-                isLoading={isLoading}
+              <AuthService.SendAccessKey
+                useNewSession
+                onSuccess={() => {
+                  isCreatePassword
+                    ? onStateChange({
+                      step: steps.CREATE_PASSWORD,
+                      isCreatePassword: false,
+                    })
+                    : onStateChange({ step: this.props.next })
+                }}
+                onFailure={() => {
+                  this.setState({ isUserBlocked: true })
+                }}
               >
-                <span className="f7">{translate('login.send', intl)}</span>
-              </Button>
+                {({
+                  state: { email },
+                  loading,
+                  action: sendToken,
+                  validation: { validateEmail },
+                }) => (
+                  <Button
+                    variation="primary"
+                    size="small"
+                    type="submit"
+                    isLoading={loading}
+                    onClick={e =>
+                      this.handleOnSubmit(e, email, validateEmail, sendToken)
+                    }
+                  >
+                    <span className="f7">{translate('login.send', intl)}</span>
+                  </Button>
+                )}
+              </AuthService.SendAccessKey>
             </div>
           </Fragment>
-        )}
+        }
       />
     )
   }
 }
 
-export default injectIntl(
-  graphql(sendEmailVerification, { name: 'sendEmailVerification' })(
-    EmailVerification
-  )
-)
+export default injectIntl(EmailVerification)

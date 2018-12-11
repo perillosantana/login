@@ -23,6 +23,7 @@ import { LoginPropTypes } from './propTypes'
 import { getProfile } from './utils/profile'
 import { Queries } from 'vtex.store'
 import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
+import { AuthState } from 'vtex.auth'
 
 import './global.css'
 
@@ -37,7 +38,6 @@ const STEPS = [
           isCreatePassword={state.isCreatePassword}
           title={props.accessCodeTitle}
           emailPlaceholder={props.emailPlaceholder}
-          email={state.email}
           onStateChange={func}
           showBackButton={!isOptionsMenuDisplayed}
         />
@@ -53,8 +53,6 @@ const STEPS = [
           title={props.emailAndPasswordTitle}
           emailPlaceholder={props.emailPlaceholder}
           passwordPlaceholder={props.passwordPlaceholder}
-          email={state.email}
-          password={state.password}
           showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
           onStateChange={func}
           showBackButton={!isOptionsMenuDisplayed}
@@ -69,9 +67,7 @@ const STEPS = [
         <CodeConfirmation
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_VERIFICATION}
-          email={state.email}
           accessCodePlaceholder={props.accessCodePlaceholder}
-          code={state.code}
           onStateChange={func}
           loginCallback={props.loginCallback}
         />
@@ -91,7 +87,6 @@ const STEPS = [
         <RecoveryPassword
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_PASSWORD}
-          email={state.email}
           passwordPlaceholder={props.passwordPlaceholder}
           showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
           accessCodePlaceholder={props.accessCodePlaceholder}
@@ -307,26 +302,29 @@ class LoginContent extends Component {
     })
 
     return (
-      <div className={className}>
-        <Transition
-          keys={(!profile && this.shouldRenderLoginOptions && !loading) ? ['children'] : []}
-          from={{ opacity: 0, transform: 'translateX(-50%)' }}
-          enter={{ opacity: 1, transform: 'translateX(0%)' }}
-          leave={{ display: 'none' }}
-        >
-          {(!profile && this.shouldRenderLoginOptions && !loading) ? [this.renderChildren] : []}
-        </Transition>
-        <div className={formClassName}>
+      <AuthState scope="store">
+        <div className={className}>
           <Transition
-            keys={this.shouldRenderForm && render ? ['children'] : []}
-            from={{ opacity: 0, transform: 'translateX(50%)' }}
+            keys={(!profile && this.shouldRenderLoginOptions && !loading) ? ['children'] : []}
+            from={{ opacity: 0, transform: 'translateX(-50%)' }}
             enter={{ opacity: 1, transform: 'translateX(0%)' }}
             leave={{ display: 'none' }}
           >
-            {this.shouldRenderForm && render ? [render] : []}
+            {(!profile && this.shouldRenderLoginOptions && !loading) ? [this.renderChildren] : []}
           </Transition>
+          <div className={formClassName}>
+            <Transition
+              keys={this.shouldRenderForm && render ? ['children'] : []}
+              from={{ opacity: 0, transform: 'translateX(50%)' }}
+              enter={{ opacity: 1, transform: 'translateX(0%)' }}
+              leave={{ display: 'none' }}
+            >
+              {this.shouldRenderForm && render ? [render] : []}
+            </Transition>
+          </div>
         </div>
-      </div>
+      </AuthState>
+
     )
   }
 }

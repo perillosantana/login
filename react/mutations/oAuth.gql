@@ -1,3 +1,0 @@
-mutation oAuth($provider: String!, $redirectUrl: String!) {
-  oAuth(provider: $provider, redirectUrl: $redirectUrl)
-}

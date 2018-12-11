@@ -1,61 +1,44 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { graphql } from 'react-apollo'
 import { Button } from 'vtex.styleguide'
+import { AuthService } from 'vtex.auth'
 
 import { translate } from '../utils/translate'
-
-import oAuth from '../mutations/oAuth.gql'
 
 // Component that shows account options to the user.
 class OAuth extends Component {
   static propTypes = {
     /** Intl object*/
     intl: intlShape,
-    /** Graphql property to call a mutation */
-    oAuth: PropTypes.func,
     /** Name of the Provider to proceed with the Authentication */
     provider: PropTypes.string,
     /** Actual button */
     children: PropTypes.node,
-  };
-
-  handleLoginClick = event => {
-    let callbackUrl = location.href
-    if (location.href.substr(-1) === '/') {
-      callbackUrl = location.href.slice(0, -1)
-    }
-    event.preventDefault()
-    this.props.oAuth({
-      variables: {
-        provider: this.props.provider,
-        redirectUrl: callbackUrl,
-      },
-    }).then(({ data: { oAuth } }) => {
-      location.assign(oAuth)
-    })
   }
 
   render() {
     const { intl, children, provider } = this.props
     return (
       <div className="vtex-login__button vtex-login__button--social">
-        <Button
-          variation="tertiary"
-          onClick={event => this.handleLoginClick(event)}
-        >
-          {children}
-          <span className="f6 vtex-login__oauth-label relative normal">
-            {translate('loginOptions.oAuth', intl)}
-            <span className="vtex-login__oauth-provider b">{provider}</span>
-          </span>
-        </Button>
+        <AuthService.OAuthRedirect useNewSession provider={provider} >
+          {({ loading, action: redirectToOAuthPage }) => (
+            <Button
+              isLoading={loading}
+              variation="tertiary"
+              onClick={redirectToOAuthPage}
+            >
+              {children}
+              <span className="t-action--small vtex-login__oauth-label relative normal">
+                {translate('loginOptions.oAuth', intl)}
+                <span className="vtex-login__oauth-provider b">{provider}</span>
+              </span>
+            </Button>
+          )}
+        </AuthService.OAuthRedirect>
       </div>
     )
   }
 }
 
-export default injectIntl(
-  graphql(oAuth, { name: 'oAuth' })(OAuth)
-)
+export default injectIntl(OAuth)

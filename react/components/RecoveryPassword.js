@@ -2,79 +2,63 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Button, IconArrowBack } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
-import { graphql } from 'react-apollo'
 
 import { translate } from '../utils/translate'
 import { isValidPassword, isValidAccessCode } from '../utils/format-check'
-import recoveryPassword from '../mutations/recoveryPassword.gql'
 import Form from './Form'
 import FormError from './FormError'
 import PasswordInput from './PasswordInput'
 
+import { AuthState, AuthService } from 'vtex.auth'
+
 /** RecoveryPassword tab component. Receive a code and new password from an input
- * and call the recoveryPassword mutation.
+ * and call the recoveryPassword API.
  */
 class RecoveryPassword extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoading: false,
       isInvalidPassword: false,
       isPasswordsMatch: true,
       isInvalidCode: false,
       isUserBlocked: false,
-      code: '',
-      newPassword: '',
       confirmPassword: '',
     }
   }
 
-  handleCodeChange = event => {
-    this.setState({ isInvalidCode: false, code: event.target.value })
+  handleConfirmPasswordChange = event => {
+    this.setState({
+      isPasswordsMatch: true,
+      confirmPassword: event.target.value,
+    })
   }
 
-  handleNewPassword = event => {
-    this.setState({ isInvalidPassword: false, newPassword: event.password })
-  }
-
-  handleConfirmPassword = event => {
-    this.setState({ isPasswordsMatch: true, confirmPassword: event.target.value })
-  }
-
-  handleSuccess = status => {
+  handleSuccess = () => {
     const { onStateChange, next } = this.props
-    status === 'Success' && onStateChange({ step: next })
+    onStateChange({ step: next })
     this.props.loginCallback()
   }
 
-  handleUserIsBlocked = status => {
-    status === 'BlockedUser' && this.setState({ isUserBlocked: true })
+  handleFailure = err => {
+    err.authStatus === 'BlockedUser'
+      ? this.setState({ isUserBlocked: true })
+      : console.error(err)
   }
 
-  handleOnSubmit = event => {
+  handleOnSubmit = (event, newPassword, token, setPassword) => {
     event.preventDefault()
-    const { email, recoveryPassword } = this.props
-    const { newPassword, code, confirmPassword } = this.state
-    if (!isValidAccessCode(code)) {
+    const { confirmPassword } = this.state
+    if (!isValidAccessCode(token)) {
       this.setState({ isInvalidCode: true })
     } else if (!isValidPassword(newPassword)) {
       this.setState({ isInvalidPassword: true })
     } else if (newPassword !== confirmPassword) {
       this.setState({ isPasswordsMatch: false })
     } else {
-      this.setState({ isLoading: true })
-      recoveryPassword({
-        variables: { email, newPassword, code },
-      })
-        .then(({ data }) => {
-          if (data && data.recoveryPassword) {
-            this.setState({ isLoading: false })
-            this.handleSuccess(data.recoveryPassword)
-            this.handleUserIsBlocked(data.recoveryPassword)
-          }
-        }, err => { console.error(err) })
+      setPassword()
     }
   }
+
   render() {
     const {
       intl,
@@ -86,12 +70,10 @@ class RecoveryPassword extends Component {
     } = this.props
 
     const {
-      isLoading,
       isInvalidPassword,
       isUserBlocked,
       isInvalidCode,
       isPasswordsMatch,
-      newPassword,
     } = this.state
 
     return (
@@ -99,24 +81,46 @@ class RecoveryPassword extends Component {
         className="vtex-login__email-verification"
         title={translate('login.createPassword', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
-        content={(
+        content={
           <Fragment>
             <div className="vtex-login__input-container vtex-login__input-container--access-code">
-              <Input
-                onChange={this.handleCodeChange}
-                placeholder={emailPlaceholder || translate('login.accessCode.placeholder', intl)}
-              />
+              <AuthState.Token>
+                {({ value, setValue }) => (
+                  <Input
+                    token
+                    name="token"
+                    onChange={e => {
+                      setValue(e.target.value)
+                      this.setState({ isInvalidCode: false })
+                    }}
+                    value={value || ''}
+                    placeholder={
+                      accessCodePlaceholder ||
+                      translate('login.accessCode.placeholder', intl)
+                    }
+                  />
+                )}
+              </AuthState.Token>
             </div>
             <FormError show={isInvalidCode}>
               {translate('login.invalidCode', intl)}
             </FormError>
             <div className="vtex-login__input-container vtex-login__input-container--password">
-              <PasswordInput
-                onStateChange={this.handleNewPassword}
-                placeholder={passwordPlaceholder}
-                password={newPassword}
-                showPasswordVerificationIntoTooltip={showPasswordVerificationIntoTooltip}
-              />
+              <AuthState.Password>
+                {({ value, setValue }) => (
+                  <PasswordInput
+                    onStateChange={({ password }) => {
+                      setValue(password)
+                      this.setState({ isInvalidPassword: false })
+                    }}
+                    placeholder={passwordPlaceholder || translate('login.password.placeholder', intl)}
+                    password={value || ''}
+                    showPasswordVerificationIntoTooltip={
+                      showPasswordVerificationIntoTooltip
+                    }
+                  />
+                )}
+              </AuthState.Password>
             </div>
             <FormError show={isInvalidPassword}>
               {translate('login.invalidPassword', intl)}
@@ -127,7 +131,7 @@ class RecoveryPassword extends Component {
             <div className="vtex-login__input-container vtex-login__input-container--password">
               <Input
                 type="password"
-                onChange={this.handleConfirmPassword}
+                onChange={this.handleConfirmPasswordChange}
                 placeholder={translate('login.confirmPassword', intl)}
               />
             </div>
@@ -135,8 +139,8 @@ class RecoveryPassword extends Component {
               {translate('login.invalidMatch', intl)}
             </FormError>
           </Fragment>
-        )}
-        footer={(
+        }
+        footer={
           <Fragment>
             <div className="vtex-login__back-button">
               <Button
@@ -144,23 +148,44 @@ class RecoveryPassword extends Component {
                 size="small"
                 onClick={() => onStateChange({ step: previous })}
               >
-                <span className="vtex-login__back-icon"><IconArrowBack size={10} color="#368DF7" /></span>
-                <span className="f7 ml2">{translate('login.goBack', intl)}</span>
+                <span className="vtex-login__back-icon c-link">
+                  <IconArrowBack size={10} color="currentColor" />
+                </span>
+                <span className="t-mini ml2">
+                  {translate('login.goBack', intl)}
+                </span>
               </Button>
             </div>
             <div className="vtex-login__send-button">
-              <Button
-                variation="primary"
-                size="small"
-                type="submit"
-                onClick={e => this.handleOnSubmit(e)}
-                isLoading={isLoading}
+              <AuthService.SetPassword
+                onSuccess={this.handleSuccess}
+                onFailure={this.handleFailure}
               >
-                <span className="f7">{translate('login.create', intl)}</span>
-              </Button>
+                {({
+                  state: { password, token },
+                  loading,
+                  action: setPassword,
+                  validation: {
+                    validatePassword,
+                  },
+                }) => (
+                  <Button
+                    variation="primary"
+                    size="small"
+                    type="submit"
+                    onClick={e => this.handleOnSubmit(e, password, token, setPassword)}
+                    isLoading={loading}
+                    disabled={!validatePassword(password)}
+                  >
+                    <span className="t-mini">
+                      {translate('login.create', intl)}
+                    </span>
+                  </Button>
+                )}
+              </AuthService.SetPassword>
             </div>
           </Fragment>
-        )}
+        }
       />
     )
   }
@@ -171,14 +196,10 @@ RecoveryPassword.propTypes = {
   next: PropTypes.number.isRequired,
   /** Previous step */
   previous: PropTypes.number.isRequired,
-  /** Email set on state */
-  email: PropTypes.string.isRequired,
   /** Set the type of password verification ui */
   showPasswordVerificationIntoTooltip: PropTypes.bool,
   /** Function to change de active tab */
   onStateChange: PropTypes.func.isRequired,
-  /** Graphql property to call a mutation */
-  recoveryPassword: PropTypes.func.isRequired,
   /** Intl object*/
   intl: intlShape,
   /** Placeholder to password input */
@@ -189,6 +210,4 @@ RecoveryPassword.propTypes = {
   loginCallback: PropTypes.func,
 }
 
-export default injectIntl(
-  graphql(recoveryPassword, { name: 'recoveryPassword' })(RecoveryPassword)
-)
+export default injectIntl(RecoveryPassword)

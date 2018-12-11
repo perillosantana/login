@@ -1,25 +1,17 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { Button } from 'vtex.styleguide'
 import { Link } from 'render'
-import { graphql } from 'react-apollo'
 
 import { translate } from '../utils/translate'
-import logout from '../mutations/logout.gql'
+
+import { AuthService } from 'vtex.auth'
 
 // Component that shows account options to the user.
 class AccountOptions extends Component {
   static propTypes = {
     /** Intl object*/
     intl: intlShape,
-    /** Graphql property to call a mutation */
-    logout: PropTypes.func,
-  }
-
-  handleLogoutClick = async () => {
-    await this.props.logout()
-    location.assign('/') // Needed to refetch all the data from GraphQL.
   }
 
   render() {
@@ -32,23 +24,31 @@ class AccountOptions extends Component {
               className="vtex-button bw1 ba t-action ttu br2 t-action--small v-mid relative pv3 ph5 t-heading-5 bg-base b--transparent c-action-primary  hover-c-action-primary pointer"
               closeonclick=""
             >
-              <span className="t-action--small">{translate('login.myAccount', intl)}</span>
+              <span className="t-action--small">
+                {translate('login.myAccount', intl)}
+              </span>
             </button>
           </Link>
         </div>
         <hr className="mv2 o-30" />
         <div className="ma4 min-h-2 b--muted-4">
-          <Button
-            variation="tertiary"
-            size="small"
-            onClick={() => this.handleLogoutClick()}
-          >
-            <span className="t-action--small">{translate('login.logoutLabel', intl)}</span>
-          </Button>
+          <AuthService.RedirectLogout returnUrl="/">
+            {({ action: logout }) => (
+              <Button
+                variation="tertiary"
+                size="small"
+                onClick={logout}
+              >
+                <span className="t-action--small">
+                  {translate('login.logoutLabel', intl)}
+                </span>
+              </Button>
+            )}
+          </AuthService.RedirectLogout>
         </div>
       </div>
     )
   }
 }
 
-export default injectIntl(graphql(logout, { name: 'logout' })(AccountOptions))
+export default injectIntl(AccountOptions)
