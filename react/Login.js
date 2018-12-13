@@ -7,7 +7,7 @@ import { injectIntl } from 'react-intl'
 
 import { LoginSchema } from './schema'
 import { setCookie } from './utils/set-cookie'
-import { Queries } from 'vtex.store'
+import { Queries } from 'vtex.store-resources'
 import { LoginContainerProptypes } from './propTypes'
 import LoginComponent from './components/LoginComponent'
 
