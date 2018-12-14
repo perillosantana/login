@@ -108,7 +108,7 @@ class LoginOptions extends Component {
                   onClick={this.handleRefetchOptions}
                 >
                   <div className={`${loadingOptions ? 'dn' : 'db'} f6`}>{translate('loginOptions.error.title', intl)}</div>
-                  <span className="f7 pt1">{translate('loginOptions.error.subhead', intl)}</span>
+                  <span className="t-small pt1">{translate('loginOptions.error.subhead', intl)}</span>
                 </Button>
               </div>
             </li>

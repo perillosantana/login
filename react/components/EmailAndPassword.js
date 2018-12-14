@@ -160,7 +160,7 @@ class EmailAndPassword extends Component {
                 className="link dim c-link"
                 onClick={this.handleCreatePassword}
               >
-                <span className="t-mini">
+                <span className="t-small">
                   {translate('login.forgotPassword', intl)}
                 </span>
               </a>
@@ -181,7 +181,7 @@ class EmailAndPassword extends Component {
                   <span className="vtex-login__back-icon c-link">
                     <IconArrowBack size={10} color="currentColor" />
                   </span>
-                  <span className="t-mini ml2">
+                  <span className="t-small ml2">
                     {translate('login.goBack', intl)}
                   </span>
                 </Button>
@@ -199,22 +199,22 @@ class EmailAndPassword extends Component {
                   action: loginWithPassword,
                   validation: { validateEmail },
                 }) => (
-                  <Button
-                    variation="primary"
-                    size="small"
-                    type="submit"
-                    onClick={e => {
-                      e.preventDefault()
-                      this.handleOnSubmit(email, password, loginWithPassword)
-                    }}
-                    isLoading={loading}
-                    disabled={!validateEmail(email)}
-                  >
-                    <span className="t-mini">
-                      {translate('login.signIn', intl)}
-                    </span>
-                  </Button>
-                )}
+                    <Button
+                      variation="primary"
+                      size="small"
+                      type="submit"
+                      onClick={e => {
+                        e.preventDefault()
+                        this.handleOnSubmit(email, password, loginWithPassword)
+                      }}
+                      isLoading={loading}
+                      disabled={!validateEmail(email)}
+                    >
+                      <span className="t-small">
+                        {translate('login.signIn', intl)}
+                      </span>
+                    </Button>
+                  )}
               </AuthService.LoginWithPassword>
             </div>
           </Fragment>
@@ -226,7 +226,7 @@ class EmailAndPassword extends Component {
             className="link dim c-link"
             onClick={e => this.handleCreatePassword(e)}
           >
-            <span className="t-mini">
+            <span className="t-small">
               {translate('login.notHaveAccount', intl)}
             </span>
           </a>

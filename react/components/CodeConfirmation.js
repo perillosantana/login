@@ -85,7 +85,7 @@ class CodeConfirmation extends Component {
                 <span className="vtex-login__back-icon c-link">
                   <IconArrowBack size={10} color="currentColor" />
                 </span>
-                <span className="f7 ml2">
+                <span className="t-small ml2">
                   {translate('login.goBack', intl)}
                 </span>
               </Button>
@@ -103,7 +103,7 @@ class CodeConfirmation extends Component {
                     onClick={e => this.handleOnSubmit(e, confirmToken, token)}
                     isLoading={loading}
                   >
-                    <span className="f7">
+                    <span className="t-small">
                       {translate('login.confirm', intl)}
                     </span>
                   </Button>

@@ -6,8 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.1.0] - 2018-12-14
 ### Changed
 - Use `vtex.auth` lib instead of mutations to perform authentication operations.
+- Bump `vtex.styleguide` major version.
+
+### Fixed
+- Add design tokens on labels. 
 
 ## [2.0.4] - 2018-11-29
 ### Changed

@@ -110,7 +110,7 @@ class EmailVerification extends Component {
                   <span className="vtex-login__back-icon c-link">
                     <IconArrowBack size={10} color="currentColor" />
                   </span>
-                  <span className="f7 ml2">
+                  <span className="t-small ml2">
                     {translate('login.goBack', intl)}
                   </span>
                 </Button>
@@ -137,18 +137,18 @@ class EmailVerification extends Component {
                   action: sendToken,
                   validation: { validateEmail },
                 }) => (
-                  <Button
-                    variation="primary"
-                    size="small"
-                    type="submit"
-                    isLoading={loading}
-                    onClick={e =>
-                      this.handleOnSubmit(e, email, validateEmail, sendToken)
-                    }
-                  >
-                    <span className="f7">{translate('login.send', intl)}</span>
-                  </Button>
-                )}
+                    <Button
+                      variation="primary"
+                      size="small"
+                      type="submit"
+                      isLoading={loading}
+                      onClick={e =>
+                        this.handleOnSubmit(e, email, validateEmail, sendToken)
+                      }
+                    >
+                      <span className="t-small">{translate('login.send', intl)}</span>
+                    </Button>
+                  )}
               </AuthService.SendAccessKey>
             </div>
           </Fragment>
