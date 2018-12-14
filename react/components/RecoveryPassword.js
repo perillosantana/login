@@ -151,7 +151,7 @@ class RecoveryPassword extends Component {
                 <span className="vtex-login__back-icon c-link">
                   <IconArrowBack size={10} color="currentColor" />
                 </span>
-                <span className="t-mini ml2">
+                <span className="t-small ml2">
                   {translate('login.goBack', intl)}
                 </span>
               </Button>
@@ -169,19 +169,19 @@ class RecoveryPassword extends Component {
                     validatePassword,
                   },
                 }) => (
-                  <Button
-                    variation="primary"
-                    size="small"
-                    type="submit"
-                    onClick={e => this.handleOnSubmit(e, password, token, setPassword)}
-                    isLoading={loading}
-                    disabled={!validatePassword(password)}
-                  >
-                    <span className="t-mini">
-                      {translate('login.create', intl)}
-                    </span>
-                  </Button>
-                )}
+                    <Button
+                      variation="primary"
+                      size="small"
+                      type="submit"
+                      onClick={e => this.handleOnSubmit(e, password, token, setPassword)}
+                      isLoading={loading}
+                      disabled={!validatePassword(password)}
+                    >
+                      <span className="t-small">
+                        {translate('login.create', intl)}
+                      </span>
+                    </Button>
+                  )}
               </AuthService.SetPassword>
             </div>
           </Fragment>

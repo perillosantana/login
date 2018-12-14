@@ -7,7 +7,7 @@ export default function FormError({ children, show }) {
   }
 
   return (
-    <div className="vtex-login__form-error f7 tc pa1 mv1 mh0">
+    <div className="vtex-login__form-error t-small tc pa1 mv1 mh0">
       {children}
     </div>
   )

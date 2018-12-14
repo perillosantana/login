@@ -66,7 +66,7 @@ export default class LoginComponent extends Component {
     return (
       <Button variation="tertiary" icon onClick={onProfileIconClick}>
         <div
-          className="flex items-center"
+          className="flex pv2 items-center"
           ref={e => {
             this.iconRef = e
           }}
