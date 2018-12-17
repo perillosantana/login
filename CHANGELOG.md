@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.6.9] - 2018-12-17
+### Fixed
+- Remove typo in access code placeholder.
+
 ## [1.6.8] - 2018-12-04
 ### Fixed
 - Crash because it was using `emailPlaceholder` instead of `accessCodePlaceholder` prop in `RecoveryPassword`.
