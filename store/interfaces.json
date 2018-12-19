@@ -3,5 +3,10 @@
     "allowed": [],
     "required": [],
     "component": "Login"
+  },
+  "loginContent": {
+    "allowed": [],
+    "required": [],
+    "component": "LoginContent"
   }
 }
