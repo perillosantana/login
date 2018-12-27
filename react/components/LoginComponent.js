@@ -52,10 +52,10 @@ export default class LoginComponent extends Component {
     )
 
     if (renderIconAsLink) {
-      const linkTo = profile ? '/account' : '/login'
+      const linkTo = profile ? 'store.account' : 'store.login'
       return (
         <Link
-          to={linkTo}
+          page={linkTo}
           className="vtex-login__button--link tc flex items-center"
         >
           {iconContent}
