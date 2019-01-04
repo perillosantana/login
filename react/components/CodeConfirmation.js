@@ -79,7 +79,10 @@ class CodeConfirmation extends Component {
         }
         footer={
           <Fragment>
-            <GoBackButton onStateChange={() => onStateChange({ step: previous })} />
+            <GoBackButton
+              onStateChange={onStateChange}
+              changeTab={{ step: previous }}
+            />
             <div className="vtex-login__send-button">
               <AuthService.LoginWithAccessKey
                 onSuccess={this.handleSuccess}

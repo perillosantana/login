@@ -172,7 +172,10 @@ class EmailAndPassword extends Component {
         footer={
           <Fragment>
             {showBackButton && (
-              <GoBackButton onStateChange={() => onStateChange({ step: previous, password: '' })} />
+              <GoBackButton
+                onStateChange={onStateChange}
+                changeTab={{ step: previous, password: '' }}
+              />
             )}
             <div className="vtex-login__send-button">
               <AuthService.LoginWithPassword

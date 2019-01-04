@@ -144,7 +144,10 @@ class RecoveryPassword extends Component {
         }
         footer={
           <Fragment>
-            <GoBackButton onStateChange={() => onStateChange({ step: previous })} />
+            <GoBackButton
+              onStateChange={onStateChange}
+              changeTab={{ step: previous }}
+            />
             <div className="vtex-login__send-button">
               <AuthService.SetPassword
                 onSuccess={this.handleSuccess}

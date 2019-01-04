@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'render'
 import OutsideClickHandler from 'react-outside-click-handler'
+import classNames from 'classnames'
 
 import { ButtonWithIcon } from 'vtex.styleguide'
 import Icon from 'vtex.use-svg/Icon'
@@ -38,6 +39,11 @@ export default class LoginComponent extends Component {
 
     const iconContent = (
       <Fragment>
+        {renderIconAsLink &&
+          <div className="flex items-center">
+            <Icon id="hpa-profile" size={iconSize} />
+          </div>
+        }
         {profile ? (
           <span className={`vtex-login__profile order-1 f6 pl4 ${labelClasses} dn-m db-l`}>
             {translate('login.hello', intl)}{' '}
@@ -89,9 +95,10 @@ export default class LoginComponent extends Component {
           {this.renderIcon()}
           <OutsideClickHandler onOutsideClick={onOutSideBoxClick}>
             <div
-              className={`vtex-login__box absolute z-max ${
-                isBoxOpen ? 'flex' : 'dn'
-                }`}
+              className={classNames('vtex-login__box absolute z-max', {
+                'flex': isBoxOpen,
+                'dn': !isBoxOpen,
+              })}
               style={boxPositionStyle}
             >
               <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-base" />

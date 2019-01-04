@@ -95,14 +95,13 @@ class EmailVerification extends Component {
         footer={
           <Fragment>
             {(showBackButton || isCreatePassword) && (
-              <GoBackButton onStateChange=
-                {
-                  isCreatePassword
-                    ? onStateChange({
-                      step: steps.EMAIL_PASSWORD,
-                      isCreatePassword: false,
-                    })
-                    : onStateChange({ step: previous })
+              <GoBackButton
+                onStateChange={onStateChange}
+                changeTab={
+                  isCreatePassword ? {
+                    step: steps.EMAIL_PASSWORD,
+                    isCreatePassword: false,
+                  } : { step: previous }
                 }
               />
             )}
