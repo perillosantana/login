@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { injectIntl, intlShape } from 'react-intl'
 import { ExtensionContainer } from 'render'
+
 import { Button } from 'vtex.styleguide'
 
 import FacebookIcon from '../images/FacebookIcon'

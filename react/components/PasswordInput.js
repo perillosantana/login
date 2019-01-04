@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-
 import PropTypes from 'prop-types'
-import { Input } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
-import { translate } from '../utils/translate'
+import { isMobile } from 'react-device-detect'
+
+import { Input } from 'vtex.styleguide'
 import Icon from 'vtex.use-svg/Icon'
+
+import { translate } from '../utils/translate'
 import Tooltip from './Tooltip'
 import PasswordValidationContent from './PasswordValidationContent'
-import { isMobile } from 'react-device-detect'
 
 class PasswordInput extends Component {
   state = {

@@ -21,7 +21,6 @@ export default class Login extends Component {
 
   static defaultProps = {
     labelClasses: DEFAULT_CLASSES,
-    iconClasses: DEFAULT_CLASSES,
   }
 
   state = {

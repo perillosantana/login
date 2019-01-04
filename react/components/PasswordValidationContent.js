@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+
 import PasswordValidationItem from './PasswordValidationItem'
 
 export default class PasswordValidationContent extends Component {

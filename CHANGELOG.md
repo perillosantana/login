@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.2.1] - 2019-01-04
+### Changed
+- Use `ButtonWithIcon` in favour of `Button` from styleguide. 
+
+### Fixed
+- Create `GoBackButton` to remove duplicated code.
+
 ## [2.2.0] - 2018-12-17
 ### Added
 - Support to messages builder.

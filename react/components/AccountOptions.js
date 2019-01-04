@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { injectIntl, intlShape } from 'react-intl'
-import { Button } from 'vtex.styleguide'
 import { Link } from 'render'
+
+import { Button } from 'vtex.styleguide'
+import { AuthService } from 'vtex.auth'
 
 import { translate } from '../utils/translate'
 
-import { AuthService } from 'vtex.auth'
 
 // Component that shows account options to the user.
 class AccountOptions extends Component {
