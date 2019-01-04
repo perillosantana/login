@@ -1,15 +1,17 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { Input, Button, IconArrowBack } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
+
+import { Input, Button } from 'vtex.styleguide'
+import { AuthState, AuthService } from 'vtex.auth'
 
 import { translate } from '../utils/translate'
 import { isValidPassword, isValidAccessCode } from '../utils/format-check'
 import Form from './Form'
 import FormError from './FormError'
 import PasswordInput from './PasswordInput'
+import GoBackButton from './GoBackButton'
 
-import { AuthState, AuthService } from 'vtex.auth'
 
 /** RecoveryPassword tab component. Receive a code and new password from an input
  * and call the recoveryPassword API.
@@ -142,20 +144,7 @@ class RecoveryPassword extends Component {
         }
         footer={
           <Fragment>
-            <div className="vtex-login__back-button">
-              <Button
-                variation="tertiary"
-                size="small"
-                onClick={() => onStateChange({ step: previous })}
-              >
-                <span className="vtex-login__back-icon c-link">
-                  <IconArrowBack size={10} color="currentColor" />
-                </span>
-                <span className="t-small ml2">
-                  {translate('login.goBack', intl)}
-                </span>
-              </Button>
-            </div>
+            <GoBackButton onStateChange={() => onStateChange({ step: previous })} />
             <div className="vtex-login__send-button">
               <AuthService.SetPassword
                 onSuccess={this.handleSuccess}

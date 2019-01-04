@@ -1,14 +1,15 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { Input, Button, IconArrowBack } from 'vtex.styleguide'
 import { injectIntl, intlShape } from 'react-intl'
+
+import { AuthState, AuthService } from 'vtex.auth'
+import { Input, Button } from 'vtex.styleguide'
 
 import Form from './Form'
 import FormError from './FormError'
 import { translate } from '../utils/translate'
 import { steps } from '../utils/steps'
-
-import { AuthState, AuthService } from 'vtex.auth'
+import GoBackButton from './GoBackButton'
 
 /**
  * EmailVerification tab component.
@@ -94,27 +95,16 @@ class EmailVerification extends Component {
         footer={
           <Fragment>
             {(showBackButton || isCreatePassword) && (
-              <div className="vtex-login__back-button">
-                <Button
-                  variation="tertiary"
-                  size="small"
-                  onClick={() =>
-                    isCreatePassword
-                      ? onStateChange({
-                        step: steps.EMAIL_PASSWORD,
-                        isCreatePassword: false,
-                      })
-                      : onStateChange({ step: previous })
-                  }
-                >
-                  <span className="vtex-login__back-icon c-link">
-                    <IconArrowBack size={10} color="currentColor" />
-                  </span>
-                  <span className="t-small ml2">
-                    {translate('login.goBack', intl)}
-                  </span>
-                </Button>
-              </div>
+              <GoBackButton onStateChange=
+                {
+                  isCreatePassword
+                    ? onStateChange({
+                      step: steps.EMAIL_PASSWORD,
+                      isCreatePassword: false,
+                    })
+                    : onStateChange({ step: previous })
+                }
+              />
             )}
             <div className="vtex-login__send-button">
               <AuthService.SendAccessKey
