@@ -296,7 +296,7 @@ class LoginContent extends Component {
       'items-baseline': isInitialScreenOptionOnly,
     })
 
-    const formClassName = classNames('vtex-login-content__form dn ph4', {
+    const formClassName = classNames('vtex-login-content__form dn ph4 pb6', {
       [`vtex-login-content__form--step-${step}`]: step >= 0,
       'vtex-login-content__form--visible db': this.shouldRenderForm,
     })
