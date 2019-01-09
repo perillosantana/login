@@ -21,7 +21,7 @@ import { setCookie } from './utils/set-cookie'
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
 import { getProfile } from './utils/profile'
-import { Queries } from 'vtex.store'
+import { session } from 'vtex.store-resources/Queries'
 import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 import { AuthState } from 'vtex.auth'
 
@@ -337,7 +337,7 @@ const options = {
 const content = withSession()(compose(
   injectIntl,
   graphql(LOGIN_OPTIONS_QUERY),
-  graphql(Queries.session, options),
+  graphql(session, options),
 )(LoginContent))
 
 content.schema = {

@@ -1,0 +1,12 @@
+{
+  "login": {
+    "allowed": [],
+    "required": [],
+    "component": "Login"
+  },
+  "login-content": {
+    "allowed": [],
+    "required": [],
+    "component": "LoginContent"
+  }
+}

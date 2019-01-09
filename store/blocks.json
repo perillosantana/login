@@ -1,0 +1,10 @@
+{
+  "login": {
+    "blocks": [],
+    "inheritComponent": true
+  },
+  "login-content": {
+    "blocks": [],
+    "inheritComponent": true
+  }
+}

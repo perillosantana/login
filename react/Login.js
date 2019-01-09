@@ -7,7 +7,7 @@ import { injectIntl } from 'react-intl'
 
 import { LoginSchema } from './schema'
 import { setCookie } from './utils/set-cookie'
-import { Queries } from 'vtex.store'
+import { session } from 'vtex.store-resources/Queries'
 import { LoginContainerProptypes } from './propTypes'
 import LoginComponent from './components/LoginComponent'
 
@@ -94,5 +94,5 @@ const LoginWithSession = withSession({
   loading: <div />,
 })(compose(
   injectIntl,
-  graphql(Queries.session, options),
+  graphql(session, options),
 )(LoginComponent))
