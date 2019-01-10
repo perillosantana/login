@@ -6,7 +6,9 @@ import classNames from 'classnames'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 import { Transition } from 'react-spring'
+
 import { withSession, withRuntimeContext } from 'vtex.render-runtime'
+import StateMachine from './StateMachine'
 
 import LoginOptions from './components/LoginOptions'
 import AccountOptions from './components/AccountOptions'
@@ -123,6 +125,19 @@ class LoginContent extends Component {
     showPasswordVerificationIntoTooltip: LoginPropTypes.showPasswordVerificationIntoTooltip,
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      isOnInitialScreen: !this.props.profile,
+      isCreatePassword: false,
+      step: this.props.defaultOption,
+      email: '',
+      password: '',
+      code: '',
+      returnUrl: '/',
+    }
+  }
+
   static defaultProps = {
     isInitialScreenOptionOnly: true,
     defaultOption: 0,
@@ -131,16 +146,6 @@ class LoginContent extends Component {
 
   static contextTypes = {
     patchSession: PropTypes.func,
-  }
-
-  state = {
-    isOnInitialScreen: !this.props.profile,
-    isCreatePassword: false,
-    step: this.props.defaultOption,
-    email: '',
-    password: '',
-    code: '',
-    returnUrl: '/',
   }
 
   componentDidMount() {
@@ -254,7 +259,7 @@ class LoginContent extends Component {
     )
   }
 
-  render() {
+  render = () => {
     const {
       profile,
       isInitialScreenOptionOnly,
@@ -295,36 +300,40 @@ class LoginContent extends Component {
         !isInitialScreenOptionOnly,
       'items-baseline': isInitialScreenOptionOnly,
     })
-
-    const formClassName = classNames('vtex-login-content__form dn ph4 pb6', {
-      [`vtex-login-content__form--step-${step}`]: step >= 0,
-      'vtex-login-content__form--visible db': this.shouldRenderForm,
-    })
-
     return (
       <AuthState scope="store">
-        {() => (
-          <div className={className}>
-            <Transition
-              keys={(!profile && this.shouldRenderLoginOptions && !loading) ? ['children'] : []}
-              from={{ opacity: 0, transform: 'translateX(-50%)' }}
-              enter={{ opacity: 1, transform: 'translateX(0%)' }}
-              leave={{ display: 'none' }}
-            >
-              {(!profile && this.shouldRenderLoginOptions && !loading) ? [this.renderChildren] : []}
-            </Transition>
-            <div className={formClassName}>
-              <Transition
-                keys={this.shouldRenderForm && render ? ['children'] : []}
-                from={{ opacity: 0, transform: 'translateX(50%)' }}
-                enter={{ opacity: 1, transform: 'translateX(0%)' }}
-                leave={{ display: 'none' }}
-              >
-                {this.shouldRenderForm && render ? [render] : []}
-              </Transition>
-            </div>
+      {() => (
+        <div className={className}>
+          <div className="vtex-login-content__form--step-0">
+            <StateMachine>
+              {
+                ({ sendEvent, state }) => {
+                  if (state.matches('identification.unidentified_user')) {
+                    return (
+                      <EmailVerification
+                        title={this.props.accessCodeTitle}
+                        emailPlaceholder={this.props.emailPlaceholder}
+                        onSuccess={() => sendEvent('PASSWORD_PREFERENCE')}
+                      />
+                    )
+                  }
+                  if (state.matches('password_login')) {
+                    return (
+                      <EmailAndPassword
+                        title={this.props.emailAndPasswordTitle}
+                        emailPlaceholder={this.props.emailPlaceholder}
+                        passwordPlaceholder={this.props.passwordPlaceholder}
+                        showPasswordVerificationIntoTooltip={this.props.showPasswordVerificationIntoTooltip}
+                        loginCallback={this.props.loginCallback}
+                      />
+                    )
+                  }
+                }
+              }
+            </StateMachine>
           </div>
-        )}
+        </div>
+      )}
       </AuthState>
 
     )

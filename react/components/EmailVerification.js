@@ -17,22 +17,15 @@ import GoBackButton from './GoBackButton'
  */
 class EmailVerification extends Component {
   static propTypes = {
-    /** Next step */
-    next: PropTypes.number.isRequired,
-    /** Previous step */
-    previous: PropTypes.number.isRequired,
-    /** State that will send user to CreatePassword tab */
-    isCreatePassword: PropTypes.bool.isRequired,
     /** Title to be displayed */
     title: PropTypes.string,
     /** Placeholder to email input */
     emailPlaceholder: PropTypes.string,
-    /** Function to change de active tab */
-    onStateChange: PropTypes.func.isRequired,
     /** Intl object*/
     intl: intlShape,
     /** Whether to display the back button */
     showBackButton: PropTypes.bool,
+    onSuccess: PropTypes.func.isRequired,
   }
 
   state = {
@@ -53,10 +46,6 @@ class EmailVerification extends Component {
     const {
       title,
       intl,
-      onStateChange,
-      previous,
-      isCreatePassword,
-      showBackButton,
       emailPlaceholder,
     } = this.props
     const { isInvalidEmail, isUserBlocked } = this.state
@@ -94,28 +83,10 @@ class EmailVerification extends Component {
         }
         footer={
           <Fragment>
-            {(showBackButton || isCreatePassword) && (
-              <GoBackButton
-                onStateChange={onStateChange}
-                changeTab={
-                  isCreatePassword ? {
-                    step: steps.EMAIL_PASSWORD,
-                    isCreatePassword: false,
-                  } : { step: previous }
-                }
-              />
-            )}
             <div className="vtex-login__send-button">
               <AuthService.SendAccessKey
                 useNewSession
-                onSuccess={() => {
-                  isCreatePassword
-                    ? onStateChange({
-                      step: steps.CREATE_PASSWORD,
-                      isCreatePassword: false,
-                    })
-                    : onStateChange({ step: this.props.next })
-                }}
+                onSuccess={this.props.onSuccess}
                 onFailure={() => {
                   this.setState({ isUserBlocked: true })
                 }}
@@ -126,18 +97,18 @@ class EmailVerification extends Component {
                   action: sendToken,
                   validation: { validateEmail },
                 }) => (
-                    <Button
-                      variation="primary"
-                      size="small"
-                      type="submit"
-                      isLoading={loading}
-                      onClick={e =>
-                        this.handleOnSubmit(e, email, validateEmail, sendToken)
-                      }
-                    >
-                      <span className="t-small">{translate('login.send', intl)}</span>
-                    </Button>
-                  )}
+                  <Button
+                    variation="primary"
+                    size="small"
+                    type="submit"
+                    isLoading={loading}
+                    onClick={e =>
+                      this.handleOnSubmit(e, email, validateEmail, sendToken)
+                    }
+                  >
+                    <span className="t-small">{translate('login.send', intl)}</span>
+                  </Button>
+                )}
               </AuthService.SendAccessKey>
             </div>
           </Fragment>

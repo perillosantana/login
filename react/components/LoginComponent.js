@@ -50,8 +50,8 @@ export default class LoginComponent extends Component {
             {profile.firstName || truncateString(profile.email)}
           </span>
         ) : (
-            iconLabel && <span className={`vtex-login__label t-action--small pl4 ${labelClasses} dn-m db-l`}>{iconLabel}</span>
-          )}
+          iconLabel && <span className={`vtex-login__label t-action--small pl4 ${labelClasses} dn-m db-l`}>{iconLabel}</span>
+        )}
       </Fragment>
     )
 
@@ -106,7 +106,6 @@ export default class LoginComponent extends Component {
                 <LoginContent
                   profile={profile}
                   loginCallback={this.onClickLoginButton}
-                  isInitialScreenOptionOnly
                   {...this.props}
                 />
               </div>

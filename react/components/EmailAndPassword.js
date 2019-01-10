@@ -13,14 +13,9 @@ import FormError from './FormError'
 import PasswordInput from './PasswordInput'
 import GoBackButton from './GoBackButton'
 
-
 /** EmailAndPasswordLogin component. */
 class EmailAndPassword extends Component {
   static propTypes = {
-    /** Next step */
-    next: PropTypes.number.isRequired,
-    /** Previous step */
-    previous: PropTypes.number.isRequired,
     /** Set the type of password verification ui */
     showPasswordVerificationIntoTooltip: PropTypes.bool,
     /** Title to be displayed */
@@ -29,12 +24,8 @@ class EmailAndPassword extends Component {
     emailPlaceholder: PropTypes.string,
     /** Placeholder to password input */
     passwordPlaceholder: PropTypes.string,
-    /** Function to change de active tab */
-    onStateChange: PropTypes.func.isRequired,
     /** Intl object*/
     intl: intlShape,
-    /** Whether to display the back button */
-    showBackButton: PropTypes.bool,
     /** Function called after login success */
     loginCallback: PropTypes.func,
   }
@@ -48,15 +39,15 @@ class EmailAndPassword extends Component {
 
   handlePasswordChange = event => {
     this.setState({ isInvalidPassword: false })
-    this.props.onStateChange({ password: event.target.value })
+    // this.props.onStateChange({ password: event.target.value })
   }
 
   handleCreatePassword = event => {
-    this.props.onStateChange({
-      step: steps.EMAIL_VERIFICATION,
-      isCreatePassword: true,
-      isOnInitialScreen: false,
-    })
+    // this.props.onStateChange({
+    //   step: steps.EMAIL_VERIFICATION,
+    //   isCreatePassword: true,
+    //   isOnInitialScreen: false,
+    // })
     event.preventDefault()
   }
 
@@ -189,22 +180,22 @@ class EmailAndPassword extends Component {
                   action: loginWithPassword,
                   validation: { validateEmail },
                 }) => (
-                    <Button
-                      variation="primary"
-                      size="small"
-                      type="submit"
-                      onClick={e => {
-                        e.preventDefault()
-                        this.handleOnSubmit(email, password, loginWithPassword)
-                      }}
-                      isLoading={loading}
-                      disabled={!validateEmail(email)}
-                    >
-                      <span className="t-small">
-                        {translate('login.signIn', intl)}
-                      </span>
-                    </Button>
-                  )}
+                  <Button
+                    variation="primary"
+                    size="small"
+                    type="submit"
+                    onClick={e => {
+                      e.preventDefault()
+                      this.handleOnSubmit(email, password, loginWithPassword)
+                    }}
+                    isLoading={loading}
+                    disabled={!validateEmail(email)}
+                  >
+                    <span className="t-small">
+                      {translate('login.signIn', intl)}
+                    </span>
+                  </Button>
+                )}
               </AuthService.LoginWithPassword>
             </div>
           </Fragment>
