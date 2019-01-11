@@ -9,7 +9,9 @@ class StateMachine extends Component {
 
     const loginMachineService = interpret(loginMachine.withContext({
       userStored: this.props.userStored,
-    }))
+    })).onTransition(nextState => {
+      console.log(nextState.value)
+    })
 
     loginMachineService.start()
 

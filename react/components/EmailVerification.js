@@ -31,7 +31,7 @@ class EmailVerification extends Component {
     isInvalidEmail: false,
     isUserBlocked: false,
     // TODO: dinamically get preference
-    hasEmailPreference: true,
+    hasEmailPreference: false,
   }
 
   handleOnSubmit = (event, email, validate, sendToken) => {

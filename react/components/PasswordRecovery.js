@@ -14,7 +14,7 @@ import PasswordInput from './PasswordInput'
 /** RecoveryPassword tab component. Receive a new password from an input
  * and call the recoveryPassword API.
  */
-class RecoveryPassword extends Component {
+class PasswordRecovery extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -153,7 +153,7 @@ class RecoveryPassword extends Component {
   }
 }
 
-RecoveryPassword.propTypes = {
+PasswordRecovery.propTypes = {
   /** Set the type of password verification ui */
   showPasswordVerificationIntoTooltip: PropTypes.bool,
   /** Function to change de active tab */
@@ -165,4 +165,4 @@ RecoveryPassword.propTypes = {
   onPasswordSetSuccess: PropTypes.func,
 }
 
-export default injectIntl(RecoveryPassword)
+export default injectIntl(PasswordRecovery)

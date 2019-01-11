@@ -11,10 +11,10 @@ import { withSession, withRuntimeContext } from 'vtex.render-runtime'
 import StateMachine from './StateMachine'
 
 import LoginOptions from './components/LoginOptions'
-import AccountOptions from './components/AccountOptions'
 import PasswordLogin from './components/PasswordLogin'
 import CodeConfirmation from './components/CodeConfirmation'
-import RecoveryPassword from './components/RecoveryPassword'
+import TokenLogin from './components/TokenLogin'
+import PasswordRecovery from './components/PasswordRecovery'
 import EmailVerification from './components/EmailVerification'
 
 import { steps } from './utils/steps'
@@ -230,11 +230,9 @@ class LoginContent extends Component {
     const {
       profile,
       isInitialScreenOptionOnly,
-      defaultOption,
       data: { loading },
       session,
     } = this.props
-    const { isOnInitialScreen } = this.state
 
     // Check if the user is already logged and redirect to the return URL if it didn't receive
     // the profile by the props and current endpoint are /login, if receive it, should render the account options.
@@ -258,11 +256,12 @@ class LoginContent extends Component {
       'items-baseline': isInitialScreenOptionOnly,
     })
     return (
-      <AuthState scope="store">
+
+      <AuthState scope="store" email="anita@mailinator.com">
       {() => (
         <div className={className}>
           <div className="vtex-login-content__form--step-0">
-            <StateMachine>
+            <StateMachine userStored>
               {
                 ({ sendEvent, state }) => {
                   if (state.matches('identification.unidentified_user')) {
@@ -273,6 +272,19 @@ class LoginContent extends Component {
                         onPasswordPreference={() => sendEvent('PASSWORD_PREFERENCE')}
                         onTokenPreference={() => sendEvent('TOKEN_PREFERENCE')}
                       />
+                    )
+                  }
+                  if (state.matches('identification.identified_user')) {
+                    return (
+                      <div>
+                        Hello anita
+                        <button onClick={() => sendEvent('TOKEN_PREFERENCE')}>
+                          continue
+                        </button>
+                        <button onClick={() => sendEvent('NOT_ME')}>
+                          that's not me
+                        </button>
+                      </div>
                     )
                   }
                   if (state.matches('password_login')) {
@@ -289,18 +301,30 @@ class LoginContent extends Component {
                       />
                     )
                   }
+                  if (state.matches('token_login')) {
+                    return (
+                      <TokenLogin
+                        accessCodePlaceholder={this.props.accessCodePlaceholder}
+                        onSuccess={() => {
+                          sendEvent('LOGIN_SUCESS')
+                          this.onLoginSuccess()
+                        }}
+                        onClickBack={() => sendEvent('BACK')}
+                        onAddPassword={() => sendEvent('SET_PASSWORD')}
+                      />
+                    )
+                  }
                   if (state.matches('default_login.token_confirmation')) {
                     return (
                       <CodeConfirmation
                         accessCodePlaceholder={this.props.accessCodePlaceholder}
-                        loginCallback={this.onLoginSuccess}
                         onSuccess={() => sendEvent('TOKEN_CONFIRMED')}
                       />
                     )
                   }
                   if (state.matches('default_login.set_password')) {
                     return (
-                      <RecoveryPassword
+                      <PasswordRecovery
                         passwordPlaceholder={this.props.passwordPlaceholder}
                         showPasswordVerificationIntoTooltip={this.props.showPasswordVerificationIntoTooltip}
                         accessCodePlaceholder={this.props.accessCodePlaceholder}
@@ -314,7 +338,7 @@ class LoginContent extends Component {
                       <div>
                         Congrats password changed
                         <br />
-                        <button onClick={this.onLoginSuccess}>continue</button>
+                        <button onClick={() => this.onLoginSuccess()}>continue</button>
                       </div>
                     )
                   }

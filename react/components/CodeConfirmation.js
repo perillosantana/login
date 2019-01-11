@@ -9,7 +9,6 @@ import { translate } from '../utils/translate'
 import { isValidAccessCode } from '../utils/format-check'
 import Form from './Form'
 import FormError from './FormError'
-import GoBackButton from './GoBackButton'
 
 /** CodeConfirmation tab component. Receive the code from an input and call the signIn API */
 class CodeConfirmation extends Component {
@@ -18,6 +17,7 @@ class CodeConfirmation extends Component {
     this.state = {
       isInvalidCode: false,
       isWrongCredentials: false,
+      handleSuccess: this.props.onSuccess,
     }
   }
 
@@ -34,6 +34,15 @@ class CodeConfirmation extends Component {
     if (!isValidAccessCode(token)) {
       this.setState({ isInvalidCode: true })
     } else {
+      confirmToken()
+    }
+  }
+
+  handleAddPassword = (confirmToken, token) => {
+    if (!isValidAccessCode(token)) {
+      this.setState({ isInvalidCode: true })
+    } else {
+      this.setState({ handleSuccess: this.props.onAddPassword })
       confirmToken()
     }
   }
@@ -78,26 +87,37 @@ class CodeConfirmation extends Component {
         }
         footer={
           <Fragment>
-            <GoBackButton
-              onClick={() => {}}
-            />
             <div className="vtex-login__send-button">
               <AuthService.LoginWithAccessKey
-                onSuccess={this.handleSuccess}
+                onSuccess={this.state.handleSuccess}
                 onFailure={this.handleFailure}
               >
                 {({ state: { token }, loading, action: confirmToken }) => (
-                  <Button
-                    variation="primary"
-                    size="small"
-                    type="submit"
-                    onClick={e => this.handleOnSubmit(e, confirmToken, token)}
-                    isLoading={loading}
-                  >
-                    <span className="t-small">
-                      {translate('login.confirm', intl)}
-                    </span>
-                  </Button>
+                  <Fragment>
+                    <Button
+                      variation="primary"
+                      size="small"
+                      type="submit"
+                      onClick={e => this.handleOnSubmit(e, confirmToken, token)}
+                      isLoading={loading}
+                    >
+                      <span className="t-small">
+                        {translate('login.confirm', intl)}
+                      </span>
+                    </Button>
+                    { this.props.showAddPassword &&
+                      <Button
+                        variation="primary"
+                        size="small"
+                        onClick={() => this.handleAddPassword(confirmToken, token)}
+                        isLoading={loading}
+                      >
+                        <span className="t-small">
+                          Add New Password
+                        </span>
+                      </Button>
+                    }
+                  </Fragment>
                 )}
               </AuthService.LoginWithAccessKey>
             </div>
@@ -108,12 +128,18 @@ class CodeConfirmation extends Component {
   }
 }
 
+CodeConfirmation.defaultProps = {
+  showAddPassword: false,
+}
+
 CodeConfirmation.propTypes = {
   /** Intl object*/
   intl: intlShape,
   /** Placeholder to access code input */
   accessCodePlaceholder: PropTypes.string,
   onSuccess: PropTypes.func,
+  showAddPassword: PropTypes.bool,
+  onAddPassword: PropTypes.func,
 }
 
 export default injectIntl(CodeConfirmation)
