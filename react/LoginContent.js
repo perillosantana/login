@@ -12,7 +12,7 @@ import StateMachine from './StateMachine'
 
 import LoginOptions from './components/LoginOptions'
 import AccountOptions from './components/AccountOptions'
-import EmailAndPassword from './components/EmailAndPassword'
+import PasswordLogin from './components/PasswordLogin'
 import CodeConfirmation from './components/CodeConfirmation'
 import RecoveryPassword from './components/RecoveryPassword'
 import EmailVerification from './components/EmailVerification'
@@ -128,20 +128,8 @@ class LoginContent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isOnInitialScreen: !this.props.profile,
-      isCreatePassword: false,
-      step: this.props.defaultOption,
-      email: '',
-      password: '',
-      code: '',
       returnUrl: '/',
     }
-  }
-
-  static defaultProps = {
-    isInitialScreenOptionOnly: true,
-    defaultOption: 0,
-    optionsTitle: '',
   }
 
   static contextTypes = {
@@ -155,27 +143,6 @@ class LoginContent extends Component {
     if (location.search) {
       this.setState({ returnUrl: location.search.substring(11) })
     }
-  }
-
-  get shouldRenderLoginOptions() {
-    return this.props.isInitialScreenOptionOnly ? this.state.isOnInitialScreen : true
-  }
-
-  get shouldRenderForm() {
-    if (this.props.profile) {
-      return true
-    }
-
-    return !this.props.isInitialScreenOptionOnly || !this.state.isOnInitialScreen
-  }
-
-  handleUpdateState = state => {
-    if (state.hasOwnProperty('step') && state.step === -1) {
-      state.step = 0
-      state.isOnInitialScreen = true
-    }
-
-    this.setState({ ...state })
   }
 
   handleOptionsClick = option => {
@@ -284,16 +251,6 @@ class LoginContent extends Component {
       step = defaultOption
     }
 
-    const render = STEPS[step](
-      {
-        ...this.props,
-        loginCallback: this.onLoginSuccess,
-      },
-      this.state,
-      this.handleUpdateState,
-      this.shouldRenderLoginOptions
-    )
-
     const className = classNames('vtex-login-content flex relative bg-base justify-around overflow-hidden', {
       'vtex-login-content--initial-screen': this.state.isOnInitialScreen,
       'vtex-login-content--always-with-options flex-column-reverse items-center flex-row-ns items-baseline-ns':
@@ -313,19 +270,52 @@ class LoginContent extends Component {
                       <EmailVerification
                         title={this.props.accessCodeTitle}
                         emailPlaceholder={this.props.emailPlaceholder}
-                        onSuccess={() => sendEvent('PASSWORD_PREFERENCE')}
+                        onPasswordPreference={() => sendEvent('PASSWORD_PREFERENCE')}
+                        onTokenPreference={() => sendEvent('TOKEN_PREFERENCE')}
                       />
                     )
                   }
                   if (state.matches('password_login')) {
                     return (
-                      <EmailAndPassword
+                      <PasswordLogin
                         title={this.props.emailAndPasswordTitle}
                         emailPlaceholder={this.props.emailPlaceholder}
                         passwordPlaceholder={this.props.passwordPlaceholder}
                         showPasswordVerificationIntoTooltip={this.props.showPasswordVerificationIntoTooltip}
-                        loginCallback={this.props.loginCallback}
+                        loginCallback={this.onLoginSuccess}
+                        onSuccess={() => sendEvent('LOGIN_SUCCESS')}
+                        onForgotPassword={() => sendEvent('FORGOT_PASSWORD')}
+                        onClickBack={() => sendEvent('BACK')}
                       />
+                    )
+                  }
+                  if (state.matches('default_login.token_confirmation')) {
+                    return (
+                      <CodeConfirmation
+                        accessCodePlaceholder={this.props.accessCodePlaceholder}
+                        loginCallback={this.onLoginSuccess}
+                        onSuccess={() => sendEvent('TOKEN_CONFIRMED')}
+                      />
+                    )
+                  }
+                  if (state.matches('default_login.set_password')) {
+                    return (
+                      <RecoveryPassword
+                        passwordPlaceholder={this.props.passwordPlaceholder}
+                        showPasswordVerificationIntoTooltip={this.props.showPasswordVerificationIntoTooltip}
+                        accessCodePlaceholder={this.props.accessCodePlaceholder}
+                        onPasswordSetSuccess={() => sendEvent('CHANGE_PASSWORD')}
+                        loginCallback={this.onLoginSuccess}
+                      />
+                    )
+                  }
+                  if (state.matches('default_login.password_changed')) {
+                    return (
+                      <div>
+                        Congrats password changed
+                        <br />
+                        <button onClick={this.onLoginSuccess}>continue</button>
+                      </div>
                     )
                   }
                 }

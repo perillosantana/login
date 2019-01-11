@@ -2,32 +2,31 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 
-import { Input, Button } from 'vtex.styleguide'
+import { Button } from 'vtex.styleguide'
 import { AuthState, AuthService } from 'vtex.react-vtexid'
 
 import { translate } from '../utils/translate'
 import { isValidEmail, isValidPassword } from '../utils/format-check'
-import { steps } from '../utils/steps'
 import Form from './Form'
 import FormError from './FormError'
 import PasswordInput from './PasswordInput'
 import GoBackButton from './GoBackButton'
 
 /** EmailAndPasswordLogin component. */
-class EmailAndPassword extends Component {
+class PasswordLogin extends Component {
   static propTypes = {
     /** Set the type of password verification ui */
     showPasswordVerificationIntoTooltip: PropTypes.bool,
     /** Title to be displayed */
     title: PropTypes.string,
-    /** Placeholder to email input */
-    emailPlaceholder: PropTypes.string,
     /** Placeholder to password input */
     passwordPlaceholder: PropTypes.string,
     /** Intl object*/
     intl: intlShape,
     /** Function called after login success */
     loginCallback: PropTypes.func,
+    onClickBack: PropTypes.func.isRequired,
+    onForgotPassword: PropTypes.func.isRequired,
   }
 
   state = {
@@ -37,18 +36,9 @@ class EmailAndPassword extends Component {
     isUserBlocked: false,
   }
 
-  handlePasswordChange = event => {
-    this.setState({ isInvalidPassword: false })
-    // this.props.onStateChange({ password: event.target.value })
-  }
-
-  handleCreatePassword = event => {
-    // this.props.onStateChange({
-    //   step: steps.EMAIL_VERIFICATION,
-    //   isCreatePassword: true,
-    //   isOnInitialScreen: false,
-    // })
+  handleForgotPassword = (event, sendToken) => {
     event.preventDefault()
+    sendToken()
   }
 
   handleSuccess = () => {
@@ -77,10 +67,6 @@ class EmailAndPassword extends Component {
     const {
       title,
       intl,
-      onStateChange,
-      previous,
-      showBackButton,
-      emailPlaceholder,
       passwordPlaceholder,
       showPasswordVerificationIntoTooltip,
     } = this.props
@@ -101,18 +87,10 @@ class EmailAndPassword extends Component {
           <Fragment>
             <div className="vtex-login__input-container vtex-login__input-container--email">
               <AuthState.Email>
-                {({ value, setValue }) => (
-                  <Input
-                    value={value || ''}
-                    onChange={e => {
-                      setValue(e.target.value)
-                      this.setState({ isInvalidEmail: false })
-                    }}
-                    placeholder={
-                      emailPlaceholder ||
-                      translate('login.email.placeholder', intl)
-                    }
-                  />
+                {({ value }) => (
+                  <div>
+                    Hello, {value}
+                  </div>
                 )}
               </AuthState.Email>
             </div>
@@ -148,26 +126,35 @@ class EmailAndPassword extends Component {
               {translate('login.userBlocked', intl)}
             </FormError>
             <div className="vtex-login__form-link-container flex justify-end ph0 pv2">
-              <a
-                href=""
-                className="link dim c-link"
-                onClick={this.handleCreatePassword}
+              <AuthService.SendAccessKey
+                useNewSession
+                onSuccess={this.props.onForgotPassword}
+                onFailure={() => {
+                  this.setState({ isUserBlocked: true })
+                }}
               >
-                <span className="t-small">
-                  {translate('login.forgotPassword', intl)}
-                </span>
-              </a>
+                {({
+                  action: sendToken,
+                }) => (
+                  <a
+                    href=""
+                    className="link dim c-link"
+                    onClick={(event) => this.handleForgotPassword(event, sendToken)}
+                  >
+                    <span className="t-small">
+                      {translate('login.forgotPassword', intl)}
+                    </span>
+                  </a>
+                )}
+              </AuthService.SendAccessKey>
             </div>
           </Fragment>
         }
         footer={
           <Fragment>
-            {showBackButton && (
-              <GoBackButton
-                onStateChange={onStateChange}
-                changeTab={{ step: previous, password: '' }}
-              />
-            )}
+            <GoBackButton
+              onClick={this.props.onClickBack}
+            />
             <div className="vtex-login__send-button">
               <AuthService.LoginWithPassword
                 useNewSession
@@ -200,21 +187,9 @@ class EmailAndPassword extends Component {
             </div>
           </Fragment>
         }
-      >
-        <div className="vtex-login__form-link-container flex justify-center ph0 mt4">
-          <a
-            href=""
-            className="link dim c-link"
-            onClick={e => this.handleCreatePassword(e)}
-          >
-            <span className="t-small">
-              {translate('login.notHaveAccount', intl)}
-            </span>
-          </a>
-        </div>
-      </Form>
+      />
     )
   }
 }
 
-export default injectIntl(EmailAndPassword)
+export default injectIntl(PasswordLogin)

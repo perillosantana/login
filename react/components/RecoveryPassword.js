@@ -6,14 +6,12 @@ import { Input, Button } from 'vtex.styleguide'
 import { AuthState, AuthService } from 'vtex.react-vtexid'
 
 import { translate } from '../utils/translate'
-import { isValidPassword, isValidAccessCode } from '../utils/format-check'
+import { isValidPassword } from '../utils/format-check'
 import Form from './Form'
 import FormError from './FormError'
 import PasswordInput from './PasswordInput'
-import GoBackButton from './GoBackButton'
 
-
-/** RecoveryPassword tab component. Receive a code and new password from an input
+/** RecoveryPassword tab component. Receive a new password from an input
  * and call the recoveryPassword API.
  */
 class RecoveryPassword extends Component {
@@ -22,7 +20,6 @@ class RecoveryPassword extends Component {
     this.state = {
       isInvalidPassword: false,
       isPasswordsMatch: true,
-      isInvalidCode: false,
       isUserBlocked: false,
       confirmPassword: '',
     }
@@ -35,24 +32,18 @@ class RecoveryPassword extends Component {
     })
   }
 
-  handleSuccess = () => {
-    const { onStateChange, next } = this.props
-    onStateChange({ step: next })
-    this.props.loginCallback()
-  }
-
   handleFailure = err => {
     err.authStatus === 'BlockedUser'
       ? this.setState({ isUserBlocked: true })
       : console.error(err)
   }
 
-  handleOnSubmit = (event, newPassword, token, setPassword) => {
+  handleSkip = () => this.props.loginCallback()
+
+  handleOnSubmit = (event, newPassword, setPassword) => {
     event.preventDefault()
     const { confirmPassword } = this.state
-    if (!isValidAccessCode(token)) {
-      this.setState({ isInvalidCode: true })
-    } else if (!isValidPassword(newPassword)) {
+    if (!isValidPassword(newPassword)) {
       this.setState({ isInvalidPassword: true })
     } else if (newPassword !== confirmPassword) {
       this.setState({ isPasswordsMatch: false })
@@ -64,17 +55,13 @@ class RecoveryPassword extends Component {
   render() {
     const {
       intl,
-      previous,
-      onStateChange,
       passwordPlaceholder,
-      accessCodePlaceholder,
       showPasswordVerificationIntoTooltip,
     } = this.props
 
     const {
       isInvalidPassword,
       isUserBlocked,
-      isInvalidCode,
       isPasswordsMatch,
     } = this.state
 
@@ -85,28 +72,6 @@ class RecoveryPassword extends Component {
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
-            <div className="vtex-login__input-container vtex-login__input-container--access-code">
-              <AuthState.Token>
-                {({ value, setValue }) => (
-                  <Input
-                    token
-                    name="token"
-                    onChange={e => {
-                      setValue(e.target.value)
-                      this.setState({ isInvalidCode: false })
-                    }}
-                    value={value || ''}
-                    placeholder={
-                      accessCodePlaceholder ||
-                      translate('login.accessCode.placeholder', intl)
-                    }
-                  />
-                )}
-              </AuthState.Token>
-            </div>
-            <FormError show={isInvalidCode}>
-              {translate('login.invalidCode', intl)}
-            </FormError>
             <div className="vtex-login__input-container vtex-login__input-container--password">
               <AuthState.Password>
                 {({ value, setValue }) => (
@@ -144,36 +109,41 @@ class RecoveryPassword extends Component {
         }
         footer={
           <Fragment>
-            <GoBackButton
-              onStateChange={onStateChange}
-              changeTab={{ step: previous }}
-            />
             <div className="vtex-login__send-button">
+              <Button
+                variation="primary"
+                size="small"
+                onClick={this.handleSkip}
+              >
+                <span className="t-small">
+                  SKIP
+                </span>
+              </Button>
               <AuthService.SetPassword
-                onSuccess={this.handleSuccess}
+                onSuccess={this.props.onPasswordSetSuccess}
                 onFailure={this.handleFailure}
               >
                 {({
-                  state: { password, token },
+                  state: { password },
                   loading,
                   action: setPassword,
                   validation: {
                     validatePassword,
                   },
                 }) => (
-                    <Button
-                      variation="primary"
-                      size="small"
-                      type="submit"
-                      onClick={e => this.handleOnSubmit(e, password, token, setPassword)}
-                      isLoading={loading}
-                      disabled={!validatePassword(password)}
-                    >
-                      <span className="t-small">
-                        {translate('login.create', intl)}
-                      </span>
-                    </Button>
-                  )}
+                  <Button
+                    variation="primary"
+                    size="small"
+                    type="submit"
+                    onClick={e => this.handleOnSubmit(e, password, setPassword)}
+                    isLoading={loading}
+                    disabled={!validatePassword(password)}
+                  >
+                    <span className="t-small">
+                      {translate('login.create', intl)}
+                    </span>
+                  </Button>
+                )}
               </AuthService.SetPassword>
             </div>
           </Fragment>
@@ -184,22 +154,15 @@ class RecoveryPassword extends Component {
 }
 
 RecoveryPassword.propTypes = {
-  /** Next step */
-  next: PropTypes.number.isRequired,
-  /** Previous step */
-  previous: PropTypes.number.isRequired,
   /** Set the type of password verification ui */
   showPasswordVerificationIntoTooltip: PropTypes.bool,
   /** Function to change de active tab */
-  onStateChange: PropTypes.func.isRequired,
-  /** Intl object*/
   intl: intlShape,
   /** Placeholder to password input */
   passwordPlaceholder: PropTypes.string,
-  /** Placeholder to access code input */
-  accessCodePlaceholder: PropTypes.string,
   /** Function called after login success */
   loginCallback: PropTypes.func,
+  onPasswordSetSuccess: PropTypes.func,
 }
 
 export default injectIntl(RecoveryPassword)

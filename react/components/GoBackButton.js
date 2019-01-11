@@ -10,15 +10,13 @@ const arrow = <IconArrowBack size={10} />
 class GoBackButton extends Component {
   static propTypes = {
     /** Function to change the active tab */
-    onStateChange: PropTypes.func,
-    /** Data that change the active tab */
-    changeTab: PropTypes.object,
+    onClick: PropTypes.func.isRequired,
     /** Intl object*/
     intl: intlShape,
   }
 
   render() {
-    const { onStateChange, intl, changeTab } = this.props
+    const { intl } = this.props
     return (
       <Fragment>
         <div className="vtex-login__back-button">
@@ -27,7 +25,7 @@ class GoBackButton extends Component {
             iconPosition="left"
             variation="tertiary"
             size="small"
-            onClick={() => onStateChange(changeTab)}
+            onClick={this.props.onClick}
           >
             <span className="t-small ml2">
               {translate('login.goBack', intl)}
@@ -37,7 +35,6 @@ class GoBackButton extends Component {
       </Fragment>
 
     )
-
   }
 }
 export default injectIntl(GoBackButton)

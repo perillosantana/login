@@ -8,8 +8,6 @@ import { Input, Button } from 'vtex.styleguide'
 import Form from './Form'
 import FormError from './FormError'
 import { translate } from '../utils/translate'
-import { steps } from '../utils/steps'
-import GoBackButton from './GoBackButton'
 
 /**
  * EmailVerification tab component.
@@ -25,12 +23,15 @@ class EmailVerification extends Component {
     intl: intlShape,
     /** Whether to display the back button */
     showBackButton: PropTypes.bool,
-    onSuccess: PropTypes.func.isRequired,
+    onPasswordPreference: PropTypes.func.isRequired,
+    onTokenPreference: PropTypes.func.isRequired,
   }
 
   state = {
     isInvalidEmail: false,
     isUserBlocked: false,
+    // TODO: dinamically get preference
+    hasEmailPreference: true,
   }
 
   handleOnSubmit = (event, email, validate, sendToken) => {
@@ -38,7 +39,11 @@ class EmailVerification extends Component {
     if (!validate(email)) {
       this.setState({ isInvalidEmail: true })
     } else {
-      sendToken()
+      if (this.state.hasEmailPreference) {
+        this.props.onPasswordPreference()
+      } else {
+        sendToken()
+      }
     }
   }
 
@@ -86,7 +91,7 @@ class EmailVerification extends Component {
             <div className="vtex-login__send-button">
               <AuthService.SendAccessKey
                 useNewSession
-                onSuccess={this.props.onSuccess}
+                onSuccess={this.props.onTokenPreference}
                 onFailure={() => {
                   this.setState({ isUserBlocked: true })
                 }}

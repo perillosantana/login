@@ -11,7 +11,6 @@ import Form from './Form'
 import FormError from './FormError'
 import GoBackButton from './GoBackButton'
 
-
 /** CodeConfirmation tab component. Receive the code from an input and call the signIn API */
 class CodeConfirmation extends Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class CodeConfirmation extends Component {
     }
   }
 
-  handleSuccess = () => this.props.loginCallback()
+  handleSuccess = () => this.props.onSuccess()
 
   handleFailure = err => {
     err.authStatus === 'WrongCredentials'
@@ -40,7 +39,7 @@ class CodeConfirmation extends Component {
   }
 
   render() {
-    const { intl, onStateChange, previous, accessCodePlaceholder } = this.props
+    const { intl, accessCodePlaceholder } = this.props
     const { isInvalidCode, isWrongCredentials } = this.state
 
     return (
@@ -80,8 +79,7 @@ class CodeConfirmation extends Component {
         footer={
           <Fragment>
             <GoBackButton
-              onStateChange={onStateChange}
-              changeTab={{ step: previous }}
+              onClick={() => {}}
             />
             <div className="vtex-login__send-button">
               <AuthService.LoginWithAccessKey
@@ -111,18 +109,11 @@ class CodeConfirmation extends Component {
 }
 
 CodeConfirmation.propTypes = {
-  /** Next step */
-  next: PropTypes.number.isRequired,
-  /** Previous step */
-  previous: PropTypes.number.isRequired,
-  /** Function to change de active tab */
-  onStateChange: PropTypes.func.isRequired,
   /** Intl object*/
   intl: intlShape,
   /** Placeholder to access code input */
   accessCodePlaceholder: PropTypes.string,
-  /** Function called after login success */
-  loginCallback: PropTypes.func,
+  onSuccess: PropTypes.func,
 }
 
 export default injectIntl(CodeConfirmation)
