@@ -31,7 +31,7 @@ class EmailVerification extends Component {
     isInvalidEmail: false,
     isUserBlocked: false,
     // TODO: dinamically get preference
-    hasEmailPreference: false,
+    hasPasswordPreference: true,
   }
 
   handleOnSubmit = (event, email, validate, sendToken) => {
@@ -39,7 +39,7 @@ class EmailVerification extends Component {
     if (!validate(email)) {
       this.setState({ isInvalidEmail: true })
     } else {
-      if (this.state.hasEmailPreference) {
+      if (this.state.hasPasswordPreference) {
         this.props.onPasswordPreference()
       } else {
         sendToken()

@@ -2,22 +2,20 @@ import React, { Component } from 'react'
 
 import { compose } from 'ramda'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
-import { Transition } from 'react-spring'
 
+// import { Transition } from 'react-spring'
 import { withSession, withRuntimeContext } from 'vtex.render-runtime'
 import StateMachine from './StateMachine'
 
-import LoginOptions from './components/LoginOptions'
 import PasswordLogin from './components/PasswordLogin'
 import CodeConfirmation from './components/CodeConfirmation'
 import TokenLogin from './components/TokenLogin'
 import PasswordRecovery from './components/PasswordRecovery'
 import EmailVerification from './components/EmailVerification'
+import AccountOptions from './components/AccountOptions'
 
-import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
 
 import { LoginSchema } from './schema'
@@ -28,87 +26,19 @@ import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 import { AuthState } from 'vtex.react-vtexid'
 
 import './global.css'
+import IdentifiedUser from './components/IdentifiedUser'
+import PasswordChangeSuccess from './components/PasswordChangeSuccess';
 
-const STEPS = [
-  /* eslint-disable react/display-name, react/prop-types */
-  (props, state, func, isOptionsMenuDisplayed) => {
-    return style => (
-      <div style={style}>
-        <EmailVerification
-          next={steps.CODE_CONFIRMATION}
-          previous={steps.LOGIN_OPTIONS}
-          isCreatePassword={state.isCreatePassword}
-          title={props.accessCodeTitle}
-          emailPlaceholder={props.emailPlaceholder}
-          onStateChange={func}
-          showBackButton={!isOptionsMenuDisplayed}
-        />
-      </div>
-    )
-  },
-  (props, state, func, isOptionsMenuDisplayed) => {
-    return style => (
-      <div style={style}>
-        <EmailAndPassword
-          next={steps.ACCOUNT_OPTIONS}
-          previous={steps.LOGIN_OPTIONS}
-          title={props.emailAndPasswordTitle}
-          emailPlaceholder={props.emailPlaceholder}
-          passwordPlaceholder={props.passwordPlaceholder}
-          showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
-          onStateChange={func}
-          showBackButton={!isOptionsMenuDisplayed}
-          loginCallback={props.loginCallback}
-        />
-      </div>
-    )
-  },
-  (props, state, func) => {
-    return style => (
-      <div style={style}>
-        <CodeConfirmation
-          next={steps.ACCOUNT_OPTIONS}
-          previous={steps.EMAIL_VERIFICATION}
-          accessCodePlaceholder={props.accessCodePlaceholder}
-          onStateChange={func}
-          loginCallback={props.loginCallback}
-        />
-      </div>
-    )
-  },
-  () => {
-    return style => (
-      <div style={style}>
-        <AccountOptions />
-      </div>
-    )
-  },
-  (props, state, func) => {
-    return style => (
-      <div style={style}>
-        <RecoveryPassword
-          next={steps.ACCOUNT_OPTIONS}
-          previous={steps.EMAIL_PASSWORD}
-          passwordPlaceholder={props.passwordPlaceholder}
-          showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
-          accessCodePlaceholder={props.accessCodePlaceholder}
-          onStateChange={func}
-          loginCallback={props.loginCallback}
-        />
-      </div>
-    )
-  },
-  /* eslint-enable react/display-name react/prop-types */
-]
+// TODO: REMOVE MOCK DATA
+const USERSTORED = true
+const USEREMAIL = 'anita@mailinator.com'
+// const USEREMAIL = undefined
+const USERPREFERSPASSWORD = true
 
 class LoginContent extends Component {
   static propTypes = {
     /** User profile information */
     profile: PropTypes.shape({}),
-    /** Which screen option will renderize  */
-    isInitialScreenOptionOnly: PropTypes.bool,
-    /** Step that will be render first */
-    defaultOption: PropTypes.number,
     /** Function called after login success */
     loginCallback: PropTypes.func,
     /** Runtime context. */
@@ -116,7 +46,6 @@ class LoginContent extends Component {
       navigate: PropTypes.func,
     }),
     /* Reused props */
-    optionsTitle: LoginPropTypes.optionsTitle,
     emailAndPasswordTitle: LoginPropTypes.emailAndPasswordTitle,
     accessCodeTitle: LoginPropTypes.accessCodePlaceholder,
     emailPlaceholder: LoginPropTypes.emailPlaceholder,
@@ -125,15 +54,12 @@ class LoginContent extends Component {
     showPasswordVerificationIntoTooltip: LoginPropTypes.showPasswordVerificationIntoTooltip,
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      returnUrl: '/',
-    }
-  }
-
   static contextTypes = {
     patchSession: PropTypes.func,
+  }
+
+  state = {
+    returnUrl: '/',
   }
 
   componentDidMount() {
@@ -143,22 +69,6 @@ class LoginContent extends Component {
     if (location.search) {
       this.setState({ returnUrl: location.search.substring(11) })
     }
-  }
-
-  handleOptionsClick = option => {
-    let nextStep
-
-    if (option === 'loginOptions.emailVerification') {
-      nextStep = 0
-    } else if (option === 'loginOptions.emailAndPassword') {
-      nextStep = 1
-    }
-
-    this.setState({
-      step: nextStep,
-      isOnInitialScreen: false,
-      isCreatePassword: false,
-    })
   }
 
   redirect = () => {
@@ -193,75 +103,56 @@ class LoginContent extends Component {
     }
   }
 
-  renderChildren = style => {
-    const {
-      profile,
-      isInitialScreenOptionOnly,
-      optionsTitle,
-      defaultOption,
-      data: { loginOptions },
-    } = this.props
-    const { isOnInitialScreen } = this.state
-
-    let step = this.state.step
-    if (profile) {
-      step = steps.ACCOUNT_OPTIONS
-    } else if (isOnInitialScreen) {
-      step = defaultOption
-    }
-
-    return (
-      <div style={style}>
-        <LoginOptions
-          page="login-options"
-          fallbackTitle="loginOptions.title"
-          title={optionsTitle}
-          options={loginOptions}
-          currentStep={step === 0 ? 'loginOptions.emailVerification' : 'loginOptions.emailAndPassword'}
-          isAlwaysShown={!isInitialScreenOptionOnly}
-          onOptionsClick={this.handleOptionsClick}
-          refetchOptions={this.refetchOptions}
-        />
-      </div>
-    )
-  }
+  //       <LoginOptions
+  //         page="login-options"
+  //         fallbackTitle="loginOptions.title"
+  //         title={optionsTitle}
+  //         options={loginOptions}
+  //         currentStep={step === 0 ? 'loginOptions.emailVerification' : 'loginOptions.emailAndPassword'}
+  //         isAlwaysShown={!isInitialScreenOptionOnly}
+  //         onOptionsClick={this.handleOptionsClick}
+  //         refetchOptions={this.refetchOptions}
+  //       />
 
   render = () => {
     const {
       profile,
-      isInitialScreenOptionOnly,
       data: { loading },
       session,
     } = this.props
 
     // Check if the user is already logged and redirect to the return URL if it didn't receive
-    // the profile by the props and current endpoint are /login, if receive it, should render the account options.
+    // the profile by the props and current endpoint are /login,
+    // if receive it, should render the account options.
     if (getProfile(session) && !profile) {
       if (location.pathname.includes('/login')) {
         this.redirect()
       }
     }
 
-    let step = this.state.step
     if (profile) {
-      step = steps.ACCOUNT_OPTIONS
-    } else if (isOnInitialScreen) {
-      step = defaultOption
+      return (
+        <div className="vtex-login-content flex relative bg-base justify-around overflow-hidden">
+          <div className="vtex-login-content__form--step-0">
+            <AccountOptions />
+          </div>
+        </div>
+      )
     }
 
-    const className = classNames('vtex-login-content flex relative bg-base justify-around overflow-hidden', {
-      'vtex-login-content--initial-screen': this.state.isOnInitialScreen,
-      'vtex-login-content--always-with-options flex-column-reverse items-center flex-row-ns items-baseline-ns':
-        !isInitialScreenOptionOnly,
-      'items-baseline': isInitialScreenOptionOnly,
-    })
+    // const className = classNames('vtex-login-content flex relative bg-base justify-around overflow-hidden', {
+    //   'vtex-login-content--initial-screen': this.state.isOnInitialScreen,
+    //   'vtex-login-content--always-with-options flex-column-reverse items-center flex-row-ns items-baseline-ns':
+    //     !isInitialScreenOptionOnly,
+    //   'items-baseline': isInitialScreenOptionOnly,
+    // })
     return (
 
-      <AuthState scope="store" email="anita@mailinator.com">
+      <AuthState scope="store" email={USEREMAIL}>
       {() => (
-        <div className={className}>
+        <div className="vtex-login-content flex relative bg-base justify-around overflow-hidden">
           <div className="vtex-login-content__form--step-0">
-            <StateMachine userStored>
+            <StateMachine userStored={USERSTORED}>
               {
                 ({ sendEvent, state }) => {
                   if (state.matches('identification.unidentified_user')) {
@@ -276,15 +167,13 @@ class LoginContent extends Component {
                   }
                   if (state.matches('identification.identified_user')) {
                     return (
-                      <div>
-                        Hello anita
-                        <button onClick={() => sendEvent('TOKEN_PREFERENCE')}>
-                          continue
-                        </button>
-                        <button onClick={() => sendEvent('NOT_ME')}>
-                          that's not me
-                        </button>
-                      </div>
+                      <IdentifiedUser
+                        onSuccess={() => {
+                          USERPREFERSPASSWORD ? sendEvent('PASSWORD_PREFERENCE') : sendEvent('TOKEN_PREFERENCE')
+                        }}
+                        onSwitchUser={() => sendEvent('NOT_ME')}
+                        userName={USEREMAIL}
+                      />
                     )
                   }
                   if (state.matches('password_login')) {
@@ -335,11 +224,12 @@ class LoginContent extends Component {
                   }
                   if (state.matches('default_login.password_changed')) {
                     return (
-                      <div>
-                        Congrats password changed
-                        <br />
-                        <button onClick={() => this.onLoginSuccess()}>continue</button>
-                      </div>
+                      <PasswordChangeSuccess
+                        onContinue={() => {
+                          sendEvent('CONTINUE')
+                          this.onLoginSuccess()
+                        }}
+                      />
                     )
                   }
                 }

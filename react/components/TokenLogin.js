@@ -8,7 +8,7 @@ import GoBackButton from './GoBackButton'
 
 /** CodeConfirmation tab component. Receive the code from an input and call the signIn API */
 class TokenLogin extends Component {
-  handleBackClick = () => this.props.onBackClick()
+  handleBackClick = () => this.props.onClickBack()
 
   render() {
     return (
@@ -33,7 +33,7 @@ TokenLogin.propTypes = {
   /** Placeholder to access code input */
   accessCodePlaceholder: PropTypes.string,
   onSuccess: PropTypes.func,
-  onBackClick: PropTypes.func,
+  onClickBack: PropTypes.func,
   onAddPassword: PropTypes.func,
 }
 
