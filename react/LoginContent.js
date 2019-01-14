@@ -15,6 +15,7 @@ import TokenLogin from './components/TokenLogin'
 import PasswordRecovery from './components/PasswordRecovery'
 import EmailVerification from './components/EmailVerification'
 import AccountOptions from './components/AccountOptions'
+import ExternalProvidersMenu from './components/ExternalProvidersMenu'
 
 import { setCookie } from './utils/set-cookie'
 
@@ -103,17 +104,6 @@ class LoginContent extends Component {
     }
   }
 
-  //       <LoginOptions
-  //         page="login-options"
-  //         fallbackTitle="loginOptions.title"
-  //         title={optionsTitle}
-  //         options={loginOptions}
-  //         currentStep={step === 0 ? 'loginOptions.emailVerification' : 'loginOptions.emailAndPassword'}
-  //         isAlwaysShown={!isInitialScreenOptionOnly}
-  //         onOptionsClick={this.handleOptionsClick}
-  //         refetchOptions={this.refetchOptions}
-  //       />
-
   render = () => {
     const {
       profile,
@@ -157,50 +147,74 @@ class LoginContent extends Component {
                 ({ sendEvent, state }) => {
                   if (state.matches('identification.unidentified_user')) {
                     return (
-                      <EmailVerification
-                        title={this.props.accessCodeTitle}
-                        emailPlaceholder={this.props.emailPlaceholder}
-                        onPasswordPreference={() => sendEvent('PASSWORD_PREFERENCE')}
-                        onTokenPreference={() => sendEvent('TOKEN_PREFERENCE')}
-                      />
+                      <React.Fragment>
+                        <EmailVerification
+                          title={this.props.accessCodeTitle}
+                          emailPlaceholder={this.props.emailPlaceholder}
+                          onPasswordPreference={() => sendEvent('PASSWORD_PREFERENCE')}
+                          onTokenPreference={() => sendEvent('TOKEN_PREFERENCE')}
+                        />
+                        <ExternalProvidersMenu
+                          options={this.props.data.loginOptions}
+                          refetchOptions={this.refetchOptions}
+                        />
+                      </React.Fragment>
                     )
                   }
                   if (state.matches('identification.identified_user')) {
                     return (
-                      <IdentifiedUser
-                        onSuccess={() => {
-                          USERPREFERSPASSWORD ? sendEvent('PASSWORD_PREFERENCE') : sendEvent('TOKEN_PREFERENCE')
-                        }}
-                        onSwitchUser={() => sendEvent('NOT_ME')}
-                        userName={USEREMAIL}
-                      />
+                      <React.Fragment>
+                        <IdentifiedUser
+                          onSuccess={() => {
+                            USERPREFERSPASSWORD ? sendEvent('PASSWORD_PREFERENCE') : sendEvent('TOKEN_PREFERENCE')
+                          }}
+                          onSwitchUser={() => sendEvent('NOT_ME')}
+                          userName={USEREMAIL}
+                        />
+                        <ExternalProvidersMenu
+                          options={this.props.data.loginOptions}
+                          refetchOptions={this.refetchOptions}
+                        />
+                      </React.Fragment>
                     )
                   }
                   if (state.matches('password_login')) {
                     return (
-                      <PasswordLogin
-                        title={this.props.emailAndPasswordTitle}
-                        emailPlaceholder={this.props.emailPlaceholder}
-                        passwordPlaceholder={this.props.passwordPlaceholder}
-                        showPasswordVerificationIntoTooltip={this.props.showPasswordVerificationIntoTooltip}
-                        loginCallback={this.onLoginSuccess}
-                        onSuccess={() => sendEvent('LOGIN_SUCCESS')}
-                        onForgotPassword={() => sendEvent('FORGOT_PASSWORD')}
-                        onClickBack={() => sendEvent('BACK')}
-                      />
+                      <React.Fragment>
+                        <PasswordLogin
+                          title={this.props.emailAndPasswordTitle}
+                          emailPlaceholder={this.props.emailPlaceholder}
+                          passwordPlaceholder={this.props.passwordPlaceholder}
+                          showPasswordVerificationIntoTooltip={this.props.showPasswordVerificationIntoTooltip}
+                          loginCallback={this.onLoginSuccess}
+                          onSuccess={() => sendEvent('LOGIN_SUCCESS')}
+                          onForgotPassword={() => sendEvent('FORGOT_PASSWORD')}
+                          onClickBack={() => sendEvent('BACK')}
+                        />
+                        <ExternalProvidersMenu
+                          options={this.props.data.loginOptions}
+                          refetchOptions={this.refetchOptions}
+                        />
+                      </React.Fragment>
                     )
                   }
                   if (state.matches('token_login')) {
                     return (
-                      <TokenLogin
-                        accessCodePlaceholder={this.props.accessCodePlaceholder}
-                        onSuccess={() => {
-                          sendEvent('LOGIN_SUCESS')
-                          this.onLoginSuccess()
-                        }}
-                        onClickBack={() => sendEvent('BACK')}
-                        onAddPassword={() => sendEvent('SET_PASSWORD')}
-                      />
+                      <React.Fragment>
+                        <TokenLogin
+                          accessCodePlaceholder={this.props.accessCodePlaceholder}
+                          onSuccess={() => {
+                            sendEvent('LOGIN_SUCESS')
+                            this.onLoginSuccess()
+                          }}
+                          onClickBack={() => sendEvent('BACK')}
+                          onAddPassword={() => sendEvent('SET_PASSWORD')}
+                        />
+                        <ExternalProvidersMenu
+                          options={this.props.data.loginOptions}
+                          refetchOptions={this.refetchOptions}
+                        />
+                      </React.Fragment>
                     )
                   }
                   if (state.matches('default_login.token_confirmation')) {
