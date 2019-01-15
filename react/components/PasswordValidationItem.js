@@ -8,10 +8,10 @@ export default class PasswordValidationItem extends Component {
     return (
       <div className={`flex flex-row ${valid ? 'c-success' : 'c-danger'}`}>
         <div className="w-20">
-          <span className="f6">{prefix}</span>
+          <span className="t-small">{prefix}</span>
         </div>
         <div className="w-80">
-          <span className="f6">{label}</span>
+          <span className="t-small">{label}</span>
         </div>
       </div >
     )
