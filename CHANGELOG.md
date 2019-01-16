@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.3.1] - 2019-01-15
+### Fixed
+- Improve the design tokens of login. 
+
 ## [2.3.0] - 2019-01-09
 ### Changed
 - Bye `pages.json`! Welcome store-builder.

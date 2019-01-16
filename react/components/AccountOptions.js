@@ -22,7 +22,7 @@ class AccountOptions extends Component {
         <div className="ma4 min-h-2 b--muted-4">
           <Link page={'store.account'}>
             <button
-              className="vtex-button bw1 ba t-action ttu br2 t-action--small v-mid relative pv3 ph5 t-heading-5 bg-base b--transparent c-action-primary  hover-c-action-primary pointer"
+              className="vtex-button bw1 ba ttu br2 t-action--small v-mid relative pv3 ph5 t-heading-5 bg-base b--transparent c-action-primary  hover-c-action-primary pointer"
               closeonclick=""
             >
               <span className="t-action--small">

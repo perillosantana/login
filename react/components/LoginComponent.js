@@ -45,12 +45,12 @@ export default class LoginComponent extends Component {
           </div>
         }
         {profile ? (
-          <span className={`vtex-login__profile order-1 f6 pl4 ${labelClasses} dn-m db-l`}>
+          <span className={`vtex-login__profile t-action--small order-1 pl4 ${labelClasses} dn-m db-l`}>
             {translate('login.hello', intl)}{' '}
             {profile.firstName || truncateString(profile.email)}
           </span>
         ) : (
-            iconLabel && <span className={`vtex-login__label f6 pl4 ${labelClasses} dn-m db-l`}>{iconLabel}</span>
+            iconLabel && <span className={`vtex-login__label t-action--small pl4 ${labelClasses} dn-m db-l`}>{iconLabel}</span>
           )}
       </Fragment>
     )
@@ -90,7 +90,7 @@ export default class LoginComponent extends Component {
     const profile = getProfile(data)
 
     return (
-      <div className="vtex-login__container flex items-center f6 fr">
+      <div className="vtex-login__container flex items-center fr">
         <div className="relative">
           {this.renderIcon()}
           <OutsideClickHandler onOutsideClick={onOutSideBoxClick}>

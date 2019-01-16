@@ -68,7 +68,7 @@ class LoginOptions extends Component {
                   variation="secondary"
                   onClick={this.handleOptionClick('loginOptions.emailVerification')}
                 >
-                  <span className="f6">{translate('loginOptions.emailVerification', intl)}</span>
+                  <span>{translate('loginOptions.emailVerification', intl)}</span>
                 </Button>
               </div>
             </li>
@@ -80,7 +80,7 @@ class LoginOptions extends Component {
                   variation="secondary"
                   onClick={this.handleOptionClick('loginOptions.emailAndPassword')}
                 >
-                  <span className="f6">{translate('loginOptions.emailAndPassword', intl)}</span>
+                  <span>{translate('loginOptions.emailAndPassword', intl)}</span>
                 </Button>
               </div>
             </li>
@@ -108,7 +108,7 @@ class LoginOptions extends Component {
                   isLoading={loadingOptions}
                   onClick={this.handleRefetchOptions}
                 >
-                  <div className={`${loadingOptions ? 'dn' : 'db'} f6`}>{translate('loginOptions.error.title', intl)}</div>
+                  <div className={`${loadingOptions ? 'dn' : 'db'}`}>{translate('loginOptions.error.title', intl)}</div>
                   <span className="t-small pt1">{translate('loginOptions.error.subhead', intl)}</span>
                 </Button>
               </div>
