@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { injectIntl, intlShape } from 'react-intl'
-import { ExtensionContainer } from 'render'
+import { ExtensionContainer } from 'vtex.render-runtime'
 
 import { Button } from 'vtex.styleguide'
 

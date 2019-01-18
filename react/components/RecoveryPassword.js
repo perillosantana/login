@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 
 import { Input, Button } from 'vtex.styleguide'
-import { AuthState, AuthService } from 'vtex.auth'
+import { AuthState, AuthService } from 'vtex.react-vtexid'
 
 import { translate } from '../utils/translate'
 import { isValidPassword, isValidAccessCode } from '../utils/format-check'

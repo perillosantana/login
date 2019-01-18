@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { injectIntl, intlShape } from 'react-intl'
-import { Link } from 'render'
+import { Link } from 'vtex.render-runtime'
 
 import { Button } from 'vtex.styleguide'
-import { AuthService } from 'vtex.auth'
+import { AuthService } from 'vtex.react-vtexid'
 
 import { translate } from '../utils/translate'
 
