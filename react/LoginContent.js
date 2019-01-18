@@ -203,32 +203,7 @@ const content = withSession()(compose(
 content.schema = {
   title: 'editor.loginPage.title',
   type: 'object',
-  properties: {
-    isInitialScreenOptionOnly: {
-      title: 'editor.login.isInitialScreenOptionOnly.title',
-      type: 'boolean',
-      default: true,
-      isLayout: true,
-    },
-    defaultOption: {
-      title: 'editor.login.defaultOption.title',
-      type: 'number',
-      default: 0,
-      isLayout: true,
-      enum: [0, 1],
-      enumNames: [
-        'editor.login.defaultOption.token',
-        'editor.login.defaultOption.emailAndPassword',
-      ],
-      widget: {
-        'ui:widget': 'radio',
-        'ui:options': {
-          inline: true,
-        },
-      },
-    },
-    ...LoginSchema,
-  },
+  properties: LoginSchema,
 }
 
 export default withRuntimeContext(content)

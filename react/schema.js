@@ -1,11 +1,4 @@
 export const LoginSchema = {
-  optionsTitle: {
-    title: 'editor.login.optionsTitle',
-    type: 'string',
-    widget: {
-      'ui:widget': 'textarea',
-    },
-  },
   emailAndPasswordTitle: {
     title: 'editor.login.emailAndPasswordTitle',
     type: 'string',
