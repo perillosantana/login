@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 import { Transition } from 'react-spring'
-import { withSession, withRuntimeContext } from 'render'
+import { withSession, withRuntimeContext } from 'vtex.render-runtime'
 
 import LoginOptions from './components/LoginOptions'
 import AccountOptions from './components/AccountOptions'
@@ -23,7 +23,7 @@ import { LoginPropTypes } from './propTypes'
 import { getProfile } from './utils/profile'
 import { session } from 'vtex.store-resources/Queries'
 import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
-import { AuthState } from 'vtex.auth'
+import { AuthState } from 'vtex.react-vtexid'
 
 import './global.css'
 
@@ -303,26 +303,28 @@ class LoginContent extends Component {
 
     return (
       <AuthState scope="store">
-        <div className={className}>
-          <Transition
-            keys={(!profile && this.shouldRenderLoginOptions && !loading) ? ['children'] : []}
-            from={{ opacity: 0, transform: 'translateX(-50%)' }}
-            enter={{ opacity: 1, transform: 'translateX(0%)' }}
-            leave={{ display: 'none' }}
-          >
-            {(!profile && this.shouldRenderLoginOptions && !loading) ? [this.renderChildren] : []}
-          </Transition>
-          <div className={formClassName}>
+        {() => (
+          <div className={className}>
             <Transition
-              keys={this.shouldRenderForm && render ? ['children'] : []}
-              from={{ opacity: 0, transform: 'translateX(50%)' }}
+              keys={(!profile && this.shouldRenderLoginOptions && !loading) ? ['children'] : []}
+              from={{ opacity: 0, transform: 'translateX(-50%)' }}
               enter={{ opacity: 1, transform: 'translateX(0%)' }}
               leave={{ display: 'none' }}
             >
-              {this.shouldRenderForm && render ? [render] : []}
+              {(!profile && this.shouldRenderLoginOptions && !loading) ? [this.renderChildren] : []}
             </Transition>
+            <div className={formClassName}>
+              <Transition
+                keys={this.shouldRenderForm && render ? ['children'] : []}
+                from={{ opacity: 0, transform: 'translateX(50%)' }}
+                enter={{ opacity: 1, transform: 'translateX(0%)' }}
+                leave={{ display: 'none' }}
+              >
+                {this.shouldRenderForm && render ? [render] : []}
+              </Transition>
+            </div>
           </div>
-        </div>
+        )}
       </AuthState>
 
     )

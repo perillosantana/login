@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { compose } from 'ramda'
-import { withSession } from 'render'
+import { withSession } from 'vtex.render-runtime'
 import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'render'
+import { Link } from 'vtex.render-runtime'
 import OutsideClickHandler from 'react-outside-click-handler'
 import classNames from 'classnames'
 
