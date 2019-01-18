@@ -3,12 +3,19 @@ import loginMachine from './utils/loginMachine'
 import { interpret } from 'xstate/lib/interpreter'
 import PropTypes from 'prop-types'
 
+const generateTransitionHandlers = (sendEvent, transitions) => {
+  return Object.keys(transitions).reduce((acc, key) => {
+    acc[key] = () => sendEvent(transitions[key])
+    return acc
+  }, {})
+}
+
 class StateMachine extends Component {
   constructor(props) {
     super(props)
 
     const loginMachineService = interpret(loginMachine.withContext({
-      userStored: this.props.userStored,
+      isUserIdentified: this.props.isUserIdentified,
     })).onTransition(nextState => {
       console.log(nextState.value)
     })
@@ -27,13 +34,18 @@ class StateMachine extends Component {
   }
 
   render = () => {
+    const { sendEvent, props: { transitionsMapping } } = this
     return (
       <React.Fragment>
         {
           this.props.children(
             {
-              sendEvent: this.sendEvent,
-              state: this.state.currentState,
+              sendEvent,
+              state: this.state.currentState.toStrings().pop(),
+              transitionHandlers: generateTransitionHandlers(
+                sendEvent,
+                transitionsMapping,
+              ),
             }
           )
         }
@@ -44,7 +56,8 @@ class StateMachine extends Component {
 
 StateMachine.propTypes = {
   children: PropTypes.any,
-  userStored: PropTypes.bool,
+  isUserIdentified: PropTypes.bool,
+  transitionsMapping: PropTypes.object,
 }
 
 export default StateMachine

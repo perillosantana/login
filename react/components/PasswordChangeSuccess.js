@@ -6,6 +6,11 @@ import { Button } from 'vtex.styleguide'
 // import { translate } from '../utils/translate'
 
 class PasswordChangeSuccess extends Component {
+  handleContinue = () => {
+    this.props.onContinue()
+    this.props.loginCallback()
+  }
+
   render() {
     return (
       <div className="relative">
@@ -25,6 +30,7 @@ class PasswordChangeSuccess extends Component {
 PasswordChangeSuccess.propTypes = {
   /** Function to change de active tab */
   onContinue: PropTypes.func.isRequired,
+  loginCallback: PropTypes.func.isRequired,
   /** Intl object*/
   intl: intlShape,
 }

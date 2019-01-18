@@ -18,6 +18,7 @@ class PasswordLogin extends Component {
     /** Set the type of password verification ui */
     showPasswordVerificationIntoTooltip: PropTypes.bool,
     /** Title to be displayed */
+    // TODO: make this customizable
     title: PropTypes.string,
     /** Placeholder to password input */
     passwordPlaceholder: PropTypes.string,
@@ -25,7 +26,7 @@ class PasswordLogin extends Component {
     intl: intlShape,
     /** Function called after login success */
     loginCallback: PropTypes.func,
-    onClickBack: PropTypes.func.isRequired,
+    onBack: PropTypes.func.isRequired,
     onForgotPassword: PropTypes.func.isRequired,
   }
 
@@ -153,7 +154,7 @@ class PasswordLogin extends Component {
         footer={
           <Fragment>
             <GoBackButton
-              onClick={this.props.onClickBack}
+              onClick={this.props.onBack}
             />
             <div className="vtex-login__send-button">
               <AuthService.LoginWithPassword

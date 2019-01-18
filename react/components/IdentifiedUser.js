@@ -15,16 +15,17 @@ class IdentifiedUser extends Component {
   static propTypes = {
     /** Intl object*/
     intl: intlShape,
-    onSuccess: PropTypes.func.isRequired,
+    onTokenPreference: PropTypes.func.isRequired,
+    onPasswordPreference: PropTypes.func.isRequired,
     userName: PropTypes.string,
-    onSwitchUser: PropTypes.func.isRequired,
+    onNotMe: PropTypes.func.isRequired,
     hasPasswordPreference: PropTypes.bool,
   }
 
   handleOnSubmit = (event, sendToken) => {
     event.preventDefault()
     if (this.props.hasPasswordPreference) {
-      this.props.onSuccess()
+      this.props.onPasswordPreference()
     } else {
       sendToken()
     }
@@ -47,7 +48,7 @@ class IdentifiedUser extends Component {
             <div className="vtex-login__send-button">
               <AuthService.SendAccessKey
                 useNewSession
-                onSuccess={this.props.onSuccess}
+                onSuccess={this.props.onTokenPreference}
                 onFailure={() => {
                   this.setState({ isUserBlocked: true })
                 }}
@@ -72,7 +73,7 @@ class IdentifiedUser extends Component {
               <Button
                 variation="primary"
                 size="small"
-                onClick={this.props.onSwitchUser}
+                onClick={this.props.onNotMe}
               >
                 <span className="t-small">That's not me</span>
               </Button>

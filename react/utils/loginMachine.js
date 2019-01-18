@@ -19,36 +19,36 @@ const loginMachine = Machine({
         unknown: {
           on: {
             '': [
-              { target: 'identified_user', cond: ctx => ctx && ctx.userStored },
+              { target: 'identified_user', cond: ctx => ctx && ctx.isUserIdentified },
               { target: 'unidentified_user' },
             ],
           },
         },
-        identified_user: {
+        'identified_user': {
           on: {
             NOT_ME: 'unidentified_user',
           },
         },
-        unidentified_user: {
+        'unidentified_user': {
           on: {},
         },
       },
     },
-    password_login: {
+    'password_login': {
       on: {
         FORGOT_PASSWORD: 'default_login',
         LOGIN_SUCCESS: 'redirecting',
         BACK: 'identification',
       },
     },
-    token_login: {
+    'token_login': {
       on: {
         SET_PASSWORD: 'default_login.set_password',
         LOGIN_SUCCESS: 'redirecting',
         BACK: 'identification',
       },
     },
-    default_login: {
+    'default_login': {
       id: 'default_login',
       initial: 'token_confirmation',
       on: {
@@ -57,7 +57,7 @@ const loginMachine = Machine({
         },
       },
       states: {
-        token_confirmation: {
+        'token_confirmation': {
           on: {
             TOKEN_CONFIRMED: 'set_password',
             CONTINUE: {
@@ -65,12 +65,12 @@ const loginMachine = Machine({
             },
           },
         },
-        set_password: {
+        'set_password': {
           on: {
             CHANGE_PASSWORD: 'password_changed',
           },
         },
-        password_changed: {},
+        'password_changed': {},
       },
     },
     redirecting: {},

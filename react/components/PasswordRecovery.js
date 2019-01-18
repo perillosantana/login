@@ -120,7 +120,7 @@ class PasswordRecovery extends Component {
                 </span>
               </Button>
               <AuthService.SetPassword
-                onSuccess={this.props.onPasswordSetSuccess}
+                onSuccess={this.props.onChangePassword}
                 onFailure={this.handleFailure}
               >
                 {({
@@ -162,7 +162,7 @@ PasswordRecovery.propTypes = {
   passwordPlaceholder: PropTypes.string,
   /** Function called after login success */
   loginCallback: PropTypes.func,
-  onPasswordSetSuccess: PropTypes.func,
+  onChangePassword: PropTypes.func,
 }
 
 export default injectIntl(PasswordRecovery)

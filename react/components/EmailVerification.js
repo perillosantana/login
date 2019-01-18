@@ -49,7 +49,6 @@ class EmailVerification extends Component {
 
   render() {
     const {
-      title,
       intl,
       emailPlaceholder,
     } = this.props
@@ -58,7 +57,7 @@ class EmailVerification extends Component {
     return (
       <Form
         className="vtex-login__email-verification"
-        title={title || translate('loginOptions.emailVerification', intl)}
+        title={translate('loginOptions.emailVerification', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>

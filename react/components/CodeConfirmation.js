@@ -17,7 +17,7 @@ class CodeConfirmation extends Component {
     this.state = {
       isInvalidCode: false,
       isWrongCredentials: false,
-      handleSuccess: this.props.onSuccess,
+      handleSuccess: this.props.onLoginSuccess,
     }
   }
 
@@ -40,7 +40,7 @@ class CodeConfirmation extends Component {
     if (!isValidAccessCode(token)) {
       this.setState({ isInvalidCode: true })
     } else {
-      this.setState({ handleSuccess: this.props.onAddPassword })
+      this.setState({ handleSuccess: this.props.onChangePassword })
       confirmToken()
     }
   }
@@ -135,9 +135,9 @@ CodeConfirmation.propTypes = {
   intl: intlShape,
   /** Placeholder to access code input */
   accessCodePlaceholder: PropTypes.string,
-  onSuccess: PropTypes.func,
+  onLoginSuccess: PropTypes.func,
   showAddPassword: PropTypes.bool,
-  onAddPassword: PropTypes.func,
+  onChangePassword: PropTypes.func,
 }
 
 export default injectIntl(CodeConfirmation)
