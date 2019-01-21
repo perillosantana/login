@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 
-import { AuthService } from 'vtex.auth'
+import { AuthService } from 'vtex.react-vtexid'
 import { Button } from 'vtex.styleguide'
 
 import Form from './Form'
