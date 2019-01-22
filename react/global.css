@@ -161,9 +161,3 @@
 .vtex-login__button--danger > .vtex-button .vtex__icon-spinner{
   color: #FF4C4C;
 }
-
-@media only screen and (max-width: 80em) {	
-  .vtex-login__profile {	
-    display: none;	
-  }	
-} 
