@@ -12,7 +12,7 @@ import { translate } from '../utils/translate'
 import { LoginPropTypes } from '../propTypes'
 import { getProfile } from '../utils/profile'
 
-const profileIcon = (iconSize, iconClasses) => (<Icon id="hpa-profile" className={iconClasses} size={iconSize} />)
+const profileIcon = (iconSize, iconClasses) => <Icon id="hpa-profile" className={iconClasses} size={iconSize} />
 export default class LoginComponent extends Component {
   static propTypes = LoginPropTypes
 
