@@ -73,7 +73,9 @@ const loginMachine = Machine({
         'password_changed': {},
       },
     },
-    redirecting: {},
+    redirecting: {
+      onEntry: ['redirect'],
+    },
   },
 })
 

@@ -38,7 +38,7 @@ class PasswordRecovery extends Component {
       : console.error(err)
   }
 
-  handleSkip = () => this.props.loginCallback()
+  handleSkip = () => this.props.onContinue()
 
   handleOnSubmit = (event, newPassword, setPassword) => {
     event.preventDefault()
@@ -161,7 +161,7 @@ PasswordRecovery.propTypes = {
   /** Placeholder to password input */
   passwordPlaceholder: PropTypes.string,
   /** Function called after login success */
-  loginCallback: PropTypes.func,
+  onContinue: PropTypes.func,
   onChangePassword: PropTypes.func,
 }
 

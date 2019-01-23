@@ -25,7 +25,7 @@ class PasswordLogin extends Component {
     /** Intl object*/
     intl: intlShape,
     /** Function called after login success */
-    loginCallback: PropTypes.func,
+    onLoginSuccess: PropTypes.func,
     onBack: PropTypes.func.isRequired,
     onForgotPassword: PropTypes.func.isRequired,
   }
@@ -43,7 +43,7 @@ class PasswordLogin extends Component {
   }
 
   handleSuccess = () => {
-    this.props.loginCallback()
+    this.props.onLoginSuccess()
   }
 
   handleFailure = err => {

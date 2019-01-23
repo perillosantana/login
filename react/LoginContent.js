@@ -25,7 +25,7 @@ import { LoginPropTypes } from './propTypes'
 import { getProfile } from './utils/profile'
 import { session } from 'vtex.store-resources/Queries'
 import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
-import { AuthState } from 'vtex.react-vtexid'
+import { AuthState, AuthService } from 'vtex.react-vtexid'
 
 import './global.css'
 import IdentifiedUser from './components/IdentifiedUser'
@@ -73,26 +73,11 @@ class LoginContent extends Component {
     }
   }
 
-  redirect = () => {
-    this.props.runtime.navigate({
-      to: this.state.returnUrl,
-      fallbackToWindowLocation: true,
-    })
-  }
-
-  /**
-   * Action after login success. If loginCallback isn't
-   * a prop, it will call a root page redirect as default.
-  */
-  onLoginSuccess = () => {
+  onLoginSuccess = (redirectCallback) => {
     const { loginCallback } = this.props
-    return this.context.patchSession().then(() => {
-      if (loginCallback) {
-        loginCallback()
-      } else {
-        location.assign(this.state.returnUrl)
-      }
-    })
+    const ensureSessionExists = this.context.patchSession
+
+    return ensureSessionExists().then(loginCallback ? loginCallback : redirectCallback)
   }
 
   refetchOptions = () => {
@@ -113,7 +98,7 @@ class LoginContent extends Component {
     'default_login.token_confirmation': (data, handlers) => <CodeConfirmation {...data} {...handlers} />,
     'default_login.set_password': (data, handlers) => <PasswordRecovery {...data} {...handlers} />,
     'default_login.password_changed': (data, handlers) => <PasswordChangeSuccess {...data} {...handlers} />,
-    'redirecting': null,
+    'redirecting': () => <p>Redirecting</p>,
   }
 
   render = () => {
@@ -122,16 +107,13 @@ class LoginContent extends Component {
       session,
     } = this.props
 
-    // Check if the user is already logged and redirect to the return URL if it didn't receive
-    // the profile by the props and current endpoint are /login,
-    // if receive it, should render the account options.
-    if (getProfile(session) && !profile) {
-      if (location.pathname.includes('/login')) {
-        this.redirect()
-      }
-    }
+    // Redirect the user to the returnURL if they are logged in and no "profile" props was passed and the user is at "/login"
+    // Otherwise just render account options
 
-    if (profile) {
+    const isEmbeddedAndLogged = !!profile
+    const isLoggedIn = getProfile(session)
+
+    if (isEmbeddedAndLogged) {
       return (
         <div className="vtex-login-content flex relative bg-base justify-around overflow-hidden">
           <div className="vtex-login-content__form--step-0">
@@ -141,47 +123,51 @@ class LoginContent extends Component {
       )
     }
 
-    // const className = classNames('vtex-login-content flex relative bg-base justify-around overflow-hidden', {
-    //   'vtex-login-content--initial-screen': this.state.isOnInitialScreen,
-    //   'vtex-login-content--always-with-options flex-column-reverse items-center flex-row-ns items-baseline-ns':
-    //     !isInitialScreenOptionOnly,
-    //   'items-baseline': isInitialScreenOptionOnly,
-    // })
-
     const allData = {
       ...this.props,
-      loginCallback: this.onLoginSuccess,
       userName: USEREMAIL,
       hasPasswordPreference: USERPREFERSPASSWORD,
     }
 
     return (
 
-      <AuthState scope="store" email={USEREMAIL}>
+      <AuthState scope="store" email={USEREMAIL} returnUrl={this.state.returnUrl}>
       {() => (
-        <div className="vtex-login-content flex relative bg-base justify-around overflow-hidden">
-          <div className="vtex-login-content__form--step-0">
-            <StateMachine isUserIdentified={USERSTORED} transitionsMapping={transitionsMapping}>
-              {
-                ({ state, transitionHandlers }) => {
-                  const showExternalProviders = ['identification.identified_user', 'identification.unidentified_user', 'token_login', 'password_login'].includes(state)
+        <AuthService.RedirectAfterLogin>
+        {
+          ({action: redirect}) => {
+            return (
+              <div className="vtex-login-content flex relative bg-base justify-around overflow-hidden">
+                <div className="vtex-login-content__form--step-0">
+                  <StateMachine
+                    isUserIdentified={USERSTORED}
+                    transitionsMapping={transitionsMapping}
+                    actions={{redirect: () => this.onLoginSuccess(redirect)}}
+                  >
+                    {
+                      ({ state, transitionHandlers }) => {
+                        const showExternalProviders = ['identification.identified_user', 'identification.unidentified_user', 'token_login', 'password_login'].includes(state)
 
-                  return (
-                    <React.Fragment>
-                      {this.componentByState[state]({ ...allData, ...transitionHandlers })}
-                      {showExternalProviders &&
-                        <ExternalProvidersMenu
-                          options={this.props.data.loginOptions}
-                          refetchOptions={this.refetchOptions}
-                        />
+                        return (
+                          <React.Fragment>
+                            {this.componentByState[state]({ ...allData, ...transitionHandlers })}
+                            {showExternalProviders &&
+                              <ExternalProvidersMenu
+                                options={this.props.data.loginOptions}
+                                refetchOptions={this.refetchOptions}
+                              />
+                            }
+                          </React.Fragment>
+                        )
                       }
-                    </React.Fragment>
-                  )
-                }
-              }
-            </StateMachine>
-          </div>
-        </div>
+                    }
+                  </StateMachine>
+                </div>
+              </div>
+            )
+          }
+        }
+        </AuthService.RedirectAfterLogin>
       )}
       </AuthState>
 

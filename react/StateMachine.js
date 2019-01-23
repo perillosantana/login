@@ -14,9 +14,15 @@ class StateMachine extends Component {
   constructor(props) {
     super(props)
 
-    const loginMachineService = interpret(loginMachine.withContext({
-      isUserIdentified: this.props.isUserIdentified,
-    })).onTransition(nextState => {
+    const loginMachineService = interpret(
+      loginMachine
+      .withContext({
+        isUserIdentified: this.props.isUserIdentified,
+      })
+      .withConfig({
+        actions: this.props.actions
+      })
+    ).onTransition(nextState => {
       console.log(nextState.value)
     })
 

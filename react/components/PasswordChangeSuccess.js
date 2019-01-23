@@ -8,7 +8,6 @@ import { Button } from 'vtex.styleguide'
 class PasswordChangeSuccess extends Component {
   handleContinue = () => {
     this.props.onContinue()
-    this.props.loginCallback()
   }
 
   render() {
@@ -30,7 +29,6 @@ class PasswordChangeSuccess extends Component {
 PasswordChangeSuccess.propTypes = {
   /** Function to change de active tab */
   onContinue: PropTypes.func.isRequired,
-  loginCallback: PropTypes.func.isRequired,
   /** Intl object*/
   intl: intlShape,
 }

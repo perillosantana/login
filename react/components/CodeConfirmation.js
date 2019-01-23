@@ -10,15 +10,10 @@ import { isValidAccessCode } from '../utils/format-check'
 import Form from './Form'
 import FormError from './FormError'
 
-/** CodeConfirmation tab component. Receive the code from an input and call the signIn API */
 class CodeConfirmation extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isInvalidCode: false,
-      isWrongCredentials: false,
-      handleSuccess: this.props.onLoginSuccess,
-    }
+  state = {
+    isInvalidCode: false,
+    isWrongCredentials: false,
   }
 
   handleFailure = err => {
@@ -32,15 +27,6 @@ class CodeConfirmation extends Component {
     if (!isValidAccessCode(token)) {
       this.setState({ isInvalidCode: true })
     } else {
-      confirmToken()
-    }
-  }
-
-  handleAddPassword = (confirmToken, token) => {
-    if (!isValidAccessCode(token)) {
-      this.setState({ isInvalidCode: true })
-    } else {
-      this.setState({ handleSuccess: this.props.onChangePassword })
       confirmToken()
     }
   }
@@ -87,7 +73,7 @@ class CodeConfirmation extends Component {
           <Fragment>
             <div className="vtex-login__send-button">
               <AuthService.LoginWithAccessKey
-                onSuccess={this.state.handleSuccess}
+                onSuccess={this.props.onTokenConfirmed}
                 onFailure={this.handleFailure}
               >
                 {({ state: { token }, loading, action: confirmToken }) => (
@@ -103,18 +89,6 @@ class CodeConfirmation extends Component {
                         {translate('login.confirm', intl)}
                       </span>
                     </Button>
-                    { this.props.showAddPassword &&
-                      <Button
-                        variation="primary"
-                        size="small"
-                        onClick={() => this.handleAddPassword(confirmToken, token)}
-                        isLoading={loading}
-                      >
-                        <span className="t-small">
-                          Add New Password
-                        </span>
-                      </Button>
-                    }
                   </Fragment>
                 )}
               </AuthService.LoginWithAccessKey>
@@ -131,13 +105,9 @@ CodeConfirmation.defaultProps = {
 }
 
 CodeConfirmation.propTypes = {
-  /** Intl object*/
   intl: intlShape,
-  /** Placeholder to access code input */
   accessCodePlaceholder: PropTypes.string,
-  onLoginSuccess: PropTypes.func,
-  showAddPassword: PropTypes.bool,
-  onChangePassword: PropTypes.func,
+  onTokenConfirmed: PropTypes.func,
 }
 
 export default injectIntl(CodeConfirmation)
