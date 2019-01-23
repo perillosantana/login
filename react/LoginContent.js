@@ -141,6 +141,7 @@ class LoginContent extends Component {
                 <div className="vtex-login-content__form--step-0">
                   <StateMachine
                     isUserIdentified={USERSTORED}
+                    isUserLoggedIn={isLoggedIn}
                     transitionsMapping={transitionsMapping}
                     actions={{redirect: () => this.onLoginSuccess(redirect)}}
                   >

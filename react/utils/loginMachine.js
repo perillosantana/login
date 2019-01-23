@@ -2,8 +2,17 @@ import { Machine } from 'xstate'
 
 const loginMachine = Machine({
   id: 'loginMachine',
-  initial: 'identification',
+  initial: 'unknown',
   states: {
+    unknown: {
+      on: {
+        '': [
+          { target: 'redirecting', cond: ctx => ctx && ctx.isUserLoggedIn },
+          { target: 'identification.identified_user', cond: ctx => ctx && ctx.isUserIdentified },
+          { target: 'identification' },
+        ],
+      },
+    },
     identification: {
       id: 'identification',
       on: {
@@ -14,23 +23,15 @@ const loginMachine = Machine({
           in: 'identification.unidentified_user',
         },
       },
-      initial: 'unknown',
+      initial: 'unidentified_user',
       states: {
-        unknown: {
-          on: {
-            '': [
-              { target: 'identified_user', cond: ctx => ctx && ctx.isUserIdentified },
-              { target: 'unidentified_user' },
-            ],
-          },
+        'unidentified_user': {
+          on: {},
         },
         'identified_user': {
           on: {
             NOT_ME: 'unidentified_user',
           },
-        },
-        'unidentified_user': {
-          on: {},
         },
       },
     },

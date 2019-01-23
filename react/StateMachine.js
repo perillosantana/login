@@ -18,6 +18,7 @@ class StateMachine extends Component {
       loginMachine
       .withContext({
         isUserIdentified: this.props.isUserIdentified,
+        isUserLoggedIn: this.props.isUserLoggedIn,
       })
       .withConfig({
         actions: this.props.actions
@@ -63,6 +64,7 @@ class StateMachine extends Component {
 StateMachine.propTypes = {
   children: PropTypes.any,
   isUserIdentified: PropTypes.bool,
+  isUserLogged: PropTypes.bool,
   transitionsMapping: PropTypes.object,
 }
 
