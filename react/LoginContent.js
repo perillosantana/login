@@ -2,51 +2,26 @@ import React, { Component } from 'react'
 
 import { compose } from 'ramda'
 import PropTypes from 'prop-types'
-import { graphql } from 'react-apollo'
-import { injectIntl } from 'react-intl'
+import { graphql, Query } from 'react-apollo'
 
 // import { Transition } from 'react-spring'
-import { withSession, withRuntimeContext } from 'vtex.render-runtime'
-import StateMachine from './StateMachine'
-
-import PasswordLogin from './components/PasswordLogin'
-import CodeConfirmation from './components/CodeConfirmation'
-import TokenLogin from './components/TokenLogin'
-import PasswordRecovery from './components/PasswordRecovery'
-import EmailVerification from './components/EmailVerification'
-import AccountOptions from './components/AccountOptions'
-import ExternalProvidersMenu from './components/ExternalProvidersMenu'
-
-import { setCookie } from './utils/set-cookie'
-import transitionsMapping from './utils/transitionsMapping'
+import { withSession } from 'vtex.render-runtime'
 
 import { LoginSchema } from './schema'
 import { LoginPropTypes } from './propTypes'
 import { getProfile } from './utils/profile'
-import { session } from 'vtex.store-resources/Queries'
-import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
-import { AuthState, AuthService } from 'vtex.react-vtexid'
+import { session as GET_SESSION } from 'vtex.store-resources/Queries'
 
 import './global.css'
-import IdentifiedUser from './components/IdentifiedUser'
-import PasswordChangeSuccess from './components/PasswordChangeSuccess'
+import SignIn from './components/SignIn'
+import AccountOptions from './components/AccountOptions'
 
-// TODO: REMOVE MOCK DATA
-const USERSTORED = true
-const USEREMAIL = 'anita@mailinator.com'
-// const USEREMAIL = undefined
-const USERPREFERSPASSWORD = true
 
 class LoginContent extends Component {
   static propTypes = {
-    /** User profile information */
-    profile: PropTypes.shape({}),
+    session: PropTypes.object,
     /** Function called after login success */
     loginCallback: PropTypes.func,
-    /** Runtime context. */
-    runtime: PropTypes.shape({
-      navigate: PropTypes.func,
-    }),
     /* Reused props */
     emailAndPasswordTitle: LoginPropTypes.emailAndPasswordTitle,
     accessCodeTitle: LoginPropTypes.accessCodePlaceholder,
@@ -56,64 +31,18 @@ class LoginContent extends Component {
     showPasswordVerificationIntoTooltip: LoginPropTypes.showPasswordVerificationIntoTooltip,
   }
 
-  static contextTypes = {
-    patchSession: PropTypes.func,
-  }
-
-  state = {
-    returnUrl: '/',
-  }
-
-  componentDidMount() {
-    if (location.href.indexOf('accountAuthCookieName') > 0) {
-      setCookie(location.href)
-    }
-    if (location.search) {
-      this.setState({ returnUrl: location.search.substring(11) })
-    }
-  }
-
-  onLoginSuccess = (redirectCallback) => {
-    const { loginCallback } = this.props
-    const ensureSessionExists = this.context.patchSession
-
-    return ensureSessionExists().then(loginCallback ? loginCallback : redirectCallback)
-  }
-
-  refetchOptions = () => {
-    const { data: query } = this.props
-    if (!query.loading && !query.loginOptions) {
-      return query.refetch()
-    }
-    if (query.loginOptions) {
-      return Promise.resolve()
-    }
-  }
-
-  componentByState = {
-    'identification.identified_user': (data, handlers) => <IdentifiedUser {...data} {...handlers} />,
-    'identification.unidentified_user': (data, handlers) => <EmailVerification {...data} {...handlers} />,
-    'password_login': (data, handlers) => <PasswordLogin {...data} {...handlers} />,
-    'token_login': (data, handlers) => <TokenLogin {...data} {...handlers} />,
-    'default_login.token_confirmation': (data, handlers) => <CodeConfirmation {...data} {...handlers} />,
-    'default_login.set_password': (data, handlers) => <PasswordRecovery {...data} {...handlers} />,
-    'default_login.password_changed': (data, handlers) => <PasswordChangeSuccess {...data} {...handlers} />,
-    'redirecting': () => <p>Redirecting</p>,
-  }
-
   render = () => {
     const {
-      profile,
-      session,
+      sessionData,
     } = this.props
 
     // Redirect the user to the returnURL if they are logged in and no "profile" props was passed and the user is at "/login"
     // Otherwise just render account options
 
-    const isEmbeddedAndLogged = !!profile
-    const isLoggedIn = getProfile(session)
+    const alreadyLoadedSession = !!sessionData
+    const isLoggedIn = getProfile(sessionData)
 
-    if (isEmbeddedAndLogged) {
+    if (alreadyLoadedSession) {
       return (
         <div className="vtex-login-content flex relative bg-base justify-around overflow-hidden">
           <div className="vtex-login-content__form--step-0">
@@ -123,69 +52,27 @@ class LoginContent extends Component {
       )
     }
 
-    const allData = {
-      ...this.props,
-      userName: USEREMAIL,
-      hasPasswordPreference: USERPREFERSPASSWORD,
-    }
 
     return (
-
-      <AuthState scope="store" email={USEREMAIL} returnUrl={this.state.returnUrl}>
-      {() => (
-        <AuthService.RedirectAfterLogin>
-        {
-          ({action: redirect}) => {
-            return (
-              <div className="vtex-login-content flex relative bg-base justify-around overflow-hidden">
-                <div className="vtex-login-content__form--step-0">
-                  <StateMachine
-                    isUserIdentified={USERSTORED}
-                    isUserLoggedIn={isLoggedIn}
-                    transitionsMapping={transitionsMapping}
-                    actions={{redirect: () => this.onLoginSuccess(redirect)}}
-                  >
-                    {
-                      ({ state, transitionHandlers }) => {
-                        const showExternalProviders = ['identification.identified_user', 'identification.unidentified_user', 'token_login', 'password_login'].includes(state)
-
-                        return (
-                          <React.Fragment>
-                            {this.componentByState[state]({ ...allData, ...transitionHandlers })}
-                            {showExternalProviders &&
-                              <ExternalProvidersMenu
-                                options={this.props.data.loginOptions}
-                                refetchOptions={this.refetchOptions}
-                              />
-                            }
-                          </React.Fragment>
-                        )
-                      }
-                    }
-                  </StateMachine>
-                </div>
-              </div>
-            )
-          }
-        }
-        </AuthService.RedirectAfterLogin>
-      )}
-      </AuthState>
-
+      <Query
+        query={GET_SESSION}
+        ssr={false}
+      >
+        {({data: session, loading}) => {
+          const profile = getProfile(session)
+          return (
+            !loading && <SignIn
+              profile={profile}
+              loginCallback={this.props.loginCallback}
+            />
+          )
+        }}
+      </Query>
     )
   }
 }
 
-const options = {
-  name: 'session',
-  options: () => ({ ssr: false }),
-}
-
-const content = withSession()(compose(
-  injectIntl,
-  graphql(LOGIN_OPTIONS_QUERY),
-  graphql(session, options),
-)(LoginContent))
+const content = withSession()(LoginContent)
 
 content.schema = {
   title: 'editor.loginPage.title',
@@ -193,5 +80,5 @@ content.schema = {
   properties: LoginSchema,
 }
 
-export default withRuntimeContext(content)
+export default content
 

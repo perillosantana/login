@@ -22,7 +22,20 @@ class ExternalProvidersMenu extends Component {
     loadingOptions: false,
   }
 
+  //TODO: remove mock and use bezerras api
+  mockLoginOptions = {
+    providers: [
+      {
+        providerName: 'Facebook'
+      },
+      {
+        providerName: 'Google'
+      }
+    ]
+  }
+
   handleRefetchOptions = () => {
+    return null
     if (!this.state.loadingOptions) {
       this.setState({ loadingOptions: true })
       this.props.refetchOptions()
@@ -33,7 +46,6 @@ class ExternalProvidersMenu extends Component {
   render() {
     const {
       className,
-      options,
       intl,
     } = this.props
 
@@ -44,7 +56,7 @@ class ExternalProvidersMenu extends Component {
     return (
       <div className={classes}>
         <ul className="vtex-login-options__list list pa0">
-          {options && options.providers && options.providers.map(({ providerName }, index) => {
+          {this.mockLoginOptions && this.mockLoginOptions.providers && this.mockLoginOptions.providers.map(({ providerName }, index) => {
             const hasIcon = PROVIDERS_ICONS.hasOwnProperty(providerName)
             return (
               <li
@@ -57,7 +69,7 @@ class ExternalProvidersMenu extends Component {
               </li>
             )
           })}
-          {!options && (
+          {!this.mockLoginOptions && (
             <li className="vtex-login-options__list-item mb3">
               <div className="vtex-login__button vtex-login__button--danger">
                 <Button
@@ -84,8 +96,6 @@ class ExternalProvidersMenu extends Component {
 ExternalProvidersMenu.propTypes = {
   /** Intl object*/
   intl: intlShape,
-  /** Function to refetch login options */
-  refetchOptions: PropTypes.func.isRequired,
   /** List of options to be displayed */
   options: PropTypes.shape({
     accessKeyAuthentication: PropTypes.bool,
