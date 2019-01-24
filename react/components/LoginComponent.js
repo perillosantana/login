@@ -29,7 +29,6 @@ export default class LoginComponent extends Component {
             iconSize={this.props.iconSize}
             iconLabel={this.props.iconLabel}
             labelClasses={this.props.labelClasses}
-            renderIconAsLink={this.props.renderIconAsLink}
             onProfileIconClick={this.props.onProfileIconClick}
             profileData={profile}
           />

@@ -24,33 +24,6 @@ export default class Login extends Component {
 
   state = {
     isBoxOpen: false,
-    renderIconAsLink: false,
-  }
-
-  componentDidMount() {
-    window.addEventListener('resize', this.handleResize)
-    this.handleResize()
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize)
-  }
-
-  handleResize = () => {
-    const WIDTH_THRESHOLD = 640
-
-    if (window.innerWidth < WIDTH_THRESHOLD && !this.state.renderIconAsLink) {
-      this.setState({
-        renderIconAsLink: true,
-      })
-    } else if (
-      window.innerWidth >= WIDTH_THRESHOLD &&
-      this.state.renderIconAsLink
-    ) {
-      this.setState({
-        renderIconAsLink: false,
-      })
-    }
   }
 
   handleProfileIconClick = () => {
