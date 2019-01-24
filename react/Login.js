@@ -6,7 +6,6 @@ import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 
 import { LoginSchema } from './schema'
-import { setCookie } from './utils/set-cookie'
 import { session } from 'vtex.store-resources/Queries'
 import { LoginContainerProptypes } from './propTypes'
 import LoginComponent from './components/LoginComponent'
@@ -31,10 +30,6 @@ export default class Login extends Component {
   componentDidMount() {
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
-
-    if (location.href.indexOf('accountAuthCookieName') > 0) {
-      setCookie(location.href)
-    }
   }
 
   componentWillUnmount() {

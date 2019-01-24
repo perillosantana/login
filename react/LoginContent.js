@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 
-import { compose } from 'ramda'
-import PropTypes from 'prop-types'
-import { graphql, Query } from 'react-apollo'
+// import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
 
-// import { Transition } from 'react-spring'
 import { withSession } from 'vtex.render-runtime'
 
 import { LoginSchema } from './schema'
@@ -16,13 +14,11 @@ import './global.css'
 import SignIn from './components/SignIn'
 import AccountOptions from './components/AccountOptions'
 
-
+// TODO: rename this component to pageLogin, dreamstore should use it when user
+// goes to /login
 class LoginContent extends Component {
   static propTypes = {
-    session: PropTypes.object,
-    /** Function called after login success */
-    loginCallback: PropTypes.func,
-    /* Reused props */
+    /* Props from storefront */
     emailAndPasswordTitle: LoginPropTypes.emailAndPasswordTitle,
     accessCodeTitle: LoginPropTypes.accessCodePlaceholder,
     emailPlaceholder: LoginPropTypes.emailPlaceholder,
@@ -32,15 +28,11 @@ class LoginContent extends Component {
   }
 
   render = () => {
-    const {
-      sessionData,
-    } = this.props
 
     // Redirect the user to the returnURL if they are logged in and no "profile" props was passed and the user is at "/login"
     // Otherwise just render account options
 
-    const alreadyLoadedSession = !!sessionData
-    const isLoggedIn = getProfile(sessionData)
+    const alreadyLoadedSession = false
 
     if (alreadyLoadedSession) {
       return (
@@ -63,7 +55,7 @@ class LoginContent extends Component {
           return (
             !loading && <SignIn
               profile={profile}
-              loginCallback={this.props.loginCallback}
+              {...this.props}
             />
           )
         }}
@@ -72,13 +64,11 @@ class LoginContent extends Component {
   }
 }
 
-const content = withSession()(LoginContent)
-
-content.schema = {
+LoginContent.schema = {
   title: 'editor.loginPage.title',
   type: 'object',
   properties: LoginSchema,
 }
 
-export default content
+export default withSession()(LoginContent)
 
