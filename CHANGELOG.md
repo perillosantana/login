@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.5.3] - 2019-01-26
+### Changed
+- Fix style of profile name in tablet view.
+
 ## [2.5.2] - 2019-01-18
 ### Changed
 - Fix dependencies issues. 
