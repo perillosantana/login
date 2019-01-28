@@ -140,15 +140,12 @@ class LoginContent extends Component {
     email: '',
     password: '',
     code: '',
-    returnUrl: '/',
+    returnUrl: this.props.query && this.props.query.returnUrl || '/',
   }
 
   componentDidMount() {
     if (location.href.indexOf('accountAuthCookieName') > 0) {
       setCookie(location.href)
-    }
-    if (location.search) {
-      this.setState({ returnUrl: location.search.substring(11) })
     }
   }
 
