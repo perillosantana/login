@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { compose } from 'ramda'
+import { compose, pathOr } from 'ramda'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { graphql } from 'react-apollo'
@@ -140,7 +140,7 @@ class LoginContent extends Component {
     email: '',
     password: '',
     code: '',
-    returnUrl: this.props.query && this.props.query.returnUrl || '/',
+    returnUrl: pathOr('/', ['query', 'returnUrl'], this.props),
   }
 
   componentDidMount() {
