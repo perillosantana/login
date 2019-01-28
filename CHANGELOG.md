@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.6.1] - 2019-01-28
+### Fixed
+- Encoding of `returnUrl` query param.
+
 ## [2.6.0] - 2019-01-28
 
 ## [2.5.3] - 2019-01-26

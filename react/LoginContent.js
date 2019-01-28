@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { compose } from 'ramda'
+import { compose, pathOr } from 'ramda'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { graphql } from 'react-apollo'
@@ -140,15 +140,13 @@ class LoginContent extends Component {
     email: '',
     password: '',
     code: '',
-    returnUrl: '/',
   }
+
+  returnUrl = pathOr('/', ['query', 'returnUrl'], this.props)
 
   componentDidMount() {
     if (location.href.indexOf('accountAuthCookieName') > 0) {
       setCookie(location.href)
-    }
-    if (location.search) {
-      this.setState({ returnUrl: location.search.substring(11) })
     }
   }
 
@@ -191,7 +189,7 @@ class LoginContent extends Component {
 
   redirect = () => {
     this.props.runtime.navigate({
-      to: this.state.returnUrl,
+      to: this.returnUrl,
       fallbackToWindowLocation: true,
     })
   }
@@ -206,7 +204,12 @@ class LoginContent extends Component {
       if (loginCallback) {
         loginCallback()
       } else {
-        location.assign(this.state.returnUrl)
+        // the use of location.assign here, instead of
+        // the redirect method, is because on CSR the
+        // components using authentication and relying
+        // on the session cookie haven't been updated yet,
+        // so the refresh is intentional.
+        location.assign(this.returnUrl)
       }
     })
   }
