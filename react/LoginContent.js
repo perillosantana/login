@@ -140,8 +140,9 @@ class LoginContent extends Component {
     email: '',
     password: '',
     code: '',
-    returnUrl: pathOr('/', ['query', 'returnUrl'], this.props),
   }
+
+  returnUrl = pathOr('/', ['query', 'returnUrl'], this.props)
 
   componentDidMount() {
     if (location.href.indexOf('accountAuthCookieName') > 0) {
@@ -188,7 +189,7 @@ class LoginContent extends Component {
 
   redirect = () => {
     this.props.runtime.navigate({
-      to: this.state.returnUrl,
+      to: this.returnUrl,
       fallbackToWindowLocation: true,
     })
   }
@@ -203,7 +204,7 @@ class LoginContent extends Component {
       if (loginCallback) {
         loginCallback()
       } else {
-        location.assign(this.state.returnUrl)
+        location.assign(this.returnUrl)
       }
     })
   }
