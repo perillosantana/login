@@ -204,6 +204,11 @@ class LoginContent extends Component {
       if (loginCallback) {
         loginCallback()
       } else {
+        // the use of location.assign here, instead of
+        // the redirect method, is because on CSR the
+        // components using authentication and relying
+        // on the session cookie haven't been updated yet,
+        // so the refresh is intentional.
         location.assign(this.returnUrl)
       }
     })
