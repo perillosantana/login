@@ -12,7 +12,11 @@ import { translate } from '../utils/translate'
 import { LoginPropTypes } from '../propTypes'
 import { getProfile } from '../utils/profile'
 
-const profileIcon = iconSize => (<Icon id="hpa-profile" size={iconSize} />)
+const profileIcon = (labelClasses, iconSize) => (
+  <div className={`${labelClasses}`}>
+    <Icon id="hpa-profile" size={iconSize} />
+  </div>
+)
 export default class LoginComponent extends Component {
   static propTypes = LoginPropTypes
 
@@ -34,13 +38,12 @@ export default class LoginComponent extends Component {
       onProfileIconClick,
       data,
     } = this.props
-
     const profile = getProfile(data)
 
     const iconContent = (
       <Fragment>
         {renderIconAsLink &&
-          <div className="flex items-center">
+          <div className={`flex items-center ${labelClasses}`}>
             <Icon id="hpa-profile" size={iconSize} />
           </div>
         }
@@ -68,7 +71,7 @@ export default class LoginComponent extends Component {
     }
 
     return (
-      <ButtonWithIcon variation="tertiary" icon={profileIcon(iconSize)} iconPosition="left" onClick={onProfileIconClick}>
+      <ButtonWithIcon variation="tertiary" icon={profileIcon(labelClasses, iconSize)} iconPosition="left" onClick={onProfileIconClick}>
         <div
           className="flex pv2 items-center"
           ref={e => {
