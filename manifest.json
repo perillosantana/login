@@ -19,7 +19,7 @@
     "vtex.store-graphql": "2.x",
     "vtex.store-session": "0.x",
     "vtex.store-resources": "0.x",
-    "vtex.use-svg": "1.x",
+    "vtex.dreamstore-icons": "0.x",
     "vtex.react-vtexid": "4.x"
   }
 }
