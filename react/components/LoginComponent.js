@@ -4,7 +4,7 @@ import OutsideClickHandler from 'react-outside-click-handler'
 import classNames from 'classnames'
 
 import { ButtonWithIcon } from 'vtex.styleguide'
-import Icon from 'vtex.use-svg/Icon'
+import { IconProfile } from 'vtex.dreamstore-icons'
 
 import LoginContent from '../LoginContent'
 import { truncateString } from '../utils/format-string'
@@ -12,9 +12,9 @@ import { translate } from '../utils/translate'
 import { LoginPropTypes } from '../propTypes'
 import { getProfile } from '../utils/profile'
 
-const profileIcon = (labelClasses, iconSize) => (
-  <div className={`${labelClasses}`}>
-    <Icon id="hpa-profile" size={iconSize} />
+const profileIcon = (iconSize, labelClasses, classes) => (
+  <div className={classNames(labelClasses, classes)}>
+    <IconProfile size={iconSize} />
   </div>
 )
 export default class LoginComponent extends Component {
@@ -39,23 +39,24 @@ export default class LoginComponent extends Component {
       data,
     } = this.props
     const profile = getProfile(data)
+    const iconClasses = 'flex items-center'
 
     const iconContent = (
       <Fragment>
         {renderIconAsLink &&
-          <div className={`flex items-center ${labelClasses}`}>
-            <Icon id="hpa-profile" size={iconSize} />
-          </div>
+          profileIcon(iconSize, labelClasses, iconClasses)
         }
-        {profile ? (
-          <span className={`vtex-login__profile t-action--small order-1 pl4 ${labelClasses} dn db-l`}>
-            {translate('login.hello', intl)}{' '}
-            {profile.firstName || truncateString(profile.email)}
-          </span>
-        ) : (
-            iconLabel && <span className={`vtex-login__label t-action--small pl4 ${labelClasses} dn db-l`}>{iconLabel}</span>
-          )}
-      </Fragment>
+        {
+          profile ? (
+            <span className={`vtex-login__profile t-action--small order-1 pl4 ${labelClasses} dn db-l`}>
+              {translate('login.hello', intl)}{' '}
+              {profile.firstName || truncateString(profile.email)}
+            </span>
+          ) : (
+              iconLabel && <span className={`vtex-login__label t-action--small pl4 ${labelClasses} dn db-l`}>{iconLabel}</span>
+            )
+        }
+      </Fragment >
     )
 
     if (renderIconAsLink) {
@@ -71,7 +72,7 @@ export default class LoginComponent extends Component {
     }
 
     return (
-      <ButtonWithIcon variation="tertiary" icon={profileIcon(labelClasses, iconSize)} iconPosition="left" onClick={onProfileIconClick}>
+      <ButtonWithIcon variation="tertiary" icon={profileIcon(iconSize, labelClasses)} iconPosition="left" onClick={onProfileIconClick}>
         <div
           className="flex pv2 items-center"
           ref={e => {

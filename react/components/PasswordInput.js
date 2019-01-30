@@ -4,7 +4,7 @@ import { injectIntl, intlShape } from 'react-intl'
 import { isMobile } from 'react-device-detect'
 
 import { Input } from 'vtex.styleguide'
-import Icon from 'vtex.use-svg/Icon'
+import { IconEyeSightOff, IconEyeSightOn } from 'vtex.dreamstore-icons'
 
 import { translate } from '../utils/translate'
 import Tooltip from './Tooltip'
@@ -89,7 +89,7 @@ class PasswordInput extends Component {
           onFocus={() => this.setState({ showVerification: true })}
           suffixIcon={(
             <span className="pointer" onClick={this.handleEyeIcon}>
-              {showPassword ? <Icon id='mpa-s-eyesight--off' size={16} /> : <Icon id='mpa-s-eyesight--on' size={16} />}
+              {showPassword ? <IconEyeSightOff size={16} /> : <IconEyeSightOn size={16} />}
             </span>
           )}
         />

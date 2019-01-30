@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react'
-import { ButtonWithIcon, IconArrowBack } from 'vtex.styleguide'
+import { ButtonWithIcon } from 'vtex.styleguide'
+import { IconArrowBack } from 'vtex.dreamstore-icons'
+
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 
 import { translate } from '../utils/translate'
 
-const arrow = <IconArrowBack size={10} />
+const arrow = <IconArrowBack size={10} viewBox="0 0 16 11" />
 
 class GoBackButton extends Component {
   static propTypes = {
