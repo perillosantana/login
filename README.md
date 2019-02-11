@@ -2,7 +2,7 @@
 
 ## Description
 
-The VTEX Login app 
+The VTEX Login app responsible to handle user login. 
 This is a VTEX app that is used by Dreamstore product.
 
 :loudspeaker: **Disclaimer:** Don't fork this project, use, contribute, or open issue with your feature request.
@@ -40,7 +40,6 @@ Then, add `login` block into our app theme, as we do in our [Store Header app](h
 ### Blocks API
 This app has an interface that describes which rules must be implemented by a block when you want to use the minicart.
 
-<!-- TODO find good example -->
 ```json
 {
   "login": {
