@@ -29,25 +29,25 @@ This app uses our store builder with the blocks architecture. To know more about
 
 To use this app, you need to import in your dependencies on `manifest.json`.
 
-<!-- TODO find good example -->
 ```json
   "dependencies": {
     "vtex.login": "2.x"
   }
 ```
 
-Then, add `login` block into our app theme, as we do in our [Dreamstore app](https://github.com/vtex-apps/dreamstore/blob/master/store/blocks.json).
+Then, add `login` block into our app theme, as we do in our [Store Header app](https://github.com/vtex-apps/store-header/blob/master/store/blocks.json).
 
 ### Blocks API
 This app has an interface that describes which rules must be implemented by a block when you want to use the minicart.
 
 <!-- TODO find good example -->
 ```json
-  "minicart": {
-    "required": [
-      "product-summary"
-    ],
-    "component": "index"
+{
+  "login": {
+    "component": "Login"
+  },
+  "login-content": {
+    "component": "LoginContent"
   }
 }
 ```
