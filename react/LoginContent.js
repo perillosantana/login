@@ -305,7 +305,7 @@ class LoginContent extends Component {
     })
 
     return (
-      <AuthState scope="store">
+      <AuthState scope="STORE">
         {() => (
           <div className={className}>
             <Transition
