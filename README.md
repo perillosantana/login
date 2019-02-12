@@ -35,10 +35,10 @@ To use this app, you need to import in your dependencies on `manifest.json`.
   }
 ```
 
-Then, add `login` block into our app theme, as we do in our [Store Header app](https://github.com/vtex-apps/store-header/blob/master/store/blocks.json).
+Then, add `login` or `login-content` block into our app theme, as we do in our [Store Header app](https://github.com/vtex-apps/store-header/blob/master/store/blocks.json).
 
 ### Blocks API
-This app has an interface that describes which rules must be implemented by a block when you want to use the minicart.
+This app has an interface that describes which rules must be implemented by a block when you want to use `Login` or `LoginContent`.
 
 ```json
 {
@@ -52,7 +52,7 @@ This app has an interface that describes which rules must be implemented by a bl
 ```
 
 #### Configuration 
-Through the Storefront, you can change the minicart's behavior and interface. However, you also can make in your theme app, as Dreamstore does.
+Through the Storefront, you can change the `Login`'s behavior and interface. However, you also can make in your theme app, as Dreamstore does.
 
 | Prop name          | Type       | Description                                                                 |
 | ------------------ | ---------- | --------------------------------------------------------------------------- |
@@ -63,6 +63,21 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 | `passwordPlaceholder` | `String` | Set placeholder to password input |
 | `showPasswordVerificationIntoTooltip` | `String` | Set show password format verification as tooltip |
 | `acessCodePlaceholder` | `String` | Set placeholder to access code input |
+
+You can also change the `LoginContent`'s behaviour and interface through the Store front.
+
+| Prop name          | Type       | Description                                                                 |
+| ------------------ | ---------- | --------------------------------------------------------------------------- |
+| `isInitialScreenOptionOnly` | `Boolean` | Set to show only the login options on the initial screen |
+| `defaultOption` | `Enum` | Set the initial form to show. 0 for access code login, 1 for email and password login |
+| `optionsTitle` | `String` | Set title of login options |
+| `emailAndPasswordTitle` | `String` | Set title of login with email and password |
+| `accessCodeTitle` | `String` | Set title of login by access code |
+| `emailPlaceholder` | `String` | Set placeholder to email input |
+| `passwordPlaceholder` | `String` | Set placeholder to password input |
+| `showPasswordVerificationIntoTooltip` | `String` | Set show password format verification as tooltip |
+| `acessCodePlaceholder` | `String` | Set placeholder to access code input |
+
 
 ### Styles API
 :construction: :construction: :construction:
