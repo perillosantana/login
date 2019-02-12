@@ -1,0 +1,110 @@
+.container {}
+
+.contentInitialScreen {}
+
+.contentFormVisible {}
+
+.profile {}
+
+.label {}
+
+.optionsSticky {}
+
+.optionsList {}
+
+.optionsListItem {}
+
+.optionsListItemContainer {}
+
+.oauthProvider {}
+
+.inputContainer {}
+
+.inputContainerAccessCode {}
+
+.inputContainerPassword {}
+
+.inputContainerEmail {}
+
+.emailVerification {}
+
+.formLinkContainer {}
+
+.box {
+  top: 100%;
+  visibility: visible;
+  min-width: 310px;
+}
+
+.arrowUp {}
+
+.contentContainer {
+  min-width: 100%;
+}
+
+.buttonLink {
+  height: 20px;
+  width: 40px;
+}
+
+.content {}
+
+.contentForm {
+  min-width: 290px;
+}
+
+.contentAlwaysWithOptions {
+  min-height: 300px;
+  max-width: 700px;
+}
+
+.options {
+  min-width: 320px;
+}
+
+.sendButton {}
+
+.sendButton:only-child {
+    margin: 0;
+    width: 100%;
+  }
+
+.sendButton:only-child :global(.vtex-button) {
+  width: 100%;
+}
+
+.tooltipContainer {
+  width: max-content;
+} 
+
+.tooltipContainerTop {
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltipContainerLeft {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 102%;
+}
+
+.tooltipContainerLeft::after {
+  content: '';
+  position: absolute;
+  top: 45%;
+  left: 100%;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent #3b3b3b;
+}
+
+.tooltipContainerTop::after {
+  content: '';
+  position: absolute;
+  left: 45%;
+  top: 100%;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #3b3b3b transparent transparent transparent;
+}

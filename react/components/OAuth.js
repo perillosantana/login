@@ -6,6 +6,7 @@ import { Button } from 'vtex.styleguide'
 import { AuthService } from 'vtex.react-vtexid'
 
 import { translate } from '../utils/translate'
+import login from '../styles.css'
 
 // Component that shows account options to the user.
 class OAuth extends Component {
@@ -32,7 +33,7 @@ class OAuth extends Component {
               {children}
               <span className="t-action--small vtex-login__oauth-label relative normal">
                 {translate('loginOptions.oAuth', intl)}
-                <span className="vtex-login__oauth-provider b">{provider}</span>
+                <span className={`${login.oauthProvider} b ml2`}>{provider}</span>
               </span>
             </Button>
           )}

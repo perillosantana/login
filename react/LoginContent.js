@@ -26,6 +26,7 @@ import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 import { AuthState } from 'vtex.react-vtexid'
 
 import './global.css'
+import login from './styles.css'
 
 const STEPS = [
   /* eslint-disable react/display-name, react/prop-types */
@@ -292,16 +293,15 @@ class LoginContent extends Component {
       this.shouldRenderLoginOptions
     )
 
-    const className = classNames('vtex-login-content flex relative bg-base justify-around overflow-hidden', {
-      'vtex-login-content--initial-screen': this.state.isOnInitialScreen,
-      'vtex-login-content--always-with-options flex-column-reverse items-center flex-row-ns items-baseline-ns':
+    const className = classNames(`${login.content} flex relative bg-base justify-around overflow-hidden pa4 center`, {
+      [login.contentInitialScreen]: this.state.isOnInitialScreen,
+      [`${login.contentAlwaysWithOptions} mw6-ns flex-column-reverse items-center flex-row-ns items-baseline-ns`]:
         !isInitialScreenOptionOnly,
       'items-baseline': isInitialScreenOptionOnly,
     })
 
-    const formClassName = classNames('vtex-login-content__form dn ph4 pb6', {
-      [`vtex-login-content__form--step-${step}`]: step >= 0,
-      'vtex-login-content__form--visible db': this.shouldRenderForm,
+    const formClassName = classNames(`${login.contentForm} dn ph4 pb6`, {
+      [`${login.contentFormVisible} db `]: this.shouldRenderForm,
     })
 
     return (

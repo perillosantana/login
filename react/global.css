@@ -1,42 +1,42 @@
-.vtex-login__arrow-up {
+/* .vtex-login__arrow-up {
   transform: rotate(45deg);
   width: 25px;
   height: 25px;
   right: 7px;
-}
+} */
 
-.vtex-login__box {
+/* .vtex-login__box {
   top: 100%;
   visibility: visible;
   min-width: 310px;
-}
+} */
 
-.vtex-login__content-container {
+/* .vtex-login__content-container {
   min-width: 100%;
-}
+} */
 
-.vtex-login__button--link {
+/* .vtex-login__button--link {
   height: 20px;
   width: 40px;
-}
+} */
 
-.vtex-login-content {
+/* .vtex-login-content {
   padding: 0.75rem;
   margin: 0 auto;
-}
+} */
 
-.vtex-login__code-confirmation,
+/* .vtex-login__code-confirmation,
 .vtex-login__email-verification {
   width: 100%;
-}
+} */
 
-.vtex-login-content__form {
+/* .vtex-login-content__form {
   min-width: 290px;
-}
+} */
 
-.vtex-login-options {
+/* .vtex-login-options {
   min-width: 320px;
-}
+} */
 
 .vtex-login-content--always-with-options {
   min-height: 300px;
@@ -62,7 +62,7 @@
   padding-top: 0.75rem;
 }
 
-.vtex-login__send-button {
+/* .vtex-login__send-button {
   margin-left: auto;
 }
 
@@ -73,11 +73,11 @@
 
 .vtex-login__send-button:only-child .vtex-button {
   width: 100%;
-}
+} */
 
-.vtex-login__input-container {
+/* .vtex-login__input-container {
   padding: 0.5rem 0;
-}
+} */
 
 .vtex-login__button .vtex-button {
   border: 1px solid rgb(233, 233, 233);
@@ -94,9 +94,9 @@
   margin: 0 20px 0 20px;
 }
 
-.vtex-login__oauth-provider {
+/* .vtex-login__oauth-provider {
   margin-left: 5px;
-}
+} */
 
 @media only screen and (max-width: 600px) {
   .vtex-login__button--link {
@@ -109,17 +109,12 @@
   }
 }
 
-.vtex-tooltip {
-  right: 102%;
-  top: -100%;
-}
-
-.vtex-tooltip__container {
+/* .vtex-tooltip__container {
   background-color: #3b3b3b;
   width: max-content;
-}
+} */
 
-.vtex-tooltip__container-top {
+/* .vtex-tooltip__container-top {
   bottom: 110%;
   left: 50%;
   transform: translateX(-50%);
@@ -151,7 +146,7 @@
   border-width: 10px;
   border-style: solid;
   border-color: #3b3b3b transparent transparent transparent;
-}
+} */
 
 .vtex-login__button--danger > .vtex-button {
   background-color: #ffe6e6;

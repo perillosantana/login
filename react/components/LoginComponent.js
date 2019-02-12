@@ -12,6 +12,8 @@ import { translate } from '../utils/translate'
 import { LoginPropTypes } from '../propTypes'
 import { getProfile } from '../utils/profile'
 
+import login from '../styles.css'
+
 const profileIcon = (iconSize, labelClasses, classes) => (
   <div className={classNames(labelClasses, classes)}>
     <IconProfile size={iconSize} />
@@ -48,12 +50,12 @@ export default class LoginComponent extends Component {
         }
         {
           profile ? (
-            <span className={`vtex-login__profile t-action--small order-1 pl4 ${labelClasses} dn db-l`}>
+            <span className={`${login.profile} t-action--small order-1 pl4 ${labelClasses} dn db-l`}>
               {translate('login.hello', intl)}{' '}
               {profile.firstName || truncateString(profile.email)}
             </span>
           ) : (
-              iconLabel && <span className={`vtex-login__label t-action--small pl4 ${labelClasses} dn db-l`}>{iconLabel}</span>
+              iconLabel && <span className={`${login.label} t-action--small pl4 ${labelClasses} dn db-l`}>{iconLabel}</span>
             )
         }
       </Fragment >
@@ -64,7 +66,7 @@ export default class LoginComponent extends Component {
       return (
         <Link
           page={linkTo}
-          className="vtex-login__button--link tc flex items-center"
+          className={`${login.buttonLink} tc flex items-center`}
         >
           {iconContent}
         </Link>
@@ -94,19 +96,19 @@ export default class LoginComponent extends Component {
     const profile = getProfile(data)
 
     return (
-      <div className="vtex-login__container flex items-center fr">
+      <div className={`${login.container} flex items-center fr`}>
         <div className="relative">
           {this.renderIcon()}
           <OutsideClickHandler onOutsideClick={onOutSideBoxClick}>
             <div
-              className={classNames('vtex-login__box absolute z-max', {
+              className={classNames(`${login.box} absolute z-max`, {
                 'flex': isBoxOpen,
                 'dn': !isBoxOpen,
               })}
               style={boxPositionStyle}
             >
-              <div className="vtex-login__arrow-up absolute top-0 right-0 shadow-3 bg-base" />
-              <div className="vtex-login__content-container shadow-3 mt3">
+              <div className={`${login.arrowUp} absolute top-0 right-0 shadow-3 bg-base mr3 rotate-45 h2 w2`} />
+              <div className={`${login.contentContainer} shadow-3 mt3`}>
                 <LoginContent
                   profile={profile}
                   loginCallback={this.onClickLoginButton}
