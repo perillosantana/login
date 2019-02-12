@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.6.10] - 2019-02-12
+### Fixed
+- Improve regex for email validation.
+
 ## [1.6.9] - 2018-12-17
 ### Fixed
 - Remove typo in access code placeholder.
