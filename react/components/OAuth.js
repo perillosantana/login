@@ -22,7 +22,7 @@ class OAuth extends Component {
   render() {
     const { intl, children, provider } = this.props
     return (
-      <div className="vtex-login__button vtex-login__button--social">
+      <div className={`${login.button} ${login.buttonSocial}`}>
         <AuthService.OAuthRedirect useNewSession provider={provider} >
           {({ loading, action: redirectToOAuthPage }) => (
             <Button
@@ -31,7 +31,7 @@ class OAuth extends Component {
               onClick={redirectToOAuthPage}
             >
               {children}
-              <span className="t-action--small vtex-login__oauth-label relative normal">
+              <span className={`t-action--small ${login.oauthLabel} relative normal`}>
                 {translate('loginOptions.oAuth', intl)}
                 <span className={`${login.oauthProvider} b ml2`}>{provider}</span>
               </span>

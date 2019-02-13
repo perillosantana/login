@@ -18,11 +18,11 @@ class AccountOptions extends Component {
   render() {
     const { intl } = this.props
     return (
-      <div className="vtex-login__account-options items-center w-100">
+      <div className={`${login.accountOptions} items-center w-100`}>
         <div className="ma4 min-h-2 b--muted-4">
           <Link page={'store.account'}>
             <button
-              className="vtex-button bw1 ba ttu br2 t-action--small v-mid relative pv3 ph5 t-heading-5 bg-base b--transparent c-action-primary  hover-c-action-primary pointer"
+              className={`${login.button} bw1 ba ttu br2 t-action--small v-mid relative pv3 ph5 t-heading-5 bg-base b--transparent c-action-primary  hover-c-action-primary pointer`}
               closeonclick=""
             >
               <span className="t-action--small">

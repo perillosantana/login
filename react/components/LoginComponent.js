@@ -66,7 +66,7 @@ export default class LoginComponent extends Component {
       return (
         <Link
           page={linkTo}
-          className={`${login.buttonLink} tc flex items-center`}
+          className={`${login.buttonLink} h1 w2 tc flex items-center w-100-s h-100-s pa4-s`}
         >
           {iconContent}
         </Link>

@@ -109,7 +109,7 @@ class EmailAndPassword extends Component {
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
-            <div className={`${login.inputContainer} ${login.inputContainerEmail} pv3`}>
+            <div className={`${login.inputContainer} ${login.inputContainerEmail}`}>
               <AuthState.Email>
                 {({ value, setValue }) => (
                   <Input

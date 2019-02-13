@@ -6,6 +6,8 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 
 import { translate } from '../utils/translate'
+import LoginComponent from './LoginComponent';
+import login from '../styles.css'
 
 const arrow = <IconArrowBack size={10} viewBox="0 0 16 11" />
 
@@ -23,7 +25,7 @@ class GoBackButton extends Component {
     const { onStateChange, intl, changeTab } = this.props
     return (
       <Fragment>
-        <div className="vtex-login__back-button">
+        <div className={login.backButton}>
           <ButtonWithIcon
             icon={arrow}
             iconPosition="left"

@@ -25,7 +25,6 @@ import { session } from 'vtex.store-resources/Queries'
 import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 import { AuthState } from 'vtex.react-vtexid'
 
-import './global.css'
 import login from './styles.css'
 
 const STEPS = [

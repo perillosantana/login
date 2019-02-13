@@ -65,7 +65,7 @@ class LoginOptions extends Component {
         <ul className={`${login.optionsList} list pa0`}>
           {this.showOption('accessKeyAuthentication', 'loginOptions.emailVerification') &&
             <li className={`${login.optionsListItem} mb3`}>
-              <div className="vtex-login__button">
+              <div className={login.button}>
                 <Button
                   variation="secondary"
                   onClick={this.handleOptionClick('loginOptions.emailVerification')}
@@ -77,7 +77,7 @@ class LoginOptions extends Component {
           }
           {this.showOption('classicAuthentication', 'loginOptions.emailAndPassword') &&
             <li className={`${login.optionsListItem} mb3`}>
-              <div className="vtex-login__button">
+              <div className={login.button}>
                 <Button
                   variation="secondary"
                   onClick={this.handleOptionClick('loginOptions.emailAndPassword')}
@@ -103,7 +103,7 @@ class LoginOptions extends Component {
           })}
           {!options && (
             <li className={`${login.optionsListItem} mb3`}>
-              <div className="vtex-login__button vtex-login__button--danger">
+              <div className={`${login.button} ${login.buttonDanger}`}>
                 <Button
                   type="danger"
                   variation="secondary"
