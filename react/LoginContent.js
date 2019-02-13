@@ -299,7 +299,7 @@ class LoginContent extends Component {
       'items-baseline': isInitialScreenOptionOnly,
     })
 
-    const formClassName = classNames(`${login.contentForm} dn ph4 pb6`, {
+    const formClassName = classNames(login.contentForm, 'dn ph4 pb6', {
       [`${login.contentFormVisible} db `]: this.shouldRenderForm,
     })
 

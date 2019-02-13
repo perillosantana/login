@@ -9,7 +9,6 @@ import { Button } from 'vtex.styleguide'
 import FacebookIcon from '../images/FacebookIcon'
 import GoogleIcon from '../images/GoogleIcon'
 import { translate } from '../utils/translate'
-import { slugify } from '../utils/format-string'
 import FormTitle from './FormTitle'
 import OAuth from './OAuth'
 

@@ -46,7 +46,7 @@ class CodeConfirmation extends Component {
 
     return (
       <Form
-        className="w-100"
+        className={`${login.codeConfirmation} w-100`}
         title={translate('login.accessCodeTitle', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
