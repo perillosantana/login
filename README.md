@@ -146,7 +146,7 @@ content | Login Content container | [LoginContent](/react/LoginContent.js)
 button | Any button | [AccountOptions](/react/components/AccountOptions.js), [LoginOptions](/react/components/LoginOptions.js), [OAuth](/react/components/OAuth.js)
 sendButton | Buttons sending informations | [CodeConfirmation](/react/components/CodeConfirmation.js), [EmailAndPassword](/react/components/EmailAndPassword.js), [EmailVerification](/react/components/EmailVerification.js), [RecoveryPassword](/react/components/RecoveryPassword.js)
 buttonSocial | Button to social media | [OAuth](/react/components/OAuth.js)
-buttonDanger | Danger button | [LoginOptions](/react/components/LoginOptions.js
+buttonDanger | Danger button | [LoginOptions](/react/components/LoginOptions.js)
 backButton | Back button | [GoBackButton](/react/components/GoBackButton.js)
 accountOptions | Account options container | [AccountOption](/react/components/AccountOption.js)
 codeConfirmation | Code Confirmation container | [CodeConfirmation](/react/components/CodeConfirmation.js)
