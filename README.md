@@ -76,27 +76,27 @@ Through the Storefront, you can change the `login`'s behavior and interface. How
 
 Prop name | Type | Description | Default value
 --------- | ---- | ----------- | -------------
-`optionsTitle` | `String` | Set title of login options | 
-`emailAndPasswordTitle` | `String` | Set title of login with email and password | 
-`accessCodeTitle` | `String` | Set title of login by access code |
-`emailPlaceholder` | `String` | Set placeholder to email input |
-`passwordPlaceholder` | `String` | Set placeholder to password input |
-`showPasswordVerificationIntoTooltip` | `Boolean` | Set show password format verification as tooltip |
-`acessCodePlaceholder` | `String` | Set placeholder to access code input |
+`optionsTitle` | `String` | Set title of login options | -
+`emailAndPasswordTitle` | `String` | Set title of login with email and password | -
+`accessCodeTitle` | `String` | Set title of login by access code | -
+`emailPlaceholder` | `String` | Set placeholder to email input | -
+`passwordPlaceholder` | `String` | Set placeholder to password input | -
+`showPasswordVerificationIntoTooltip` | `Boolean` | Set show password format verification as tooltip | -
+`acessCodePlaceholder` | `String` | Set placeholder to access code input | -
 
 You can also change the `login-content`'s behaviour and interface through the Store front.
 
 Prop name | Type | Description | Default value
 --------- | ---- | ----------- | -------------
-`isInitialScreenOptionOnly` | `Boolean` | Set to show only the login options on the initial screen |
-`defaultOption` | `Enum` | Set the initial form to show. 0 for access code login, 1 for email and password login |
-`optionsTitle` | `String` | Set title of login options | 
-`emailAndPasswordTitle` | `String` | Set title of login with email and password | 
-`accessCodeTitle` | `String` | Set title of login by access code |
-`emailPlaceholder` | `String` | Set placeholder to email input |
-`passwordPlaceholder` | `String` | Set placeholder to password input |
-`showPasswordVerificationIntoTooltip` | `Boolean` | Set show password format verification as tooltip |
-`acessCodePlaceholder` | `String` | Set placeholder to access code input |
+`isInitialScreenOptionOnly` | `Boolean` | Set to show only the login options on the initial screen | true
+`defaultOption` | `Enum` | Set the initial form to show. 0 for access code login, 1 for email and password login | 0
+`optionsTitle` | `String` | Set title of login options | -
+`emailAndPasswordTitle` | `String` | Set title of login with email and password | -
+`accessCodeTitle` | `String` | Set title of login by access code | -
+`emailPlaceholder` | `String` | Set placeholder to email input | -
+`passwordPlaceholder` | `String` | Set placeholder to password input | -
+`showPasswordVerificationIntoTooltip` | `Boolean` | Set show password format verification as tooltip | -
+`acessCodePlaceholder` | `String` | Set placeholder to access code input | -
 
 ### Styles API
 
