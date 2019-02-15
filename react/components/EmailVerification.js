@@ -11,7 +11,7 @@ import { translate } from '../utils/translate'
 import { steps } from '../utils/steps'
 import GoBackButton from './GoBackButton'
 
-import login from '../styles.css'
+import styles from '../styles.css'
 
 /**
  * EmailVerification tab component.
@@ -65,12 +65,12 @@ class EmailVerification extends Component {
 
     return (
       <Form
-        className={`${login.emailVerification} w-100`}
+        className={`${styles.emailVerification} w-100`}
         title={title || translate('loginOptions.emailVerification', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
-            <div className={`${login.inputContainer} ${login.inputContainerEmail}`}>
+            <div className={`${styles.inputContainer} ${styles.inputContainerEmail}`}>
               <AuthState.Email>
                 {({ value, setValue }) => (
                   <Input
@@ -107,7 +107,7 @@ class EmailVerification extends Component {
                 }
               />
             )}
-            <div className={`${login.sendButton} ml-auto`}>
+            <div className={`${styles.sendButton} ml-auto`}>
               <AuthService.SendAccessKey
                 useNewSession
                 onSuccess={() => {

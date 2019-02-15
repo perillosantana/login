@@ -11,7 +11,7 @@ import Form from './Form'
 import FormError from './FormError'
 import GoBackButton from './GoBackButton'
 
-import login from '../styles.css'
+import styles from '../styles.css'
 
 /** CodeConfirmation tab component. Receive the code from an input and call the signIn API */
 class CodeConfirmation extends Component {
@@ -46,12 +46,12 @@ class CodeConfirmation extends Component {
 
     return (
       <Form
-        className={`${login.codeConfirmation} w-100`}
+        className={`${styles.codeConfirmation} w-100`}
         title={translate('login.accessCodeTitle', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
-            <div className={`${login.inputContainer} ${login.inputContainerAccessCode} pv3`}>
+            <div className={`${styles.inputContainer} ${styles.inputContainerAccessCode} pv3`}>
               <AuthState.Token>
                 {({ value, setValue }) => (
                   <Input
@@ -84,7 +84,7 @@ class CodeConfirmation extends Component {
               onStateChange={onStateChange}
               changeTab={{ step: previous }}
             />
-            <div className={`${login.sendButton} ml-auto`}>
+            <div className={`${styles.sendButton} ml-auto`}>
               <AuthService.LoginWithAccessKey
                 onSuccess={this.handleSuccess}
                 onFailure={this.handleFailure}

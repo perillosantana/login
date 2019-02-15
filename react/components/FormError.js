@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import login from '../styles.css'
+import styles from '../styles.css'
 
 export default function FormError({ children, show }) {
   if (!show) {
@@ -9,7 +9,7 @@ export default function FormError({ children, show }) {
   }
 
   return (
-    <div className={`${login.formError} bg-danger--faded t-small tc pa1 mv1 mh0`}>
+    <div className={`${styles.formError} bg-danger--faded t-small tc pa1 mv1 mh0`}>
       {children}
     </div>
   )

@@ -12,7 +12,7 @@ import FormError from './FormError'
 import PasswordInput from './PasswordInput'
 import GoBackButton from './GoBackButton'
 
-import login from '../styles.css'
+import styles from '../styles.css'
 
 /** RecoveryPassword tab component. Receive a code and new password from an input
  * and call the recoveryPassword API.
@@ -81,12 +81,12 @@ class RecoveryPassword extends Component {
 
     return (
       <Form
-        className={`${login.emailVerification} w-100`}
+        className={`${styles.emailVerification} w-100`}
         title={translate('login.createPassword', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
-            <div className={`${login.inputContainer} ${login.inputContainerAccessCode} pv3`}>
+            <div className={`${styles.inputContainer} ${styles.inputContainerAccessCode} pv3`}>
               <AuthState.Token>
                 {({ value, setValue }) => (
                   <Input
@@ -108,7 +108,7 @@ class RecoveryPassword extends Component {
             <FormError show={isInvalidCode}>
               {translate('login.invalidCode', intl)}
             </FormError>
-            <div className={`${login.inputContainer} ${login.inputContainerPassword} pv3`}>
+            <div className={`${styles.inputContainer} ${styles.inputContainerPassword} pv3`}>
               <AuthState.Password>
                 {({ value, setValue }) => (
                   <PasswordInput
@@ -131,7 +131,7 @@ class RecoveryPassword extends Component {
             <FormError show={isUserBlocked}>
               {translate('login.userBlocked', intl)}
             </FormError>
-            <div className={`${login.inputContainer} ${login.inputContainerPassword} pv3`}>
+            <div className={`${styles.inputContainer} ${styles.inputContainerPassword} pv3`}>
               <Input
                 type="password"
                 onChange={this.handleConfirmPasswordChange}
@@ -149,7 +149,7 @@ class RecoveryPassword extends Component {
               onStateChange={onStateChange}
               changeTab={{ step: previous }}
             />
-            <div className={`${login.sendButton} ml-auto`}>
+            <div className={`${styles.sendButton} ml-auto`}>
               <AuthService.SetPassword
                 onSuccess={this.handleSuccess}
                 onFailure={this.handleFailure}

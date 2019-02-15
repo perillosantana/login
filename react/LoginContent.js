@@ -25,7 +25,7 @@ import { session } from 'vtex.store-resources/Queries'
 import LOGIN_OPTIONS_QUERY from './queries/loginOptions.gql'
 import { AuthState } from 'vtex.react-vtexid'
 
-import login from './styles.css'
+import styles from './styles.css'
 
 const STEPS = [
   /* eslint-disable react/display-name, react/prop-types */
@@ -292,15 +292,15 @@ class LoginContent extends Component {
       this.shouldRenderLoginOptions
     )
 
-    const className = classNames(`${login.content} flex relative bg-base justify-around overflow-hidden pa4 center`, {
-      [login.contentInitialScreen]: this.state.isOnInitialScreen,
-      [`${login.contentAlwaysWithOptions} mw6-ns flex-column-reverse items-center flex-row-ns items-baseline-ns`]:
+    const className = classNames(`${styles.content} flex relative bg-base justify-around overflow-hidden pa4 center`, {
+      [styles.contentInitialScreen]: this.state.isOnInitialScreen,
+      [`${styles.contentAlwaysWithOptions} mw6-ns flex-column-reverse items-center flex-row-ns items-baseline-ns`]:
         !isInitialScreenOptionOnly,
       'items-baseline': isInitialScreenOptionOnly,
     })
 
-    const formClassName = classNames(login.contentForm, 'dn ph4 pb6', {
-      [`${login.contentFormVisible} db `]: this.shouldRenderForm,
+    const formClassName = classNames(styles.contentForm, 'dn ph4 pb6', {
+      [`${styles.contentFormVisible} db `]: this.shouldRenderForm,
     })
 
     return (

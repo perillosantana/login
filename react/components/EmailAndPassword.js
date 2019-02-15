@@ -13,7 +13,7 @@ import FormError from './FormError'
 import PasswordInput from './PasswordInput'
 import GoBackButton from './GoBackButton'
 
-import login from '../styles.css'
+import styles from '../styles.css'
 
 /** EmailAndPasswordLogin component. */
 class EmailAndPassword extends Component {
@@ -104,12 +104,12 @@ class EmailAndPassword extends Component {
 
     return (
       <Form
-        className={`${login.emailVerification} w-100`}
+        className={`${styles.emailVerification} w-100`}
         title={title || translate('loginOptions.emailAndPassword', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
-            <div className={`${login.inputContainer} ${login.inputContainerEmail}`}>
+            <div className={`${styles.inputContainer} ${styles.inputContainerEmail}`}>
               <AuthState.Email>
                 {({ value, setValue }) => (
                   <Input
@@ -129,7 +129,7 @@ class EmailAndPassword extends Component {
             <FormError show={isInvalidEmail}>
               {translate('login.invalidEmail', intl)}
             </FormError>
-            <div className={`${login.inputContainer} ${login.inputContainerPassword} pv3 flex flex-column`}>
+            <div className={`${styles.inputContainer} ${styles.inputContainerPassword} pv3 flex flex-column`}>
               <AuthState.Password>
                 {({ value, setValue }) => (
                   <PasswordInput
@@ -157,7 +157,7 @@ class EmailAndPassword extends Component {
             <FormError show={isUserBlocked}>
               {translate('login.userBlocked', intl)}
             </FormError>
-            <div className={`${login.formLinkContainer} flex justify-end ph0 pv2`}>
+            <div className={`${styles.formLinkContainer} flex justify-end ph0 pv2`}>
               <a
                 href=""
                 className="link dim c-link"
@@ -178,7 +178,7 @@ class EmailAndPassword extends Component {
                 changeTab={{ step: previous, password: '' }}
               />
             )}
-            <div className={`${login.sendButton} ml-auto`}>
+            <div className={`${styles.sendButton} ml-auto`}>
               <AuthService.LoginWithPassword
                 useNewSession
                 onSuccess={this.handleSuccess}
@@ -211,7 +211,7 @@ class EmailAndPassword extends Component {
           </Fragment>
         }
       >
-        <div className={`${login.formLinkContainer} flex justify-center ph0 mt4`}>
+        <div className={`${styles.formLinkContainer} flex justify-center ph0 mt4`}>
           <a
             href=""
             className="link dim c-link"

@@ -12,7 +12,7 @@ import { translate } from '../utils/translate'
 import FormTitle from './FormTitle'
 import OAuth from './OAuth'
 
-import login from '../styles.css'
+import styles from '../styles.css'
 
 const PROVIDERS_ICONS = {
   'Google': GoogleIcon,
@@ -54,17 +54,17 @@ class LoginOptions extends Component {
 
     const { loadingOptions } = this.state
 
-    const classes = classNames(login.options, className, {
-      [login.optionsSticky]: isAlwaysShown,
+    const classes = classNames(styles.options, className, {
+      [styles.optionsSticky]: isAlwaysShown,
     })
 
     return (
       <div className={classes}>
         <FormTitle>{title || translate(fallbackTitle, intl)}</FormTitle>
-        <ul className={`${login.optionsList} list pa0`}>
+        <ul className={`${styles.optionsList} list pa0`}>
           {this.showOption('accessKeyAuthentication', 'loginOptions.emailVerification') &&
-            <li className={`${login.optionsListItem} mb3`}>
-              <div className={login.button}>
+            <li className={`${styles.optionsListItem} mb3`}>
+              <div className={styles.button}>
                 <Button
                   variation="secondary"
                   onClick={this.handleOptionClick('loginOptions.emailVerification')}
@@ -75,8 +75,8 @@ class LoginOptions extends Component {
             </li>
           }
           {this.showOption('classicAuthentication', 'loginOptions.emailAndPassword') &&
-            <li className={`${login.optionsListItem} mb3`}>
-              <div className={login.button}>
+            <li className={`${styles.optionsListItem} mb3`}>
+              <div className={styles.button}>
                 <Button
                   variation="secondary"
                   onClick={this.handleOptionClick('loginOptions.emailAndPassword')}
@@ -91,7 +91,7 @@ class LoginOptions extends Component {
 
             return (
               <li
-                className={`${login.optionsListItem} mb3`}
+                className={`${styles.optionsListItem} mb3`}
                 key={`${providerName}-${index}`}
               >
                 <OAuth provider={providerName}>
@@ -101,8 +101,8 @@ class LoginOptions extends Component {
             )
           })}
           {!options && (
-            <li className={`${login.optionsListItem} mb3`}>
-              <div className={`${login.button} ${login.buttonDanger}`}>
+            <li className={`${styles.optionsListItem} mb3`}>
+              <div className={`${styles.button} ${styles.buttonDanger}`}>
                 <Button
                   type="danger"
                   variation="secondary"
@@ -115,7 +115,7 @@ class LoginOptions extends Component {
               </div>
             </li>
           )}
-          <li className={`${login.optionsListItem} ${login.optionsListItemContainer} mb3`}>
+          <li className={`${styles.optionsListItem} ${styles.optionsListItemContainer} mb3`}>
             <ExtensionContainer id="container" />
           </li>
         </ul>

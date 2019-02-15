@@ -7,7 +7,7 @@ import { injectIntl, intlShape } from 'react-intl'
 
 import { translate } from '../utils/translate'
 import LoginComponent from './LoginComponent';
-import login from '../styles.css'
+import styles from '../styles.css'
 
 const arrow = <IconArrowBack size={10} viewBox="0 0 16 11" />
 
@@ -25,7 +25,7 @@ class GoBackButton extends Component {
     const { onStateChange, intl, changeTab } = this.props
     return (
       <Fragment>
-        <div className={login.backButton}>
+        <div className={styles.backButton}>
           <ButtonWithIcon
             icon={arrow}
             iconPosition="left"
