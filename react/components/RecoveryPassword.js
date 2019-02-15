@@ -12,6 +12,7 @@ import FormError from './FormError'
 import PasswordInput from './PasswordInput'
 import GoBackButton from './GoBackButton'
 
+import styles from '../styles.css'
 
 /** RecoveryPassword tab component. Receive a code and new password from an input
  * and call the recoveryPassword API.
@@ -80,12 +81,12 @@ class RecoveryPassword extends Component {
 
     return (
       <Form
-        className="vtex-login__email-verification"
+        className={`${styles.emailVerification} w-100`}
         title={translate('login.createPassword', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
-            <div className="vtex-login__input-container vtex-login__input-container--access-code">
+            <div className={`${styles.inputContainer} ${styles.inputContainerAccessCode} pv3`}>
               <AuthState.Token>
                 {({ value, setValue }) => (
                   <Input
@@ -107,7 +108,7 @@ class RecoveryPassword extends Component {
             <FormError show={isInvalidCode}>
               {translate('login.invalidCode', intl)}
             </FormError>
-            <div className="vtex-login__input-container vtex-login__input-container--password">
+            <div className={`${styles.inputContainer} ${styles.inputContainerPassword} pv3`}>
               <AuthState.Password>
                 {({ value, setValue }) => (
                   <PasswordInput
@@ -130,7 +131,7 @@ class RecoveryPassword extends Component {
             <FormError show={isUserBlocked}>
               {translate('login.userBlocked', intl)}
             </FormError>
-            <div className="vtex-login__input-container vtex-login__input-container--password">
+            <div className={`${styles.inputContainer} ${styles.inputContainerPassword} pv3`}>
               <Input
                 type="password"
                 onChange={this.handleConfirmPasswordChange}
@@ -148,7 +149,7 @@ class RecoveryPassword extends Component {
               onStateChange={onStateChange}
               changeTab={{ step: previous }}
             />
-            <div className="vtex-login__send-button">
+            <div className={`${styles.sendButton} ml-auto`}>
               <AuthService.SetPassword
                 onSuccess={this.handleSuccess}
                 onFailure={this.handleFailure}

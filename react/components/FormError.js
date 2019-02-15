@@ -1,13 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import styles from '../styles.css'
+
 export default function FormError({ children, show }) {
   if (!show) {
     return null
   }
 
   return (
-    <div className="vtex-login__form-error t-small tc pa1 mv1 mh0">
+    <div className={`${styles.formError} bg-danger--faded t-small tc pa1 mv1 mh0`}>
       {children}
     </div>
   )

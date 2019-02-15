@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
+import styles from '../styles.css'
+
 export default class Tooltip extends Component {
   render() {
     const { children, title, top } = this.props
 
-    const classes = classNames('vtex-tooltip__container pa5 br2 absolute z-max', {
-      'vtex-tooltip__container-top': top,
-      'vtex-tooltip__container-left': !top,
+    const classes = classNames(`${styles.tooltipContainer} pa5 br2 absolute z-max bg-near-black`, {
+      [`${styles.tooltipContainerTop} mb2`]: top,
+      [`${styles.tooltipContainerLeft} mr2`]: !top,
     })
 
     return (

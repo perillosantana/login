@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import styles from '../styles.css'
+
 export default function FormFooter({ children }) {
   return (
-    <div className="vtex-login__form-footer flex mt3">
+    <div className={`${styles.formFooter} bt b--muted-4 pt4 flex mt3`}>
       {children}
     </div>
   )

@@ -9,9 +9,10 @@ import { Button } from 'vtex.styleguide'
 import FacebookIcon from '../images/FacebookIcon'
 import GoogleIcon from '../images/GoogleIcon'
 import { translate } from '../utils/translate'
-import { slugify } from '../utils/format-string'
 import FormTitle from './FormTitle'
 import OAuth from './OAuth'
+
+import styles from '../styles.css'
 
 const PROVIDERS_ICONS = {
   'Google': GoogleIcon,
@@ -53,17 +54,17 @@ class LoginOptions extends Component {
 
     const { loadingOptions } = this.state
 
-    const classes = classNames('vtex-login-options', className, {
-      'vtex-login-options--sticky': isAlwaysShown,
+    const classes = classNames(styles.options, className, {
+      [styles.optionsSticky]: isAlwaysShown,
     })
 
     return (
       <div className={classes}>
         <FormTitle>{title || translate(fallbackTitle, intl)}</FormTitle>
-        <ul className="vtex-login-options__list list pa0">
+        <ul className={`${styles.optionsList} list pa0`}>
           {this.showOption('accessKeyAuthentication', 'loginOptions.emailVerification') &&
-            <li className="vtex-login-options__list-item mb3">
-              <div className="vtex-login__button">
+            <li className={`${styles.optionsListItem} mb3`}>
+              <div className={styles.button}>
                 <Button
                   variation="secondary"
                   onClick={this.handleOptionClick('loginOptions.emailVerification')}
@@ -74,8 +75,8 @@ class LoginOptions extends Component {
             </li>
           }
           {this.showOption('classicAuthentication', 'loginOptions.emailAndPassword') &&
-            <li className="vtex-login-options__list-item mb3">
-              <div className="vtex-login__button">
+            <li className={`${styles.optionsListItem} mb3`}>
+              <div className={styles.button}>
                 <Button
                   variation="secondary"
                   onClick={this.handleOptionClick('loginOptions.emailAndPassword')}
@@ -90,7 +91,7 @@ class LoginOptions extends Component {
 
             return (
               <li
-                className={`vtex-login-options__list-item vtex-login-options__list-item--${slugify(providerName)} mb3`}
+                className={`${styles.optionsListItem} mb3`}
                 key={`${providerName}-${index}`}
               >
                 <OAuth provider={providerName}>
@@ -100,8 +101,8 @@ class LoginOptions extends Component {
             )
           })}
           {!options && (
-            <li className="vtex-login-options__list-item mb3">
-              <div className="vtex-login__button vtex-login__button--danger">
+            <li className={`${styles.optionsListItem} mb3`}>
+              <div className={`${styles.button} ${styles.buttonDanger}`}>
                 <Button
                   type="danger"
                   variation="secondary"
@@ -114,7 +115,7 @@ class LoginOptions extends Component {
               </div>
             </li>
           )}
-          <li className="vtex-login-options__list-item vtex-login-options__list-item--container mb3">
+          <li className={`${styles.optionsListItem} ${styles.optionsListItemContainer} mb3`}>
             <ExtensionContainer id="container" />
           </li>
         </ul>

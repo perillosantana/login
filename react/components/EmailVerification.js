@@ -11,6 +11,8 @@ import { translate } from '../utils/translate'
 import { steps } from '../utils/steps'
 import GoBackButton from './GoBackButton'
 
+import styles from '../styles.css'
+
 /**
  * EmailVerification tab component.
  * Receive a email from an input and call the sendEmailVerification API
@@ -63,12 +65,12 @@ class EmailVerification extends Component {
 
     return (
       <Form
-        className="vtex-login__email-verification"
+        className={`${styles.emailVerification} w-100`}
         title={title || translate('loginOptions.emailVerification', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
-            <div className="vtex-login__input-container vtex-login__input-container--email">
+            <div className={`${styles.inputContainer} ${styles.inputContainerEmail}`}>
               <AuthState.Email>
                 {({ value, setValue }) => (
                   <Input
@@ -105,7 +107,7 @@ class EmailVerification extends Component {
                 }
               />
             )}
-            <div className="vtex-login__send-button">
+            <div className={`${styles.sendButton} ml-auto`}>
               <AuthService.SendAccessKey
                 useNewSession
                 onSuccess={() => {

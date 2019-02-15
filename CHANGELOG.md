@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.8.0] - 2019-02-15
+### Added
+- Add CSS Modules.
+
 ## [2.7.6] - 2019-02-14
 
 ## [2.7.5] - 2019-02-14

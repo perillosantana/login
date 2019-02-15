@@ -11,6 +11,7 @@ import Form from './Form'
 import FormError from './FormError'
 import GoBackButton from './GoBackButton'
 
+import styles from '../styles.css'
 
 /** CodeConfirmation tab component. Receive the code from an input and call the signIn API */
 class CodeConfirmation extends Component {
@@ -45,12 +46,12 @@ class CodeConfirmation extends Component {
 
     return (
       <Form
-        className="vtex-login__code-confirmation"
+        className={`${styles.codeConfirmation} w-100`}
         title={translate('login.accessCodeTitle', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
-            <div className="vtex-login__input-container vtex-login__input-container--access-code">
+            <div className={`${styles.inputContainer} ${styles.inputContainerAccessCode} pv3`}>
               <AuthState.Token>
                 {({ value, setValue }) => (
                   <Input
@@ -83,7 +84,7 @@ class CodeConfirmation extends Component {
               onStateChange={onStateChange}
               changeTab={{ step: previous }}
             />
-            <div className="vtex-login__send-button">
+            <div className={`${styles.sendButton} ml-auto`}>
               <AuthService.LoginWithAccessKey
                 onSuccess={this.handleSuccess}
                 onFailure={this.handleFailure}

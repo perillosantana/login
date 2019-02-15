@@ -6,6 +6,7 @@ import { Button } from 'vtex.styleguide'
 import { AuthService } from 'vtex.react-vtexid'
 
 import { translate } from '../utils/translate'
+import styles from '../styles.css'
 
 // Component that shows account options to the user.
 class OAuth extends Component {
@@ -21,7 +22,7 @@ class OAuth extends Component {
   render() {
     const { intl, children, provider } = this.props
     return (
-      <div className="vtex-login__button vtex-login__button--social">
+      <div className={`${styles.button} ${styles.buttonSocial}`}>
         <AuthService.OAuthRedirect useNewSession provider={provider} >
           {({ loading, action: redirectToOAuthPage }) => (
             <Button
@@ -30,9 +31,9 @@ class OAuth extends Component {
               onClick={redirectToOAuthPage}
             >
               {children}
-              <span className="t-action--small vtex-login__oauth-label relative normal">
+              <span className={`t-action--small ${styles.oauthLabel} relative normal`}>
                 {translate('loginOptions.oAuth', intl)}
-                <span className="vtex-login__oauth-provider b">{provider}</span>
+                <span className={`${styles.oauthProvider} b ml2`}>{provider}</span>
               </span>
             </Button>
           )}
