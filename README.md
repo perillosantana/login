@@ -38,9 +38,7 @@ To configure or customize this app, you need to import it in your dependencies i
   }
 ```
 
-Then, add `login` or `login-content` block into your app theme as we do in our [Store theme app](https://github.com/vtex-apps/store-theme/blob/master/store/blocks.json).
-
-TODO EXPLAIN DIFFERENCE BETWEEN THEMES
+Then, add `login` or `login-content` block into your app theme as we do in our [Store theme app](https://github.com/vtex-apps/store-theme/blob/master/store/blocks.json). `login-content` is just the login form and `login` contains the login form and adds the possibility of other display modes such as pop-up.
 
 Now, you can change the behavior of the `login` block that is in the store header. See an example of how to configure:
 
@@ -71,7 +69,7 @@ When implementing this app as a block, various inner blocks may be available. Th
 }
 ```
 
-For now these block do not have any required or optional blocks.
+For now these blocks do not have any required or optional blocks.
 
 #### Configuration 
 Through the Storefront, you can change the `login`'s behavior and interface. However, you also can make in your theme app, as Store theme does.
