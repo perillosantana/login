@@ -4,7 +4,7 @@ import { injectIntl, intlShape } from 'react-intl'
 import { isMobile } from 'react-device-detect'
 
 import { Input } from 'vtex.styleguide'
-import { IconEyeSight } from 'vtex.dreamstore-icons'
+import { IconEyeSight } from 'vtex.store-icons'
 
 import { translate } from '../utils/translate'
 import Tooltip from './Tooltip'

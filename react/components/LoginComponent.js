@@ -4,7 +4,7 @@ import OutsideClickHandler from 'react-outside-click-handler'
 import classNames from 'classnames'
 
 import { ButtonWithIcon } from 'vtex.styleguide'
-import { IconProfile } from 'vtex.dreamstore-icons'
+import { IconProfile } from 'vtex.store-icons'
 
 import LoginContent from '../LoginContent'
 import { truncateString } from '../utils/format-string'
