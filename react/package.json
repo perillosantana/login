@@ -19,7 +19,13 @@
   },
   "devDependencies": {
     "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1"
+    "enzyme-adapter-react-16": "^1.1.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.9.0",
+    "eslint-config-vtex": "^8.0.0",
+    "eslint-config-vtex-react": "^3.0.3",
+    "eslint-plugin-import": "^2.14.0",
+    "estraverse": "^4.2.0"
   },
   "vtexScriptsOverride": {
     "srcPath": "."
