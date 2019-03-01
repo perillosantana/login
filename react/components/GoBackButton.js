@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { ButtonWithIcon } from 'vtex.styleguide'
-import { IconArrowBack } from 'vtex.dreamstore-icons'
+import { IconArrowBack } from 'vtex.store-icons'
 
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'

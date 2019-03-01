@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.8.1] - 2019-03-01
+### Changed
+- Using `store-icons` instead of `dreamstore-icons`.
+
 ### Fixed
 
 - Move `package.json` file data from wrong folder to the right one.
