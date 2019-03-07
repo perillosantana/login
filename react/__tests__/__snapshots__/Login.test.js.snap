@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Login /> component should match snapshot 1`] = `
+exports[`<Login /> component should match snapshot when loading 1`] = `
 <DocumentFragment>
   <div
     class="container flex items-center fr"
@@ -8,7 +8,14 @@ exports[`<Login /> component should match snapshot 1`] = `
     <div
       class="relative"
     >
-      <div />
+      <button
+        class="ButtonWithIcon-mock"
+        type="button"
+      >
+        <div
+          class="flex pv2 items-center"
+        />
+      </button>
       <div>
         <div
           class="box absolute z-max dn"
