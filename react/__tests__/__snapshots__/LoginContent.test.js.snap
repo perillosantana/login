@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginContent /> component should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="content flex relative bg-base justify-around overflow-hidden pa4 center contentInitialScreen items-baseline"
+  >
+    <div
+      style="opacity: 0; transform: translateX(-50%);"
+    >
+      <div
+        class="options"
+      >
+        <h3
+          class="formTitle t-body v-mid ttu tc relative pv2 ph3 br2"
+        >
+          Choose an option to sign in
+        </h3>
+        <ul
+          class="optionsList list pa0"
+        >
+          <li
+            class="optionsListItem mb3"
+          >
+            <div
+              class="button buttonDanger"
+            >
+              <button
+                class="Button-mock"
+                type="button"
+              >
+                <div
+                  class="db"
+                >
+                  Something bad happened...
+                </div>
+                <span
+                  class="t-small pt1"
+                >
+                  Click to try again.
+                </span>
+              </button>
+            </div>
+          </li>
+          <li
+            class="optionsListItem optionsListItemContainer mb3"
+          >
+            <div
+              class="ExtensionContainer-mock"
+            >
+              container
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="contentForm dn ph4 pb6"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<LoginContent /> component should match snapshot when loading 1`] = `
+<DocumentFragment>
+  <div
+    class="content flex relative bg-base justify-around overflow-hidden pa4 center contentInitialScreen items-baseline"
+  >
+    <div
+      class="contentForm dn ph4 pb6"
+    />
+  </div>
+</DocumentFragment>
+`;

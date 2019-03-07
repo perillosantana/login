@@ -16,7 +16,7 @@ describe('<Login /> component', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('should match snapshot without data', () => {
+  it('should match snapshot without profile', () => {
     const { asFragment } = renderWithIntl(
       <Login
         data={{
@@ -28,7 +28,7 @@ describe('<Login /> component', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('should match snapshot with data only email', () => {
+  it('should match snapshot with profile without name', () => {
     const { asFragment } = renderWithIntl(
       <Login
         data={{
@@ -46,7 +46,7 @@ describe('<Login /> component', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('should match snapshot with data', () => {
+  it('should match snapshot with profile with name', () => {
     const { asFragment } = renderWithIntl(
       <Login
         data={{

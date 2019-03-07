@@ -41,7 +41,7 @@ exports[`<Login /> component should match snapshot when loading 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<Login /> component should match snapshot with data 1`] = `
+exports[`<Login /> component should match snapshot with profile with name 1`] = `
 <DocumentFragment>
   <div
     class="container flex items-center fr"
@@ -132,7 +132,7 @@ exports[`<Login /> component should match snapshot with data 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<Login /> component should match snapshot with data only email 1`] = `
+exports[`<Login /> component should match snapshot with profile without name 1`] = `
 <DocumentFragment>
   <div
     class="container flex items-center fr"
@@ -223,7 +223,7 @@ exports[`<Login /> component should match snapshot with data only email 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<Login /> component should match snapshot without data 1`] = `
+exports[`<Login /> component should match snapshot without profile 1`] = `
 <DocumentFragment>
   <div
     class="container flex items-center fr"
