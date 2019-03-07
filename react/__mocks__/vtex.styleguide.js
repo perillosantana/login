@@ -1,5 +1,14 @@
 import React from 'react'
 
-export const Button = () => <div />
-export const ButtonWithIcon = () => <div />
-export const Input = () => <div />
+export const Button = ({ children }) => (
+  <button type="button" className="Button-mock">
+    {children}
+  </button>
+)
+export const ButtonWithIcon = ({ children }) => (
+  <button type="button" className="ButtonWithIcon-mock">
+    {children}
+  </button>
+)
+
+export const Input = props => <input {...props} />
