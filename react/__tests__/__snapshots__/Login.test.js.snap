@@ -253,7 +253,7 @@ exports[`<Login /> component should match snapshot without profile 1`] = `
               class="content flex relative bg-base justify-around overflow-hidden pa4 center contentInitialScreen items-baseline"
             >
               <div
-                style="opacity: 0; transform: translateX(-50%);"
+                style="opacity: 0.00028516048692; transform: translateX(-50%);"
               >
                 <div
                   class="options"
