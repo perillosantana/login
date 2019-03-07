@@ -1,16 +1,18 @@
 import React from 'react'
-import { render } from 'react-testing-library'
+import { renderWithIntl } from 'intl-utils'
 
 import Login from '../Login'
-import messages from '../../messages/en-US.json'
 
 describe('<Login /> component', () => {
-  const intl = {
-    formatMessage: ({ id }) => messages[id],
-  }
-
-  it('should match snapshot', () => {
-    const { asFragment } = render(<Login />)
+  it('should match snapshot when loading', () => {
+    const { asFragment } = renderWithIntl(
+      <Login
+        data={{
+          loading: true,
+          refetch: () => {},
+        }}
+      />
+    )
     expect(asFragment()).toMatchSnapshot()
   })
 })

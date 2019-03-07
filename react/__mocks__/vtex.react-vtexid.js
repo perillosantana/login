@@ -1,3 +1,5 @@
+import { Component } from 'react'
+
 export const AuthService = {
   RedirectLogout: ({ children }) => children({ action: () => {} }),
 
@@ -32,8 +34,16 @@ export const AuthService = {
     }),
 }
 
-export const AuthState = {
-  Token: ({ children }) => children({ value: 'value', setValue: () => {} }),
-  Password: ({ children }) => children({ value: 'value', setValue: () => {} }),
-  Email: ({ children }) => children({ value: 'value', setValue: () => {} }),
+export class AuthState extends Component {
+  static Token = ({ children }) =>
+    children({ value: 'value', setValue: () => {} })
+  static Password = ({ children }) =>
+    children({ value: 'value', setValue: () => {} })
+  static Email = ({ children }) =>
+    children({ value: 'value', setValue: () => {} })
+
+  render() {
+    const { children } = this.props
+    return children()
+  }
 }

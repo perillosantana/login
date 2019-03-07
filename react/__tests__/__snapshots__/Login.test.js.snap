@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login /> component should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="container flex items-center fr"
+  >
+    <div
+      class="relative"
+    >
+      <div />
+      <div>
+        <div
+          class="box absolute z-max dn"
+        >
+          <div
+            class="arrowUp absolute top-0 right-0 shadow-3 bg-base mr3 rotate-45 h2 w2"
+          />
+          <div
+            class="contentContainer shadow-3 mt3"
+          >
+            <div
+              class="content flex relative bg-base justify-around overflow-hidden pa4 center contentInitialScreen items-baseline"
+            >
+              <div
+                class="contentForm dn ph4 pb6"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
