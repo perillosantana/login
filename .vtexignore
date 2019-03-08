@@ -1,10 +1,13 @@
 .git/
 react/node_modules/
 .eslintrc
+.eslintignore
 .gitignore
+.prettierrc
 package.json
 README.md
 CHANGELOG.md
+react/.babelrc
 react/**/__tests__/**
 react/**/__mocks__/**
-react/setupTests.js
+react/testUtils/**/*
