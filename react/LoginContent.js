@@ -308,7 +308,7 @@ class LoginContent extends Component {
     const className = classNames(
       `${
         styles.content
-      } flex relative bg-base justify-around overflow-hidden pa4 center`,
+      } flex relative bg-base justify-around overflow-visible pa4 center`,
       {
         [styles.contentInitialScreen]: this.state.isOnInitialScreen,
         [`${
