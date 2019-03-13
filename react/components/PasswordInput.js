@@ -16,7 +16,8 @@ class PasswordInput extends Component {
     showPassword: false,
   }
 
-  handleEyeIcon = () => this.setState({ showPassword: !this.state.showPassword })
+  handleEyeIcon = () =>
+    this.setState({ showPassword: !this.state.showPassword })
 
   handlePasswordChange = event => {
     const lowerCaseLetters = /[a-z]/g
@@ -26,10 +27,12 @@ class PasswordInput extends Component {
     const value = event.target.value
 
     this.setState({
-      containsLowerLetter: value.match(lowerCaseLetters) && value.match(lowerCaseLetters).length > 0,
-      containsUpperLetter: value.match(upperCaseLetters) && value.match(upperCaseLetters).length > 0,
-      containsNumber: value.match(numbers) && value.match(numbers).length > 0,
-      atLeastEightCharacteres: value.length >= 8,
+      containsLowerLetter:
+        value.length > 0 ? value.match(lowerCaseLetters) : undefined,
+      containsUpperLetter:
+        value.length > 0 ? value.match(upperCaseLetters) : undefined,
+      containsNumber: value.length > 0 ? value.match(numbers) : undefined,
+      atLeastEightCharacteres: value.length > 0 ? value.length >= 8 : undefined,
     })
 
     this.props.onStateChange({ password: value })
@@ -45,11 +48,7 @@ class PasswordInput extends Component {
       showPassword,
     } = this.state
 
-    const {
-      intl,
-      password,
-      showPasswordVerificationIntoTooltip,
-    } = this.props
+    const { intl, password, showPasswordVerificationIntoTooltip } = this.props
 
     const fields = [
       {
@@ -84,39 +83,39 @@ class PasswordInput extends Component {
           type={`${showPassword ? 'text' : 'password'}`}
           value={password}
           onChange={this.handlePasswordChange}
-          placeholder={this.props.placeholder || translate('login.password.placeholder', intl)}
+          placeholder={
+            this.props.placeholder ||
+            translate('login.password.placeholder', intl)
+          }
           onBlur={() => this.setState({ showVerification: false })}
           onFocus={() => this.setState({ showVerification: true })}
-          suffixIcon={(
+          suffixIcon={
             <span className="pointer" onClick={this.handleEyeIcon}>
-              {showPassword
-                ? <IconEyeSight type='filled' state='off' size={16} />
-                : <IconEyeSight type='filled' state="on" size={16} />}
+              {showPassword ? (
+                <IconEyeSight type="filled" state="off" size={16} />
+              ) : (
+                <IconEyeSight type="filled" state="on" size={16} />
+              )}
             </span>
-          )}
+          }
         />
-        {showVerification && (
-          (!showPasswordVerificationIntoTooltip)
-            ? (
-              <div className="pa2">
-                <PasswordValidationContent fields={fields} />
-              </div>
-            )
-            : (
-              isMobile
-                ? (
-                  <Tooltip top title={translate('login.password.tooltip.title', intl)}>
-                    <PasswordValidationContent fields={fields} />
-                  </Tooltip>
-                )
-                : (
-                  <Tooltip title={translate('login.password.tooltip.title', intl)}>
-                    <PasswordValidationContent fields={fields} />
-                  </Tooltip>
-                )
-            )
-        )
-        }
+        {showVerification &&
+          (!showPasswordVerificationIntoTooltip ? (
+            <div className="pa2">
+              <PasswordValidationContent fields={fields} />
+            </div>
+          ) : isMobile ? (
+            <Tooltip
+              top
+              title={translate('login.password.tooltip.title', intl)}
+            >
+              <PasswordValidationContent fields={fields} />
+            </Tooltip>
+          ) : (
+            <Tooltip title={translate('login.password.tooltip.title', intl)}>
+              <PasswordValidationContent fields={fields} />
+            </Tooltip>
+          ))}
       </div>
     )
   }
