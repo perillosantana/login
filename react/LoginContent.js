@@ -53,7 +53,9 @@ const STEPS = [
           title={props.emailAndPasswordTitle}
           emailPlaceholder={props.emailPlaceholder}
           passwordPlaceholder={props.passwordPlaceholder}
-          showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
+          showPasswordVerificationIntoTooltip={
+            props.showPasswordVerificationIntoTooltip
+          }
           onStateChange={func}
           showBackButton={!isOptionsMenuDisplayed}
           loginCallback={props.loginCallback}
@@ -88,7 +90,9 @@ const STEPS = [
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_PASSWORD}
           passwordPlaceholder={props.passwordPlaceholder}
-          showPasswordVerificationIntoTooltip={props.showPasswordVerificationIntoTooltip}
+          showPasswordVerificationIntoTooltip={
+            props.showPasswordVerificationIntoTooltip
+          }
           accessCodePlaceholder={props.accessCodePlaceholder}
           onStateChange={func}
           loginCallback={props.loginCallback}
@@ -120,7 +124,8 @@ class LoginContent extends Component {
     emailPlaceholder: LoginPropTypes.emailPlaceholder,
     passwordPlaceholder: LoginPropTypes.passwordPlaceholder,
     accessCodePlaceholder: LoginPropTypes.accessCodePlaceholder,
-    showPasswordVerificationIntoTooltip: LoginPropTypes.showPasswordVerificationIntoTooltip,
+    showPasswordVerificationIntoTooltip:
+      LoginPropTypes.showPasswordVerificationIntoTooltip,
   }
 
   static defaultProps = {
@@ -151,7 +156,9 @@ class LoginContent extends Component {
   }
 
   get shouldRenderLoginOptions() {
-    return this.props.isInitialScreenOptionOnly ? this.state.isOnInitialScreen : true
+    return this.props.isInitialScreenOptionOnly
+      ? this.state.isOnInitialScreen
+      : true
   }
 
   get shouldRenderForm() {
@@ -159,7 +166,9 @@ class LoginContent extends Component {
       return true
     }
 
-    return !this.props.isInitialScreenOptionOnly || !this.state.isOnInitialScreen
+    return (
+      !this.props.isInitialScreenOptionOnly || !this.state.isOnInitialScreen
+    )
   }
 
   handleUpdateState = state => {
@@ -197,7 +206,7 @@ class LoginContent extends Component {
   /**
    * Action after login success. If loginCallback isn't
    * a prop, it will call a root page redirect as default.
-  */
+   */
   onLoginSuccess = () => {
     const { loginCallback } = this.props
     return this.context.patchSession().then(() => {
@@ -248,7 +257,11 @@ class LoginContent extends Component {
           fallbackTitle="loginOptions.title"
           title={optionsTitle}
           options={loginOptions}
-          currentStep={step === 0 ? 'loginOptions.emailVerification' : 'loginOptions.emailAndPassword'}
+          currentStep={
+            step === 0
+              ? 'loginOptions.emailVerification'
+              : 'loginOptions.emailAndPassword'
+          }
           isAlwaysShown={!isInitialScreenOptionOnly}
           onOptionsClick={this.handleOptionsClick}
           refetchOptions={this.refetchOptions}
@@ -292,12 +305,18 @@ class LoginContent extends Component {
       this.shouldRenderLoginOptions
     )
 
-    const className = classNames(`${styles.content} flex relative bg-base justify-around overflow-hidden pa4 center`, {
-      [styles.contentInitialScreen]: this.state.isOnInitialScreen,
-      [`${styles.contentAlwaysWithOptions} mw6-ns flex-column-reverse items-center flex-row-ns items-baseline-ns`]:
-        !isInitialScreenOptionOnly,
-      'items-baseline': isInitialScreenOptionOnly,
-    })
+    const className = classNames(
+      `${
+        styles.content
+      } flex relative bg-base justify-around overflow-hidden pa4 center`,
+      {
+        [styles.contentInitialScreen]: this.state.isOnInitialScreen,
+        [`${
+          styles.contentAlwaysWithOptions
+        } mw6-ns flex-column-reverse items-center flex-row-ns items-baseline-ns`]: !isInitialScreenOptionOnly,
+        'items-baseline': isInitialScreenOptionOnly,
+      }
+    )
 
     const formClassName = classNames(styles.contentForm, 'dn ph4 pb6', {
       [`${styles.contentFormVisible} db `]: this.shouldRenderForm,
@@ -308,12 +327,18 @@ class LoginContent extends Component {
         {() => (
           <div className={className}>
             <Transition
-              keys={(!profile && this.shouldRenderLoginOptions && !loading) ? ['children'] : []}
+              keys={
+                !profile && this.shouldRenderLoginOptions && !loading
+                  ? ['children']
+                  : []
+              }
               from={{ opacity: 0, transform: 'translateX(-50%)' }}
               enter={{ opacity: 1, transform: 'translateX(0%)' }}
               leave={{ display: 'none' }}
             >
-              {(!profile && this.shouldRenderLoginOptions && !loading) ? [this.renderChildren] : []}
+              {!profile && this.shouldRenderLoginOptions && !loading
+                ? [this.renderChildren]
+                : []}
             </Transition>
             <div className={formClassName}>
               <Transition
@@ -328,7 +353,6 @@ class LoginContent extends Component {
           </div>
         )}
       </AuthState>
-
     )
   }
 }
@@ -338,11 +362,13 @@ const options = {
   options: () => ({ ssr: false }),
 }
 
-const content = withSession()(compose(
-  injectIntl,
-  graphql(LOGIN_OPTIONS_QUERY),
-  graphql(session, options),
-)(LoginContent))
+const content = withSession()(
+  compose(
+    injectIntl,
+    graphql(LOGIN_OPTIONS_QUERY),
+    graphql(session, options)
+  )(LoginContent)
+)
 
 content.schema = {
   title: 'editor.loginPage.title',
@@ -376,4 +402,3 @@ content.schema = {
 }
 
 export default withRuntimeContext(content)
-
