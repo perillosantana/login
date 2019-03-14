@@ -30,8 +30,21 @@ exports[`<Login /> component should match snapshot when loading 1`] = `
               class="content flex relative bg-base justify-around overflow-visible pa4 center contentInitialScreen items-baseline"
             >
               <div
-                class="contentForm dn ph4 pb6"
+                enter="[object Object]"
+                from="[object Object]"
+                keys=""
+                leave="[object Object]"
               />
+              <div
+                class="contentForm dn ph4 pb6"
+              >
+                <div
+                  enter="[object Object]"
+                  from="[object Object]"
+                  keys=""
+                  leave="[object Object]"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -77,51 +90,20 @@ exports[`<Login /> component should match snapshot with profile with name 1`] = 
               class="content flex relative bg-base justify-around overflow-visible pa4 center items-baseline"
             >
               <div
+                enter="[object Object]"
+                from="[object Object]"
+                keys=""
+                leave="[object Object]"
+              />
+              <div
                 class="contentForm dn ph4 pb6 contentFormVisible db "
               >
                 <div
-                  style="opacity: 0; transform: translateX(50%);"
-                >
-                  <div
-                    class="accountOptions items-center w-100"
-                  >
-                    <div
-                      class="ma4 min-h-2 b--muted-4"
-                    >
-                      <a
-                        href="store.account"
-                      >
-                        <button
-                          class="button bw1 ba ttu br2 t-action--small v-mid relative pv3 ph5 t-heading-5 bg-base b--transparent c-action-primary  hover-c-action-primary pointer"
-                          closeonclick=""
-                        >
-                          <span
-                            class="t-action--small"
-                          >
-                            My Account
-                          </span>
-                        </button>
-                      </a>
-                    </div>
-                    <hr
-                      class="mv2 o-30"
-                    />
-                    <div
-                      class="ma4 min-h-2 b--muted-4"
-                    >
-                      <button
-                        class="Button-mock"
-                        type="button"
-                      >
-                        <span
-                          class="t-action--small"
-                        >
-                          Logout
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                  enter="[object Object]"
+                  from="[object Object]"
+                  keys="children"
+                  leave="[object Object]"
+                />
               </div>
             </div>
           </div>
@@ -168,51 +150,20 @@ exports[`<Login /> component should match snapshot with profile without name 1`]
               class="content flex relative bg-base justify-around overflow-visible pa4 center items-baseline"
             >
               <div
+                enter="[object Object]"
+                from="[object Object]"
+                keys=""
+                leave="[object Object]"
+              />
+              <div
                 class="contentForm dn ph4 pb6 contentFormVisible db "
               >
                 <div
-                  style="opacity: 0; transform: translateX(50%);"
-                >
-                  <div
-                    class="accountOptions items-center w-100"
-                  >
-                    <div
-                      class="ma4 min-h-2 b--muted-4"
-                    >
-                      <a
-                        href="store.account"
-                      >
-                        <button
-                          class="button bw1 ba ttu br2 t-action--small v-mid relative pv3 ph5 t-heading-5 bg-base b--transparent c-action-primary  hover-c-action-primary pointer"
-                          closeonclick=""
-                        >
-                          <span
-                            class="t-action--small"
-                          >
-                            My Account
-                          </span>
-                        </button>
-                      </a>
-                    </div>
-                    <hr
-                      class="mv2 o-30"
-                    />
-                    <div
-                      class="ma4 min-h-2 b--muted-4"
-                    >
-                      <button
-                        class="Button-mock"
-                        type="button"
-                      >
-                        <span
-                          class="t-action--small"
-                        >
-                          Logout
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                  enter="[object Object]"
+                  from="[object Object]"
+                  keys="children"
+                  leave="[object Object]"
+                />
               </div>
             </div>
           </div>
@@ -253,57 +204,21 @@ exports[`<Login /> component should match snapshot without profile 1`] = `
               class="content flex relative bg-base justify-around overflow-visible pa4 center contentInitialScreen items-baseline"
             >
               <div
-                style="opacity: 0; transform: translateX(-50%);"
-              >
-                <div
-                  class="options"
-                >
-                  <h3
-                    class="formTitle t-body v-mid ttu tc relative pv2 ph3 br2"
-                  >
-                    Choose an option to sign in
-                  </h3>
-                  <ul
-                    class="optionsList list pa0"
-                  >
-                    <li
-                      class="optionsListItem mb3"
-                    >
-                      <div
-                        class="button buttonDanger"
-                      >
-                        <button
-                          class="Button-mock"
-                          type="button"
-                        >
-                          <div
-                            class="db"
-                          >
-                            Something bad happened...
-                          </div>
-                          <span
-                            class="t-small pt1"
-                          >
-                            Click to try again.
-                          </span>
-                        </button>
-                      </div>
-                    </li>
-                    <li
-                      class="optionsListItem optionsListItemContainer mb3"
-                    >
-                      <div
-                        class="ExtensionContainer-mock"
-                      >
-                        container
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+                enter="[object Object]"
+                from="[object Object]"
+                keys="children"
+                leave="[object Object]"
+              />
               <div
                 class="contentForm dn ph4 pb6"
-              />
+              >
+                <div
+                  enter="[object Object]"
+                  from="[object Object]"
+                  keys=""
+                  leave="[object Object]"
+                />
+              </div>
             </div>
           </div>
         </div>
