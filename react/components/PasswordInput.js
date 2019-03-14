@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { isMobile } from 'react-device-detect'
 
 import { Input } from 'vtex.styleguide'
 import { IconEyeSight } from 'vtex.store-icons'
 
 import { translate } from '../utils/translate'
-import Tooltip from './Tooltip'
 import PasswordValidationContent from './PasswordValidationContent'
+import TooltipVerification from './TooltipVerification'
 
 class PasswordInput extends Component {
   constructor(props) {
@@ -115,17 +114,8 @@ class PasswordInput extends Component {
             <div className="pa2">
               <PasswordValidationContent fields={fields} />
             </div>
-          ) : isMobile ? (
-            <Tooltip
-              top
-              title={translate('login.password.tooltip.title', intl)}
-            >
-              <PasswordValidationContent fields={fields} />
-            </Tooltip>
           ) : (
-            <Tooltip title={translate('login.password.tooltip.title', intl)}>
-              <PasswordValidationContent fields={fields} />
-            </Tooltip>
+            <TooltipVerification fields={fields} />
           ))}
       </div>
     )
