@@ -5,18 +5,13 @@ import classNames from 'classnames'
 export default class PasswordValidationItem extends Component {
   render() {
     const { valid, prefix, label } = this.props
+    const className = classNames('flex flex-row', {
+      'c-success': valid !== undefined && valid,
+      'c-danger': valid !== undefined && !valid,
+      'c-muted-2': valid === undefined,
+    })
     return (
-      <div
-        className={classNames(
-          `flex flex-row ${
-            valid !== undefined
-              ? valid
-                ? 'c-success'
-                : 'c-danger'
-              : 'c-muted-2'
-          }`
-        )}
-      >
+      <div className={className}>
         <div className="w-20">
           <span className="t-small">{prefix}</span>
         </div>
