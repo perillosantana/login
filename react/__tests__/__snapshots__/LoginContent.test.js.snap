@@ -6,10 +6,7 @@ exports[`<LoginContent /> component should match snapshot 1`] = `
     class="content flex relative bg-base justify-around overflow-visible pa4 center contentInitialScreen items-baseline"
   >
     <div
-      enter="[object Object]"
-      from="[object Object]"
-      keys="children"
-      leave="[object Object]"
+      style="opacity: 0.00028516048692; transform: translateX(-50%);"
     >
       <div
         style="opacity: 0; transform: translateX(-50%);"
