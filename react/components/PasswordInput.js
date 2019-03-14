@@ -102,11 +102,11 @@ class PasswordInput extends Component {
           onFocus={() => this.setState({ showVerification: true })}
           suffixIcon={
             <span className="pointer" onClick={this.handleEyeIcon}>
-              {showPassword ? (
-                <IconEyeSight type="filled" state="off" size={16} />
-              ) : (
-                <IconEyeSight type="filled" state="on" size={16} />
-              )}
+              <IconEyeSight
+                type="filled"
+                state={showPassword ? 'off' : 'on'}
+                size={16}
+              />
             </span>
           }
         />
