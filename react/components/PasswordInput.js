@@ -11,9 +11,13 @@ import Tooltip from './Tooltip'
 import PasswordValidationContent from './PasswordValidationContent'
 
 class PasswordInput extends Component {
-  state = {
-    showVerification: false,
-    showPassword: false,
+  constructor(props) {
+    super(props)
+    this.state = {
+      showVerification: false,
+      showPassword: false,
+    }
+    this.timeout = 0
   }
 
   handleEyeIcon = () =>
@@ -26,14 +30,21 @@ class PasswordInput extends Component {
 
     const value = event.target.value
 
-    this.setState({
-      containsLowerLetter:
-        value.length > 0 ? value.match(lowerCaseLetters) : undefined,
-      containsUpperLetter:
-        value.length > 0 ? value.match(upperCaseLetters) : undefined,
-      containsNumber: value.length > 0 ? value.match(numbers) : undefined,
-      atLeastEightCharacteres: value.length > 0 ? value.length >= 8 : undefined,
-    })
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+    }
+
+    this.timeout = setTimeout(() => {
+      this.setState({
+        containsLowerLetter:
+          value.length > 0 ? value.match(lowerCaseLetters) : undefined,
+        containsUpperLetter:
+          value.length > 0 ? value.match(upperCaseLetters) : undefined,
+        containsNumber: value.length > 0 ? value.match(numbers) : undefined,
+        atLeastEightCharacteres:
+          value.length > 0 ? value.length >= 8 : undefined,
+      })
+    }, 200)
 
     this.props.onStateChange({ password: value })
   }
