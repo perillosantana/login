@@ -6,57 +6,71 @@ exports[`<LoginContent /> component should match snapshot 1`] = `
     class="content flex relative bg-base justify-around overflow-visible pa4 center contentInitialScreen items-baseline"
   >
     <div
-      style="opacity: 0; transform: translateX(-50%);"
+      enter="[object Object]"
+      from="[object Object]"
+      keys="children"
+      leave="[object Object]"
     >
       <div
-        class="options"
+        style="opacity: 0; transform: translateX(-50%);"
       >
-        <h3
-          class="formTitle t-body v-mid ttu tc relative pv2 ph3 br2"
+        <div
+          class="options"
         >
-          Choose an option to sign in
-        </h3>
-        <ul
-          class="optionsList list pa0"
-        >
-          <li
-            class="optionsListItem mb3"
+          <h3
+            class="formTitle t-body v-mid ttu tc relative pv2 ph3 br2"
           >
-            <div
-              class="button buttonDanger"
+            Choose an option to sign in
+          </h3>
+          <ul
+            class="optionsList list pa0"
+          >
+            <li
+              class="optionsListItem mb3"
             >
-              <button
-                class="Button-mock"
-                type="button"
+              <div
+                class="button buttonDanger"
               >
-                <div
-                  class="db"
+                <button
+                  class="Button-mock"
+                  type="button"
                 >
-                  Something bad happened...
-                </div>
-                <span
-                  class="t-small pt1"
-                >
-                  Click to try again.
-                </span>
-              </button>
-            </div>
-          </li>
-          <li
-            class="optionsListItem optionsListItemContainer mb3"
-          >
-            <div
-              class="ExtensionContainer-mock"
+                  <div
+                    class="db"
+                  >
+                    Something bad happened...
+                  </div>
+                  <span
+                    class="t-small pt1"
+                  >
+                    Click to try again.
+                  </span>
+                </button>
+              </div>
+            </li>
+            <li
+              class="optionsListItem optionsListItemContainer mb3"
             >
-              container
-            </div>
-          </li>
-        </ul>
+              <div
+                class="ExtensionContainer-mock"
+              >
+                container
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div
       class="contentForm dn ph4 pb6"
-    />
+    >
+      <div
+        enter="[object Object]"
+        from="[object Object]"
+        keys=""
+        leave="[object Object]"
+      />
+    </div>
   </div>
 </DocumentFragment>
 `;
@@ -67,8 +81,21 @@ exports[`<LoginContent /> component should match snapshot when loading 1`] = `
     class="content flex relative bg-base justify-around overflow-visible pa4 center contentInitialScreen items-baseline"
   >
     <div
-      class="contentForm dn ph4 pb6"
+      enter="[object Object]"
+      from="[object Object]"
+      keys=""
+      leave="[object Object]"
     />
+    <div
+      class="contentForm dn ph4 pb6"
+    >
+      <div
+        enter="[object Object]"
+        from="[object Object]"
+        keys=""
+        leave="[object Object]"
+      />
+    </div>
   </div>
 </DocumentFragment>
 `;
