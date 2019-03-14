@@ -43,7 +43,7 @@ class PasswordInput extends Component {
         atLeastEightCharacteres:
           value.length > 0 ? value.length >= 8 : undefined,
       })
-    }, 200)
+    }, 300)
 
     this.props.onStateChange({ password: value })
   }
