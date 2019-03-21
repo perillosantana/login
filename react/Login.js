@@ -11,7 +11,7 @@ import { session } from 'vtex.store-resources/Queries'
 import { LoginContainerProptypes } from './propTypes'
 import LoginComponent from './components/LoginComponent'
 
-const DEFAULT_CLASSES = 'white'
+const DEFAULT_CLASSES = 'gray'
 
 /** Canonical login that calls a mutation to retrieve the authentication token */
 export default class Login extends Component {
