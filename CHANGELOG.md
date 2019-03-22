@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- Set default color to gray
+
 ## [2.8.4] - 2019-03-22
 ### Fixed
 - Change messages file to generic language.
