@@ -70,7 +70,7 @@ exports[`<Login /> component should match snapshot with profile with name 1`] = 
           class="flex pv2 items-center"
         >
           <span
-            class="profile t-action--small order-1 pl4 white dn db-l"
+            class="profile t-action--small order-1 pl4 gray dn db-l"
           >
             Hello, firstName
           </span>
@@ -174,7 +174,7 @@ exports[`<Login /> component should match snapshot with profile without name 1`]
           class="flex pv2 items-center"
         >
           <span
-            class="profile t-action--small order-1 pl4 white dn db-l"
+            class="profile t-action--small order-1 pl4 gray dn db-l"
           >
             Hello, email@v...
           </span>
