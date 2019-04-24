@@ -11,14 +11,14 @@ class TooltipVerification extends Component {
     const { fields, intl } = this.props
     if (isMobile) {
       return (
-        <Tooltip top title={translate('login.password.tooltip.title', intl)}>
+        <Tooltip top title={translate('store/login.password.tooltip.title', intl)}>
           <PasswordValidationContent fields={fields} />
         </Tooltip>
       )
     }
 
     return (
-      <Tooltip title={translate('login.password.tooltip.title', intl)}>
+      <Tooltip title={translate('store/login.password.tooltip.title', intl)}>
         <PasswordValidationContent fields={fields} />
       </Tooltip>
     )

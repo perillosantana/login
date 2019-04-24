@@ -64,25 +64,25 @@ class PasswordInput extends Component {
       {
         id: 0,
         prefix: 'ABC',
-        label: translate('login.password.uppercaseLetter', intl),
+        label: translate('store/login.password.uppercaseLetter', intl),
         valid: containsUpperLetter,
       },
       {
         id: 1,
         prefix: 'abc',
-        label: translate('login.password.lowercaseLetter', intl),
+        label: translate('store/login.password.lowercaseLetter', intl),
         valid: containsLowerLetter,
       },
       {
         id: 2,
         prefix: '123',
-        label: translate('login.password.number', intl),
+        label: translate('store/login.password.number', intl),
         valid: containsNumber,
       },
       {
         id: 3,
         prefix: '***',
-        label: translate('login.password.eightCharacteres', intl),
+        label: translate('store/login.password.eightCharacteres', intl),
         valid: atLeastEightCharacteres,
       },
     ]
@@ -95,7 +95,7 @@ class PasswordInput extends Component {
           onChange={this.handlePasswordChange}
           placeholder={
             this.props.placeholder ||
-            translate('login.password.placeholder', intl)
+            translate('store/login.password.placeholder', intl)
           }
           onBlur={() => this.setState({ showVerification: false })}
           onFocus={() => this.setState({ showVerification: true })}

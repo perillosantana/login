@@ -32,7 +32,7 @@ class OAuth extends Component {
             >
               {children}
               <span className={`t-action--small ${styles.oauthLabel} relative normal`}>
-                {translate('loginOptions.oAuth', intl)}
+                {translate('store/loginOptions.oAuth', intl)}
                 <span className={`${styles.oauthProvider} b ml2`}>{provider}</span>
               </span>
             </Button>

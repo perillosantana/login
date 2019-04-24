@@ -66,7 +66,7 @@ class EmailVerification extends Component {
     return (
       <Form
         className={`${styles.emailVerification} w-100`}
-        title={title || translate('loginOptions.emailVerification', intl)}
+        title={title || translate('store/loginOptions.emailVerification', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
@@ -80,17 +80,17 @@ class EmailVerification extends Component {
                     onChange={e => setValue(e.target.value)}
                     placeholder={
                       emailPlaceholder ||
-                      translate('login.email.placeholder', intl)
+                      translate('store/login.email.placeholder', intl)
                     }
                   />
                 )}
               </AuthState.Email>
             </div>
             <FormError show={isInvalidEmail}>
-              {translate('login.invalidEmail', intl)}
+              {translate('store/login.invalidEmail', intl)}
             </FormError>
             <FormError show={isUserBlocked}>
-              {translate('login.userBlocked', intl)}
+              {translate('store/login.userBlocked', intl)}
             </FormError>
           </Fragment>
         }
@@ -137,7 +137,7 @@ class EmailVerification extends Component {
                         this.handleOnSubmit(e, email, validateEmail, sendToken)
                       }
                     >
-                      <span className="t-small">{translate('login.send', intl)}</span>
+                      <span className="t-small">{translate('store/login.send', intl)}</span>
                     </Button>
                   )}
               </AuthService.SendAccessKey>

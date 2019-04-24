@@ -62,26 +62,26 @@ class LoginOptions extends Component {
       <div className={classes}>
         <FormTitle>{title || translate(fallbackTitle, intl)}</FormTitle>
         <ul className={`${styles.optionsList} list pa0`}>
-          {this.showOption('accessKeyAuthentication', 'loginOptions.emailVerification') &&
+          {this.showOption('accessKeyAuthentication', 'store/loginOptions.emailVerification') &&
             <li className={`${styles.optionsListItem} mb3`}>
               <div className={styles.button}>
                 <Button
                   variation="secondary"
-                  onClick={this.handleOptionClick('loginOptions.emailVerification')}
+                  onClick={this.handleOptionClick('store/loginOptions.emailVerification')}
                 >
-                  <span>{translate('loginOptions.emailVerification', intl)}</span>
+                  <span>{translate('store/loginOptions.emailVerification', intl)}</span>
                 </Button>
               </div>
             </li>
           }
-          {this.showOption('classicAuthentication', 'loginOptions.emailAndPassword') &&
+          {this.showOption('classicAuthentication', 'store/loginOptions.emailAndPassword') &&
             <li className={`${styles.optionsListItem} mb3`}>
               <div className={styles.button}>
                 <Button
                   variation="secondary"
-                  onClick={this.handleOptionClick('loginOptions.emailAndPassword')}
+                  onClick={this.handleOptionClick('store/loginOptions.emailAndPassword')}
                 >
-                  <span>{translate('loginOptions.emailAndPassword', intl)}</span>
+                  <span>{translate('store/loginOptions.emailAndPassword', intl)}</span>
                 </Button>
               </div>
             </li>
@@ -109,8 +109,8 @@ class LoginOptions extends Component {
                   isLoading={loadingOptions}
                   onClick={this.handleRefetchOptions}
                 >
-                  <div className={`${loadingOptions ? 'dn' : 'db'}`}>{translate('loginOptions.error.title', intl)}</div>
-                  <span className="t-small pt1">{translate('loginOptions.error.subhead', intl)}</span>
+                  <div className={`${loadingOptions ? 'dn' : 'db'}`}>{translate('store/loginOptions.error.title', intl)}</div>
+                  <span className="t-small pt1">{translate('store/loginOptions.error.subhead', intl)}</span>
                 </Button>
               </div>
             </li>

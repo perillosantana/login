@@ -47,7 +47,7 @@ class CodeConfirmation extends Component {
     return (
       <Form
         className={`${styles.codeConfirmation} w-100`}
-        title={translate('login.accessCodeTitle', intl)}
+        title={translate('store/login.accessCodeTitle', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
@@ -64,17 +64,17 @@ class CodeConfirmation extends Component {
                     }}
                     placeholder={
                       accessCodePlaceholder ||
-                      translate('login.accessCode.placeholder', intl)
+                      translate('store/login.accessCode.placeholder', intl)
                     }
                   />
                 )}
               </AuthState.Token>
             </div>
             <FormError show={isInvalidCode}>
-              {translate('login.invalidCode', intl)}
+              {translate('store/login.invalidCode', intl)}
             </FormError>
             <FormError show={isWrongCredentials}>
-              {translate('login.wrongCredentials', intl)}
+              {translate('store/login.wrongCredentials', intl)}
             </FormError>
           </Fragment>
         }
@@ -98,7 +98,7 @@ class CodeConfirmation extends Component {
                     isLoading={loading}
                   >
                     <span className="t-small">
-                      {translate('login.confirm', intl)}
+                      {translate('store/login.confirm', intl)}
                     </span>
                   </Button>
                 )}

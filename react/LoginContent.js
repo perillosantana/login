@@ -183,9 +183,9 @@ class LoginContent extends Component {
   handleOptionsClick = option => {
     let nextStep
 
-    if (option === 'loginOptions.emailVerification') {
+    if (option === 'store/loginOptions.emailVerification') {
       nextStep = 0
-    } else if (option === 'loginOptions.emailAndPassword') {
+    } else if (option === 'store/loginOptions.emailAndPassword') {
       nextStep = 1
     }
 
@@ -254,13 +254,13 @@ class LoginContent extends Component {
       <div style={style}>
         <LoginOptions
           page="login-options"
-          fallbackTitle="loginOptions.title"
+          fallbackTitle="store/loginOptions.title"
           title={optionsTitle}
           options={loginOptions}
           currentStep={
             step === 0
-              ? 'loginOptions.emailVerification'
-              : 'loginOptions.emailAndPassword'
+              ? 'store/loginOptions.emailVerification'
+              : 'store/loginOptions.emailAndPassword'
           }
           isAlwaysShown={!isInitialScreenOptionOnly}
           onOptionsClick={this.handleOptionsClick}
@@ -371,24 +371,24 @@ const content = withSession()(
 )
 
 content.schema = {
-  title: 'editor.loginPage.title',
+  title: 'admin/editor.loginPage.title',
   type: 'object',
   properties: {
     isInitialScreenOptionOnly: {
-      title: 'editor.login.isInitialScreenOptionOnly.title',
+      title: 'admin/editor.login.isInitialScreenOptionOnly.title',
       type: 'boolean',
       default: true,
       isLayout: true,
     },
     defaultOption: {
-      title: 'editor.login.defaultOption.title',
+      title: 'admin/editor.login.defaultOption.title',
       type: 'number',
       default: 0,
       isLayout: true,
       enum: [0, 1],
       enumNames: [
-        'editor.login.defaultOption.token',
-        'editor.login.defaultOption.emailAndPassword',
+        'admin/editor.login.defaultOption.token',
+        'admin/editor.login.defaultOption.emailAndPassword',
       ],
       widget: {
         'ui:widget': 'radio',

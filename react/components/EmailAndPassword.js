@@ -105,7 +105,7 @@ class EmailAndPassword extends Component {
     return (
       <Form
         className={`${styles.emailVerification} w-100`}
-        title={title || translate('loginOptions.emailAndPassword', intl)}
+        title={title || translate('store/loginOptions.emailAndPassword', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
@@ -120,14 +120,14 @@ class EmailAndPassword extends Component {
                     }}
                     placeholder={
                       emailPlaceholder ||
-                      translate('login.email.placeholder', intl)
+                      translate('store/login.email.placeholder', intl)
                     }
                   />
                 )}
               </AuthState.Email>
             </div>
             <FormError show={isInvalidEmail}>
-              {translate('login.invalidEmail', intl)}
+              {translate('store/login.invalidEmail', intl)}
             </FormError>
             <div className={`${styles.inputContainer} ${styles.inputContainerPassword} pv3 flex flex-column`}>
               <AuthState.Password>
@@ -139,7 +139,7 @@ class EmailAndPassword extends Component {
                     }}
                     placeholder={
                       passwordPlaceholder ||
-                      translate('login.password.placeholder', intl)
+                      translate('store/login.password.placeholder', intl)
                     }
                     showPasswordVerificationIntoTooltip={
                       showPasswordVerificationIntoTooltip
@@ -149,13 +149,13 @@ class EmailAndPassword extends Component {
               </AuthState.Password>
             </div>
             <FormError show={isInvalidPassword}>
-              {translate('login.invalidPassword', intl)}
+              {translate('store/login.invalidPassword', intl)}
             </FormError>
             <FormError show={isWrongCredentials}>
-              {translate('login.wrongCredentials', intl)}
+              {translate('store/login.wrongCredentials', intl)}
             </FormError>
             <FormError show={isUserBlocked}>
-              {translate('login.userBlocked', intl)}
+              {translate('store/login.userBlocked', intl)}
             </FormError>
             <div className={`${styles.formLinkContainer} flex justify-end ph0 pv2`}>
               <a
@@ -164,7 +164,7 @@ class EmailAndPassword extends Component {
                 onClick={this.handleCreatePassword}
               >
                 <span className="t-small">
-                  {translate('login.forgotPassword', intl)}
+                  {translate('store/login.forgotPassword', intl)}
                 </span>
               </a>
             </div>
@@ -202,7 +202,7 @@ class EmailAndPassword extends Component {
                       disabled={!validateEmail(email)}
                     >
                       <span className="t-small">
-                        {translate('login.signIn', intl)}
+                        {translate('store/login.signIn', intl)}
                       </span>
                     </Button>
                   )}
@@ -218,7 +218,7 @@ class EmailAndPassword extends Component {
             onClick={e => this.handleCreatePassword(e)}
           >
             <span className="t-small">
-              {translate('login.notHaveAccount', intl)}
+              {translate('store/login.notHaveAccount', intl)}
             </span>
           </a>
         </div>

@@ -34,7 +34,7 @@ class GoBackButton extends Component {
             onClick={() => onStateChange(changeTab)}
           >
             <span className="t-small ml2">
-              {translate('login.goBack', intl)}
+              {translate('store/login.goBack', intl)}
             </span>
           </ButtonWithIcon>
         </div>
