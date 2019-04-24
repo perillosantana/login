@@ -41,7 +41,7 @@
     "admin/editor.login.defaultOption.emailAndPassword": "Email and password login",
     "admin/editor.login.optionsTitle": "Login options title",
     "admin/editor.login.emailAndPasswordTitle": "Title of login with email and password",
-    "admin/editor.store/login.accessCodeTitle": "Title of login by access code",
+    "admin/editor.login.accessCodeTitle": "Title of login by access code",
     "admin/editor.login.emailPlaceholder": "Placeholder to email input",
     "admin/editor.login.passwordPlaceholder": "Placeholder to password input",
     "admin/editor.login.accessCodePlaceholder": "Placeholder to access code input",
