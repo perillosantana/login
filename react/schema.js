@@ -14,7 +14,7 @@ export const LoginSchema = {
     },
   },
   accessCodeTitle: {
-    title: 'admin/editor.store/login.accessCodeTitle',
+    title: 'admin/editor.login.accessCodeTitle',
     type: 'string',
     widget: {
       'ui:widget': 'textarea',

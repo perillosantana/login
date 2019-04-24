@@ -41,7 +41,7 @@
     "admin/editor.login.defaultOption.emailAndPassword": "Login por e-mail e senha",
     "admin/editor.login.optionsTitle": "Título das opções de login",
     "admin/editor.login.emailAndPasswordTitle": "Título do login com e-mail e senha",
-    "admin/editor.store/login.accessCodeTitle": "Título do login por código de acesso",
+    "admin/editor.login.accessCodeTitle": "Título do login por código de acesso",
     "admin/editor.login.emailPlaceholder": "Placeholder do campo de e-mail",
     "admin/editor.login.passwordPlaceholder": "Placeholder do campo de senha",
     "admin/editor.login.accessCodePlaceholder": "Placeholder do campo de código de acesso",

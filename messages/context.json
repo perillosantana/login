@@ -41,7 +41,7 @@
   "admin/editor.login.defaultOption.emailAndPassword": "admin/editor.login.defaultOption.emailAndPassword",
   "admin/editor.login.optionsTitle": "admin/editor.login.optionsTitle",
   "admin/editor.login.emailAndPasswordTitle": "admin/editor.login.emailAndPasswordTitle",
-  "admin/editor.store/login.accessCodeTitle": "admin/editor.store/login.accessCodeTitle",
+  "admin/editor.login.accessCodeTitle": "admin/editor.login.accessCodeTitle",
   "admin/editor.login.emailPlaceholder": "admin/editor.login.emailPlaceholder",
   "admin/editor.login.passwordPlaceholder": "admin/editor.login.passwordPlaceholder",
   "admin/editor.login.accessCodePlaceholder": "admin/editor.login.accessCodePlaceholder",
