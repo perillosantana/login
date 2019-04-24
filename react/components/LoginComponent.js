@@ -51,7 +51,7 @@ export default class LoginComponent extends Component {
         {
           profile ? (
             <span className={`${styles.profile} t-action--small order-1 pl4 ${labelClasses} dn db-l`}>
-              {translate('login.hello', intl)}{' '}
+              {translate('store/login.hello', intl)}{' '}
               {profile.firstName || truncateString(profile.email)}
             </span>
           ) : (

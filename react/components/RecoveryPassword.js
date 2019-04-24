@@ -82,7 +82,7 @@ class RecoveryPassword extends Component {
     return (
       <Form
         className={`${styles.emailVerification} w-100`}
-        title={translate('login.createPassword', intl)}
+        title={translate('store/login.createPassword', intl)}
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
@@ -99,14 +99,14 @@ class RecoveryPassword extends Component {
                     value={value || ''}
                     placeholder={
                       accessCodePlaceholder ||
-                      translate('login.accessCode.placeholder', intl)
+                      translate('store/login.accessCode.placeholder', intl)
                     }
                   />
                 )}
               </AuthState.Token>
             </div>
             <FormError show={isInvalidCode}>
-              {translate('login.invalidCode', intl)}
+              {translate('store/login.invalidCode', intl)}
             </FormError>
             <div className={`${styles.inputContainer} ${styles.inputContainerPassword} pv3`}>
               <AuthState.Password>
@@ -116,7 +116,7 @@ class RecoveryPassword extends Component {
                       setValue(password)
                       this.setState({ isInvalidPassword: false })
                     }}
-                    placeholder={passwordPlaceholder || translate('login.password.placeholder', intl)}
+                    placeholder={passwordPlaceholder || translate('store/login.password.placeholder', intl)}
                     password={value || ''}
                     showPasswordVerificationIntoTooltip={
                       showPasswordVerificationIntoTooltip
@@ -126,20 +126,20 @@ class RecoveryPassword extends Component {
               </AuthState.Password>
             </div>
             <FormError show={isInvalidPassword}>
-              {translate('login.invalidPassword', intl)}
+              {translate('store/login.invalidPassword', intl)}
             </FormError>
             <FormError show={isUserBlocked}>
-              {translate('login.userBlocked', intl)}
+              {translate('store/login.userBlocked', intl)}
             </FormError>
             <div className={`${styles.inputContainer} ${styles.inputContainerPassword} pv3`}>
               <Input
                 type="password"
                 onChange={this.handleConfirmPasswordChange}
-                placeholder={translate('login.confirmPassword', intl)}
+                placeholder={translate('store/login.confirmPassword', intl)}
               />
             </div>
             <FormError show={!isPasswordsMatch}>
-              {translate('login.invalidMatch', intl)}
+              {translate('store/login.invalidMatch', intl)}
             </FormError>
           </Fragment>
         }
@@ -171,7 +171,7 @@ class RecoveryPassword extends Component {
                       disabled={!validatePassword(password)}
                     >
                       <span className="t-small">
-                        {translate('login.create', intl)}
+                        {translate('store/login.create', intl)}
                       </span>
                     </Button>
                   )}

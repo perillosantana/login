@@ -77,7 +77,7 @@ export default class Login extends Component {
 }
 
 Login.schema = {
-  title: 'editor.login.title',
+  title: 'admin/editor.login.title',
   type: 'object',
   properties: {
     ...LoginSchema,

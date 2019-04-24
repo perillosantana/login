@@ -27,7 +27,7 @@ class AccountOptions extends Component {
               closeonclick=""
             >
               <span className="t-action--small">
-                {translate('login.myAccount', intl)}
+                {translate('store/login.myAccount', intl)}
               </span>
             </button>
           </Link>
@@ -42,7 +42,7 @@ class AccountOptions extends Component {
                 onClick={logout}
               >
                 <span className="t-action--small">
-                  {translate('login.logoutLabel', intl)}
+                  {translate('store/login.logoutLabel', intl)}
                 </span>
               </Button>
             )}
