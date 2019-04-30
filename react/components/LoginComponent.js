@@ -5,6 +5,7 @@ import classNames from 'classnames'
 
 import { ButtonWithIcon } from 'vtex.styleguide'
 import { IconProfile } from 'vtex.store-icons'
+import Overlay from 'vtex.react-portal/Overlay'
 
 import LoginContent from '../LoginContent'
 import { truncateString } from '../utils/format-string'
@@ -55,8 +56,8 @@ export default class LoginComponent extends Component {
               {profile.firstName || truncateString(profile.email)}
             </span>
           ) : (
-              iconLabel && <span className={`${styles.label} t-action--small pl4 ${labelClasses} dn db-l`}>{iconLabel}</span>
-            )
+            iconLabel && <span className={`${styles.label} t-action--small pl4 ${labelClasses} dn db-l`}>{iconLabel}</span>
+          )
         }
       </Fragment >
     )
@@ -89,9 +90,6 @@ export default class LoginComponent extends Component {
 
   render() {
     const { isBoxOpen, onOutSideBoxClick, data } = this.props
-    const boxPositionStyle = {
-      right: this.iconRef && this.iconRef.offsetWidth - 21,
-    }
 
     const profile = getProfile(data)
 
@@ -99,25 +97,23 @@ export default class LoginComponent extends Component {
       <div className={`${styles.container} flex items-center fr`}>
         <div className="relative">
           {this.renderIcon()}
-          <OutsideClickHandler onOutsideClick={onOutSideBoxClick}>
-            <div
-              className={classNames(`${styles.box} absolute z-max`, {
-                'flex': isBoxOpen,
-                'dn': !isBoxOpen,
-              })}
-              style={boxPositionStyle}
-            >
-              <div className={`${styles.arrowUp} absolute top-0 right-0 shadow-3 bg-base mr3 rotate-45 h2 w2`} />
-              <div className={`${styles.contentContainer} shadow-3 mt3`}>
-                <LoginContent
-                  profile={profile}
-                  loginCallback={this.onClickLoginButton}
-                  isInitialScreenOptionOnly
-                  {...this.props}
-                />
-              </div>
-            </div>
-          </OutsideClickHandler>
+          {isBoxOpen && (
+            <Overlay>
+              <OutsideClickHandler onOutsideClick={onOutSideBoxClick}>
+                <div className={`${styles.box} z-max`}>
+                  <div className={`${styles.arrowUp} absolute top-0 right-0 shadow-3 bg-base mr3 rotate-45 h2 w2`} />
+                  <div className={`${styles.contentContainer} shadow-3 mt3`}>
+                    <LoginContent
+                      profile={profile}
+                      loginCallback={this.onClickLoginButton}
+                      isInitialScreenOptionOnly
+                      {...this.props}
+                    />
+                  </div>
+                </div>
+              </OutsideClickHandler>
+            </Overlay>
+          )}
         </div>
       </div>
     )
