@@ -100,7 +100,9 @@ export default class LoginComponent extends Component {
           {isBoxOpen && (
             <Overlay>
               <OutsideClickHandler onOutsideClick={onOutSideBoxClick}>
-                <div className={`${styles.box} z-max`}>
+                <div className={`${styles.box} z-max absolute`} style={{
+                  right: -50,
+                }}>
                   <div className={`${styles.arrowUp} absolute top-0 right-0 shadow-3 bg-base mr3 rotate-45 h2 w2`} />
                   <div className={`${styles.contentContainer} shadow-3 mt3`}>
                     <LoginContent
