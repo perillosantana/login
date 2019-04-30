@@ -67,8 +67,8 @@ export default class Login extends Component {
   render() {
     return (
       <LoginWithSession
-        {...this.props}
         {...this.state}
+        {...this.props}
         onOutSideBoxClick={this.handleOutSideBoxClick}
         onProfileIconClick={this.handleProfileIconClick}
       />

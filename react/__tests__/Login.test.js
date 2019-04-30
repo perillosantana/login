@@ -7,6 +7,7 @@ describe('<Login /> component', () => {
   it('should match snapshot when loading', () => {
     const { asFragment } = renderWithIntl(
       <Login
+        isBoxOpen
         data={{
           loading: true,
           refetch: () => {},
@@ -19,6 +20,7 @@ describe('<Login /> component', () => {
   it('should match snapshot without profile', () => {
     const { asFragment } = renderWithIntl(
       <Login
+        isBoxOpen
         data={{
           loading: false,
           refetch: () => {},
@@ -31,6 +33,7 @@ describe('<Login /> component', () => {
   it('should match snapshot with profile without name', () => {
     const { asFragment } = renderWithIntl(
       <Login
+        isBoxOpen
         data={{
           loading: false,
           refetch: () => {},
@@ -49,6 +52,7 @@ describe('<Login /> component', () => {
   it('should match snapshot with profile with name', () => {
     const { asFragment } = renderWithIntl(
       <Login
+        isBoxOpen
         data={{
           loading: false,
           refetch: () => {},
