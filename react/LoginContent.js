@@ -323,7 +323,7 @@ class LoginContent extends Component {
     })
 
     return (
-      <AuthState scope="STORE">
+      <AuthState scope="STORE" returnUrl={this.returnUrl}>
         {() => (
           <div className={className}>
             <Transition
