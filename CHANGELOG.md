@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.9.1] - 2019-04-30
+### Changed
+- Fixes user redirection after OAuth login
+- Validates the return URL to prevent [Open Redirect](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md)
+
 ## [2.9.0] - 2019-04-24
 ### Changed
 - Scope messages by domain

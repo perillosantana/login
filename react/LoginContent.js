@@ -218,7 +218,7 @@ class LoginContent extends Component {
         // components using authentication and relying
         // on the session cookie haven't been updated yet,
         // so the refresh is intentional.
-        location.assign(this.returnUrl)
+        location.assign(`/api/vtexid/pub/authentication/redirect?returnUrl=${encodeURIComponent(this.returnUrl)}`)
       }
     })
   }
@@ -321,9 +321,9 @@ class LoginContent extends Component {
     const formClassName = classNames(styles.contentForm, 'dn ph4 pb6', {
       [`${styles.contentFormVisible} db `]: this.shouldRenderForm,
     })
-
+    
     return (
-      <AuthState scope="STORE">
+      <AuthState scope="STORE" returnUrl={this.returnUrl}>
         {() => (
           <div className={className}>
             <Transition
