@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.10.0] - 2019-05-02
+### Changed
+- Fix redirection after OAuth login.
+- Pass the `returnUrl` query when the user opens login on mobile.
+
 ## [2.9.2] - 2019-04-30
 ### Changed
 - Use `react-portal` to add login popover on the top level of the body.

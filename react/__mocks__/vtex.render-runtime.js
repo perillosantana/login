@@ -10,5 +10,18 @@ export const Link = ({ page, className, children }) => (
   </a>
 )
 
-export const withRuntimeContext = comp => comp
+// eslint-disable-next-line react/display-name
+export const withRuntimeContext = WrappedComponent => props => {
+  const mockedRuntime = {
+    page: '',
+    history: {
+      location: {
+        pathname: '',
+        search: '',
+      },
+    },
+  }
+  return <WrappedComponent {...props} runtime={mockedRuntime} />
+}
+
 export const withSession = () => comp => comp
