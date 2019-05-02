@@ -116,6 +116,13 @@ class LoginContent extends Component {
     /** Runtime context. */
     runtime: PropTypes.shape({
       navigate: PropTypes.func,
+      page: PropTypes.string,
+      history: PropTypes.shape({
+        location: PropTypes.shape({
+          pathname: PropTypes.string,
+          search: PropTypes.string,
+        }),
+      }),
     }),
     /* Reused props */
     optionsTitle: LoginPropTypes.optionsTitle,

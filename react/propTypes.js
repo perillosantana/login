@@ -40,6 +40,15 @@ export const LoginPropTypes = {
   onOutSideBoxClick: PropTypes.func.isRequired,
   /** Function called when the user clicks on the icon*/
   onProfileIconClick: PropTypes.func.isRequired,
+  /** Runtime context. */
+  runtime: PropTypes.shape({
+    history: PropTypes.shape({
+      location: PropTypes.shape({
+        pathname: PropTypes.string,
+        search: PropTypes.string,
+      }),
+    }),
+  }),
   /** Props received through the LoginContainer */
   ...LoginContainerProptypes,
 }
