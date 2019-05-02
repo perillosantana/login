@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
-- Fixes redirection after OAuth login when the user is in any page.
-- Pass the returnUrl query when open login in mobile version.
+- Fix redirection after OAuth login.
+- Pass the `returnUrl` query when the user opens login on mobile.
 
 ## [2.9.2] - 2019-04-30
 ### Changed
