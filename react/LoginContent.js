@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { compose, pathOr } from 'ramda'
+import { compose, path } from 'ramda'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { graphql } from 'react-apollo'
@@ -147,7 +147,11 @@ class LoginContent extends Component {
     code: '',
   }
 
-  returnUrl = pathOr('/', ['query', 'returnUrl'], this.props)
+  get returnUrl() {
+    const { runtime: { page, history: { location: { pathname, search } } } } = this.props
+    const currentUrl = page !== 'store.login' ? `${pathname}${search}` : '/'
+    return path(['query', 'returnUrl'], this.props) || currentUrl
+  }
 
   componentDidMount() {
     if (location.href.indexOf('accountAuthCookieName') > 0) {

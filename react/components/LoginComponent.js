@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'vtex.render-runtime'
+import { Link, withRuntimeContext } from 'vtex.render-runtime'
 import OutsideClickHandler from 'react-outside-click-handler'
 import classNames from 'classnames'
 
@@ -20,7 +20,7 @@ const profileIcon = (iconSize, labelClasses, classes) => (
     <IconProfile size={iconSize} />
   </div>
 )
-export default class LoginComponent extends Component {
+class LoginComponent extends Component {
   static propTypes = LoginPropTypes
 
   /** Function called after login success */
@@ -40,6 +40,7 @@ export default class LoginComponent extends Component {
       renderIconAsLink,
       onProfileIconClick,
       data,
+      runtime: { history: { location: { pathname } } },
     } = this.props
     const profile = getProfile(data)
     const iconClasses = 'flex items-center'
@@ -64,9 +65,11 @@ export default class LoginComponent extends Component {
 
     if (renderIconAsLink) {
       const linkTo = profile ? 'store.account' : 'store.login'
+      const returnUrl = !profile && `returnUrl=${encodeURIComponent(pathname)}`
       return (
         <Link
           page={linkTo}
+          query={returnUrl}
           className={`${styles.buttonLink} h1 w2 tc flex items-center w-100-s h-100-s pa4-s`}
         >
           {iconContent}
@@ -121,3 +124,5 @@ export default class LoginComponent extends Component {
     )
   }
 }
+
+export default withRuntimeContext(LoginComponent)
