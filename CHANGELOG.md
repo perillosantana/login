@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.10.1] - 2019-05-07
+### Fixed
+- Fix error messages not appearing correctly
+
 ## [2.10.0] - 2019-05-02
 ### Changed
 - Fix redirection after OAuth login.

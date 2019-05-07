@@ -43,7 +43,7 @@ class RecoveryPassword extends Component {
   }
 
   handleFailure = err => {
-    err.authStatus === 'BlockedUser'
+    err.code === 'BlockedUser'
       ? this.setState({ isUserBlocked: true })
       : console.error(err)
   }
