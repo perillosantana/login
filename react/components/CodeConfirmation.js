@@ -26,7 +26,7 @@ class CodeConfirmation extends Component {
   handleSuccess = () => this.props.loginCallback()
 
   handleFailure = err => {
-    err.authStatus === 'WrongCredentials'
+    err.code === 'wrongCredentials'
       ? this.setState({ isWrongCredentials: true })
       : console.error(err)
   }
