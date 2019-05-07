@@ -66,9 +66,9 @@ class EmailAndPassword extends Component {
   }
 
   handleFailure = err => {
-    err.code === 'wrongCredentials'
+    err.code === 'WrongCredentials'
       ? this.setState({ isWrongCredentials: true })
-      : err.code === 'blockedUser'
+      : err.code === 'BlockedUser'
         ? this.setState({ isUserBlocked: true })
         : console.error(err)
   }
