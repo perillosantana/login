@@ -35,6 +35,7 @@
   "store/login.email.placeholder": "store/login.email.placeholder",
   "store/login.password.placeholder": "store/login.password.placeholder",
   "store/login.accessCode.placeholder": "store/login.accessCode.placeholder",
+  "store/login.autoRedirect.message": "store/login.autoRedirect.message",
   "admin/editor.login.isInitialScreenOptionOnly.title": "admin/editor.login.isInitialScreenOptionOnly.title",
   "admin/editor.login.defaultOption.title": "admin/editor.login.defaultOption.title",
   "admin/editor.login.defaultOption.token": "admin/editor.login.defaultOption.token",

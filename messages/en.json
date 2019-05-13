@@ -35,6 +35,7 @@
     "store/login.email.placeholder": "Ex.: example@mail.com",
     "store/login.password.placeholder": "Add your password",
     "store/login.accessCode.placeholder": "Add your access code",
+    "store/login.autoRedirect.message": "We are redirecting you to our {provider} login",
     "admin/editor.login.isInitialScreenOptionOnly.title": "Show only the login options on the initial screen",
     "admin/editor.login.defaultOption.title": "Initial form to show",
     "admin/editor.login.defaultOption.token": "Access code login",

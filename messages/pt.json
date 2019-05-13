@@ -35,6 +35,7 @@
     "store/login.email.placeholder": "Ex.: example@mail.com",
     "store/login.password.placeholder": "Adicione sua senha",
     "store/login.accessCode.placeholder": "Adicione seu código de acesso",
+    "store/login.autoRedirect.message": "Estamos redirecionando você para o nosso login do {provider}",
     "admin/editor.login.isInitialScreenOptionOnly.title": "Mostrar apenas as opções de login na tela inicial",
     "admin/editor.login.defaultOption.title": "Formulário inicial a ser mostrado",
     "admin/editor.login.defaultOption.token": "Login por código de acesso",
