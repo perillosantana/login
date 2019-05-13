@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { injectIntl, intlShape } from 'react-intl'
 import { ExtensionContainer } from 'vtex.render-runtime'
 
@@ -62,45 +62,47 @@ class LoginOptions extends Component {
       <div className={classes}>
         <FormTitle>{title || translate(fallbackTitle, intl)}</FormTitle>
         <ul className={`${styles.optionsList} list pa0`}>
-          {this.showOption('accessKeyAuthentication', 'store/loginOptions.emailVerification') &&
-            <li className={`${styles.optionsListItem} mb3`}>
-              <div className={styles.button}>
-                <Button
-                  variation="secondary"
-                  onClick={this.handleOptionClick('store/loginOptions.emailVerification')}
-                >
-                  <span>{translate('store/loginOptions.emailVerification', intl)}</span>
-                </Button>
-              </div>
-            </li>
-          }
-          {this.showOption('classicAuthentication', 'store/loginOptions.emailAndPassword') &&
-            <li className={`${styles.optionsListItem} mb3`}>
-              <div className={styles.button}>
-                <Button
-                  variation="secondary"
-                  onClick={this.handleOptionClick('store/loginOptions.emailAndPassword')}
-                >
-                  <span>{translate('store/loginOptions.emailAndPassword', intl)}</span>
-                </Button>
-              </div>
-            </li>
-          }
-          {options && options.providers && options.providers.map(({ providerName }, index) => {
-            const hasIcon = PROVIDERS_ICONS.hasOwnProperty(providerName)
-
-            return (
-              <li
-                className={`${styles.optionsListItem} mb3`}
-                key={`${providerName}-${index}`}
-              >
-                <OAuth provider={providerName}>
-                  {hasIcon ? React.createElement(PROVIDERS_ICONS[providerName], null) : null}
-                </OAuth>
-              </li>
-            )
-          })}
-          {!options && (
+          {options ? (
+            <Fragment>
+              {options.accessKeyAuthentication && this.showOption('accessKeyAuthentication', 'store/loginOptions.emailVerification') &&
+                <li className={`${styles.optionsListItem} mb3`}>
+                  <div className={styles.button}>
+                    <Button
+                      variation="secondary"
+                      onClick={this.handleOptionClick('store/loginOptions.emailVerification')}
+                    >
+                      <span>{translate('store/loginOptions.emailVerification', intl)}</span>
+                    </Button>
+                  </div>
+                </li>
+              }
+              {options.classicAuthentication && this.showOption('classicAuthentication', 'store/loginOptions.emailAndPassword') &&
+                <li className={`${styles.optionsListItem} mb3`}>
+                  <div className={styles.button}>
+                    <Button
+                      variation="secondary"
+                      onClick={this.handleOptionClick('store/loginOptions.emailAndPassword')}
+                    >
+                      <span>{translate('store/loginOptions.emailAndPassword', intl)}</span>
+                    </Button>
+                  </div>
+                </li>
+              }
+              {options.providers && options.providers.map(({ providerName }, index) => {
+                const hasIcon = PROVIDERS_ICONS.hasOwnProperty(providerName)
+                return (
+                  <li
+                    className={`${styles.optionsListItem} mb3`}
+                    key={`${providerName}-${index}`}
+                  >
+                    <OAuth provider={providerName}>
+                      {hasIcon ? React.createElement(PROVIDERS_ICONS[providerName], null) : null}
+                    </OAuth>
+                  </li>
+                )
+              })}
+            </Fragment>
+          ) : (
             <li className={`${styles.optionsListItem} mb3`}>
               <div className={`${styles.button} ${styles.buttonDanger}`}>
                 <Button
