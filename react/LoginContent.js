@@ -33,7 +33,7 @@ const STEPS = [
   /* eslint-disable react/display-name, react/prop-types */
   (props, state, func, isOptionsMenuDisplayed) => {
     return style => (
-      <div style={style}>
+      <div style={style} key={0}>
         <EmailVerification
           next={steps.CODE_CONFIRMATION}
           previous={steps.LOGIN_OPTIONS}
@@ -48,7 +48,7 @@ const STEPS = [
   },
   (props, state, func, isOptionsMenuDisplayed) => {
     return style => (
-      <div style={style}>
+      <div style={style} key={1}>
         <EmailAndPassword
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.LOGIN_OPTIONS}
@@ -67,7 +67,7 @@ const STEPS = [
   },
   (props, state, func) => {
     return style => (
-      <div style={style}>
+      <div style={style} key={2}>
         <CodeConfirmation
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_VERIFICATION}
@@ -80,14 +80,14 @@ const STEPS = [
   },
   () => {
     return style => (
-      <div style={style}>
+      <div style={style} key={3}>
         <AccountOptions />
       </div>
     )
   },
   (props, state, func) => {
     return style => (
-      <div style={style}>
+      <div style={style} key={4}>
         <RecoveryPassword
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_PASSWORD}
@@ -271,7 +271,7 @@ class LoginContent extends Component {
     }
     
     return (
-      <div style={style}>
+      <div style={style} key={0}>
         <AuthState.IdentityProviders>
           {({ value: options }) => {
             const [
