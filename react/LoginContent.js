@@ -184,7 +184,7 @@ class LoginContent extends Component {
     )
   }
 
-  shouldRedirectToOAuth = (loginOptions) => {
+  shouldRedirectToOAuth = loginOptions => {
     if (!loginOptions) return [false, null]
     const { accessKey, oAuthProviders, password } = loginOptions
     if (accessKey || password) return [false, null]
