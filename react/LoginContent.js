@@ -185,12 +185,11 @@ class LoginContent extends Component {
   }
 
   shouldRedirectToOAuth = (loginOptions) => {
-    if (!loginOptions) return false
+    if (!loginOptions) return [false, null]
     const { accessKey, oAuthProviders, password } = loginOptions
-    if (accessKey || password) return false
-    if (!oAuthProviders || oAuthProviders.length === 0) return false
-    if (oAuthProviders.length > 1) return false
-    return true
+    if (accessKey || password) return [false, null]
+    if (!oAuthProviders || oAuthProviders.length !== 1) return [false, null]
+    return [true, oAuthProviders[0]]
   }
 
   handleUpdateState = state => {
@@ -270,12 +269,13 @@ class LoginContent extends Component {
     } else if (isOnInitialScreen) {
       step = defaultOption
     }
+    const [shouldRedirectToOauth, oauthProvider] = this.shouldRedirectToOAuth(options)
     return (
       <div style={style}>
         <AuthState.IdentityProviders>
           {({ value: options }) =>
-            this.shouldRedirectToOAuth(options) ? (
-              <OAuthAutoRedirect provider={options.oAuthProviders[0].providerName} />
+            shouldRedirectToOauth && oauthProvider ? (
+              <OAuthAutoRedirect provider={oauthProvider.providerName} />
             ) : (
               <LoginOptions
                 page="login-options"
