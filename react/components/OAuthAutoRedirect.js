@@ -21,7 +21,7 @@ function OAuthAutoRedirect({ intl, provider, redirect }) {
             { provider }
           )}
         </p>
-        <div className="self-center c-emphasis">
+        <div className={`self-center c-emphasis ${styles.oauthAutoRedirectLoading}`}>
           <Spinner color="currentColor" size={24} />
         </div>
       </div>
