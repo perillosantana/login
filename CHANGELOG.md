@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Auto-redirect to OAuth when there's only one provider.
+
 ## [2.10.1] - 2019-05-07
 ### Fixed
 - Fix error messages not appearing correctly
