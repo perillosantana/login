@@ -269,12 +269,16 @@ class LoginContent extends Component {
     } else if (isOnInitialScreen) {
       step = defaultOption
     }
-    const [shouldRedirectToOauth, oauthProvider] = this.shouldRedirectToOAuth(options)
+    
     return (
       <div style={style}>
         <AuthState.IdentityProviders>
-          {({ value: options }) =>
-            shouldRedirectToOauth && oauthProvider ? (
+          {({ value: options }) => {
+            const [
+              shouldRedirectToOauth,
+              oauthProvider,
+            ] = this.shouldRedirectToOAuth(options)
+            return shouldRedirectToOauth && oauthProvider ? (
               <OAuthAutoRedirect provider={oauthProvider.providerName} />
             ) : (
               <LoginOptions
@@ -296,7 +300,7 @@ class LoginContent extends Component {
                 refetchOptions={this.refetchOptions}
               />
             )
-          }
+          }}
         </AuthState.IdentityProviders>
       </div>
     )
