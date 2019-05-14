@@ -4,22 +4,26 @@ import { injectIntl, intlShape } from 'react-intl'
 import { Spinner } from 'vtex.styleguide'
 import { AuthService } from 'vtex.react-vtexid'
 
+import styles from '../styles.css'
+
 function OAuthAutoRedirect({ intl, provider, redirect }) {
   useEffect(() => {
     redirect()
   }, [])
   return (
-    <div className="w-100 flex flex-column pv5">
-      <p className="tc ph4">
-        {intl.formatMessage(
-          {
-            id: 'store/login.autoRedirect.message',
-          },
-          { provider }
-        )}
-      </p>
-      <div className="self-center c-emphasis">
-        <Spinner color="currentColor" size={24} />
+    <div className={styles.oauthAutoRedirect}>
+      <div className="w-100 flex flex-column pv5">
+        <p className="tc ph4">
+          {intl.formatMessage(
+            {
+              id: 'store/login.autoRedirect.message',
+            },
+            { provider }
+          )}
+        </p>
+        <div className="self-center c-emphasis">
+          <Spinner color="currentColor" size={24} />
+        </div>
       </div>
     </div>
   )
