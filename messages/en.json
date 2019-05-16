@@ -46,5 +46,8 @@
     "admin/editor.login.emailPlaceholder": "Placeholder to email input",
     "admin/editor.login.passwordPlaceholder": "Placeholder to password input",
     "admin/editor.login.accessCodePlaceholder": "Placeholder to access code input",
-    "admin/editor.login.showPasswordVerificationIntoTooltip.title": "Show password format verification as tooltip"
+    "admin/editor.login.showPasswordVerificationIntoTooltip.title": "Show password format verification as tooltip",
+    "admin/editor.login.showIconProfile": "Show icon profile",
+    "admin/editor.login.iconLabel": "Title of icon label profile"
+
 }

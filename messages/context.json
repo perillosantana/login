@@ -46,5 +46,8 @@
   "admin/editor.login.emailPlaceholder": "admin/editor.login.emailPlaceholder",
   "admin/editor.login.passwordPlaceholder": "admin/editor.login.passwordPlaceholder",
   "admin/editor.login.accessCodePlaceholder": "admin/editor.login.accessCodePlaceholder",
-  "admin/editor.login.showPasswordVerificationIntoTooltip.title": "admin/editor.login.showPasswordVerificationIntoTooltip.title"
+  "admin/editor.login.showPasswordVerificationIntoTooltip.title": "admin/editor.login.showPasswordVerificationIntoTooltip.title",
+  "admin/editor.login.showIconProfile": "admin/editor.login.showIconProfile",
+  "admin/editor.login.iconLabel": "admin/editor.login.iconLabel"
+
 }

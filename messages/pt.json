@@ -46,5 +46,8 @@
     "admin/editor.login.emailPlaceholder": "Placeholder do campo de e-mail",
     "admin/editor.login.passwordPlaceholder": "Placeholder do campo de senha",
     "admin/editor.login.accessCodePlaceholder": "Placeholder do campo de código de acesso",
-    "admin/editor.login.showPasswordVerificationIntoTooltip.title": "Exibir verificação do formato de senha como tooltip"
+    "admin/editor.login.showPasswordVerificationIntoTooltip.title": "Exibir verificação do formato de senha como tooltip",
+    "admin/editor.login.showIconProfile": "Exibir ícone de login",
+    "admin/editor.login.iconLabel": "Título do botão de login"
+
 }

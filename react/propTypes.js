@@ -22,6 +22,8 @@ export const LoginContainerProptypes = {
   iconLabel: PropTypes.object,
   /** Label's classnames */
   labelClasses: PropTypes.string,
+  /** Should show icon icon profile */
+  showIconProfile: PropTypes.bool,
 }
 
 export const LoginPropTypes = {
