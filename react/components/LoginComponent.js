@@ -34,7 +34,7 @@ class LoginComponent extends Component {
   renderIcon = () => {
     const {
       iconSize,
-      iconLabel,
+      iconLabel: iconLabelProfile,
       labelClasses,
       intl,
       renderIconAsLink,
@@ -45,6 +45,8 @@ class LoginComponent extends Component {
     } = this.props
     const profile = getProfile(data)
     const iconClasses = 'flex items-center'
+    const iconLabel = iconLabelProfile ? iconLabelProfile : translate('store/login.signIn', intl)
+    console.log(iconLabel)
     const iconContent = (
       <Fragment>
         {showIconProfile && renderIconAsLink &&
