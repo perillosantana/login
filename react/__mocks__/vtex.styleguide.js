@@ -12,3 +12,5 @@ export const ButtonWithIcon = ({ children }) => (
 )
 
 export const Input = props => <input {...props} />
+
+export const Spinner = () => <div className="spinner"></div>

@@ -8,6 +8,8 @@
 
 .label {}
 
+.loading {}
+
 .optionsSticky {}
 
 .optionsList {}
@@ -17,6 +19,10 @@
 .optionsListItemContainer {}
 
 .oauthProvider {}
+
+.oauthAutoRedirect {}
+
+.oauthAutoRedirectLoading {}
 
 .inputContainer {}
 
@@ -90,9 +96,9 @@
 }
 
 .sendButton:only-child {
-    margin: 0;
-    width: 100%;
-  }
+  margin: 0;
+  width: 100%;
+}
 
 .sendButton:only-child :global(.vtex-button) {
   width: 100%;

@@ -34,16 +34,28 @@ export const AuthService = {
     }),
 }
 
-export class AuthState extends Component {
-  static Token = ({ children }) =>
-    children({ value: 'value', setValue: () => {} })
-  static Password = ({ children }) =>
-    children({ value: 'value', setValue: () => {} })
-  static Email = ({ children }) =>
-    children({ value: 'value', setValue: () => {} })
+const AuthState = jest.fn(({ children }) => children({ loading: false }))
 
-  render() {
-    const { children } = this.props
-    return children()
-  }
-}
+AuthState.Token = jest.fn(({ children }) =>
+  children({ value: 'value', setValue: () => {} })
+)
+
+AuthState.Password = jest.fn(({ children }) =>
+  children({ value: 'value', setValue: () => {} })
+)
+
+AuthState.Email = jest.fn(({ children }) =>
+  children({ value: 'value', setValue: () => {} })
+)
+
+AuthState.IdentityProviders = jest.fn(({ children }) =>
+  children({
+    value: {
+      accessKey: true,
+      password: true,
+      oAuthProviders: [{ providerName: 'Google', className: '' }],
+    },
+  })
+)
+
+export { AuthState }

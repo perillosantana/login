@@ -3,8 +3,12 @@ import { renderWithIntl } from 'intl-utils'
 
 import Login from '../Login'
 
+import { AuthState } from 'vtex.react-vtexid'
+
 describe('<Login /> component', () => {
   it('should match snapshot when loading', () => {
+    AuthState.mockImplementationOnce(({ children }) => children({ loading: true }))
+
     const { asFragment } = renderWithIntl(
       <Login
         isBoxOpen
@@ -14,6 +18,7 @@ describe('<Login /> component', () => {
         }}
       />
     )
+
     expect(asFragment()).toMatchSnapshot()
   })
 

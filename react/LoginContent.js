@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Fragment, Component } from 'react'
 
 import { compose, path } from 'ramda'
 import PropTypes from 'prop-types'
@@ -8,12 +8,14 @@ import { injectIntl } from 'react-intl'
 import { Transition } from 'react-spring'
 import { withSession, withRuntimeContext } from 'vtex.render-runtime'
 
+import Loading from './components/Loading'
 import LoginOptions from './components/LoginOptions'
 import AccountOptions from './components/AccountOptions'
 import EmailAndPassword from './components/EmailAndPassword'
 import CodeConfirmation from './components/CodeConfirmation'
 import RecoveryPassword from './components/RecoveryPassword'
 import EmailVerification from './components/EmailVerification'
+import OAuthAutoRedirect from './components/OAuthAutoRedirect'
 
 import { steps } from './utils/steps'
 import { setCookie } from './utils/set-cookie'
@@ -31,7 +33,7 @@ const STEPS = [
   /* eslint-disable react/display-name, react/prop-types */
   (props, state, func, isOptionsMenuDisplayed) => {
     return style => (
-      <div style={style}>
+      <div style={style} key={0}>
         <EmailVerification
           next={steps.CODE_CONFIRMATION}
           previous={steps.LOGIN_OPTIONS}
@@ -46,7 +48,7 @@ const STEPS = [
   },
   (props, state, func, isOptionsMenuDisplayed) => {
     return style => (
-      <div style={style}>
+      <div style={style} key={1}>
         <EmailAndPassword
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.LOGIN_OPTIONS}
@@ -65,7 +67,7 @@ const STEPS = [
   },
   (props, state, func) => {
     return style => (
-      <div style={style}>
+      <div style={style} key={2}>
         <CodeConfirmation
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_VERIFICATION}
@@ -78,14 +80,14 @@ const STEPS = [
   },
   () => {
     return style => (
-      <div style={style}>
+      <div style={style} key={3}>
         <AccountOptions />
       </div>
     )
   },
   (props, state, func) => {
     return style => (
-      <div style={style}>
+      <div style={style} key={4}>
         <RecoveryPassword
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_PASSWORD}
@@ -182,6 +184,14 @@ class LoginContent extends Component {
     )
   }
 
+  shouldRedirectToOAuth = loginOptions => {
+    if (!loginOptions) return [false, null]
+    const { accessKey, oAuthProviders, password } = loginOptions
+    if (accessKey || password) return [false, null]
+    if (!oAuthProviders || oAuthProviders.length !== 1) return [false, null]
+    return [true, oAuthProviders[0]]
+  }
+
   handleUpdateState = state => {
     if (state.hasOwnProperty('step') && state.step === -1) {
       state.step = 0
@@ -250,7 +260,6 @@ class LoginContent extends Component {
       isInitialScreenOptionOnly,
       optionsTitle,
       defaultOption,
-      data: { loginOptions },
     } = this.props
     const { isOnInitialScreen } = this.state
 
@@ -260,23 +269,39 @@ class LoginContent extends Component {
     } else if (isOnInitialScreen) {
       step = defaultOption
     }
-
+    
     return (
-      <div style={style}>
-        <LoginOptions
-          page="login-options"
-          fallbackTitle="store/loginOptions.title"
-          title={optionsTitle}
-          options={loginOptions}
-          currentStep={
-            step === 0
-              ? 'store/loginOptions.emailVerification'
-              : 'store/loginOptions.emailAndPassword'
-          }
-          isAlwaysShown={!isInitialScreenOptionOnly}
-          onOptionsClick={this.handleOptionsClick}
-          refetchOptions={this.refetchOptions}
-        />
+      <div style={style} key={0}>
+        <AuthState.IdentityProviders>
+          {({ value: options }) => {
+            const [
+              shouldRedirectToOauth,
+              oauthProvider,
+            ] = this.shouldRedirectToOAuth(options)
+            return shouldRedirectToOauth && oauthProvider ? (
+              <OAuthAutoRedirect provider={oauthProvider.providerName} />
+            ) : (
+              <LoginOptions
+                page="login-options"
+                fallbackTitle="store/loginOptions.title"
+                title={optionsTitle}
+                options={{
+                  accessKeyAuthentication: options.accessKey,
+                  classicAuthentication: options.password,
+                  providers: options.oAuthProviders,
+                }}
+                currentStep={
+                  step === 0
+                    ? 'store/loginOptions.emailVerification'
+                    : 'store/loginOptions.emailAndPassword'
+                }
+                isAlwaysShown={!isInitialScreenOptionOnly}
+                onOptionsClick={this.handleOptionsClick}
+                refetchOptions={this.refetchOptions}
+              />
+            )
+          }}
+        </AuthState.IdentityProviders>
       </div>
     )
   }
@@ -286,7 +311,6 @@ class LoginContent extends Component {
       profile,
       isInitialScreenOptionOnly,
       defaultOption,
-      data: { loading },
       session,
     } = this.props
     const { isOnInitialScreen } = this.state
@@ -332,35 +356,42 @@ class LoginContent extends Component {
     const formClassName = classNames(styles.contentForm, 'dn ph4 pb6', {
       [`${styles.contentFormVisible} db `]: this.shouldRenderForm,
     })
-    
     return (
       <AuthState scope="STORE" returnUrl={this.returnUrl}>
-        {() => (
+        {({ loading }) => (
           <div className={className}>
-            <Transition
-              keys={
-                !profile && this.shouldRenderLoginOptions && !loading
-                  ? ['children']
-                  : []
-              }
-              from={{ opacity: 0, transform: 'translateX(-50%)' }}
-              enter={{ opacity: 1, transform: 'translateX(0%)' }}
-              leave={{ display: 'none' }}
-            >
-              {!profile && this.shouldRenderLoginOptions && !loading
-                ? [this.renderChildren]
-                : []}
-            </Transition>
-            <div className={formClassName}>
-              <Transition
-                keys={this.shouldRenderForm && render ? ['children'] : []}
-                from={{ opacity: 0, transform: 'translateX(50%)' }}
-                enter={{ opacity: 1, transform: 'translateX(0%)' }}
-                leave={{ display: 'none' }}
-              >
-                {this.shouldRenderForm && render ? [render] : []}
-              </Transition>
-            </div>
+            {loading ? (
+              <Loading />
+            ) : (
+              <Fragment>
+                <Transition
+                  keys={
+                    !profile && this.shouldRenderLoginOptions && !loading
+                      ? ['children']
+                      : []
+                  }
+                  from={{ opacity: 0, transform: 'translateX(-50%)' }}
+                  enter={{ opacity: 1, transform: 'translateX(0%)' }}
+                  leave={{ display: 'none' }}
+                >
+                  {!profile && this.shouldRenderLoginOptions && !loading
+                    ? [this.renderChildren]
+                    : []}
+                </Transition>
+                <div className={formClassName}>
+                  <Transition
+                    keys={
+                      this.shouldRenderForm && render ? ['children'] : []
+                    }
+                    from={{ opacity: 0, transform: 'translateX(50%)' }}
+                    enter={{ opacity: 1, transform: 'translateX(0%)' }}
+                    leave={{ display: 'none' }}
+                  >
+                    {this.shouldRenderForm && render ? [render] : []}
+                  </Transition>
+                </div>
+              </Fragment>
+            )}
           </div>
         )}
       </AuthState>
