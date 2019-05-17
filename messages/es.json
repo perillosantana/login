@@ -48,5 +48,5 @@
     "admin/editor.login.accessCodePlaceholder": "Placeholder para el campo de código de acceso",
     "admin/editor.login.showPasswordVerificationIntoTooltip.title": "Ver la comprobación del formato de contraseña como tooltip",
     "admin/editor.login.showIconProfile": "Mostrar icono de perfil",
-    "admin/editor.login.iconLabel": "Título del perfil del icono de etiqueta"
+    "admin/editor.login.iconLabel": "Etiqueta del botón de inicio de sesión"
 }
