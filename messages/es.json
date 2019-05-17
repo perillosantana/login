@@ -14,6 +14,7 @@
     "store/login.hello": "Hola,",
     "store/login.logoutLabel": "Cerrar sesión",
     "store/login.signIn": "Entrar",
+    "store/login.login": "Entrar",
     "store/login.code": "código de Acceso",
     "store/login.notHaveAccount": "No tiene una contraseña? Registrarse ahora",
     "store/login.forgotPassword": "Olvidé mi contraseña",

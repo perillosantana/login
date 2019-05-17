@@ -79,7 +79,7 @@ class LoginComponent extends Component {
     }
 
     return (
-      <ButtonWithIcon variation="tertiary" icon={profileIcon(iconSize, labelClasses)} iconPosition={showIconProfile ? "left" : ''} onClick={onProfileIconClick}>
+      <ButtonWithIcon variation="tertiary" icon={showIconProfile && profileIcon(iconSize, labelClasses)} iconPosition={showIconProfile ? "left" : "right"} onClick={onProfileIconClick}>
         <div
           className="flex pv2 items-center"
           ref={e => {

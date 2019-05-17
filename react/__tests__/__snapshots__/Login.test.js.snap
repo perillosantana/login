@@ -14,7 +14,13 @@ exports[`<Login /> component should match snapshot when loading 1`] = `
       >
         <div
           class="flex pv2 items-center"
-        />
+        >
+          <span
+            class="label t-action--small pl4 gray dn db-l"
+          >
+            Sign In
+          </span>
+        </div>
       </button>
       <div>
         <div>
@@ -280,7 +286,13 @@ exports[`<Login /> component should match snapshot without profile 1`] = `
       >
         <div
           class="flex pv2 items-center"
-        />
+        >
+          <span
+            class="label t-action--small pl4 gray dn db-l"
+          >
+            Sign In
+          </span>
+        </div>
       </button>
       <div>
         <div>
