@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.13.0] - 2019-05-17
+### Changed
+- Set the prop `iconLabel` in `LoginComponent`.
+
+### Added
+- prop `showIconProfile` to `LoginComponent`.
+
 ## [2.12.0] - 2019-05-17
 
 ## [2.11.0] - 2019-05-16

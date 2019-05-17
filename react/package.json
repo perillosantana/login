@@ -28,7 +28,7 @@
     "eslint": "^5.9.0",
     "eslint-config-vtex": "^8.0.0",
     "eslint-config-vtex-react": "^3.0.3",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-import": "^2.17.2",
     "estraverse": "^4.2.0",
     "graphql-tag": "^2.10.1",
     "identity-obj-proxy": "^3.0.0",

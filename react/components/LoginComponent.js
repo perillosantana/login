@@ -34,20 +34,21 @@ class LoginComponent extends Component {
   renderIcon = () => {
     const {
       iconSize,
-      iconLabel,
+      iconLabel: iconLabelProfile,
       labelClasses,
       intl,
       renderIconAsLink,
       onProfileIconClick,
       data,
+      showIconProfile,
       runtime: { history: { location: { pathname } } },
     } = this.props
     const profile = getProfile(data)
     const iconClasses = 'flex items-center'
-
+    const iconLabel = iconLabelProfile || translate('store/login.signIn', intl)
     const iconContent = (
       <Fragment>
-        {renderIconAsLink &&
+        {showIconProfile && renderIconAsLink &&
           profileIcon(iconSize, labelClasses, iconClasses)
         }
         {
@@ -78,7 +79,7 @@ class LoginComponent extends Component {
     }
 
     return (
-      <ButtonWithIcon variation="tertiary" icon={profileIcon(iconSize, labelClasses)} iconPosition="left" onClick={onProfileIconClick}>
+      <ButtonWithIcon variation="tertiary" icon={showIconProfile && profileIcon(iconSize, labelClasses)} iconPosition={showIconProfile ? "left" : "right"} onClick={onProfileIconClick}>
         <div
           className="flex pv2 items-center"
           ref={e => {

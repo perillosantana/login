@@ -13,7 +13,7 @@
     "store/login.myAccount": "My Account",
     "store/login.hello": "Hello,",
     "store/login.logoutLabel": "Logout",
-    "store/login.signIn": "Login",
+    "store/login.signIn": "Sign In",
     "store/login.code": "Access Code",
     "store/login.notHaveAccount": "Don't have account? Sign up now",
     "store/login.forgotPassword": "Forgot my password",
@@ -46,5 +46,8 @@
     "admin/editor.login.emailPlaceholder": "Placeholder to email input",
     "admin/editor.login.passwordPlaceholder": "Placeholder to password input",
     "admin/editor.login.accessCodePlaceholder": "Placeholder to access code input",
-    "admin/editor.login.showPasswordVerificationIntoTooltip.title": "Show password format verification as tooltip"
+    "admin/editor.login.showPasswordVerificationIntoTooltip.title": "Show password format verification as tooltip",
+    "admin/editor.login.showIconProfile": "Show profile icon",
+    "admin/editor.login.iconLabel": "Login button label"
+
 }

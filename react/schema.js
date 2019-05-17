@@ -37,4 +37,12 @@ export const LoginSchema = {
     title: 'admin/editor.login.accessCodePlaceholder',
     type: 'string',
   },
+  showIconProfile: {
+    title: 'admin/editor.login.showIconProfile',
+    type: 'boolean',
+  },
+  iconLabel: {
+    title: 'admin/editor.login.iconLabel',
+    type: 'string',
+  },
 }
