@@ -25,10 +25,9 @@ class LoginComponent extends Component {
 
   /** Function called after login success */
   onClickLoginButton = () => {
-    const { data: { refetch }, onOutSideBoxClick } = this.props
-    refetch().then(() => {
-      onOutSideBoxClick()
-    })
+    const { data: onOutSideBoxClick } = this.props
+    onOutSideBoxClick()
+    window.location.reload()
   }
 
   renderIcon = () => {
