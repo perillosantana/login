@@ -232,6 +232,7 @@ class LoginContent extends Component {
     const { loginCallback } = this.props
     return this.context.patchSession().then(() => {
       if (loginCallback) {
+        window.location.reload()
         loginCallback()
       } else {
         // the use of location.assign here, instead of
