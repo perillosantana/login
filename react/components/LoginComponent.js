@@ -25,8 +25,6 @@ class LoginComponent extends Component {
 
   /** Function called after login success */
   onClickLoginButton = () => {
-    const { data: onOutSideBoxClick } = this.props
-    onOutSideBoxClick()
     window.location.reload()
   }
 
