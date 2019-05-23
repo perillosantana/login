@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.13.1] - 2019-05-23
+### Fixed 
+- Page reload after login for price update
+
 ## [2.13.0] - 2019-05-17
 ### Changed
 - Set the prop `iconLabel` in `LoginComponent`.
