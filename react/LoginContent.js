@@ -332,7 +332,6 @@ class LoginContent extends Component {
   }
 
   render() {
-    console.log('Relou, my lirou friendi')
     const {
       profile,
       isInitialScreenOptionOnly,
