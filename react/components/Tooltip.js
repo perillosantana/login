@@ -8,21 +8,24 @@ export default class Tooltip extends Component {
   render() {
     const { children, title, top } = this.props
 
-    const classes = classNames(`${styles.tooltipContainer} pa5 br2 absolute z-max bg-near-black`, {
-      [`${styles.tooltipContainerTop} mb2`]: top,
-      [`${styles.tooltipContainerLeft} mr2`]: !top,
-    })
+    const classes = classNames(
+      `${styles.tooltipContainer} pa5 br2 absolute z-max bg-near-black`,
+      {
+        [`${styles.tooltipContainerTop} mb2`]: top,
+        [`${styles.tooltipContainerLeft} mr2`]: !top,
+      }
+    )
 
     return (
       <div className={classes}>
         <div className="pa2">
-          {title &&
+          {title && (
             <div className="mb3">
               <span className="t-action b ttu c-on-base--inverted">
                 {title}
               </span>
             </div>
-          }
+          )}
           {children}
         </div>
       </div>

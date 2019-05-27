@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 
 import { translate } from '../utils/translate'
-import LoginComponent from './LoginComponent';
+
 import styles from '../styles.css'
 
 const arrow = <IconArrowBack size={10} viewBox="0 0 16 11" />
@@ -39,9 +39,7 @@ class GoBackButton extends Component {
           </ButtonWithIcon>
         </div>
       </Fragment>
-
     )
-
   }
 }
 export default injectIntl(GoBackButton)

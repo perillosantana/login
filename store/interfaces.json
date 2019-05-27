@@ -3,6 +3,11 @@
     "component": "Login"
   },
   "login-content": {
-    "component": "LoginContent"
+    "component": "LoginContent",
+    "content": {
+      "properties": {
+        "texts": { "$href": "#/definitions/LoginTexts" }
+      }
+    }
   }
 }

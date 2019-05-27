@@ -5,4 +5,5 @@ export const truncateString = str => {
   return str <= MAX_LENGTH ? str : str.substring(0, MAX_LENGTH).concat('...')
 }
 
-export const slugify = string => Slugify(string, { replacement: '-', lower: true })
+export const slugify = string =>
+  Slugify(string, { replacement: '-', lower: true })

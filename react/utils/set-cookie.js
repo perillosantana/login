@@ -6,12 +6,19 @@ import Cookies from 'js-cookie'
  *
  * @param {String} url To set cookie and cleaned up.
  */
-export const setCookie = (url) => {
+export const setCookie = url => {
   const { accountAuthCookieName, accountAuthCookieValue } = compose(
-    fromPairs, map(split('=')), split('&'), tail
+    fromPairs,
+    map(split('=')),
+    split('&'),
+    tail
   )(url)
   if (accountAuthCookieName && accountAuthCookieValue) {
-    Cookies.set(accountAuthCookieName, accountAuthCookieValue, { expires: 1, path: '/', secure: true })
+    Cookies.set(accountAuthCookieName, accountAuthCookieValue, {
+      expires: 1,
+      path: '/',
+      secure: true,
+    })
     const cleanUrl = url.substring(0, url.indexOf('?'))
     window.history.replaceState({}, document.title, cleanUrl)
     location.assign(location.origin)

@@ -15,20 +15,21 @@ import OAuth from './OAuth'
 import styles from '../styles.css'
 
 const PROVIDERS_ICONS = {
-  'Google': GoogleIcon,
-  'Facebook': FacebookIcon,
+  Google: GoogleIcon,
+  Facebook: FacebookIcon,
 }
 
 /** LoginOptions tab component. Displays a list of login options */
 class LoginOptions extends Component {
   state = {
-    loadingOptions: false
+    loadingOptions: false,
   }
 
   handleRefetchOptions = () => {
     if (!this.state.loadingOptions) {
       this.setState({ loadingOptions: true })
-      this.props.refetchOptions()
+      this.props
+        .refetchOptions()
         .then(() => this.setState({ loadingOptions: false }))
     }
   }
@@ -39,7 +40,10 @@ class LoginOptions extends Component {
 
   showOption = (option, optionName) => {
     const { isAlwaysShown, currentStep, options } = this.props
-    return options && ((options[option] && !isAlwaysShown) || currentStep !== optionName)
+    return (
+      options &&
+      ((options[option] && !isAlwaysShown) || currentStep !== optionName)
+    )
   }
 
   render() {
@@ -64,43 +68,71 @@ class LoginOptions extends Component {
         <ul className={`${styles.optionsList} list pa0`}>
           {options ? (
             <Fragment>
-              {options.accessKeyAuthentication && this.showOption('accessKeyAuthentication', 'store/loginOptions.emailVerification') &&
+              {options.accessKeyAuthentication &&
+                this.showOption(
+                  'accessKeyAuthentication',
+                  'store/loginOptions.emailVerification'
+                ) && (
                 <li className={`${styles.optionsListItem} mb3`}>
                   <div className={styles.button}>
                     <Button
                       variation="secondary"
-                      onClick={this.handleOptionClick('store/loginOptions.emailVerification')}
+                      onClick={this.handleOptionClick(
+                        'store/loginOptions.emailVerification'
+                      )}
                     >
-                      <span>{translate('store/loginOptions.emailVerification', intl)}</span>
+                      <span>
+                        {translate(
+                          'store/loginOptions.emailVerification',
+                          intl
+                        )}
+                      </span>
                     </Button>
                   </div>
                 </li>
-              }
-              {options.classicAuthentication && this.showOption('classicAuthentication', 'store/loginOptions.emailAndPassword') &&
+              )}
+              {options.classicAuthentication &&
+                this.showOption(
+                  'classicAuthentication',
+                  'store/loginOptions.emailAndPassword'
+                ) && (
                 <li className={`${styles.optionsListItem} mb3`}>
                   <div className={styles.button}>
                     <Button
                       variation="secondary"
-                      onClick={this.handleOptionClick('store/loginOptions.emailAndPassword')}
+                      onClick={this.handleOptionClick(
+                        'store/loginOptions.emailAndPassword'
+                      )}
                     >
-                      <span>{translate('store/loginOptions.emailAndPassword', intl)}</span>
+                      <span>
+                        {translate(
+                          'store/loginOptions.emailAndPassword',
+                          intl
+                        )}
+                      </span>
                     </Button>
                   </div>
                 </li>
-              }
-              {options.providers && options.providers.map(({ providerName }, index) => {
-                const hasIcon = PROVIDERS_ICONS.hasOwnProperty(providerName)
-                return (
-                  <li
-                    className={`${styles.optionsListItem} mb3`}
-                    key={`${providerName}-${index}`}
-                  >
-                    <OAuth provider={providerName}>
-                      {hasIcon ? React.createElement(PROVIDERS_ICONS[providerName], null) : null}
-                    </OAuth>
-                  </li>
-                )
-              })}
+              )}
+              {options.providers &&
+                options.providers.map(({ providerName }, index) => {
+                  const hasIcon = PROVIDERS_ICONS.hasOwnProperty(providerName)
+                  return (
+                    <li
+                      className={`${styles.optionsListItem} mb3`}
+                      key={`${providerName}-${index}`}
+                    >
+                      <OAuth provider={providerName}>
+                        {hasIcon
+                          ? React.createElement(
+                            PROVIDERS_ICONS[providerName],
+                            null
+                          )
+                          : null}
+                      </OAuth>
+                    </li>
+                  )
+                })}
             </Fragment>
           ) : (
             <li className={`${styles.optionsListItem} mb3`}>
@@ -111,13 +143,21 @@ class LoginOptions extends Component {
                   isLoading={loadingOptions}
                   onClick={this.handleRefetchOptions}
                 >
-                  <div className={`${loadingOptions ? 'dn' : 'db'}`}>{translate('store/loginOptions.error.title', intl)}</div>
-                  <span className="t-small pt1">{translate('store/loginOptions.error.subhead', intl)}</span>
+                  <div className={`${loadingOptions ? 'dn' : 'db'}`}>
+                    {translate('store/loginOptions.error.title', intl)}
+                  </div>
+                  <span className="t-small pt1">
+                    {translate('store/loginOptions.error.subhead', intl)}
+                  </span>
                 </Button>
               </div>
             </li>
           )}
-          <li className={`${styles.optionsListItem} ${styles.optionsListItemContainer} mb3`}>
+          <li
+            className={`${styles.optionsListItem} ${
+              styles.optionsListItemContainer
+            } mb3`}
+          >
             <ExtensionContainer id="container" />
           </li>
         </ul>
@@ -141,10 +181,12 @@ LoginOptions.propTypes = {
   options: PropTypes.shape({
     accessKeyAuthentication: PropTypes.bool,
     classicAuthentication: PropTypes.bool,
-    providers: PropTypes.arrayOf(PropTypes.shape({
-      className: PropTypes.string,
-      providerName: PropTypes.string,
-    })),
+    providers: PropTypes.arrayOf(
+      PropTypes.shape({
+        className: PropTypes.string,
+        providerName: PropTypes.string,
+      })
+    ),
   }),
   /** Class of the root element */
   className: PropTypes.string,

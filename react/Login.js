@@ -90,7 +90,9 @@ const options = {
 
 const LoginWithSession = withSession({
   loading: <div />,
-})(compose(
-  injectIntl,
-  graphql(session, options),
-)(LoginComponent))
+})(
+  compose(
+    injectIntl,
+    graphql(session, options)
+  )(LoginComponent)
+)

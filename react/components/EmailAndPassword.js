@@ -109,7 +109,11 @@ class EmailAndPassword extends Component {
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
-            <div className={`${styles.inputContainer} ${styles.inputContainerEmail}`}>
+            <div
+              className={`${styles.inputContainer} ${
+                styles.inputContainerEmail
+              }`}
+            >
               <AuthState.Email>
                 {({ value, setValue }) => (
                   <Input
@@ -129,7 +133,11 @@ class EmailAndPassword extends Component {
             <FormError show={isInvalidEmail}>
               {translate('store/login.invalidEmail', intl)}
             </FormError>
-            <div className={`${styles.inputContainer} ${styles.inputContainerPassword} pv3 flex flex-column`}>
+            <div
+              className={`${styles.inputContainer} ${
+                styles.inputContainerPassword
+              } pv3 flex flex-column`}
+            >
               <AuthState.Password>
                 {({ value, setValue }) => (
                   <PasswordInput
@@ -157,7 +165,9 @@ class EmailAndPassword extends Component {
             <FormError show={isUserBlocked}>
               {translate('store/login.userBlocked', intl)}
             </FormError>
-            <div className={`${styles.formLinkContainer} flex justify-end ph0 pv2`}>
+            <div
+              className={`${styles.formLinkContainer} flex justify-end ph0 pv2`}
+            >
               <a
                 href=""
                 className="link dim c-link"
@@ -190,28 +200,30 @@ class EmailAndPassword extends Component {
                   action: loginWithPassword,
                   validation: { validateEmail },
                 }) => (
-                    <Button
-                      variation="primary"
-                      size="small"
-                      type="submit"
-                      onClick={e => {
-                        e.preventDefault()
-                        this.handleOnSubmit(email, password, loginWithPassword)
-                      }}
-                      isLoading={loading}
-                      disabled={!validateEmail(email)}
-                    >
-                      <span className="t-small">
-                        {translate('store/login.signIn', intl)}
-                      </span>
-                    </Button>
-                  )}
+                  <Button
+                    variation="primary"
+                    size="small"
+                    type="submit"
+                    onClick={e => {
+                      e.preventDefault()
+                      this.handleOnSubmit(email, password, loginWithPassword)
+                    }}
+                    isLoading={loading}
+                    disabled={!validateEmail(email)}
+                  >
+                    <span className="t-small">
+                      {translate('store/login.signIn', intl)}
+                    </span>
+                  </Button>
+                )}
               </AuthService.LoginWithPassword>
             </div>
           </Fragment>
         }
       >
-        <div className={`${styles.formLinkContainer} flex justify-center ph0 mt4`}>
+        <div
+          className={`${styles.formLinkContainer} flex justify-center ph0 mt4`}
+        >
           <a
             href=""
             className="link dim c-link"

@@ -7,6 +7,7 @@ import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
 import { Transition } from 'react-spring'
 import { withSession, withRuntimeContext } from 'vtex.render-runtime'
+import { formatIOMessage } from 'vtex.native-types'
 
 import Loading from './components/Loading'
 import LoginOptions from './components/LoginOptions'
@@ -32,14 +33,15 @@ import styles from './styles.css'
 const STEPS = [
   /* eslint-disable react/display-name, react/prop-types */
   (props, state, func, isOptionsMenuDisplayed) => {
+    const { intl, accessCodeTitle, emailPlaceholder } = props
     return style => (
       <div style={style} key={0}>
         <EmailVerification
           next={steps.CODE_CONFIRMATION}
           previous={steps.LOGIN_OPTIONS}
           isCreatePassword={state.isCreatePassword}
-          title={props.accessCodeTitle}
-          emailPlaceholder={props.emailPlaceholder}
+          title={formatIOMessage({ id: accessCodeTitle, intl })}
+          emailPlaceholder={formatIOMessage({ id: emailPlaceholder, intl })}
           onStateChange={func}
           showBackButton={!isOptionsMenuDisplayed}
         />
@@ -47,33 +49,40 @@ const STEPS = [
     )
   },
   (props, state, func, isOptionsMenuDisplayed) => {
+    const {
+      intl,
+      emailAndPasswordTitle,
+      emailPlaceholder,
+      passwordPlaceholder,
+      showPasswordVerificationIntoTooltip,
+      loginCallback,
+    } = props
     return style => (
       <div style={style} key={1}>
         <EmailAndPassword
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.LOGIN_OPTIONS}
-          title={props.emailAndPasswordTitle}
-          emailPlaceholder={props.emailPlaceholder}
-          passwordPlaceholder={props.passwordPlaceholder}
-          showPasswordVerificationIntoTooltip={
-            props.showPasswordVerificationIntoTooltip
-          }
+          title={formatIOMessage({ id: emailAndPasswordTitle, intl })}
+          emailPlaceholder={formatIOMessage({ id: emailPlaceholder, intl })}
+          passwordPlaceholder={formatIOMessage({ id: passwordPlaceholder, intl })}
+          showPasswordVerificationIntoTooltip={showPasswordVerificationIntoTooltip}
           onStateChange={func}
           showBackButton={!isOptionsMenuDisplayed}
-          loginCallback={props.loginCallback}
+          loginCallback={loginCallback}
         />
       </div>
     )
   },
   (props, state, func) => {
+    const { intl, accessCodePlaceholder, loginCallback } = props
     return style => (
       <div style={style} key={2}>
         <CodeConfirmation
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_VERIFICATION}
-          accessCodePlaceholder={props.accessCodePlaceholder}
+          accessCodePlaceholder={formatIOMessage({ id: accessCodePlaceholder, intl })}
           onStateChange={func}
-          loginCallback={props.loginCallback}
+          loginCallback={loginCallback}
         />
       </div>
     )
@@ -86,18 +95,22 @@ const STEPS = [
     )
   },
   (props, state, func) => {
+    const { intl,
+      passwordPlaceholder,
+      accessCodePlaceholder,
+      showPasswordVerificationIntoTooltip,
+      loginCallback,
+    } = props
     return style => (
       <div style={style} key={4}>
         <RecoveryPassword
           next={steps.ACCOUNT_OPTIONS}
           previous={steps.EMAIL_PASSWORD}
-          passwordPlaceholder={props.passwordPlaceholder}
-          showPasswordVerificationIntoTooltip={
-            props.showPasswordVerificationIntoTooltip
-          }
-          accessCodePlaceholder={props.accessCodePlaceholder}
+          passwordPlaceholder={formatIOMessage({ id: passwordPlaceholder, intl })}
+          showPasswordVerificationIntoTooltip={showPasswordVerificationIntoTooltip}
+          accessCodePlaceholder={formatIOMessage({ id: accessCodePlaceholder, intl })}
           onStateChange={func}
-          loginCallback={props.loginCallback}
+          loginCallback={loginCallback}
         />
       </div>
     )
@@ -157,7 +170,14 @@ class LoginContent extends Component {
   }
 
   get returnUrl() {
-    const { runtime: { page, history: { location: { pathname, search } } } } = this.props
+    const {
+      runtime: {
+        page,
+        history: {
+          location: { pathname, search },
+        },
+      },
+    } = this.props
     const currentUrl = page !== 'store.login' ? `${pathname}${search}` : '/'
     return path(['query', 'returnUrl'], this.props) || currentUrl
   }
@@ -239,7 +259,11 @@ class LoginContent extends Component {
         // components using authentication and relying
         // on the session cookie haven't been updated yet,
         // so the refresh is intentional.
-        location.assign(`/api/vtexid/pub/authentication/redirect?returnUrl=${encodeURIComponent(this.returnUrl)}`)
+        location.assign(
+          `/api/vtexid/pub/authentication/redirect?returnUrl=${encodeURIComponent(
+            this.returnUrl
+          )}`
+        )
       }
     })
   }
@@ -260,6 +284,7 @@ class LoginContent extends Component {
       isInitialScreenOptionOnly,
       optionsTitle,
       defaultOption,
+      intl,
     } = this.props
     const { isOnInitialScreen } = this.state
 
@@ -269,7 +294,7 @@ class LoginContent extends Component {
     } else if (isOnInitialScreen) {
       step = defaultOption
     }
-    
+
     return (
       <div style={style} key={0}>
         <AuthState.IdentityProviders>
@@ -284,7 +309,7 @@ class LoginContent extends Component {
               <LoginOptions
                 page="login-options"
                 fallbackTitle="store/loginOptions.title"
-                title={optionsTitle}
+                title={formatIOMessage({ id: optionsTitle, intl})}
                 options={{
                   accessKeyAuthentication: options.accessKey,
                   classicAuthentication: options.password,
@@ -307,6 +332,7 @@ class LoginContent extends Component {
   }
 
   render() {
+    console.log('Relou, my lirou friendi')
     const {
       profile,
       isInitialScreenOptionOnly,
@@ -380,9 +406,7 @@ class LoginContent extends Component {
                 </Transition>
                 <div className={formClassName}>
                   <Transition
-                    keys={
-                      this.shouldRenderForm && render ? ['children'] : []
-                    }
+                    keys={this.shouldRenderForm && render ? ['children'] : []}
                     from={{ opacity: 0, transform: 'translateX(50%)' }}
                     enter={{ opacity: 1, transform: 'translateX(0%)' }}
                     leave={{ display: 'none' }}
@@ -443,4 +467,4 @@ content.schema = {
   },
 }
 
-export default withRuntimeContext(content)
+export default injectIntl(withRuntimeContext(content))

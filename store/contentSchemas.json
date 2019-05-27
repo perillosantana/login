@@ -1,0 +1,15 @@
+{
+  "definitions": {
+    "LoginTexts": {
+      "properties": {
+        "optionsTitle": { "$ref": "app:vtex.native-types#/definitions/text" },
+        "emailAndPasswordTitle": { "$ref": "app:vtex.native-types#/definitions/text" },
+        "accessCodeTitle": { "$ref": "app:vtex.native-types#/definitions/text" },
+        "emailPlaceholder": { "$ref": "app:vtex.native-types#/definitions/text" },
+        "passwordPlaceholder": { "$ref": "app:vtex.native-types#/definitions/text" },
+        "accessCodePlaceholder": { "$ref": "app:vtex.native-types#/definitions/text" },
+        "iconLabel": { "$ref": "app:vtex.native-types#/definitions/text" }
+      }
+    }
+  }
+}

@@ -86,7 +86,11 @@ class RecoveryPassword extends Component {
         onSubmit={e => this.handleOnSubmit(e)}
         content={
           <Fragment>
-            <div className={`${styles.inputContainer} ${styles.inputContainerAccessCode} pv3`}>
+            <div
+              className={`${styles.inputContainer} ${
+                styles.inputContainerAccessCode
+              } pv3`}
+            >
               <AuthState.Token>
                 {({ value, setValue }) => (
                   <Input
@@ -108,7 +112,11 @@ class RecoveryPassword extends Component {
             <FormError show={isInvalidCode}>
               {translate('store/login.invalidCode', intl)}
             </FormError>
-            <div className={`${styles.inputContainer} ${styles.inputContainerPassword} pv3`}>
+            <div
+              className={`${styles.inputContainer} ${
+                styles.inputContainerPassword
+              } pv3`}
+            >
               <AuthState.Password>
                 {({ value, setValue }) => (
                   <PasswordInput
@@ -116,7 +124,10 @@ class RecoveryPassword extends Component {
                       setValue(password)
                       this.setState({ isInvalidPassword: false })
                     }}
-                    placeholder={passwordPlaceholder || translate('store/login.password.placeholder', intl)}
+                    placeholder={
+                      passwordPlaceholder ||
+                      translate('store/login.password.placeholder', intl)
+                    }
                     password={value || ''}
                     showPasswordVerificationIntoTooltip={
                       showPasswordVerificationIntoTooltip
@@ -131,7 +142,11 @@ class RecoveryPassword extends Component {
             <FormError show={isUserBlocked}>
               {translate('store/login.userBlocked', intl)}
             </FormError>
-            <div className={`${styles.inputContainer} ${styles.inputContainerPassword} pv3`}>
+            <div
+              className={`${styles.inputContainer} ${
+                styles.inputContainerPassword
+              } pv3`}
+            >
               <Input
                 type="password"
                 onChange={this.handleConfirmPasswordChange}
@@ -158,23 +173,23 @@ class RecoveryPassword extends Component {
                   state: { password, token },
                   loading,
                   action: setPassword,
-                  validation: {
-                    validatePassword,
-                  },
+                  validation: { validatePassword },
                 }) => (
-                    <Button
-                      variation="primary"
-                      size="small"
-                      type="submit"
-                      onClick={e => this.handleOnSubmit(e, password, token, setPassword)}
-                      isLoading={loading}
-                      disabled={!validatePassword(password)}
-                    >
-                      <span className="t-small">
-                        {translate('store/login.create', intl)}
-                      </span>
-                    </Button>
-                  )}
+                  <Button
+                    variation="primary"
+                    size="small"
+                    type="submit"
+                    onClick={e =>
+                      this.handleOnSubmit(e, password, token, setPassword)
+                    }
+                    isLoading={loading}
+                    disabled={!validatePassword(password)}
+                  >
+                    <span className="t-small">
+                      {translate('store/login.create', intl)}
+                    </span>
+                  </Button>
+                )}
               </AuthService.SetPassword>
             </div>
           </Fragment>
